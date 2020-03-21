@@ -14,6 +14,11 @@ class Usuaris extends Model
 
     public function rols()
     {
-        return $this->hasOne('App\Models\Rols', 'rols_id');
+        return $this->belongsTo('App\Models\Rols', 'rols_id');
+    }
+
+    public function incidencies()
+    {
+        return $this->belongsToMany('App\Models\Incidencies', 'incidencies_has_usuaris', 'usuaris_id', 'incidencies_id');
     }
 }
