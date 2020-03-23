@@ -9,7 +9,6 @@ class Usuaris extends Model
     protected $table = 'usuaris';
     protected $primaryKey = 'id';
     public $incrementing = true;
-
     public $timestamps = false;
 
     public function rols()

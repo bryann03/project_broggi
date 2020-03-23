@@ -11,4 +11,14 @@ class TipusAlertant extends Model
     public $incrementing = true;
     public $timestamps = false;
 
+    public function incidencies()
+    {
+        return $this->hasMany('App\Models\Incidencies', 'tipus_alertant_id');
+    }
+
+    public function alertants()
+    {
+        return $this->hasMany('App\Models\Alertants', 'tipus_alertant_id');
+    }
+
 }
