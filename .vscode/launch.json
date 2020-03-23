@@ -8,21 +8,13 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "http://localhost:80/project_broggi/public/",
+            "url": "http://localhost:8080/project_broggi/public/",
             "webRoot": "${workspaceFolder}"
         },
         {
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",
-            "port": 9000
-        },
-        {
-            "name": "Launch currently open script",
-            "type": "php",
-            "request": "launch",
-            "program": "${file}",
-            "cwd": "${fileDirname}",
             "port": 9000
         }
     ]
