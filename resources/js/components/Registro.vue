@@ -94,9 +94,7 @@ section {
   padding-top: 100px;
   padding-bottom: 100px;
 }
-input,
-select,
-.pwd {
+input, select, .pwd {
   margin-bottom: 1.5rem;
 }
 </style>
