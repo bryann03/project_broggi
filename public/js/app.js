@@ -1961,13 +1961,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      titulo: "Iniciar sesión"
+      titulo: "Iniciar sesión",
+      username: "",
+      password: ""
     };
   },
-  methods: {}
+  methods: {
+    openRegistro: function openRegistro() {
+      window.location.href = '/project_broggi/public/registro';
+    }
+  }
 });
 
 /***/ }),
@@ -2027,7 +2043,9 @@ __webpack_require__.r(__webpack_exports__);
         contrasenya: '',
         rols_id: null
       },
-      arrayRoles: null
+      arrayRoles: null,
+      aviso: "",
+      registrado: false
     };
   },
   created: function created() {
@@ -2047,18 +2065,28 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios.get("/rols").then(function (response) {
         me.arrayRoles = response.data;
-        console.log(me.arrayRoles);
       })["catch"](function (error) {
         console.log(error);
       });
     },
     insertUsuari: function insertUsuari() {
       var me = this;
-      axios.post("/usuaris", this.objectUsuario).then(function (response) {
-        console.log("AÑADIDO");
-      })["catch"](function (error) {
-        console.log(error);
-      });
+
+      if (me.objectUsuario.nom != "" && me.objectUsuario.codi != "" && me.objectUsuario.contrasenya != "" && me.objectUsuario.rols_id != null) {
+        axios.post("/usuaris", this.objectUsuario).then(function (response) {
+          console.log("AÑADIDO");
+          me.registrado = true;
+          me.goToLogin();
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        console.log("FALTAN CAMPOS");
+        this.aviso = "¡Por favor, rellena todos los campos!";
+      }
+    },
+    goToLogin: function goToLogin() {
+      window.location.href = '/project_broggi/public';
     }
   },
   mounted: function mounted() {
@@ -38185,44 +38213,94 @@ var render = function() {
         _c("h1", [_vm._v(_vm._s(_vm.titulo))])
       ]),
       _vm._v(" "),
-      _vm._m(0)
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-2 col-lg-4 col-md-3" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-8 col-lg-4 col-md-6 text-center" }, [
+          _c("form", { attrs: { action: "", method: "get" } }, [
+            _c("div", [
+              _c("label", { staticClass: "float-left" }, [_vm._v("User")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.username,
+                    expression: "username"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { required: "", type: "text" },
+                domProps: { value: _vm.username },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.username = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mt-3 mb-4" }, [
+              _c("label", { staticClass: "float-left" }, [_vm._v("Password")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.password,
+                    expression: "password"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { required: "", type: "password" },
+                domProps: { value: _vm.password },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.password = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary btn-block",
+                attrs: { type: "button" }
+              },
+              [_vm._v("Iniciar sesión")]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-outline-dark btn-block",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    return _vm.openRegistro()
+                  }
+                }
+              },
+              [_vm._v("Registrarse")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-2 col-lg-4 col-md-3" })
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-2 col-lg-4 col-md-3" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-8 col-lg-4 col-md-6 text-center" }, [
-        _c("form", { attrs: { action: "", method: "get" } }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary btn-block",
-              attrs: { type: "button" }
-            },
-            [_vm._v("Iniciar sesión")]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-outline-dark btn-block",
-              attrs: { type: "button" }
-            },
-            [_vm._v("Registrarse")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-2 col-lg-4 col-md-3" })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -38415,6 +38493,10 @@ var render = function() {
                 ],
                 2
               ),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-danger" }, [
+                _vm._v(_vm._s(_vm.aviso))
+              ]),
               _vm._v(" "),
               _c(
                 "button",
