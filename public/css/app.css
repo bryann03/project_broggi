@@ -20,14 +20,16 @@
   --teal: #4dc0b5;
   --cyan: #6cb2eb;
   --white: #fff;
-  --gray: #AEB7BF;
   --gray-dark: #343a40;
+  /* Estos son los colores de la paleta */
+  --gray: #AEB7BF;
   --primary: #6D96A6;
   --secondary: #023E73;
-  --success: #38c172;
-  --info: #6cb2eb;
   --warning: #D9B504;
   --danger: #A62205;
+  /* Aqui acaban */
+  --success: #38c172;
+  --info: #6cb2eb;
   --light: #f8f9fa;
   --dark: #343a40;
   --breakpoint-xs: 0;
