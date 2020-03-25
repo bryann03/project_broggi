@@ -23,7 +23,9 @@ class Incidencies extends Model
 
     public function recursos()
     {
-        return $this->belongsToMany('App\Models\Recursos', 'incidencies_has_recursos', 'incidencies_id', 'recursos_id');
+        return $this->belongsToMany('App\Models\Recursos', 'incidencies_has_recursos', 'incidencies_id', 'recursos_id')
+                    ->withPivot('prioritat', 'hora_activacio', 'hora_mobilitzacio', 'hora_asistencia', 'hora_transport',
+                                'hora_arribada_hospital', 'hora_transferencia', 'hora_finalitzacio');
     }
 
     public function tipus_incident()
