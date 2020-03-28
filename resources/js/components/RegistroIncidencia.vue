@@ -16,7 +16,11 @@
                         <input class="form-control" type="text" name="" id="" placeholder="Telf. alertant">
                     </div>
                     <div class="col-8">
-                        <input class="form-control" type="text" name="" id="" placeholder="Municipi (AutoComplete)">
+                        <b-form-input v-model.number="datosIncidencia.municipis_id" list="list-municipis" id="input-with-list" placeholder="Municipis"></b-form-input>
+                        <datalist id="list-municipis">
+                            <option v-for="municipi in arrayMunicipis" :key="municipi.id">{{ municipi.nom }}</option>
+                        </datalist>
+                        <!-- <input class="form-control" type="text" name="" id="" placeholder="Municipi (AutoComplete)"> -->
                     </div>
                     <div class="col-12">
                         <input class="form-control" type="text" name="" id="" placeholder="Direcció">
@@ -125,8 +129,13 @@ export default {
             recursSanitari: false,
             buttonSanitari: true,
             recursPolicial: false,
-            buttonPolicial: true
+            buttonPolicial: true,
+            municipis:['aaa', 'bbb', 'ccc'],
+            arrayMunicipis: null
         }
+    },
+    created() {
+        this.getMunicipis();
     },
     methods: {
         mostrarSanitari(){
@@ -136,6 +145,17 @@ export default {
         mostrarPolicial(){
             this.buttonPolicial = false;
             this.recursPolicial = true;
+        },
+        getMunicipis(){
+            let me = this;
+            axios.get("/municipis")
+                .then(function(response){
+                    me.arrayMunicipis = response.data;
+                    console.log(me.arrayMunicipis.length);
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
         }
     },
 }

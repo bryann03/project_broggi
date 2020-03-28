@@ -19,7 +19,7 @@
                 <i class="fas fa-eye"></i>
               </button>
             </div>
-            <select required class="form-control" name="rols_id" v-model="objectUsuario.rols_id">
+            <select required class="form-control" name="rols_id" v-model.number="objectUsuario.rols_id">
               <option value="" disabled selected>Selecciona el teu rol</option>
               <option v-for="rol in arrayRoles" :key="rol.id" :value="rol.id" >{{ rol.nom }}</option>
             </select>
