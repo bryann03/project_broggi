@@ -5,5 +5,5 @@
 @endsection
 
 @section('principal')
-    <login></login>
+    <registro-incidencia></registro-incidencia>
 @endsection
