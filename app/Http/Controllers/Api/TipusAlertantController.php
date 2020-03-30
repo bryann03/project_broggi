@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusAlertantResource;
 use App\Models\TipusAlertant;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TipusAlertantController extends Controller
      */
     public function index()
     {
-        //
+        $tipusAlertant = TipusAlertant::all();
+        return TipusAlertantResource::collection($tipusAlertant);
     }
 
     /**

@@ -29,8 +29,9 @@
                         <input class="form-control" type="text" name="" id="" placeholder="Complemet direcció">
                     </div>
                     <div class="col-4">
-                        <select class="form-control" name="" id="">
-                            <option selected>Tipus alertant</option>
+                        <select class="form-control" v-model.number="datosIncidencia.tipus_alertant_id">
+                            <option :value="null" disabled hidden>Tipus alertant</option>
+                            <option v-for="tipus in arrayTipusAlertant" :key="tipus.id" :value="tipus.id" >{{ tipus.tipus }}</option>
                         </select>
                     </div>
                     <div class="col-8">
@@ -44,12 +45,13 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <select class="form-control" name="" id="">
-                            <option selected>Tipus incidencia</option>
+                        <select class="form-control" v-model.number="datosIncidencia.tipus_incident_id">
+                            <option :value="null" disabled hidden>Tipus incidenica</option>
+                            <option v-for="tipus in arrayTipusIncidencia" :key="tipus.id" :value="tipus.id" >{{ tipus.tipus }}</option>
                         </select>
                     </div>
                     <div class="col-12">
-                        <textarea class="form-control" name="" id="" rows="3" placeholder="Descripció incidencia"></textarea>
+                        <textarea v-model="datosIncidencia.descripcion" class="form-control" name="" id="" rows="3" placeholder="Descripció incidencia"></textarea>
                     </div>
                 </div>
             </form>
@@ -130,12 +132,15 @@ export default {
             buttonSanitari: true,
             recursPolicial: false,
             buttonPolicial: true,
-            municipis:['aaa', 'bbb', 'ccc'],
-            arrayMunicipis: null
+            arrayMunicipis: null,
+            arrayTipusAlertant: null,
+            arrayTipusIncidencia: null
         }
     },
     created() {
         this.getMunicipis();
+        this.getTipusAlertant();
+        this.getTipusIncidencia();
     },
     methods: {
         mostrarSanitari(){
@@ -151,7 +156,26 @@ export default {
             axios.get("/municipis")
                 .then(function(response){
                     me.arrayMunicipis = response.data;
-                    console.log(me.arrayMunicipis.length);
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+        },
+        getTipusAlertant(){
+            let me = this;
+            axios.get("/tipus_alertant")
+                .then(function(response){
+                    me.arrayTipusAlertant = response.data;
+                })
+                .catch(function(error){
+                    console.log(error);
+                })
+        },
+        getTipusIncidencia(){
+            let me = this;
+            axios.get("/tipus_incident")
+                .then(function(response){
+                    me.arrayTipusIncidencia = response.data;
                 })
                 .catch(function(error){
                     console.log(error);

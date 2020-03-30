@@ -2215,6 +2215,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2236,12 +2238,15 @@ __webpack_require__.r(__webpack_exports__);
       buttonSanitari: true,
       recursPolicial: false,
       buttonPolicial: true,
-      municipis: ['aaa', 'bbb', 'ccc'],
-      arrayMunicipis: null
+      arrayMunicipis: null,
+      arrayTipusAlertant: null,
+      arrayTipusIncidencia: null
     };
   },
   created: function created() {
     this.getMunicipis();
+    this.getTipusAlertant();
+    this.getTipusIncidencia();
   },
   methods: {
     mostrarSanitari: function mostrarSanitari() {
@@ -2256,7 +2261,22 @@ __webpack_require__.r(__webpack_exports__);
       var me = this;
       axios.get("/municipis").then(function (response) {
         me.arrayMunicipis = response.data;
-        console.log(me.arrayMunicipis.length);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant() {
+      var me = this;
+      axios.get("/tipus_alertant").then(function (response) {
+        me.arrayTipusAlertant = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusIncidencia: function getTipusIncidencia() {
+      var me = this;
+      axios.get("/tipus_incident").then(function (response) {
+        me.arrayTipusIncidencia = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -78773,15 +78793,154 @@ var render = function() {
               _vm._v(" "),
               _vm._m(2),
               _vm._v(" "),
+              _c("div", { staticClass: "col-4" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.datosIncidencia.tipus_alertant_id,
+                        expression: "datosIncidencia.tipus_alertant_id",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return _vm._n(val)
+                          })
+                        _vm.$set(
+                          _vm.datosIncidencia,
+                          "tipus_alertant_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { disabled: "", hidden: "" },
+                        domProps: { value: null }
+                      },
+                      [_vm._v("Tipus alertant")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayTipusAlertant, function(tipus) {
+                      return _c(
+                        "option",
+                        { key: tipus.id, domProps: { value: tipus.id } },
+                        [_vm._v(_vm._s(tipus.tipus))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
               _vm._m(3),
               _vm._v(" "),
               _vm._m(4),
               _vm._v(" "),
-              _vm._m(5),
+              _c("div", { staticClass: "col-8" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.datosIncidencia.tipus_incident_id,
+                        expression: "datosIncidencia.tipus_incident_id",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return _vm._n(val)
+                          })
+                        _vm.$set(
+                          _vm.datosIncidencia,
+                          "tipus_incident_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { disabled: "", hidden: "" },
+                        domProps: { value: null }
+                      },
+                      [_vm._v("Tipus incidenica")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayTipusIncidencia, function(tipus) {
+                      return _c(
+                        "option",
+                        { key: tipus.id, domProps: { value: tipus.id } },
+                        [_vm._v(_vm._s(tipus.tipus))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
               _vm._v(" "),
-              _vm._m(6),
-              _vm._v(" "),
-              _vm._m(7)
+              _c("div", { staticClass: "col-12" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.datosIncidencia.descripcion,
+                      expression: "datosIncidencia.descripcion"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "",
+                    id: "",
+                    rows: "3",
+                    placeholder: "Descripció incidencia"
+                  },
+                  domProps: { value: _vm.datosIncidencia.descripcion },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.datosIncidencia,
+                        "descripcion",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
             ])
           ])
         ]),
@@ -78825,13 +78984,13 @@ var render = function() {
                 ]
               },
               [
-                _vm._m(8),
+                _vm._m(5),
                 _vm._v(" "),
-                _vm._m(9),
+                _vm._m(6),
                 _vm._v(" "),
-                _vm._m(10),
+                _vm._m(7),
                 _vm._v(" "),
-                _vm._m(11)
+                _vm._m(8)
               ]
             )
           ]),
@@ -78874,13 +79033,13 @@ var render = function() {
                 ]
               },
               [
-                _vm._m(12),
+                _vm._m(9),
                 _vm._v(" "),
-                _vm._m(13),
+                _vm._m(10),
                 _vm._v(" "),
-                _vm._m(14),
+                _vm._m(11),
                 _vm._v(" "),
-                _vm._m(15)
+                _vm._m(12)
               ]
             )
           ])
@@ -78941,18 +79100,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-4" }, [
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { name: "", id: "" } },
-        [_c("option", { attrs: { selected: "" } }, [_vm._v("Tipus alertant")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-8" }, [
       _c(
         "select",
@@ -78975,38 +79122,6 @@ var staticRenderFns = [
           ])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-8" }, [
-      _c(
-        "select",
-        { staticClass: "form-control", attrs: { name: "", id: "" } },
-        [
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v("Tipus incidencia")
-          ])
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-12" }, [
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: {
-          name: "",
-          id: "",
-          rows: "3",
-          placeholder: "Descripció incidencia"
-        }
-      })
     ])
   },
   function() {
