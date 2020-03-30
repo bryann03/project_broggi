@@ -7,13 +7,13 @@
             <form action method="post">
                 <div class="row">
                     <div class="col-4">
-                        <input v-model="datosIncidencia.num_incidencia" class="form-control" type="text" name="" id="" placeholder="Num.Incidencia">
+                        <input v-model.number="datosIncidencia.num_incidencia" class="form-control" type="text" placeholder="Num.Incidencia">
                     </div>
                     <div class="col-8">
-                        <input v-model="datosIncidencia.data" class="form-control" type="datetime-local"  name="" id="" placeholder="Num.Incidencia">
+                        <input v-model="datosIncidencia.data" class="form-control" type="datetime-local" placeholder="Num.Incidencia">
                     </div>
                     <div class="col-4">
-                        <input class="form-control" type="text" name="" id="" placeholder="Telf. alertant">
+                        <input v-model.number="datosIncidencia.telefon_alertant" class="form-control" type="text" placeholder="Telf. alertant">
                     </div>
                     <div class="col-8">
                         <b-form-input v-model.number="datosIncidencia.municipis_id" list="list-municipis" id="input-with-list" placeholder="Municipis"></b-form-input>
@@ -23,10 +23,10 @@
                         <!-- <input class="form-control" type="text" name="" id="" placeholder="Municipi (AutoComplete)"> -->
                     </div>
                     <div class="col-12">
-                        <input class="form-control" type="text" name="" id="" placeholder="Direcció">
+                        <input v-model="datosIncidencia.adreca" class="form-control" type="text" placeholder="Adreça">
                     </div>
                     <div class="col-12">
-                        <input class="form-control" type="text" name="" id="" placeholder="Complemet direcció">
+                        <input v-model="datosIncidencia.complement_adreca" class="form-control" type="text" placeholder="Complemet adreça">
                     </div>
                     <div class="col-4">
                         <select class="form-control" v-model.number="datosIncidencia.tipus_alertant_id">
@@ -35,13 +35,13 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <select class="form-control" name="" id="">
-                            <option selected>Alertant</option>
+                        <select class="form-control" v-model.number="datosIncidencia.alertant_id">
+                            <option :value="null" disabled hidden>Alertant</option>
                         </select>
                     </div>
                     <div class="col-4">
-                        <select class="form-control" name="" id="">
-                            <option selected>Estat incidencia</option>
+                        <select v-model.number="datosIncidencia.estats_incidencia_id" class="form-control">
+                            <option :value="null" disabled hidden>Estat incidenica</option>
                         </select>
                     </div>
                     <div class="col-8">
@@ -51,7 +51,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <textarea v-model="datosIncidencia.descripcion" class="form-control" name="" id="" rows="3" placeholder="Descripció incidencia"></textarea>
+                        <textarea v-model="datosIncidencia.descripcion" class="form-control" rows="3" placeholder="Descripció incidencia"></textarea>
                     </div>
                 </div>
             </form>
@@ -125,6 +125,7 @@ export default {
                 descripcion: '',
                 municipis_id: null,
                 tipus_incident_id: null,
+                estats_incidencia_id: null,
                 tipus_alertant_id: null,
                 alertant_id: null
             },
