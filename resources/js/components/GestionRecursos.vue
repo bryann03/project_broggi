@@ -20,9 +20,14 @@
                     <div class="modal-body">
                         <form action method="post" enctype="multipart/form-data">
                             <div class="form-group row">
-                                <label for="textRol" class="col-md-3 form-control-label">Codi</label>
-                                <div class="col-md-9">
-                                    <input type="text" name="rol" v-model="objectRecurso.codi" placeholder="Codi recurs" />
+                                <div class="col-12">
+                                    <input class="form-control" type="text" name="rol" v-model="objectRecurso.codi" placeholder="Codi recurs" />
+                                </div>
+                                <div class="col-12">
+                                    <select class="form-control" v-model.number="objectRecurso.tipus_recurs_id">
+                                        <option :value="null" disabled hidden>Tipus recurs</option>
+                                        <option v-for="tipus in arrayTipusRecurs" :key="tipus.id" :value="tipus.id" >{{ tipus.tipus }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div v-show="errorRol" class="form-group row">
@@ -46,10 +51,10 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
   export default {
     data() {
       return {
-        arrayTipusAlertant: null,
         objectRecurso: {
             id: null,
             codi: "",
@@ -65,19 +70,11 @@
       }
     },
     created() {
-        this.getTipusAlertant();
+        this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
+        this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
     },
     methods: {
-        getTipusAlertant(){
-            let me = this;
-            axios.get("/tipus_alertant")
-                .then(function(response){
-                    me.arrayTipusAlertant = response.data;
-                })
-                .catch(function(error){
-                    console.log(error);
-                })
-        },
+        ...mapActions(['getApi']),
         abrirModal(accionApi){
             switch (accionApi) {
                 case 'insert':
@@ -94,8 +91,14 @@
             this.tituloModal = "";
             this.errorRol = false;
             this.accionApi = "";
-            this.objectRecurso.codi = ""
+            this.objectRecurso.id = null,
+            this.objectRecurso.codi = "",
+            this.objectRecurso.tipus_recurs_id = null,
+            this.objectRecurso.id_usuario = null
         },
+    },
+    computed: {
+        ...mapState(['arrayTipusAlertant', 'arrayTipusRecurs'])
     },
   }
 </script>
@@ -116,5 +119,8 @@ section {
   opacity: 1 !important;
   position: absolute !important;
   background-color: black !important;
+}
+form div{
+    margin-bottom: 2rem;
 }
 </style>

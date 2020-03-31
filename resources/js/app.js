@@ -21,6 +21,11 @@ window.Vue = require('vue');
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+import store from '../js/store'
+
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('registro', require('./components/Registro.vue').default);
 Vue.component('login', require('./components/Login.vue').default);
@@ -37,4 +42,5 @@ Vue.use(BootstrapVue);
 
 const app = new Vue({
     el: '#app',
+    store
 });

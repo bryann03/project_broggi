@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusRecursResource;
 use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TipusRecursController extends Controller
      */
     public function index()
     {
-        //
+        $tipusRecurs = TipusRecurs::all();
+        return TipusRecursResource::collection($tipusRecurs);
     }
 
     /**
