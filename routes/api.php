@@ -23,3 +23,4 @@ Route::apiResource('municipis', 'Api\MunicipisController');
 Route::apiResource('alertants', 'Api\AlertantsController');
 Route::apiResource('tipus_alertant', 'Api\TipusAlertantController');
 Route::apiResource('tipus_incident', 'Api\TipusIncidentController');
+Route::apiResource('recursos', 'Api\RecursosController');

@@ -5,5 +5,6 @@
 @endsection
 
 @section('principal')
-    <registro-incidencia></registro-incidencia>
+    {{-- <registro-incidencia></registro-incidencia> --}}
+    <gestion-recursos></gestion-recursos>
 @endsection

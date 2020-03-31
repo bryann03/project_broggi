@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RecursosResource;
 use App\Models\Recursos;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class RecursosController extends Controller
      */
     public function index()
     {
-        //
+        $recursos = Recursos::all();
+        return RecursosResource::collection($recursos);
     }
 
     /**

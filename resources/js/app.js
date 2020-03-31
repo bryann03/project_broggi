@@ -25,6 +25,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('registro', require('./components/Registro.vue').default);
 Vue.component('login', require('./components/Login.vue').default);
 Vue.component('registro-incidencia', require('./components/RegistroIncidencia.vue').default);
+Vue.component('gestion-recursos', require('./components/GestionRecursos.vue').default);
 
 Vue.use(BootstrapVue);
 

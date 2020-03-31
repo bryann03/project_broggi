@@ -147,6 +147,7 @@ export default {
         mostrarSanitari(){
             this.buttonSanitari = false;
             this.recursSanitari = true;
+            console.log(this.arrayTipusAlertant);
         },
         mostrarPolicial(){
             this.buttonPolicial = false;
