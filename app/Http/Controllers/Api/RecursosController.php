@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Clases\Utilitat;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecursosResource;
 use App\Models\Recursos;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class RecursosController extends Controller
@@ -28,7 +30,26 @@ class RecursosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $recurs = new Recursos();
+
+        $recurs->codi = $request->input('codi');
+        $recurs->tipus_recurs_id = $request->input('tipus_recurs_id');
+        $recurs->id_usuario = $request->input('id_usuario');
+
+        try
+        {
+            $recurs->save();
+            $respuesta = (new RecursosResource($recurs))
+                        ->response()
+                        ->setStatusCode(201);
+        }
+        catch (QueryException $e)
+        {
+            $mensaje = Utilitat::errorMessage($e);
+            $respuesta = response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $respuesta;
     }
 
     /**

@@ -6,20 +6,33 @@ Vue.use(Vuex, axios)
 
 export default new Vuex.Store({
     state: {
-        arrayRoles: [],
+        arrayRols: [],
         arrayUsuaris: [],
         arrayTipusAlertant: [],
-        arrayTipusRecurs: []
+        arrayTipusRecurs: [],
+        arrayMunicipis: [],
+        arrayTipusIncidencia: [],
+        arrayRecursos: [],
+        afegit: false
     },
     mutations: {
-        llenarUsuaris(state, usuarisRecibidos) {
-            state.arrayUsuaris = usuarisRecibidos;
-        },
         tipus_alertant(state, datosRecibidos){
             state.arrayTipusAlertant = datosRecibidos;
         },
         tipus_recurs(state, datosRecibidos){
             state.arrayTipusRecurs = datosRecibidos;
+        },
+        municipis(state, datosRecibidos){
+            state.arrayMunicipis = datosRecibidos;
+        },
+        tipus_incident(state, datosRecibidos){
+            state.arrayTipusIncidencia = datosRecibidos;
+        },
+        usuaris(state, datosRecibidos){
+            state.arrayUsuaris = datosRecibidos;
+        },
+        recursos(state, datosRecibidos){
+            state.arrayRecursos = datosRecibidos;
         }
     },
     actions: {
@@ -34,16 +47,15 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
-        getUsuaris({ commit }, rol_id) {
-            axios.get("/rol/" + rol_id)
-                .then(function (response) {
-                    console.log(rol_id)
-                    const usuaris = response.data;
-                    commit('llenarUsuaris', usuaris);
+        postApi({ruta, objeto}){
+            axios.post("/" + ruta, objeto)
+                .then(function(response){
+                    console.log("RECURSO AÑADIDO");
+                    let añadido = true;
                 })
-                .catch(function (error) {
+                .catch(function(error){
                     console.log(error);
-                });
+                })
         }
     },
     modules: {

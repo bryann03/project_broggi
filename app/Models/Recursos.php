@@ -23,4 +23,9 @@ class Recursos extends Model
     {
         return $this->belongsTo('App\Models\TipusRecurs', 'tipus_recurs_id');
     }
+
+    public function usuaris()
+    {
+        return $this->belongsTo('App\Models\Usuaris', 'id_usuario');
+    }
 }

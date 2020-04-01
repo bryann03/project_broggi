@@ -2000,6 +2000,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2026,8 +2032,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ruta: 'tipus_recurs',
       nombreTabla: 'tipus_recurs'
     });
+    this.getApi({
+      ruta: 'usuaris',
+      nombreTabla: 'usuaris'
+    });
+    this.getApi({
+      ruta: 'recursos',
+      nombreTabla: 'recursos'
+    });
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi', 'postApi']), {
     abrirModal: function abrirModal(accionApi) {
       switch (accionApi) {
         case 'insert':
@@ -2046,9 +2060,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.errorRol = false;
       this.accionApi = "";
       this.objectRecurso.id = null, this.objectRecurso.codi = "", this.objectRecurso.tipus_recurs_id = null, this.objectRecurso.id_usuario = null;
+    },
+    insertRecurs: function insertRecurs() {
+      var me = this;
+      axios.post("/recursos", this.objectRecurso).then(function (response) {
+        me.cerrarModal();
+        me.arrayRecursos.push(response.data);
+      })["catch"](function (error) {
+        console.log(error);
+        me.mensajeError = error.response.data;
+        me.errorRol = true;
+        me.arrrayMensajesError.push(me.mensajeError.error);
+      });
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']))
 });
 
 /***/ }),
@@ -2226,6 +2252,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2338,6 +2371,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2359,18 +2393,24 @@ __webpack_require__.r(__webpack_exports__);
       recursSanitari: false,
       buttonSanitari: true,
       recursPolicial: false,
-      buttonPolicial: true,
-      arrayMunicipis: null,
-      arrayTipusAlertant: null,
-      arrayTipusIncidencia: null
+      buttonPolicial: true
     };
   },
   created: function created() {
-    this.getMunicipis();
-    this.getTipusAlertant();
-    this.getTipusIncidencia();
+    this.getApi({
+      ruta: 'municipis',
+      nombreTabla: 'municipis'
+    });
+    this.getApi({
+      ruta: 'tipus_alertant',
+      nombreTabla: 'tipus_alertant'
+    });
+    this.getApi({
+      ruta: 'tipus_incident',
+      nombreTabla: 'tipus_incident'
+    });
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
     mostrarSanitari: function mostrarSanitari() {
       this.buttonSanitari = false;
       this.recursSanitari = true;
@@ -2379,32 +2419,9 @@ __webpack_require__.r(__webpack_exports__);
     mostrarPolicial: function mostrarPolicial() {
       this.buttonPolicial = false;
       this.recursPolicial = true;
-    },
-    getMunicipis: function getMunicipis() {
-      var me = this;
-      axios.get("/municipis").then(function (response) {
-        me.arrayMunicipis = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getTipusAlertant: function getTipusAlertant() {
-      var me = this;
-      axios.get("/tipus_alertant").then(function (response) {
-        me.arrayTipusAlertant = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    getTipusIncidencia: function getTipusIncidencia() {
-      var me = this;
-      axios.get("/tipus_incident").then(function (response) {
-        me.arrayTipusIncidencia = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
     }
-  }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia']))
 });
 
 /***/ }),
@@ -78522,7 +78539,7 @@ var render = function() {
           _vm._v("Gestió de recursos")
         ]),
         _vm._v(" "),
-        _c("b-table", { attrs: { hover: "", items: _vm.arrayTipusAlertant } }),
+        _c("b-table", { attrs: { hover: "", items: _vm.arrayRecursos } }),
         _vm._v(" "),
         _c(
           "button",
@@ -78678,6 +78695,65 @@ var render = function() {
                                   domProps: { value: tipus.id }
                                 },
                                 [_vm._v(_vm._s(tipus.tipus))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-12" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model.number",
+                                value: _vm.objectRecurso.id_usuario,
+                                expression: "objectRecurso.id_usuario",
+                                modifiers: { number: true }
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return _vm._n(val)
+                                  })
+                                _vm.$set(
+                                  _vm.objectRecurso,
+                                  "id_usuario",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              {
+                                attrs: { disabled: "", hidden: "" },
+                                domProps: { value: null }
+                              },
+                              [_vm._v("Usuari")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayUsuaris, function(usuari) {
+                              return _c(
+                                "option",
+                                {
+                                  key: usuari.id,
+                                  domProps: { value: usuari.id }
+                                },
+                                [_vm._v(_vm._s(usuari.nom))]
                               )
                             })
                           ],
@@ -79187,32 +79263,24 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-8" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
+              _c(
+                "section",
+                { staticClass: "col-8" },
+                [
+                  _c("b-form-datepicker", {
+                    staticClass: "form-control",
+                    attrs: { placeholder: "Data" },
+                    model: {
                       value: _vm.datosIncidencia.data,
+                      callback: function($$v) {
+                        _vm.$set(_vm.datosIncidencia, "data", $$v)
+                      },
                       expression: "datosIncidencia.data"
                     }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "datetime-local",
-                    placeholder: "Num.Incidencia"
-                  },
-                  domProps: { value: _vm.datosIncidencia.data },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.datosIncidencia, "data", $event.target.value)
-                    }
-                  }
-                })
-              ]),
+                  })
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("div", { staticClass: "col-4" }, [
                 _c("input", {
@@ -93625,20 +93693,33 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"], axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    arrayRoles: [],
+    arrayRols: [],
     arrayUsuaris: [],
     arrayTipusAlertant: [],
-    arrayTipusRecurs: []
+    arrayTipusRecurs: [],
+    arrayMunicipis: [],
+    arrayTipusIncidencia: [],
+    arrayRecursos: [],
+    afegit: false
   },
   mutations: {
-    llenarUsuaris: function llenarUsuaris(state, usuarisRecibidos) {
-      state.arrayUsuaris = usuarisRecibidos;
-    },
     tipus_alertant: function tipus_alertant(state, datosRecibidos) {
       state.arrayTipusAlertant = datosRecibidos;
     },
     tipus_recurs: function tipus_recurs(state, datosRecibidos) {
       state.arrayTipusRecurs = datosRecibidos;
+    },
+    municipis: function municipis(state, datosRecibidos) {
+      state.arrayMunicipis = datosRecibidos;
+    },
+    tipus_incident: function tipus_incident(state, datosRecibidos) {
+      state.arrayTipusIncidencia = datosRecibidos;
+    },
+    usuaris: function usuaris(state, datosRecibidos) {
+      state.arrayUsuaris = datosRecibidos;
+    },
+    recursos: function recursos(state, datosRecibidos) {
+      state.arrayRecursos = datosRecibidos;
     }
   },
   actions: {
@@ -93654,12 +93735,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         console.log(error);
       });
     },
-    getUsuaris: function getUsuaris(_ref3, rol_id) {
-      var commit = _ref3.commit;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/rol/" + rol_id).then(function (response) {
-        console.log(rol_id);
-        var usuaris = response.data;
-        commit('llenarUsuaris', usuaris);
+    postApi: function postApi(_ref3) {
+      var ruta = _ref3.ruta,
+          objeto = _ref3.objeto;
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/" + ruta, objeto).then(function (response) {
+        console.log("RECURSO AÑADIDO");
+        var añadido = true;
       })["catch"](function (error) {
         console.log(error);
       });

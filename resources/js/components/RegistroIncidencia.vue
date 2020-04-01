@@ -9,9 +9,9 @@
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.num_incidencia" class="form-control" type="text" placeholder="Num.Incidencia">
                     </div>
-                    <div class="col-8">
-                        <input v-model="datosIncidencia.data" class="form-control" type="datetime-local" placeholder="Num.Incidencia">
-                    </div>
+                    <section class="col-8">
+                        <b-form-datepicker v-model="datosIncidencia.data" class="form-control" placeholder="Data"></b-form-datepicker>
+                    </section>
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.telefon_alertant" class="form-control" type="text" placeholder="Telf. alertant">
                     </div>
@@ -111,6 +111,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
     data() {
         return {
@@ -132,18 +133,16 @@ export default {
             recursSanitari: false,
             buttonSanitari: true,
             recursPolicial: false,
-            buttonPolicial: true,
-            arrayMunicipis: null,
-            arrayTipusAlertant: null,
-            arrayTipusIncidencia: null
+            buttonPolicial: true
         }
     },
     created() {
-        this.getMunicipis();
-        this.getTipusAlertant();
-        this.getTipusIncidencia();
+        this.getApi({ruta: 'municipis', nombreTabla: 'municipis'});
+        this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
+        this.getApi({ruta: 'tipus_incident', nombreTabla: 'tipus_incident'});
     },
     methods: {
+        ...mapActions(['getApi']),
         mostrarSanitari(){
             this.buttonSanitari = false;
             this.recursSanitari = true;
@@ -152,37 +151,10 @@ export default {
         mostrarPolicial(){
             this.buttonPolicial = false;
             this.recursPolicial = true;
-        },
-        getMunicipis(){
-            let me = this;
-            axios.get("/municipis")
-                .then(function(response){
-                    me.arrayMunicipis = response.data;
-                })
-                .catch(function(error){
-                    console.log(error);
-                })
-        },
-        getTipusAlertant(){
-            let me = this;
-            axios.get("/tipus_alertant")
-                .then(function(response){
-                    me.arrayTipusAlertant = response.data;
-                })
-                .catch(function(error){
-                    console.log(error);
-                })
-        },
-        getTipusIncidencia(){
-            let me = this;
-            axios.get("/tipus_incident")
-                .then(function(response){
-                    me.arrayTipusIncidencia = response.data;
-                })
-                .catch(function(error){
-                    console.log(error);
-                })
         }
+    },
+    computed: {
+        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia'])
     },
 }
 </script>

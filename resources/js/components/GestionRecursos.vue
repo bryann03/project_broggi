@@ -2,7 +2,7 @@
     <main>
         <section>
             <h1 class="text-center">Gestió de recursos</h1>
-            <b-table hover :items="arrayTipusAlertant"></b-table>
+            <b-table hover :items="arrayRecursos"></b-table>
             <button type="button" name="" id="" class="btn btn-primary btn-block" @click="abrirModal('insert')">Afegir recurs</button>
         </section>
 
@@ -27,6 +27,12 @@
                                     <select class="form-control" v-model.number="objectRecurso.tipus_recurs_id">
                                         <option :value="null" disabled hidden>Tipus recurs</option>
                                         <option v-for="tipus in arrayTipusRecurs" :key="tipus.id" :value="tipus.id" >{{ tipus.tipus }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <select class="form-control" v-model.number="objectRecurso.id_usuario">
+                                        <option :value="null" disabled hidden>Usuari</option>
+                                        <option v-for="usuari in arrayUsuaris" :key="usuari.id" :value="usuari.id" >{{ usuari.nom }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,9 +78,11 @@ import { mapState, mapMutations, mapActions } from "vuex";
     created() {
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
         this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
+        this.getApi({ruta: 'usuaris', nombreTabla: 'usuaris'});
+        this.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
     },
     methods: {
-        ...mapActions(['getApi']),
+        ...mapActions(['getApi', 'postApi']),
         abrirModal(accionApi){
             switch (accionApi) {
                 case 'insert':
@@ -96,9 +104,23 @@ import { mapState, mapMutations, mapActions } from "vuex";
             this.objectRecurso.tipus_recurs_id = null,
             this.objectRecurso.id_usuario = null
         },
+        insertRecurs(){
+            let me = this;
+            axios.post("/recursos", this.objectRecurso)
+                .then(function(response){
+                    me.cerrarModal();
+                    me.arrayRecursos.push(response.data);
+                })
+                .catch(function(error){
+                    console.log(error);
+                    me.mensajeError = error.response.data;
+                    me.errorRol = true;
+                    me.arrrayMensajesError.push(me.mensajeError.error);
+                })
+        }
     },
     computed: {
-        ...mapState(['arrayTipusAlertant', 'arrayTipusRecurs'])
+        ...mapState(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos'])
     },
   }
 </script>
