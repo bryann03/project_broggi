@@ -1,9 +1,32 @@
 <template>
     <main>
         <section>
-            <h1 class="text-center">Gestió de recursos</h1>
-            <b-table hover :items="arrayRecursos"></b-table>
-            <button type="button" name="" id="" class="btn btn-primary btn-block" @click="abrirModal('insert')">Afegir recurs</button>
+            <h1 class="text-center mb-5">Gestió de recursos</h1>
+            <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover :items="arrayRecursos" :fields="columnasTabla">
+                <template v-slot:cell(manage)="data">
+                    <button type="button" class="btn btn-primary mr-3">Editar</button>
+                    <button type="button" class="btn btn-danger" v-b-modal.modal-esborrar @click="sendRecurs(data.item)">Esborrar</button>
+                </template>
+
+            </b-table>
+
+            <b-modal id="modal-esborrar" centered title="Esborrar recurs">
+                <p class="my-4">Vols esborrar el recurs amb el codi --> <span style="font-weight: bold;">{{ objectRecurso.codi }}</span> ?</p>
+
+                <template v-slot:modal-footer="{cancel}">
+                    <b-button size="sm" variant="outline-primary" @click="cancel()">
+                        Cancel
+                    </b-button>
+                    <!-- Button with custom close trigger value -->
+                    <b-button size="sm" variant="danger" @click="deleteRecurs(objectRecurso.id)">
+                        Esborrar
+                    </b-button>
+                </template>
+            </b-modal>
+
+            <b-pagination v-model="currentPage" :per-page="perPage" :total-rows="rows" aria-controls="tablaRecursos"></b-pagination>
+            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">Afegir recurs</button>
+
         </section>
 
         <!-- Modal -->
@@ -47,7 +70,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="cerrarModal()" data-dismiss="modal">Close</button>
                         <button v-if="accionApi === 'insert'" type="button" class="btn btn-primary" @click="insertRecurs()">Guardar</button>
-                        <button v-else-if="accionApi === 'delete'" type="button" class="btn btn-danger" @click="deleteRol(rol.id)">Borrar</button>
+                        <button v-else-if="accionApi === 'delete'" type="button" class="btn btn-danger" @click="deleteRecurs(objectRecurso.id)">Borrar</button>
                         <button v-else-if="accionApi === 'update'" type="button" class="btn btn-success" @click="updateRol(rol.id)">Actualizar</button>
                     </div>
                 </div>
@@ -67,12 +90,16 @@ import { mapState, mapMutations, mapActions } from "vuex";
             tipus_recurs_id: null,
             id_usuario: null
         },
+        columnasTabla:[{key: 'codi', label: 'Codi'}, {key: 'tipus_recurs.tipus', label: 'Tipus recurs'},
+                        {key: 'usuaris.nom', label: 'Usuari'}, {key: 'manage', label: 'Manage'}],
         tituloModal: "",
         modal: 0,
         errorRol: false,
         accionApi: "",
         arrrayMensajesError: [],
-        tituloModal: ""
+        tituloModal: "",
+        perPage: 5,
+        currentPage: 1
       }
     },
     created() {
@@ -86,6 +113,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
         abrirModal(accionApi){
             switch (accionApi) {
                 case 'insert':
+                    this.clearDataModal();
                     this.modal = 1;
                     this.tituloModal = "Insertar recurs";
                     this.accionApi = accionApi;
@@ -99,6 +127,9 @@ import { mapState, mapMutations, mapActions } from "vuex";
             this.tituloModal = "";
             this.errorRol = false;
             this.accionApi = "";
+            this.clearDataModal();
+        },
+        clearDataModal(){
             this.objectRecurso.id = null,
             this.objectRecurso.codi = "",
             this.objectRecurso.tipus_recurs_id = null,
@@ -109,7 +140,10 @@ import { mapState, mapMutations, mapActions } from "vuex";
             axios.post("/recursos", this.objectRecurso)
                 .then(function(response){
                     me.cerrarModal();
-                    me.arrayRecursos.push(response.data);
+                    me.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
+                    // me.$parent.reload();
+                    // me.arrayRecursos.push(response.data);
+                    console.log(me.arrayRecursos);
                 })
                 .catch(function(error){
                     console.log(error);
@@ -117,10 +151,33 @@ import { mapState, mapMutations, mapActions } from "vuex";
                     me.errorRol = true;
                     me.arrrayMensajesError.push(me.mensajeError.error);
                 })
+        },
+        deleteRecurs(idRecurs){
+            let me = this;
+            this.modal = 0;
+            axios.delete("/recursos/" + idRecurs)
+                .then(function (response) {
+                    console.log("BORRADO");
+                    const index = me.arrayRecursos.findIndex(recurso => recurso.id === idRecurs);
+                    if(~index)
+                    {
+                        me.arrayRecursos.splice(index, 1);
+
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        sendRecurs(recurs){
+            this.objectRecurso = recurs;
         }
     },
     computed: {
-        ...mapState(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos'])
+        ...mapState(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']),
+        rows() {
+            return this.arrayRecursos.length
+        }
     },
   }
 </script>

@@ -2006,22 +2006,60 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    return _defineProperty({
+    var _ref;
+
+    return _ref = {
       objectRecurso: {
         id: null,
         codi: "",
         tipus_recurs_id: null,
         id_usuario: null
       },
+      columnasTabla: [{
+        key: 'codi',
+        label: 'Codi'
+      }, {
+        key: 'tipus_recurs.tipus',
+        label: 'Tipus recurs'
+      }, {
+        key: 'usuaris.nom',
+        label: 'Usuari'
+      }, {
+        key: 'manage',
+        label: 'Manage'
+      }],
       tituloModal: "",
       modal: 0,
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, "tituloModal", "");
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _ref;
   },
   created: function created() {
     this.getApi({
@@ -2045,6 +2083,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     abrirModal: function abrirModal(accionApi) {
       switch (accionApi) {
         case 'insert':
+          this.clearDataModal();
           this.modal = 1;
           this.tituloModal = "Insertar recurs";
           this.accionApi = accionApi;
@@ -2059,22 +2098,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.tituloModal = "";
       this.errorRol = false;
       this.accionApi = "";
+      this.clearDataModal();
+    },
+    clearDataModal: function clearDataModal() {
       this.objectRecurso.id = null, this.objectRecurso.codi = "", this.objectRecurso.tipus_recurs_id = null, this.objectRecurso.id_usuario = null;
     },
     insertRecurs: function insertRecurs() {
       var me = this;
       axios.post("/recursos", this.objectRecurso).then(function (response) {
         me.cerrarModal();
-        me.arrayRecursos.push(response.data);
+        me.getApi({
+          ruta: 'recursos',
+          nombreTabla: 'recursos'
+        }); // me.$parent.reload();
+        // me.arrayRecursos.push(response.data);
+
+        console.log(me.arrayRecursos);
       })["catch"](function (error) {
         console.log(error);
         me.mensajeError = error.response.data;
         me.errorRol = true;
         me.arrrayMensajesError.push(me.mensajeError.error);
       });
+    },
+    deleteRecurs: function deleteRecurs(idRecurs) {
+      var me = this;
+      this.modal = 0;
+      axios["delete"]("/recursos/" + idRecurs).then(function (response) {
+        console.log("BORRADO");
+        var index = me.arrayRecursos.findIndex(function (recurso) {
+          return recurso.id === idRecurs;
+        });
+
+        if (~index) {
+          me.arrayRecursos.splice(index, 1);
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    sendRecurs: function sendRecurs(recurs) {
+      this.objectRecurso = recurs;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']), {
+    rows: function rows() {
+      return this.arrayRecursos.length;
+    }
+  })
 });
 
 /***/ }),
@@ -78535,17 +78606,139 @@ var render = function() {
     _c(
       "section",
       [
-        _c("h1", { staticClass: "text-center" }, [
+        _c("h1", { staticClass: "text-center mb-5" }, [
           _vm._v("Gestió de recursos")
         ]),
         _vm._v(" "),
-        _c("b-table", { attrs: { hover: "", items: _vm.arrayRecursos } }),
+        _c("b-table", {
+          ref: "table",
+          attrs: {
+            "current-page": _vm.currentPage,
+            id: "tablaRecursos",
+            "per-page": _vm.perPage,
+            hover: "",
+            items: _vm.arrayRecursos,
+            fields: _vm.columnasTabla
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "cell(manage)",
+              fn: function(data) {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary mr-3",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Editar")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "b-modal",
+                          rawName: "v-b-modal.modal-esborrar",
+                          modifiers: { "modal-esborrar": true }
+                        }
+                      ],
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.sendRecurs(data.item)
+                        }
+                      }
+                    },
+                    [_vm._v("Esborrar")]
+                  )
+                ]
+              }
+            }
+          ])
+        }),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: {
+              id: "modal-esborrar",
+              centered: "",
+              title: "Esborrar recurs"
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "modal-footer",
+                fn: function(ref) {
+                  var cancel = ref.cancel
+                  return [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { size: "sm", variant: "outline-primary" },
+                        on: {
+                          click: function($event) {
+                            return cancel()
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    Cancel\n                ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { size: "sm", variant: "danger" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteRecurs(_vm.objectRecurso.id)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    Esborrar\n                "
+                        )
+                      ]
+                    )
+                  ]
+                }
+              }
+            ])
+          },
+          [
+            _c("p", { staticClass: "my-4" }, [
+              _vm._v("Vols esborrar el recurs amb el codi --> "),
+              _c("span", { staticStyle: { "font-weight": "bold" } }, [
+                _vm._v(_vm._s(_vm.objectRecurso.codi))
+              ]),
+              _vm._v(" ?")
+            ])
+          ]
+        ),
+        _vm._v(" "),
+        _c("b-pagination", {
+          attrs: {
+            "per-page": _vm.perPage,
+            "total-rows": _vm.rows,
+            "aria-controls": "tablaRecursos"
+          },
+          model: {
+            value: _vm.currentPage,
+            callback: function($$v) {
+              _vm.currentPage = $$v
+            },
+            expression: "currentPage"
+          }
+        }),
         _vm._v(" "),
         _c(
           "button",
           {
             staticClass: "btn btn-primary btn-block",
-            attrs: { type: "button", name: "", id: "" },
+            attrs: { type: "button" },
             on: {
               click: function($event) {
                 return _vm.abrirModal("insert")
@@ -78831,7 +79024,7 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.deleteRol(_vm.rol.id)
+                            return _vm.deleteRecurs(_vm.objectRecurso.id)
                           }
                         }
                       },

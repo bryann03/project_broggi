@@ -18,8 +18,8 @@ class RecursosController extends Controller
      */
     public function index()
     {
-        $recursos = Recursos::all();
-        return RecursosResource::collection($recursos);
+        $recursos = Recursos::with('tipus_recurs')->with('usuaris')->get();
+        return new RecursosResource($recursos);
     }
 
     /**
@@ -81,8 +81,29 @@ class RecursosController extends Controller
      * @param  \App\Models\Recursos  $recursos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Recursos $recursos)
+    public function destroy($idRecurs)
     {
-        //
+        $recurs = Recursos::find($idRecurs);
+        if($recurs == null)
+        {
+            $respuesta = response()
+                        ->json(['error'=>"¡ELEMENTO NO ENCONTRADO!"], 404);
+        }
+        else
+        {
+            try
+            {
+                $recurs->delete();
+                $respuesta = (new RecursosResource($recurs))
+                            ->response()
+                            ->setStatusCode(200);
+            }
+            catch(QueryException $e)
+            {
+                $mensaje = Utilitat::errorMessage($e);
+                $respuesta = response()
+                            ->json(['error'=>$mensaje], 400);
+            }
+        }
     }
 }
