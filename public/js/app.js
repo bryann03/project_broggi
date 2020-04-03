@@ -93916,6 +93916,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   actions: {
+    //LE PASA EL NOMBRE DE LA TABLA Y SU RUTA
     getApi: function getApi(_ref, _ref2) {
       var commit = _ref.commit;
       var ruta = _ref2.ruta,
@@ -93928,6 +93929,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         console.log(error);
       });
     },
+    //SIN USO, EN PRUEBAS...
     postApi: function postApi(_ref3) {
       var ruta = _ref3.ruta,
           objeto = _ref3.objeto;

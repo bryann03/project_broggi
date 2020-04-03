@@ -36,6 +36,7 @@ export default new Vuex.Store({
         }
     },
     actions: {
+        //LE PASA EL NOMBRE DE LA TABLA Y SU RUTA
         getApi({ commit }, {ruta, nombreTabla}) {
             axios.get("/" + ruta)
                 .then(function (response) {
@@ -47,6 +48,7 @@ export default new Vuex.Store({
                     console.log(error);
                 });
         },
+        //SIN USO, EN PRUEBAS...
         postApi({ruta, objeto}){
             axios.post("/" + ruta, objeto)
                 .then(function(response){
