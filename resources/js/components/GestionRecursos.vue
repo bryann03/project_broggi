@@ -182,8 +182,9 @@ import { mapState, mapMutations, mapActions } from "vuex";
             axios.put("/recursos/" + idRecurs, this.objectRecurso)
                 .then(function(response) {
                     console.log("ACTUALIZADO");
-                    me.cerrarModal();
                     me.getRecursos();
+                    me.cerrarModal();
+                    me.showModal();
                 })
                 .catch(function(error) {
                     me.errorRol = true;
@@ -194,6 +195,23 @@ import { mapState, mapMutations, mapActions } from "vuex";
         },
         sendRecurs(recurs){
             this.objectRecurso = recurs;
+        },
+        showModal(){
+            this.$bvModal.msgBoxOk('Les dades han sigut actualitzades correctament', {
+                title: 'Actualitzat',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'success',
+                headerClass: 'p-2 border-bottom-0',
+                footerClass: 'p-2 border-top-0',
+                centered: true
+            })
+            .then(value => {
+                this.boxTwo = value
+            })
+            .catch(err => {
+                // An error occurred
+            })
         },
         getRecursos(){
             this.getApi({ruta: 'recursos', nombreTabla: 'recursos'});

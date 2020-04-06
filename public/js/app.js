@@ -2149,8 +2149,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var me = this;
       axios.put("/recursos/" + idRecurs, this.objectRecurso).then(function (response) {
         console.log("ACTUALIZADO");
-        me.cerrarModal();
         me.getRecursos();
+        me.cerrarModal();
+        me.showModal();
       })["catch"](function (error) {
         me.errorRol = true;
         me.mensajeError = error.response.data;
@@ -2160,6 +2161,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     sendRecurs: function sendRecurs(recurs) {
       this.objectRecurso = recurs;
+    },
+    showModal: function showModal() {
+      var _this = this;
+
+      this.$bvModal.msgBoxOk('Les dades han sigut actualitzades correctament', {
+        title: 'Actualitzat',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'success',
+        headerClass: 'p-2 border-bottom-0',
+        footerClass: 'p-2 border-top-0',
+        centered: true
+      }).then(function (value) {
+        _this.boxTwo = value;
+      })["catch"](function (err) {// An error occurred
+      });
     },
     getRecursos: function getRecursos() {
       this.getApi({
