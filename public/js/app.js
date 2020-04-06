@@ -2074,19 +2074,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ruta: 'usuaris',
       nombreTabla: 'usuaris'
     });
-    this.getApi({
-      ruta: 'recursos',
-      nombreTabla: 'recursos'
-    });
+    this.getRecursos();
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi', 'postApi']), {
     abrirModal: function abrirModal(accionApi) {
+      var dataRecurs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+
       switch (accionApi) {
         case 'insert':
-          this.clearDataModal();
           this.modal = 1;
           this.tituloModal = "Insertar recurs";
           this.accionApi = accionApi;
+          break;
+
+        case 'update':
+          this.modal = 1;
+          this.tituloModal = 'Editar recurs';
+          this.accionApi = accionApi;
+          this.objectRecurso.id = dataRecurs['id'];
+          this.objectRecurso.codi = dataRecurs['codi'];
+          this.objectRecurso.tipus_recurs_id = dataRecurs['tipus_recurs_id'];
+          this.objectRecurso.id_usuario = dataRecurs['id_usuario']; // this.objectRecurso = dataRecurs;
+
           break;
 
         default:
@@ -2101,16 +2110,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.clearDataModal();
     },
     clearDataModal: function clearDataModal() {
-      this.objectRecurso.id = null, this.objectRecurso.codi = "", this.objectRecurso.tipus_recurs_id = null, this.objectRecurso.id_usuario = null;
+      this.objectRecurso.id = null;
+      this.objectRecurso.codi = "";
+      this.objectRecurso.tipus_recurs_id = null;
+      this.objectRecurso.id_usuario = null;
     },
     insertRecurs: function insertRecurs() {
       var me = this;
       axios.post("/recursos", this.objectRecurso).then(function (response) {
         me.cerrarModal();
-        me.getApi({
-          ruta: 'recursos',
-          nombreTabla: 'recursos'
-        }); // me.$parent.reload();
+        me.getRecursos(); // me.$parent.reload();
         // me.arrayRecursos.push(response.data);
 
         console.log(me.arrayRecursos);
@@ -2123,7 +2132,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     deleteRecurs: function deleteRecurs(idRecurs) {
       var me = this;
-      this.modal = 0;
       axios["delete"]("/recursos/" + idRecurs).then(function (response) {
         console.log("BORRADO");
         var index = me.arrayRecursos.findIndex(function (recurso) {
@@ -2137,8 +2145,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(error);
       });
     },
+    updateRecurs: function updateRecurs(idRecurs) {
+      var me = this;
+      axios.put("/recursos/" + idRecurs, this.objectRecurso).then(function (response) {
+        console.log("ACTUALIZADO");
+        me.cerrarModal();
+        me.getRecursos();
+      })["catch"](function (error) {
+        me.errorRol = true;
+        me.mensajeError = error.response.data;
+        me.errorRol = true;
+        me.arrrayMensajesError.push(me.mensajeError.error);
+      });
+    },
     sendRecurs: function sendRecurs(recurs) {
       this.objectRecurso = recurs;
+    },
+    getRecursos: function getRecursos() {
+      this.getApi({
+        ruta: 'recursos',
+        nombreTabla: 'recursos'
+      });
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']), {
@@ -78629,7 +78656,12 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary mr-3",
-                      attrs: { type: "button" }
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.abrirModal("update", data.item)
+                        }
+                      }
                     },
                     [_vm._v("Editar")]
                   ),
@@ -79038,11 +79070,11 @@ var render = function() {
                         attrs: { type: "button" },
                         on: {
                           click: function($event) {
-                            return _vm.updateRol(_vm.rol.id)
+                            return _vm.updateRecurs(_vm.objectRecurso.id)
                           }
                         }
                       },
-                      [_vm._v("Actualizar")]
+                      [_vm._v("Actualitzar")]
                     )
                   : _vm._e()
               ])
