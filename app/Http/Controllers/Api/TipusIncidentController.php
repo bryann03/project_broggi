@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusIncidentResource;
 use App\Models\TipusIncident;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TipusIncidentController extends Controller
      */
     public function index()
     {
-        //
+        $tipusIncident = TipusIncident::all();
+        return TipusIncidentResource::collection($tipusIncident);
     }
 
     /**

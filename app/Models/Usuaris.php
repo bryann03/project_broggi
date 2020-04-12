@@ -20,4 +20,9 @@ class Usuaris extends Model
     {
         return $this->belongsToMany('App\Models\Incidencies', 'incidencies_has_usuaris', 'usuaris_id', 'incidencies_id');
     }
+
+    public function recursos()
+    {
+        return $this->hasMany('App\Models\Recursos', 'id_usuario');
+    }
 }

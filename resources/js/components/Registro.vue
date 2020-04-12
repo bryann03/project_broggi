@@ -19,11 +19,11 @@
                 <i class="fas fa-eye"></i>
               </button>
             </div>
-            <select required class="form-control" name="rols_id" v-model="objectUsuario.rols_id">
-              <option value="" disabled selected>Selecciona el teu rol</option>
+            <select required class="form-control" name="rols_id" v-model.number="objectUsuario.rols_id">
+              <option :value="null" disabled hidden>Selecciona el teu rol</option>
               <option v-for="rol in arrayRoles" :key="rol.id" :value="rol.id" >{{ rol.nom }}</option>
             </select>
-
+            <p class="text-danger">{{ aviso }}</p>
             <button type="button" class="btn btn-primary btn-block mt-3" @click="insertUsuari()">Registrarse</button>
           </form>
         </div>
@@ -45,7 +45,9 @@ export default {
         contrasenya: '',
         rols_id: null
       },
-      arrayRoles: null
+      arrayRoles: null,
+      aviso:"",
+      registrado: false
     };
   },
   created() {
@@ -65,7 +67,6 @@ export default {
       axios.get("/rols")
           .then(function(response){
             me.arrayRoles = response.data;
-            console.log(me.arrayRoles);
           })
           .catch(function(error){
             console.log(error);
@@ -74,13 +75,25 @@ export default {
     insertUsuari(){
       let me = this;
 
-      axios.post("/usuaris", this.objectUsuario)
-            .then(function(response){
-              console.log("AÑADIDO");
-            })
-            .catch(function(error){
-              console.log(error);
-            })
+      if(me.objectUsuario.nom != "" && me.objectUsuario.codi != "" &&
+         me.objectUsuario.contrasenya != "" && me.objectUsuario.rols_id != null){
+           axios.post("/usuaris", this.objectUsuario)
+                .then(function(response){
+                  console.log("AÑADIDO");
+                  me.registrado = true;
+                  me.goToLogin();
+                })
+                .catch(function(error){
+                  console.log(error);
+                })
+      }
+      else{
+        console.log("FALTAN CAMPOS")
+        this.aviso = "¡Por favor, rellena todos los campos!"
+      }
+    },
+    goToLogin(){
+      window.location.href = '/project_broggi/public';
     }
   },
   mounted() {

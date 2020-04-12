@@ -5,6 +5,6 @@
 @endsection
 
 @section('principal')
-    <login></login>
-    <button type="button" class="btn btn-primary" onclick="window.location='{{ url('/registro') }}'">REGISTRO</button>
+    <registro-incidencia></registro-incidencia>
+    {{-- <gestion-recursos></gestion-recursos> --}}
 @endsection

@@ -8,7 +8,7 @@
         @yield('titulo')
     </title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"> --}}
     <script src="https://kit.fontawesome.com/2ebf0d5213.js" crossorigin="anonymous"></script>
 </head>
 <body>
