@@ -7,13 +7,10 @@
         {
             "type": "chrome",
             "request": "launch",
-<<<<<<< HEAD
             "name": "Ejecutar para Pau",
             "url": "http://localhost:8080/project_broggi/public/",
-=======
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:80/project_broggi/public/",
->>>>>>> 45caa9e22a6e7b55756cf7309fd43ad831cb0fd2
             "webRoot": "${workspaceFolder}"
         },
         {
