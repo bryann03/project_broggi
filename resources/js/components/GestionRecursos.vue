@@ -5,7 +5,7 @@
             <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover :items="arrayRecursos" :fields="columnasTabla">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-primary mr-3" @click="abrirModal('update', data.item)">Editar</button>
-                    <button type="button" class="btn btn-danger" v-b-modal.modal-esborrar @click="sendRecurs(data.item)">Esborrar</button>
+                    <button type="button" class="btn btn-danger" @click="deleteRecurs(data.item.id)">Esborrar</button>
                 </template>
 
             </b-table>
@@ -25,7 +25,14 @@
             </b-modal>
 
             <b-pagination v-model="currentPage" :per-page="perPage" :total-rows="rows" aria-controls="tablaRecursos"></b-pagination>
-            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">Afegir recurs</button>
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">Asignar recurs</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insertTipusRecurs')">Afegir recurs</button>
+                </div>
+            </div>
 
         </section>
 
@@ -41,10 +48,10 @@
                     </div>
 
                     <div class="modal-body">
-                        <form action method="post" enctype="multipart/form-data">
+                        <form v-if="accionApi === 'insert'" action method="post" enctype="multipart/form-data">
                             <div class="form-group row">
                                 <div class="col-12">
-                                    <input class="form-control" type="text" name="rol" v-model="objectRecurso.codi" placeholder="Codi recurs" />
+                                    <input class="form-control" type="text" v-model="objectRecurso.codi" placeholder="Codi recurs" />
                                 </div>
                                 <div class="col-12">
                                     <select class="form-control" v-model.number="objectRecurso.tipus_recurs_id">
@@ -65,11 +72,29 @@
                                 </div>
                             </div>
                         </form>
+
+                        <form v-else-if="accionApi === 'insertTipusRecurs'" action method="post">
+                            <div class="col-12">
+                                <input class="form-control" type="text" v-model="objectTipoRecurso.tipus" placeholder="Nom del recurs" />
+                            </div>
+                            <div class="col-6">
+                                <b-form-checkbox v-model="objectTipoRecurso.esSanitari">Sanitari</b-form-checkbox>
+                            </div>
+                            <div class="col-6">
+                                <b-form-checkbox v-model="objectTipoRecurso.esPolicial">Policial</b-form-checkbox>
+                            </div>
+                            <div v-show="errorRol" class="form-group row">
+                                <div class="offset-3 col-md-9">
+                                    <p class="text-danger" v-for="error in arrrayMensajesError" :key="error">{{ error }}</p>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="cerrarModal()" data-dismiss="modal">Close</button>
-                        <button v-if="accionApi === 'insert'" type="button" class="btn btn-primary" @click="insertRecurs()">Guardar</button>
+                        <button v-if="accionApi === 'insert'" type="button" class="btn btn-primary" @click="insertRecurs()">Asignar</button>
+                        <button v-else-if="accionApi === 'insertTipusRecurs'" type="button" class="btn btn-danger" @click="insertTipusRecurs()">Guardar</button>
                         <button v-else-if="accionApi === 'delete'" type="button" class="btn btn-danger" @click="deleteRecurs(objectRecurso.id)">Borrar</button>
                         <button v-else-if="accionApi === 'update'" type="button" class="btn btn-success" @click="updateRecurs(objectRecurso.id)">Actualitzar</button>
                     </div>
@@ -90,6 +115,12 @@ import { mapState, mapMutations, mapActions } from "vuex";
             tipus_recurs_id: null,
             id_usuario: null
         },
+        objectTipoRecurso:{
+            id: null,
+            tipus: "",
+            esSanitari: null,
+            esPolicial: null
+        },
         columnasTabla:[{key: 'codi', label: 'Codi'}, {key: 'tipus_recurs.tipus', label: 'Tipus recurs'},
                         {key: 'usuaris.nom', label: 'Usuari'}, {key: 'manage', label: 'Manage'}],
         tituloModal: "",
@@ -104,7 +135,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
     },
     created() {
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
-        this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
+        this.getTipusRecursos();
         this.getApi({ruta: 'usuaris', nombreTabla: 'usuaris'});
         this.getRecursos();
     },
@@ -113,6 +144,11 @@ import { mapState, mapMutations, mapActions } from "vuex";
         abrirModal(accionApi, dataRecurs=[]){
             switch (accionApi) {
                 case 'insert':
+                    this.modal = 1;
+                    this.tituloModal = "Asignar recurs";
+                    this.accionApi = accionApi;
+                    break;
+                case 'insertTipusRecurs':
                     this.modal = 1;
                     this.tituloModal = "Insertar recurs";
                     this.accionApi = accionApi;
@@ -127,6 +163,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
                     this.objectRecurso.id_usuario = dataRecurs['id_usuario'];
                     // this.objectRecurso = dataRecurs;
                     break;
+
                 default:
                     break;
             }
@@ -143,6 +180,11 @@ import { mapState, mapMutations, mapActions } from "vuex";
             this.objectRecurso.codi = "";
             this.objectRecurso.tipus_recurs_id = null;
             this.objectRecurso.id_usuario = null;
+
+            this.objectTipoRecurso.id = null;
+            this.objectTipoRecurso.tipus = "";
+            this.objectTipoRecurso.esSanitari = null;
+            this.objectTipoRecurso.esPolicial = null;
         },
         insertRecurs(){
             let me = this;
@@ -153,6 +195,20 @@ import { mapState, mapMutations, mapActions } from "vuex";
                     // me.$parent.reload();
                     // me.arrayRecursos.push(response.data);
                     console.log(me.arrayRecursos);
+                })
+                .catch(function(error){
+                    console.log(error);
+                    me.mensajeError = error.response.data;
+                    me.errorRol = true;
+                    me.arrrayMensajesError.push(me.mensajeError.error);
+                })
+        },
+        insertTipusRecurs(){
+            let me = this;
+            axios.post("/tipus_recurs", this.objectTipoRecurso)
+                .then(function(response){
+                    me.cerrarModal();
+                    me.getTipusRecursos();
                 })
                 .catch(function(error){
                     console.log(error);
@@ -215,6 +271,9 @@ import { mapState, mapMutations, mapActions } from "vuex";
         },
         getRecursos(){
             this.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
+        },
+        getTipusRecursos(){
+            this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
         }
     },
     computed: {

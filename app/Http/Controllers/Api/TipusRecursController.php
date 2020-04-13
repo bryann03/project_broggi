@@ -28,7 +28,26 @@ class TipusRecursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipusRecurs = new TipusRecurs();
+
+        $tipusRecurs->tipus = $request->input('tipus');
+        $tipusRecurs->esSanitari = $request->input('esSanitari');
+        $tipusRecurs->esPolicial = $request->input('esPolicial');
+
+        try
+        {
+            $tipusRecurs->save();
+            $respuesta = (new TipusRecursResource($tipusRecurs))
+                        ->response()
+                        ->setStatusCode(201);
+        }
+        catch (QueryException $e)
+        {
+            $mensaje = Utilitat::errorMessage($e);
+            $respuesta = response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $respuesta;
     }
 
     /**

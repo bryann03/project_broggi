@@ -62,21 +62,11 @@
                 <button v-show="buttonSanitari" type="button" class="btn btn-danger btn-lg p-4"
                      @click="mostrarSanitari()">SANITARI</button>
                 <div v-show="recursSanitari">
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="custom-control-label" for="defaultCheck1">Amb. Medicalitzada-Mike</label>
-                    </div>
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck2">
-                        <label class="custom-control-label" for="defaultCheck2">Amb. Sanitaritzada-India</label>
-                    </div>
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="custom-control-label" for="defaultCheck1">Amb. Assitencial-Tango</label>
-                    </div>
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="custom-control-label" for="defaultCheck1">Helicopter medicalitzat</label>
+                    <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayTipusRecurs" :key="tipus.id" >
+                        <div v-if="tipus.esSanitari === 1">
+                            <input class="custom-control-input" type="checkbox" :id="tipus.id">
+                            <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,21 +75,11 @@
                 <button v-show="buttonPolicial" type="button" class="btn btn-primary btn-lg p-4"
                      @click="mostrarPolicial()">POLICIAL</button>
                 <div v-show="recursPolicial">
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="custom-control-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck2">
-                        <label class="custom-control-label" for="defaultCheck2">Default checkbox</label>
-                    </div>
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="custom-control-label" for="defaultCheck1">Default checkbox</label>
-                    </div>
-                    <div class="custom-control custom-checkbox m-3">
-                        <input class="custom-control-input" type="checkbox" value="" id="defaultCheck1">
-                        <label class="custom-control-label" for="defaultCheck1">Default checkbox</label>
+                    <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayTipusRecurs" :key="tipus.id" >
+                        <div v-if="tipus.esPolicial === 1">
+                            <input class="custom-control-input" type="checkbox" :id="tipus.id">
+                            <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,6 +120,7 @@ export default {
         this.getApi({ruta: 'municipis', nombreTabla: 'municipis'});
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
         this.getApi({ruta: 'tipus_incident', nombreTabla: 'tipus_incident'});
+        this.getTipusRecursos();
     },
     methods: {
         ...mapActions(['getApi']),
@@ -151,10 +132,13 @@ export default {
         mostrarPolicial(){
             this.buttonPolicial = false;
             this.recursPolicial = true;
+        },
+        getTipusRecursos(){
+            this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
         }
     },
     computed: {
-        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia'])
+        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs'])
     },
 }
 </script>
