@@ -11,8 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'LandingPage@index');
+
 
 Route::get('/registro', 'RegistroController@index');
