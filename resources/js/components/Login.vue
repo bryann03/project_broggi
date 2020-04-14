@@ -18,7 +18,7 @@
               <input required class="form-control" type="password" v-model="password"/>
             </div>
 
-            <button type="button" class="btn btn-primary btn-block">Iniciar sesión</button>
+            <button type="button" @click="openLanding()" class="btn btn-primary btn-block">Iniciar sesión</button>
             <button type="button" @click="openRegistro()" class="btn btn-outline-dark btn-block">Registrarse</button>
           </form>
         </div>
@@ -38,6 +38,9 @@ export default {
     };
   },
   methods: {
+    openLanding(){
+      window.location.href = '/project_broggi/public/principal';
+    },
     openRegistro(){
       window.location.href = '/project_broggi/public/registro';
     }

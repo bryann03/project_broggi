@@ -15,4 +15,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/principal', 'LandingController@index');
 Route::get('/registro', 'RegistroController@index');
+Route::get('/login', 'LoginController@index');
+
+//Route::get('/principal', ['middleware' => 'auth', 'uses' => 'LandingController@index']);
