@@ -2209,22 +2209,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      titulo: "Iniciar sesión",
-      username: "",
-      password: ""
+      src: "https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80"
     };
   },
   methods: {
     openRegistro: function openRegistro() {
-      window.location.href = "/project_broggi/public/registro";
+      window.location.href = "/project_broggi/public/welcome";
     }
   }
 });
@@ -79208,102 +79201,54 @@ var render = function() {
   return _c("main", [
     _vm._m(0),
     _vm._v(" "),
-    _c("section", [
-      _c("div", { staticClass: "text-center mb-3" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.titulo))])
+    _c("div", { staticClass: "row m-10", attrs: { id: "app" } }, [
+      _c("div", { staticClass: "card col-sm-3" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.src, alt: "Card image" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("alta Incidencia")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing\n                    elit.\n                "
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-dark btn-block",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.openRegistro()
+                }
+              }
+            },
+            [_vm._v("\n                    Registrarse\n                ")]
+          )
+        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-2 col-lg-4 col-md-3" }),
+      _c("div", { staticClass: "card col-sm-3" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.src, alt: "Card image" }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "col-8 col-lg-4 col-md-6 text-center" }, [
-          _c("form", { attrs: { action: "", method: "get" } }, [
-            _c("div", [
-              _c("label", { staticClass: "float-left" }, [_vm._v("User")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.username,
-                    expression: "username"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { required: "", type: "text" },
-                domProps: { value: _vm.username },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.username = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-3 mb-4" }, [
-              _c("label", { staticClass: "float-left" }, [_vm._v("Password")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.password,
-                    expression: "password"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { required: "", type: "password" },
-                domProps: { value: _vm.password },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.password = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block",
-                attrs: { type: "button" }
-              },
-              [
-                _vm._v(
-                  "\n                        Iniciar sesión\n                    "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-dark btn-block",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.openRegistro()
-                  }
-                }
-              },
-              [
-                _vm._v(
-                  "\n                        Registrarse\n                    "
-                )
-              ]
-            )
-          ])
-        ]),
+        _vm._m(1)
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card col-sm-3" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.src, alt: "Card image" }
+        }),
         _vm._v(" "),
-        _c("div", { staticClass: "col-2 col-lg-4 col-md-3" })
+        _vm._m(2)
       ])
     ])
   ])
@@ -79315,13 +79260,36 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
       _c("ol", { staticClass: "breadcrumb" }, [
-        _c(
-          "li",
-          {
-            staticClass: "breadcrumb-item active",
-            attrs: { "aria-current": "page" }
-          },
-          [_vm._v("\n                Landingggg\n            ")]
+        _c("li", { staticClass: "breadcrumb-item" }, [
+          _c("a", { attrs: { href: "#" } }, [_vm._v("Landing")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Recursos")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v(
+          "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing\n                    elit.\n                "
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-body" }, [
+      _c("h4", { staticClass: "card-title" }, [_vm._v("Alertatntes")]),
+      _vm._v(" "),
+      _c("p", { staticClass: "card-text" }, [
+        _vm._v(
+          "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing\n                    elit.\n                "
         )
       ])
     ])
@@ -93883,14 +93851,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/LandingPage.vue ***!
   \*************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LandingPage_vue_vue_type_template_id_643fd5aa_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LandingPage.vue?vue&type=template&id=643fd5aa&scoped=true& */ "./resources/js/components/LandingPage.vue?vue&type=template&id=643fd5aa&scoped=true&");
 /* harmony import */ var _LandingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LandingPage.vue?vue&type=script&lang=js& */ "./resources/js/components/LandingPage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _LandingPage_vue_vue_type_style_index_0_id_643fd5aa_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LandingPage.vue?vue&type=style&index=0&id=643fd5aa&lang=scss&scoped=true& */ "./resources/js/components/LandingPage.vue?vue&type=style&index=0&id=643fd5aa&lang=scss&scoped=true&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _LandingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _LandingPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _LandingPage_vue_vue_type_style_index_0_id_643fd5aa_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./LandingPage.vue?vue&type=style&index=0&id=643fd5aa&lang=scss&scoped=true& */ "./resources/js/components/LandingPage.vue?vue&type=style&index=0&id=643fd5aa&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -93922,7 +93891,7 @@ component.options.__file = "resources/js/components/LandingPage.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/LandingPage.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

@@ -26,20 +26,11 @@ Vue.use(Vuex);
 
 import store from "../js/store";
 
-Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue").default
-);
+Vue.component("example-component",require("./components/ExampleComponent.vue").default);
 Vue.component("registro", require("./components/Registro.vue").default);
 Vue.component("login", require("./components/Login.vue").default);
-Vue.component(
-    "registro-incidencia",
-    require("./components/RegistroIncidencia.vue").default
-);
-Vue.component(
-    "gestion-recursos",
-    require("./components/GestionRecursos.vue").default
-);
+Vue.component("registro-incidencia",require("./components/RegistroIncidencia.vue").default);
+Vue.component("gestion-recursos",require("./components/GestionRecursos.vue").default);
 Vue.component("landing", require("./components/LandingPage.vue").default);
 
 Vue.use(BootstrapVue);
