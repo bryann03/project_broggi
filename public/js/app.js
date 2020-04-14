@@ -2054,6 +2054,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2072,7 +2086,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         esSanitari: null,
         esPolicial: null
       },
-      columnasTabla: [{
+      columnasTablaAsignados: [{
         key: 'codi',
         label: 'Codi'
       }, {
@@ -2085,12 +2099,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: 'manage',
         label: 'Manage'
       }],
+      columnasTablaRecursos: [{
+        key: 'tipus',
+        label: 'Nom recurs'
+      }, {
+        key: 'esSanitari',
+        label: 'Sanitari'
+      }, {
+        key: 'esPolicial',
+        label: 'Policial'
+      }, {
+        key: 'manage',
+        label: 'Manage'
+      }],
       tituloModal: "",
       modal: 0,
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _ref;
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", false), _ref;
   },
   created: function created() {
     this.getApi({
@@ -2184,13 +2211,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var me = this;
       axios["delete"]("/recursos/" + idRecurs).then(function (response) {
         console.log("BORRADO");
-        var index = me.arrayRecursos.findIndex(function (recurso) {
-          return recurso.id === idRecurs;
-        });
-
-        if (~index) {
-          me.arrayRecursos.splice(index, 1);
-        }
+        me.getRecursos();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2239,11 +2260,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         ruta: 'tipus_recurs',
         nombreTabla: 'tipus_recurs'
       });
+    },
+    deleteTipusRecurs: function deleteTipusRecurs(idTipusRecurs) {
+      var me = this;
+      console.log(idTipusRecurs);
+      axios["delete"]("/tipus_recurs/" + idTipusRecurs).then(function (response) {
+        console.log("BORRADO");
+        me.getTipusRecursos();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    mostrarAsignados: function mostrarAsignados() {
+      this.sectionRecursos = false;
+      this.sectionAsignados = true;
+    },
+    mostrarRecursos: function mostrarRecursos() {
+      this.sectionAsignados = false;
+      this.sectionRecursos = true;
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']), {
-    rows: function rows() {
+    rowsAsignados: function rowsAsignados() {
       return this.arrayRecursos.length;
+    },
+    rowsRecursos: function rowsRecursos() {
+      return this.arrayTipusRecurs.length;
     }
   })
 });
@@ -46971,7 +47013,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "section[data-v-20569590] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n  height: 100vh;\n}\n.modal-content[data-v-20569590] {\n  width: 100% !important;\n  position: absolute !important;\n  top: 200px !important;\n}\n.mostrar[data-v-20569590] {\n  display: list-item !important;\n  opacity: 1 !important;\n  position: absolute !important;\n  background-color: black !important;\n}\nform div[data-v-20569590] {\n  margin-bottom: 2rem;\n}", ""]);
+exports.push([module.i, "section[data-v-20569590] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n.modal-content[data-v-20569590] {\n  width: 100% !important;\n  position: absolute !important;\n  top: 200px !important;\n}\n.mostrar[data-v-20569590] {\n  display: list-item !important;\n  opacity: 1 !important;\n  position: absolute !important;\n  background-color: black !important;\n}\nform div[data-v-20569590] {\n  margin-bottom: 2rem;\n}", ""]);
 
 // exports
 
@@ -79575,13 +79617,57 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
+    _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
+      _vm._v("Gestió de recursos")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-dark btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.mostrarRecursos()
+              }
+            }
+          },
+          [_vm._v("RECURSOS")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-dark btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.mostrarAsignados()
+              }
+            }
+          },
+          [_vm._v("RECURSOS ASIGNATS")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
     _c(
       "section",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.sectionAsignados,
+            expression: "sectionAsignados"
+          }
+        ]
+      },
       [
-        _c("h1", { staticClass: "text-center mb-5" }, [
-          _vm._v("Gestió de recursos")
-        ]),
-        _vm._v(" "),
         _c("b-table", {
           ref: "table",
           attrs: {
@@ -79590,7 +79676,7 @@ var render = function() {
             "per-page": _vm.perPage,
             hover: "",
             items: _vm.arrayRecursos,
-            fields: _vm.columnasTabla
+            fields: _vm.columnasTablaAsignados
           },
           scopedSlots: _vm._u([
             {
@@ -79692,7 +79778,7 @@ var render = function() {
         _c("b-pagination", {
           attrs: {
             "per-page": _vm.perPage,
-            "total-rows": _vm.rows,
+            "total-rows": _vm.rowsAsignados,
             "aria-controls": "tablaRecursos"
           },
           model: {
@@ -79704,39 +79790,98 @@ var render = function() {
           }
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-6" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.abrirModal("insert")
-                  }
-                }
-              },
-              [_vm._v("Asignar recurs")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-6" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.abrirModal("insertTipusRecurs")
-                  }
-                }
-              },
-              [_vm._v("Afegir recurs")]
-            )
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.abrirModal("insert")
+              }
+            }
+          },
+          [_vm._v("Asignar recurs")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "section",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.sectionRecursos,
+            expression: "sectionRecursos"
+          }
+        ]
+      },
+      [
+        _c("b-table", {
+          ref: "table2",
+          attrs: {
+            "current-page": _vm.currentPageRecursos,
+            id: "tablaTipoRecursos",
+            "per-page": _vm.perPage,
+            hover: "",
+            items: _vm.arrayTipusRecurs,
+            fields: _vm.columnasTablaRecursos
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "cell(manage)",
+              fn: function(data) {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteTipusRecurs(data.item.id)
+                        }
+                      }
+                    },
+                    [_vm._v("Esborrar")]
+                  )
+                ]
+              }
+            }
           ])
-        ])
+        }),
+        _vm._v(" "),
+        _c("b-pagination", {
+          attrs: {
+            "per-page": _vm.perPage,
+            "total-rows": _vm.rowsRecursos,
+            "aria-controls": "tablaTipoRecursos"
+          },
+          model: {
+            value: _vm.currentPageRecursos,
+            callback: function($$v) {
+              _vm.currentPageRecursos = $$v
+            },
+            expression: "currentPageRecursos"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.abrirModal("insertTipusRecurs")
+              }
+            }
+          },
+          [_vm._v("Afegir recurs")]
+        )
       ],
       1
     ),

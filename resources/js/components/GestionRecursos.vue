@@ -1,8 +1,16 @@
 <template>
     <main>
-        <section>
-            <h1 class="text-center mb-5">Gestió de recursos</h1>
-            <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover :items="arrayRecursos" :fields="columnasTabla">
+        <h1 class="text-center mb-5 mt-5">Gestió de recursos</h1>
+        <div class="row">
+            <div class="col-6">
+                <button type="button" class="btn btn-outline-dark btn-block" @click="mostrarRecursos()">RECURSOS</button>
+            </div>
+            <div class="col-6">
+                <button type="button" class="btn btn-outline-dark btn-block" @click="mostrarAsignados()">RECURSOS ASIGNATS</button>
+            </div>
+        </div>
+        <section v-show="sectionAsignados">
+            <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover :items="arrayRecursos" :fields="columnasTablaAsignados">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-primary mr-3" @click="abrirModal('update', data.item)">Editar</button>
                     <button type="button" class="btn btn-danger" @click="deleteRecurs(data.item.id)">Esborrar</button>
@@ -24,16 +32,22 @@
                 </template>
             </b-modal>
 
-            <b-pagination v-model="currentPage" :per-page="perPage" :total-rows="rows" aria-controls="tablaRecursos"></b-pagination>
-            <div class="row">
-                <div class="col-6">
-                    <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">Asignar recurs</button>
-                </div>
-                <div class="col-6">
-                    <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insertTipusRecurs')">Afegir recurs</button>
-                </div>
-            </div>
+            <b-pagination v-model="currentPage" :per-page="perPage" :total-rows="rowsAsignados" aria-controls="tablaRecursos"></b-pagination>
 
+            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">Asignar recurs</button>
+
+        </section>
+
+        <section v-show="sectionRecursos">
+            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" hover :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
+                <template v-slot:cell(manage)="data">
+                    <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">Esborrar</button>
+                </template>
+            </b-table>
+
+            <b-pagination v-model="currentPageRecursos" :per-page="perPage" :total-rows="rowsRecursos" aria-controls="tablaTipoRecursos"></b-pagination>
+
+            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insertTipusRecurs')">Afegir recurs</button>
         </section>
 
         <!-- Modal -->
@@ -121,8 +135,10 @@ import { mapState, mapMutations, mapActions } from "vuex";
             esSanitari: null,
             esPolicial: null
         },
-        columnasTabla:[{key: 'codi', label: 'Codi'}, {key: 'tipus_recurs.tipus', label: 'Tipus recurs'},
+        columnasTablaAsignados:[{key: 'codi', label: 'Codi'}, {key: 'tipus_recurs.tipus', label: 'Tipus recurs'},
                         {key: 'usuaris.nom', label: 'Usuari'}, {key: 'manage', label: 'Manage'}],
+        columnasTablaRecursos: [{key: 'tipus', label: 'Nom recurs'}, {key: 'esSanitari', label: 'Sanitari'},
+                        {key: 'esPolicial', label: 'Policial'}, {key: 'manage', label: 'Manage'}],
         tituloModal: "",
         modal: 0,
         errorRol: false,
@@ -130,7 +146,10 @@ import { mapState, mapMutations, mapActions } from "vuex";
         arrrayMensajesError: [],
         tituloModal: "",
         perPage: 5,
-        currentPage: 1
+        currentPage: 1,
+        currentPageRecursos: 1,
+        sectionAsignados: false,
+        sectionRecursos: false
       }
     },
     created() {
@@ -222,12 +241,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
             axios.delete("/recursos/" + idRecurs)
                 .then(function (response) {
                     console.log("BORRADO");
-                    const index = me.arrayRecursos.findIndex(recurso => recurso.id === idRecurs);
-                    if(~index)
-                    {
-                        me.arrayRecursos.splice(index, 1);
-
-                    }
+                    me.getRecursos();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -274,12 +288,35 @@ import { mapState, mapMutations, mapActions } from "vuex";
         },
         getTipusRecursos(){
             this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
+        },
+        deleteTipusRecurs(idTipusRecurs){
+            let me = this;
+            console.log(idTipusRecurs);
+            axios.delete("/tipus_recurs/" + idTipusRecurs)
+                .then(function (response) {
+                    console.log("BORRADO");
+                    me.getTipusRecursos();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        },
+        mostrarAsignados(){
+            this.sectionRecursos = false;
+            this.sectionAsignados = true;
+        },
+        mostrarRecursos(){
+            this.sectionAsignados = false;
+            this.sectionRecursos = true;
         }
     },
     computed: {
         ...mapState(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']),
-        rows() {
+        rowsAsignados() {
             return this.arrayRecursos.length
+        },
+        rowsRecursos(){
+            return this.arrayTipusRecurs.length
         }
     },
   }
@@ -289,7 +326,6 @@ import { mapState, mapMutations, mapActions } from "vuex";
 section {
   padding-top: 20px;
   padding-bottom: 20px;
-  height: 100vh;
 }
 .modal-content {
   width: 100% !important;
