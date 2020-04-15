@@ -2191,17 +2191,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      valor: null,
       arrayIncidencia: [],
       columnasTabla: [{
         key: "num_incidencia",
@@ -2219,13 +2212,11 @@ __webpack_require__.r(__webpack_exports__);
         key: "tipus_incident.tipus",
         label: "Tipus Incident"
       }],
-      arrayMensajesError: [],
       perPage: 5,
       currentPage: 1
     };
   },
   mounted: function mounted() {
-    console.log("estamos en mounted");
     this.obtenerIncidencias();
   },
   methods: {
@@ -2237,6 +2228,10 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         return console.log(e);
       });
+    },
+    onRowSelected: function onRowSelected(items) {
+      this.valor = items;
+      clearSelected();
     }
   },
   computed: {
@@ -80122,47 +80117,11 @@ var render = function() {
             id: "tablaIncidencies",
             "per-page": _vm.perPage,
             hover: "",
+            selectable: "",
             items: _vm.arrayIncidencia,
             fields: _vm.columnasTabla
           },
-          scopedSlots: _vm._u([
-            {
-              key: "cell(manage)",
-              fn: function(data) {
-                return [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary mr-3",
-                      attrs: { type: "button" }
-                    },
-                    [_vm._v("Editar")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      directives: [
-                        {
-                          name: "b-modal",
-                          rawName: "v-b-modal.modal-esborrar",
-                          modifiers: { "modal-esborrar": true }
-                        }
-                      ],
-                      staticClass: "btn btn-danger",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          return _vm.sendIncident(data.item)
-                        }
-                      }
-                    },
-                    [_vm._v("Esborrar")]
-                  )
-                ]
-              }
-            }
-          ])
+          on: { "row-clicked": _vm.onRowSelected }
         }),
         _vm._v(" "),
         _c("b-pagination", {

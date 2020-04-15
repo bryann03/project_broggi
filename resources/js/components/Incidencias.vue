@@ -8,19 +8,11 @@
         id="tablaIncidencies"
         :per-page="perPage"
         hover
+        selectable
+        @row-clicked="onRowSelected"
         :items="arrayIncidencia"
         :fields="columnasTabla"
-      >
-        <template v-slot:cell(manage)="data">
-          <button type="button" class="btn btn-primary mr-3">Editar</button>
-          <button
-            type="button"
-            class="btn btn-danger"
-            v-b-modal.modal-esborrar
-            @click="sendIncident(data.item)"
-          >Esborrar</button>
-        </template>
-      </b-table>
+      ></b-table>
 
       <b-pagination
         v-model="currentPage"
@@ -42,6 +34,7 @@
 export default {
   data() {
     return {
+      valor: null,
       arrayIncidencia: [],
       columnasTabla: [
         { key: "num_incidencia", label: "Numero Incidencia" },
@@ -50,13 +43,11 @@ export default {
         { key: "municipis.nom", label: "Municipi" },
         { key: "tipus_incident.tipus", label: "Tipus Incident" }
       ],
-      arrayMensajesError: [],
       perPage: 5,
       currentPage: 1
     };
   },
   mounted() {
-    console.log("estamos en mounted");
     this.obtenerIncidencias();
   },
   methods: {
@@ -67,6 +58,10 @@ export default {
           this.arrayIncidencia = response.data;
         })
         .catch(e => console.log(e));
+    },
+    onRowSelected(items) {
+      this.valor = items;
+      clearSelected();
     }
   },
   computed: {
