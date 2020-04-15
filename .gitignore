@@ -11,6 +11,5 @@ npm-debug.log
 yarn-error.log
 .editorconfig
 /.vscode/launch.json
-/public/js/*
-/public/css/*
-/public/fonts
+/public/js/app.js
+package.json
