@@ -2206,116 +2206,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      arrayIncidencia: [],
+      arrayMunicipis: [],
       objectIncidencia: {
         id: null,
         numero_incidencia: "",
@@ -2340,113 +2236,50 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "descripcio",
         label: "Descripció"
       }, {
-        key: "municipis_id",
+        key: "municipis.nom",
         label: "Municipi"
       }, {
-        key: "tipus_indicent_id",
+        key: "tipus_incident.tipus",
         label: "Tipus Incident"
       }],
-      tituloModal: "",
-      modal: 0,
-      errorRol: false,
       accionApi: "",
-      arrrayMensajesError: [],
+      arrayMensajesError: [],
       perPage: 5,
       currentPage: 1
     };
   },
-  created: function created() {
-    this.getApi({
-      ruta: "tipus_alertant",
-      nombreTabla: "tipus_alertant"
-    });
-    this.getApi({
-      ruta: "tipus_recurs",
-      nombreTabla: "tipus_recurs"
-    });
-    this.getApi({
-      ruta: "usuaris",
-      nombreTabla: "usuaris"
-    });
-    this.getApi({
-      ruta: "recursos",
-      nombreTabla: "recursos"
-    });
+  mounted: function mounted() {
+    console.log("estamos en mounted");
+    this.obtenerIncidencias();
+    this.obtenerMunicipis();
   },
-  methods: {
-    /*...mapActions(["getApi", "postApi"]),
-    abrirModal(accionApi) {
-      switch (accionApi) {
-        case "insert":
-          this.clearDataModal();
-          this.modal = 1;
-          this.tituloModal = "Insertar Incedencia";
-          this.accionApi = accionApi;
-          break;
-        default:
-          break;
-      }
-    },
-    cerrarModal() {
-      this.modal = 0;
-      this.tituloModal = "";
-      this.errorRol = false;
-      this.accionApi = "";
-      this.clearDataModal();
-    },
-    clearDataModal() {
-      (this.objectRecurso.id = null),
-        (this.objectRecurso.codi = ""),
-        (this.objectRecurso.tipus_recurs_id = null),
-        (this.objectRecurso.id_usuario = null);
-    },*/
-    insertRecurs: function insertRecurs() {
-      var me = this;
-      axios.post("/incidencies", this.objectIncidencia).then(function (response) {
-        me.cerrarModal();
-        me.getApi({
-          ruta: "incidencies",
-          nombreTabla: "incidencies"
-        }); // me.$parent.reload();
-        // me.arrayRecursos.push(response.data);
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi", "postApi"]), {
+    obtenerIncidencias: function obtenerIncidencias() {
+      var _this = this;
 
-        console.log(me.arrayRecursos);
-      })["catch"](function (error) {
-        console.log(error);
-        me.mensajeError = error.response.data;
-        me.errorRol = true;
-        me.arrrayMensajesError.push(me.mensajeError.error);
+      console.log("estamos en la obtencion de datos");
+      axios.get("http://localhost:8080/project_broggi/public/api/incidencies").then(function (response) {
+        _this.arrayIncidencia = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerMunicipis: function obtenerMunicipis() {
+      var _this2 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/municipis").then(function (response) {
+        _this2.arrayMunicipis = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
       });
     }
-    /*
-    deleteRecurs(idRecurs) {
-    let me = this;
-    this.modal = 0;
-    axios
-      .delete("/recursos/" + idRecurs)
-      .then(function(response) {
-        console.log("BORRADO");
-        const index = me.arrayRecursos.findIndex(
-          recurso => recurso.id === idRecurs
-        );
-        if (~index) {
-          me.arrayRecursos.splice(index, 1);
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-    },
-    sendRecurs(recurs) {
-    this.objectRecurso = recurs;
-    }*/
-
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["arrayTipusAlertant", "arrayTipusRecurs", "arrayUsuaris", "arrayRecursos"]), {
+  }),
+  created: function created() {},
+  computed: {
     rows: function rows() {
-      return this.arrayRecursos.length;
+      return this.arrayIncidencia.length;
     }
-  })
+  }
 });
 
 /***/ }),
@@ -80322,10 +80155,10 @@ var render = function() {
           ref: "table",
           attrs: {
             "current-page": _vm.currentPage,
-            id: "tablaRecursos",
+            id: "tablaIncidencies",
             "per-page": _vm.perPage,
             hover: "",
-            items: _vm.arrayRecursos,
+            items: _vm.arrayIncidencia,
             fields: _vm.columnasTabla
           },
           scopedSlots: _vm._u([
@@ -80356,7 +80189,7 @@ var render = function() {
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.sendRecurs(data.item)
+                          return _vm.sendIncident(data.item)
                         }
                       }
                     },
@@ -80367,63 +80200,6 @@ var render = function() {
             }
           ])
         }),
-        _vm._v(" "),
-        _c(
-          "b-modal",
-          {
-            attrs: {
-              id: "modal-esborrar",
-              centered: "",
-              title: "Esborrar recurs"
-            },
-            scopedSlots: _vm._u([
-              {
-                key: "modal-footer",
-                fn: function(ref) {
-                  var cancel = ref.cancel
-                  return [
-                    _c(
-                      "b-button",
-                      {
-                        attrs: { size: "sm", variant: "outline-primary" },
-                        on: {
-                          click: function($event) {
-                            return cancel()
-                          }
-                        }
-                      },
-                      [_vm._v("Cancel")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-button",
-                      {
-                        attrs: { size: "sm", variant: "danger" },
-                        on: {
-                          click: function($event) {
-                            return _vm.deleteRecurs(_vm.objectIncidencia.id)
-                          }
-                        }
-                      },
-                      [_vm._v("Esborrar")]
-                    )
-                  ]
-                }
-              }
-            ])
-          },
-          [
-            _c("p", { staticClass: "my-4" }, [
-              _vm._v(
-                "\n        Vols esborrar la incidencia amb el numero -->\n        "
-              ),
-              _c("span", { staticStyle: { "font-weight": "bold" } }, [
-                _vm._v(_vm._s(_vm.objectIncidencia.numero_incidencia))
-              ]),
-              _vm._v(" ?\n      ")
-            ])
-          ]
-        ),
         _vm._v(" "),
         _c("b-pagination", {
           attrs: {
@@ -95377,33 +95153,24 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"], axios__WEBPACK_IMPORTED_MODULE_2___default.a);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
-    arrayRols: [],
     arrayUsuaris: [],
-    arrayTipusAlertant: [],
-    arrayTipusRecurs: [],
+    arrayTipusIncident: [],
+    arrayIncidencia: [],
     arrayMunicipis: [],
-    arrayTipusIncidencia: [],
-    arrayRecursos: [],
     afegit: false
   },
   mutations: {
-    tipus_alertant: function tipus_alertant(state, datosRecibidos) {
-      state.arrayTipusAlertant = datosRecibidos;
-    },
-    tipus_recurs: function tipus_recurs(state, datosRecibidos) {
-      state.arrayTipusRecurs = datosRecibidos;
-    },
     municipis: function municipis(state, datosRecibidos) {
       state.arrayMunicipis = datosRecibidos;
     },
     tipus_incident: function tipus_incident(state, datosRecibidos) {
-      state.arrayTipusIncidencia = datosRecibidos;
+      state.arrayTipusIncident = datosRecibidos;
     },
     usuaris: function usuaris(state, datosRecibidos) {
       state.arrayUsuaris = datosRecibidos;
     },
-    recursos: function recursos(state, datosRecibidos) {
-      state.arrayRecursos = datosRecibidos;
+    incidencies: function incidencies(state, datosRecibidos) {
+      state.arrayIncidencia = datosRecibidos;
     }
   },
   actions: {
@@ -95416,17 +95183,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         var datos = response.data;
         console.log(nombreTabla);
         commit(nombreTabla, datos);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    //SIN USO, EN PRUEBAS...
-    postApi: function postApi(_ref3) {
-      var ruta = _ref3.ruta,
-          objeto = _ref3.objeto;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/" + ruta, objeto).then(function (response) {
-        console.log("RECURSO AÑADIDO");
-        var añadido = true;
       })["catch"](function (error) {
         console.log(error);
       });

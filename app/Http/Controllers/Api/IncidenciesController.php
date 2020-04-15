@@ -16,7 +16,7 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-         $incidencies = Incidencies::all();
+         $incidencies = Incidencies::with('municipis')->with('tipus_alertant')->with('tipus_incident')->with('estats_incidencia')->with('alertants')->get();
         return IncidenciesResource::collection($incidencies);
     }
 

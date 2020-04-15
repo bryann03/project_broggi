@@ -6,7 +6,6 @@ Vue.use(Vuex, axios);
 
 export default new Vuex.Store({
     state: {
-        array: [],
         arrayUsuaris: [],
         arrayTipusIncident: [],
         arrayIncidencia: [],
@@ -36,18 +35,6 @@ export default new Vuex.Store({
                     const datos = response.data;
                     console.log(nombreTabla);
                     commit(nombreTabla, datos);
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        },
-        //SIN USO, EN PRUEBAS...
-        postApi({ ruta, objeto }) {
-            axios
-                .post("/" + ruta, objeto)
-                .then(function(response) {
-                    console.log("RECURSO AÑADIDO");
-                    let añadido = true;
                 })
                 .catch(function(error) {
                     console.log(error);

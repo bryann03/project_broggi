@@ -22,21 +22,6 @@
         </template>
       </b-table>
 
-      <b-modal id="modal-esborrar" centered title="Esborrar recurs">
-        <p class="my-4">
-          Vols esborrar la incidencia amb el numero -->
-          <span
-            style="font-weight: bold;"
-          >{{ objectIncidencia.numero_incidencia}}</span> ?
-        </p>
-
-        <template v-slot:modal-footer="{cancel}">
-          <b-button size="sm" variant="outline-primary" @click="cancel()">Cancel</b-button>
-          <!-- Button with custom close trigger value -->
-          <b-button size="sm" variant="danger" @click="deleteRecurs(objectIncidencia.id)">Esborrar</b-button>
-        </template>
-      </b-modal>
-
       <b-pagination
         v-model="currentPage"
         :per-page="perPage"
@@ -58,6 +43,8 @@ import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
+      arrayIncidencia: [],
+      arrayMunicipis: [],
       objectIncidencia: {
         id: null,
         numero_incidencia: "",
@@ -73,34 +60,45 @@ export default {
         alertants_id: null
       },
       columnasTabla: [
-        {
-          key: "objectIncidencia.numero_incidencia",
-          label: "Numero Incidencia"
-        },
-        { key: "objectIncidencia.hora", label: "Hora" },
-        { key: "objectIncidencia.descripcio", label: "Descripció" },
-        { key: "objectIncidencia.municipis_id", label: "Municipi" },
-        { key: "objectIncidencia.tipus_indicent_id", label: "Tipus Incident" }
+        { key: "num_incidencia", label: "Numero Incidencia" },
+        { key: "hora", label: "Hora" },
+        { key: "descripcio", label: "Descripció" },
+        { key: "municipis.nom", label: "Municipi" },
+        { key: "tipus_incident.tipus", label: "Tipus Incident" }
       ],
-      tituloModal: "",
-      modal: 0,
-      errorRol: false,
       accionApi: "",
-      arrrayMensajesError: [],
+      arrayMensajesError: [],
       perPage: 5,
       currentPage: 1
     };
   },
+  mounted() {
+    console.log("estamos en mounted");
+    this.obtenerIncidencias();
+    this.obtenerMunicipis();
+  },
   methods: {
-    ...mapActions(["getApi", "postApi"])
+    ...mapActions(["getApi", "postApi"]),
+    obtenerIncidencias() {
+      console.log("estamos en la obtencion de datos");
+      axios
+        .get("http://localhost:8080/project_broggi/public/api/incidencies")
+        .then(response => {
+          this.arrayIncidencia = response.data;
+        })
+        .catch(e => console.log(e));
+    },
+    obtenerMunicipis() {
+      axios
+        .get("http://localhost:8080/project_broggi/public/api/municipis")
+        .then(response => {
+          this.arrayMunicipis = response.data;
+        })
+        .catch(e => console.log(e));
+    }
   },
-  created() {
-    this.getApi({ ruta: "incidencies", nombreTabla: "incidencies" });
-    this.getApi({ ruta: "tipus_incident", nombreTabla: "tipus_incident" });
-    this.getApi({ ruta: "usuaris", nombreTabla: "usuaris" });
-  },
+  created() {},
   computed: {
-    ...mapState(["arrayIncidencia", "arrayTipusIncident", "arrayUsuaris"]),
     rows() {
       return this.arrayIncidencia.length;
     }
