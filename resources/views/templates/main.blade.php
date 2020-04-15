@@ -47,7 +47,7 @@
         </div>
     </nav>
 
-    <div id=" app" class="container">
+    <div id="app" class="container">
         @yield('principal')
     </div>
 
