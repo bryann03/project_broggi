@@ -25,3 +25,4 @@ Route::apiResource('tipus_alertant', 'Api\TipusAlertantController');
 Route::apiResource('tipus_incident', 'Api\TipusIncidentController');
 Route::apiResource('tipus_recurs', 'Api\TipusRecursController');
 Route::apiResource('recursos', 'Api\RecursosController');
+Route::apiResource('incidencies', 'Api\IncidenciesController');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\IncidenciesResource;
 use App\Models\Incidencies;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class IncidenciesController extends Controller
      */
     public function index()
     {
-        //
+         $incidencies = Incidencies::all();
+        return IncidenciesResource::collection($incidencies);
     }
 
     /**
