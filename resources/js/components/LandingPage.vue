@@ -20,7 +20,7 @@
                         @click="openIncidencia()"
                         class="btn btn-outline-dark btn-block"
                     >
-                        Go
+                        GO
                     </button>
                 </div>
             </div>
@@ -54,7 +54,7 @@
                         @click="openAlertantes()"
                         class="btn btn-outline-dark btn-block"
                     >
-                        Go
+                        GO
                     </button>
                 </div>
             </div>
