@@ -1,65 +1,58 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
-Vue.use(Vuex, axios)
+Vue.use(Vuex, axios);
 
 export default new Vuex.Store({
     state: {
-        arrayRols: [],
+        array: [],
         arrayUsuaris: [],
-        arrayTipusAlertant: [],
-        arrayTipusRecurs: [],
+        arrayTipusIncident: [],
+        arrayIncidencia: [],
         arrayMunicipis: [],
-        arrayTipusIncidencia: [],
-        arrayRecursos: [],
         afegit: false
     },
     mutations: {
-        tipus_alertant(state, datosRecibidos){
-            state.arrayTipusAlertant = datosRecibidos;
-        },
-        tipus_recurs(state, datosRecibidos){
-            state.arrayTipusRecurs = datosRecibidos;
-        },
-        municipis(state, datosRecibidos){
+        municipis(state, datosRecibidos) {
             state.arrayMunicipis = datosRecibidos;
         },
-        tipus_incident(state, datosRecibidos){
-            state.arrayTipusIncidencia = datosRecibidos;
+        tipus_incident(state, datosRecibidos) {
+            state.arrayTipusIncident = datosRecibidos;
         },
-        usuaris(state, datosRecibidos){
+        usuaris(state, datosRecibidos) {
             state.arrayUsuaris = datosRecibidos;
         },
-        recursos(state, datosRecibidos){
-            state.arrayRecursos = datosRecibidos;
+        incidencies(state, datosRecibidos) {
+            state.arrayIncidencia = datosRecibidos;
         }
     },
     actions: {
         //LE PASA EL NOMBRE DE LA TABLA Y SU RUTA
-        getApi({ commit }, {ruta, nombreTabla}) {
-            axios.get("/" + ruta)
-                .then(function (response) {
+        getApi({ commit }, { ruta, nombreTabla }) {
+            axios
+                .get("/" + ruta)
+                .then(function(response) {
                     const datos = response.data;
                     console.log(nombreTabla);
                     commit(nombreTabla, datos);
                 })
-                .catch(function (error) {
+                .catch(function(error) {
                     console.log(error);
                 });
         },
         //SIN USO, EN PRUEBAS...
-        postApi({ruta, objeto}){
-            axios.post("/" + ruta, objeto)
-                .then(function(response){
+        postApi({ ruta, objeto }) {
+            axios
+                .post("/" + ruta, objeto)
+                .then(function(response) {
                     console.log("RECURSO AÑADIDO");
                     let añadido = true;
                 })
-                .catch(function(error){
+                .catch(function(error) {
                     console.log(error);
-                })
+                });
         }
     },
-    modules: {
-    }
-})
+    modules: {}
+});
