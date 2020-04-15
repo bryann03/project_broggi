@@ -57,14 +57,8 @@ class LoginController extends Controller
 
         //falta encriptar al hacer el registro
         //if ($user != null && Hash::check($password,$user->password)) {
-        if ($user != null) {
-            if ($password == $user->contrasenya) {
-                Auth::login($user);
-                return redirect('/home');
-            } else {
-                //çhucha
-            }
-
+        if ($user != null && $password == $user->contrasenya) {
+            Auth::login($user);
             return redirect('/home');
         } else {
             return redirect('login')->withInput();

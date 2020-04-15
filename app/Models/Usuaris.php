@@ -28,4 +28,13 @@ class Usuaris extends Authenticatable
     {
         return $this->hasMany('App\Models\Recursos', 'id_usuario');
     }
+
+
+    protected $fillable = [
+        'codi', 'contrasenya',
+    ];
+
+    protected $hidden = [
+        'contrasenya', 'remember_token',
+    ];
 }
