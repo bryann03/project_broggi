@@ -30,12 +30,10 @@ Route::group(['middleware' => ['auth']], function () {
     //landing
     Route::get('/home', 'LandingController@index')->name('home');
     //Alta incidencias
-    //Route::get('/incidencias', 'IncidenciasController@index')->name('incidencias');
+    Route::get('/incidencias', 'IncidenciasController@index')->name('incidencias');
     //Recursos
-    //Route::get('/recursos', 'RecursosController@index')->name('recursos');
+    Route::get('/recursos', 'RecursosController@index')->name('recursos');
     //Alertantes
     //Route::get('/alertantes', 'AlertantesController@index')->name('alertantes');
 
 });
-
-//Route::get('/principal', ['middleware' => 'auth', 'uses' => 'LandingController@index']);
