@@ -21,8 +21,8 @@ Log in
             </div>
 
             <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-            <a href="{{route('registro')}}"><button class="btn btn-outline-dark my-2 my-sm-0">Registrarse</button></a>
         </form>
+        <a href="{{route('registro')}}"><button class="btn btn-outline-dark my-2 my-sm-0">Registrarse</button></a>
     </div>
     <div class="col-2 col-lg-4 col-md-3"></div>
 </div>

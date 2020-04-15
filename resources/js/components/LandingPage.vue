@@ -1,26 +1,26 @@
 <template>
     <main>
-        <nav aria-label="breadcrumb">
+        <!--<nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Landing</a></li>
             </ol>
-        </nav>
+        </nav>-->
 
         <div id="app" class="row m-10">
             <div class="card col-sm-3">
                 <img class="card-img-top" v-bind:src="src" alt="Card image" />
                 <div class="card-body">
-                    <h4 class="card-title">alta Incidencia</h4>
+                    <h4 class="card-title">Alta Incidencia</h4>
                     <p class="card-text">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit.
                     </p>
                     <button
                         type="button"
-                        @click="openRegistro()"
+                        @click="openIncidencia()"
                         class="btn btn-outline-dark btn-block"
                     >
-                        Registrarse
+                        Go
                     </button>
                 </div>
             </div>
@@ -32,16 +32,30 @@
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit.
                     </p>
+                    <button
+                        type="button"
+                        @click="openRecursos()"
+                        class="btn btn-outline-dark btn-block"
+                    >
+                        GO
+                    </button>
                 </div>
             </div>
             <div class="card col-sm-3">
                 <img class="card-img-top" v-bind:src="src" alt="Card image" />
                 <div class="card-body">
-                    <h4 class="card-title">Alertatntes</h4>
+                    <h4 class="card-title">Alertantes</h4>
                     <p class="card-text">
                         Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit.
                     </p>
+                    <button
+                        type="button"
+                        @click="openAlertantes()"
+                        class="btn btn-outline-dark btn-block"
+                    >
+                        Go
+                    </button>
                 </div>
             </div>
         </div>
@@ -57,8 +71,14 @@ export default {
         };
     },
     methods: {
-        openRegistro() {
-            window.location.href = "/project_broggi/public/welcome";
+        openIncidencia() {
+            window.location.href = "/project_broggi/public/incidencias";
+        },
+        openRecursos() {
+            window.location.href = "/project_broggi/public/recursos";
+        },
+        openAlertantes() {
+            window.location.href = "/project_broggi/public/alertates";
         },
     },
 };

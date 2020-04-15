@@ -11,13 +11,15 @@
 |
 */
 
-Route::get('/', 'LandingPage@index');
-
+Route::get('/', function () {
+    return view('index');
+});
 
 //redirects
 Route::get('/registro', 'RegistroController@index')->name('registro');
 
 Route::get('/login', 'Auth\LoginController@showLogin')->name('login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //actions
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');

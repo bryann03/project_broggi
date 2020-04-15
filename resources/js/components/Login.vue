@@ -53,10 +53,10 @@ export default {
   },
   methods: {
     openLanding() {
-      href = "{{ route('login ') }}";
+      href = "{{ route('login') }}";
     },
     openRegistro() {
-      window.location.href = "/project_broggi/public/registro";
+      href = "{{ route('registro') }}";
     }
   }
 };

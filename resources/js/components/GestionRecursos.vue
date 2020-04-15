@@ -4,7 +4,7 @@
             <h1 class="text-center mb-5">Gestió de recursos</h1>
             <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover :items="arrayRecursos" :fields="columnasTabla">
                 <template v-slot:cell(manage)="data">
-                    <button type="button" class="btn btn-primary mr-3">Editar</button>
+                    <button type="button" class="btn btn-primary mr-3" @click="abrirModal('update', data.item)">Editar</button>
                     <button type="button" class="btn btn-danger" v-b-modal.modal-esborrar @click="sendRecurs(data.item)">Esborrar</button>
                 </template>
 
@@ -71,7 +71,7 @@
                         <button type="button" class="btn btn-secondary" @click="cerrarModal()" data-dismiss="modal">Close</button>
                         <button v-if="accionApi === 'insert'" type="button" class="btn btn-primary" @click="insertRecurs()">Guardar</button>
                         <button v-else-if="accionApi === 'delete'" type="button" class="btn btn-danger" @click="deleteRecurs(objectRecurso.id)">Borrar</button>
-                        <button v-else-if="accionApi === 'update'" type="button" class="btn btn-success" @click="updateRol(rol.id)">Actualizar</button>
+                        <button v-else-if="accionApi === 'update'" type="button" class="btn btn-success" @click="updateRecurs(objectRecurso.id)">Actualitzar</button>
                     </div>
                 </div>
             </div>
@@ -106,17 +106,26 @@ import { mapState, mapMutations, mapActions } from "vuex";
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
         this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
         this.getApi({ruta: 'usuaris', nombreTabla: 'usuaris'});
-        this.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
+        this.getRecursos();
     },
     methods: {
         ...mapActions(['getApi', 'postApi']),
-        abrirModal(accionApi){
+        abrirModal(accionApi, dataRecurs=[]){
             switch (accionApi) {
                 case 'insert':
-                    this.clearDataModal();
                     this.modal = 1;
                     this.tituloModal = "Insertar recurs";
                     this.accionApi = accionApi;
+                    break;
+                case 'update':
+                    this.modal = 1;
+                    this.tituloModal = 'Editar recurs';
+                    this.accionApi = accionApi;
+                    this.objectRecurso.id = dataRecurs['id'];
+                    this.objectRecurso.codi = dataRecurs['codi'];
+                    this.objectRecurso.tipus_recurs_id = dataRecurs['tipus_recurs_id'];
+                    this.objectRecurso.id_usuario = dataRecurs['id_usuario'];
+                    // this.objectRecurso = dataRecurs;
                     break;
                 default:
                     break;
@@ -130,17 +139,17 @@ import { mapState, mapMutations, mapActions } from "vuex";
             this.clearDataModal();
         },
         clearDataModal(){
-            this.objectRecurso.id = null,
-            this.objectRecurso.codi = "",
-            this.objectRecurso.tipus_recurs_id = null,
-            this.objectRecurso.id_usuario = null
+            this.objectRecurso.id = null;
+            this.objectRecurso.codi = "";
+            this.objectRecurso.tipus_recurs_id = null;
+            this.objectRecurso.id_usuario = null;
         },
         insertRecurs(){
             let me = this;
             axios.post("/recursos", this.objectRecurso)
                 .then(function(response){
                     me.cerrarModal();
-                    me.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
+                    me.getRecursos();
                     // me.$parent.reload();
                     // me.arrayRecursos.push(response.data);
                     console.log(me.arrayRecursos);
@@ -154,7 +163,6 @@ import { mapState, mapMutations, mapActions } from "vuex";
         },
         deleteRecurs(idRecurs){
             let me = this;
-            this.modal = 0;
             axios.delete("/recursos/" + idRecurs)
                 .then(function (response) {
                     console.log("BORRADO");
@@ -169,8 +177,44 @@ import { mapState, mapMutations, mapActions } from "vuex";
                     console.log(error);
                 });
         },
+        updateRecurs(idRecurs){
+            let me = this;
+            axios.put("/recursos/" + idRecurs, this.objectRecurso)
+                .then(function(response) {
+                    console.log("ACTUALIZADO");
+                    me.getRecursos();
+                    me.cerrarModal();
+                    me.showModal();
+                })
+                .catch(function(error) {
+                    me.errorRol = true;
+                    me.mensajeError = error.response.data;
+                    me.errorRol = true;
+                    me.arrrayMensajesError.push(me.mensajeError.error);
+                });
+        },
         sendRecurs(recurs){
             this.objectRecurso = recurs;
+        },
+        showModal(){
+            this.$bvModal.msgBoxOk('Les dades han sigut actualitzades correctament', {
+                title: 'Actualitzat',
+                size: 'sm',
+                buttonSize: 'sm',
+                okVariant: 'success',
+                headerClass: 'p-2 border-bottom-0',
+                footerClass: 'p-2 border-top-0',
+                centered: true
+            })
+            .then(value => {
+                this.boxTwo = value
+            })
+            .catch(err => {
+                // An error occurred
+            })
+        },
+        getRecursos(){
+            this.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
         }
     },
     computed: {
