@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
     <main>
         <!--<nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -61,11 +60,6 @@
             </div>
         </div>
     </main>
-=======
-  <div>
-    <h1>Landing working</h1>
-  </div>
->>>>>>> pau
 </template>
 
 <script>
