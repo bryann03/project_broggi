@@ -39,7 +39,7 @@
         </section>
 
         <section v-show="sectionRecursos">
-            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" hover striped fixed outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
+            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" :head-variant="dark" hover striped fixed outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">ESBORRAR</button>
                 </template>
