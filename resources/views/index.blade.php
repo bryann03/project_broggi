@@ -10,4 +10,6 @@ Hello there
 <landing></landing>
 -->
 <h1>HELLO</h1>
+
+<p>aqui explicaremos un poquito de que va el proyecto <a href="{{url('/login')}}">jeje </a></p>
 @endsection
