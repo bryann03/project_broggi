@@ -2068,6 +2068,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2088,12 +2102,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       },
       columnasTablaAsignados: [{
         key: 'codi',
+        sortable: true,
         label: 'Codi'
       }, {
         key: 'tipus_recurs.tipus',
+        sortable: true,
         label: 'Tipus recurs'
       }, {
         key: 'usuaris.nom',
+        sortable: true,
         label: 'Usuari'
       }, {
         key: 'manage',
@@ -2101,13 +2118,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }],
       columnasTablaRecursos: [{
         key: 'tipus',
+        sortable: true,
         label: 'Nom recurs'
-      }, {
-        key: 'esSanitari',
-        label: 'Sanitari'
-      }, {
-        key: 'esPolicial',
-        label: 'Policial'
       }, {
         key: 'manage',
         label: 'Manage'
@@ -2117,7 +2129,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _ref;
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _defineProperty(_ref, "headVariant", 'dark'), _defineProperty(_ref, "filter", null), _ref;
   },
   created: function created() {
     this.getApi({
@@ -78783,12 +78795,80 @@ var render = function() {
         ]
       },
       [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c(
+                "b-form-group",
+                {
+                  staticClass: "mb-0",
+                  attrs: {
+                    label: "Filter",
+                    "label-cols-sm": "3",
+                    "label-align-sm": "right",
+                    "label-size": "sm",
+                    "label-for": "filterInput"
+                  }
+                },
+                [
+                  _c(
+                    "b-input-group",
+                    { attrs: { size: "sm" } },
+                    [
+                      _c("b-form-input", {
+                        attrs: {
+                          type: "search",
+                          id: "filterInput",
+                          placeholder: "Type to Search"
+                        },
+                        model: {
+                          value: _vm.filter,
+                          callback: function($$v) {
+                            _vm.filter = $$v
+                          },
+                          expression: "filter"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-input-group-append",
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: { disabled: !_vm.filter },
+                              on: {
+                                click: function($event) {
+                                  _vm.filter = ""
+                                }
+                              }
+                            },
+                            [_vm._v("Clear")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
         _c("b-table", {
           ref: "table",
           attrs: {
+            filter: _vm.filter,
             "current-page": _vm.currentPage,
             id: "tablaRecursos",
             "per-page": _vm.perPage,
+            "head-variant": _vm.headVariant,
             hover: "",
             striped: "",
             fixed: "",
@@ -78944,10 +79024,9 @@ var render = function() {
             "current-page": _vm.currentPageRecursos,
             id: "tablaTipoRecursos",
             "per-page": _vm.perPage,
-            "head-variant": _vm.dark,
+            "head-variant": _vm.headVariant,
             hover: "",
             striped: "",
-            fixed: "",
             outlined: "",
             items: _vm.arrayTipusRecurs,
             fields: _vm.columnasTablaRecursos

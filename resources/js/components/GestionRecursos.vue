@@ -10,7 +10,21 @@
             </div>
         </div>
         <section v-show="sectionAsignados">
-            <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover striped fixed outlined :items="arrayRecursos" :fields="columnasTablaAsignados">
+            <div class="row">
+                <div class="col-12">
+                <b-form-group label="Filter" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="filterInput" class="mb-0">
+
+                <b-input-group size="sm">
+                    <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+                    <b-input-group-append>
+                        <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                    </b-input-group-append>
+                    </b-input-group>
+                </b-form-group>
+                </div>
+            </div>
+
+            <b-table ref="table" :filter="filter" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" :head-variant="headVariant" hover striped fixed outlined :items="arrayRecursos" :fields="columnasTablaAsignados">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-primary mr-3" @click="abrirModal('update', data.item)">EDITAR</button>
                     <button type="button" class="btn btn-danger" @click="deleteRecurs(data.item.id)">ESBORRAR</button>
@@ -39,7 +53,7 @@
         </section>
 
         <section v-show="sectionRecursos">
-            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" :head-variant="dark" hover striped fixed outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
+            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" :head-variant="headVariant" hover striped outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">ESBORRAR</button>
                 </template>
@@ -135,10 +149,9 @@ import { mapState, mapMutations, mapActions } from "vuex";
             esSanitari: null,
             esPolicial: null
         },
-        columnasTablaAsignados:[{key: 'codi', label: 'Codi'}, {key: 'tipus_recurs.tipus', label: 'Tipus recurs'},
-                        {key: 'usuaris.nom', label: 'Usuari'}, {key: 'manage', label: 'Manage'}],
-        columnasTablaRecursos: [{key: 'tipus', label: 'Nom recurs'}, {key: 'esSanitari', label: 'Sanitari'},
-                        {key: 'esPolicial', label: 'Policial'}, {key: 'manage', label: 'Manage'}],
+        columnasTablaAsignados:[{key: 'codi', sortable: true, label: 'Codi'}, {key: 'tipus_recurs.tipus', sortable: true, label: 'Tipus recurs'},
+                        {key: 'usuaris.nom', sortable: true, label: 'Usuari'}, {key: 'manage', label: 'Manage'}],
+        columnasTablaRecursos: [{key: 'tipus', sortable: true, label: 'Nom recurs'}, {key: 'manage', label: 'Manage'}],
         tituloModal: "",
         modal: 0,
         errorRol: false,
@@ -149,7 +162,9 @@ import { mapState, mapMutations, mapActions } from "vuex";
         currentPage: 1,
         currentPageRecursos: 1,
         sectionAsignados: false,
-        sectionRecursos: true
+        sectionRecursos: true,
+        headVariant: 'dark',
+        filter: null,
       }
     },
     created() {
