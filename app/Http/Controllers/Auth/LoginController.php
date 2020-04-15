@@ -60,6 +60,7 @@ class LoginController extends Controller
         if ($user != null) {
             if ($password == $user->contrasenya) {
                 Auth::login($user);
+                return redirect('/home');
             } else {
                 //çhucha
             }
