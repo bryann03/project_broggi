@@ -11,7 +11,6 @@
 |
 */
 
-Route::get('/', 'LandingPage@index');
 Route::get('/incidencias', 'Incidencias@index');
 
 
