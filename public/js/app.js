@@ -2159,13 +2159,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -2206,26 +2199,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       arrayIncidencia: [],
-      arrayMunicipis: [],
-      objectIncidencia: {
-        id: null,
-        numero_incidencia: "",
-        data: null,
-        hora: null,
-        adreca: "",
-        complement_adreca: "",
-        descripcio: "",
-        municipis_id: null,
-        tipus_indicent_id: null,
-        estats_incidencia_id: null,
-        tipus_alertant_id: null,
-        alertants_id: null
-      },
       columnasTabla: [{
         key: "num_incidencia",
         label: "Numero Incidencia"
@@ -2242,7 +2219,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         key: "tipus_incident.tipus",
         label: "Tipus Incident"
       }],
-      accionApi: "",
       arrayMensajesError: [],
       perPage: 5,
       currentPage: 1
@@ -2251,30 +2227,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     console.log("estamos en mounted");
     this.obtenerIncidencias();
-    this.obtenerMunicipis();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi", "postApi"]), {
+  methods: {
     obtenerIncidencias: function obtenerIncidencias() {
       var _this = this;
 
-      console.log("estamos en la obtencion de datos");
       axios.get("http://localhost:8080/project_broggi/public/api/incidencies").then(function (response) {
         _this.arrayIncidencia = response.data;
       })["catch"](function (e) {
         return console.log(e);
       });
-    },
-    obtenerMunicipis: function obtenerMunicipis() {
-      var _this2 = this;
-
-      axios.get("http://localhost:8080/project_broggi/public/api/municipis").then(function (response) {
-        _this2.arrayMunicipis = response.data;
-      })["catch"](function (e) {
-        return console.log(e);
-      });
     }
-  }),
-  created: function created() {},
+  },
   computed: {
     rows: function rows() {
       return this.arrayIncidencia.length;
@@ -95151,45 +95115,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"], axios__WEBPACK_IMPORTED_MODULE_2___default.a);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {
-    arrayUsuaris: [],
-    arrayTipusIncident: [],
-    arrayIncidencia: [],
-    arrayMunicipis: [],
-    afegit: false
-  },
-  mutations: {
-    municipis: function municipis(state, datosRecibidos) {
-      state.arrayMunicipis = datosRecibidos;
-    },
-    tipus_incident: function tipus_incident(state, datosRecibidos) {
-      state.arrayTipusIncident = datosRecibidos;
-    },
-    usuaris: function usuaris(state, datosRecibidos) {
-      state.arrayUsuaris = datosRecibidos;
-    },
-    incidencies: function incidencies(state, datosRecibidos) {
-      state.arrayIncidencia = datosRecibidos;
-    }
-  },
-  actions: {
-    //LE PASA EL NOMBRE DE LA TABLA Y SU RUTA
-    getApi: function getApi(_ref, _ref2) {
-      var commit = _ref.commit;
-      var ruta = _ref2.ruta,
-          nombreTabla = _ref2.nombreTabla;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/" + ruta).then(function (response) {
-        var datos = response.data;
-        console.log(nombreTabla);
-        commit(nombreTabla, datos);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  modules: {}
-}));
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({}));
 
 /***/ }),
 

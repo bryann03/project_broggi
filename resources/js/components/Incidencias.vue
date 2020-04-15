@@ -39,26 +39,10 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
       arrayIncidencia: [],
-      arrayMunicipis: [],
-      objectIncidencia: {
-        id: null,
-        numero_incidencia: "",
-        data: null,
-        hora: null,
-        adreca: "",
-        complement_adreca: "",
-        descripcio: "",
-        municipis_id: null,
-        tipus_indicent_id: null,
-        estats_incidencia_id: null,
-        tipus_alertant_id: null,
-        alertants_id: null
-      },
       columnasTabla: [
         { key: "num_incidencia", label: "Numero Incidencia" },
         { key: "hora", label: "Hora" },
@@ -66,7 +50,6 @@ export default {
         { key: "municipis.nom", label: "Municipi" },
         { key: "tipus_incident.tipus", label: "Tipus Incident" }
       ],
-      accionApi: "",
       arrayMensajesError: [],
       perPage: 5,
       currentPage: 1
@@ -75,29 +58,17 @@ export default {
   mounted() {
     console.log("estamos en mounted");
     this.obtenerIncidencias();
-    this.obtenerMunicipis();
   },
   methods: {
-    ...mapActions(["getApi", "postApi"]),
     obtenerIncidencias() {
-      console.log("estamos en la obtencion de datos");
       axios
         .get("http://localhost:8080/project_broggi/public/api/incidencies")
         .then(response => {
           this.arrayIncidencia = response.data;
         })
         .catch(e => console.log(e));
-    },
-    obtenerMunicipis() {
-      axios
-        .get("http://localhost:8080/project_broggi/public/api/municipis")
-        .then(response => {
-          this.arrayMunicipis = response.data;
-        })
-        .catch(e => console.log(e));
     }
   },
-  created() {},
   computed: {
     rows() {
       return this.arrayIncidencia.length;
