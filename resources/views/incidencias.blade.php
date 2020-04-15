@@ -1,9 +1,9 @@
 @extends('templates.main')
 
 @section('titulo')
-    Landing
+    incidencias
 @endsection
 
 @section('principal')
-    <landing></landing>
+    <incidencias></incidencias>
 @endsection

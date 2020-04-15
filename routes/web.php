@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'LandingPage@index');
+Route::get('/incidencias', 'Incidencias@index');
 
 
 Route::get('/registro', 'RegistroController@index');
