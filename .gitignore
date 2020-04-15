@@ -3,7 +3,6 @@
 /public/storage
 /storage/*.key
 /vendor
-.env
 .env.backup
 .phpunit.result.cache
 Homestead.json
@@ -12,3 +11,6 @@ npm-debug.log
 yarn-error.log
 .editorconfig
 /.vscode/launch.json
+/public/js/*
+/public/css/*
+/public/fonts
