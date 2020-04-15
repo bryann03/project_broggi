@@ -11,5 +11,5 @@ Hello there
 -->
 <h1>HELLO</h1>
 
-<p>aqui explicaremos un poquito de que va el proyecto <a href="{{url('/login')}}">jeje </a></p>
+<p>aqui explicaremos un poquito de que va el proyecto </p>
 @endsection
