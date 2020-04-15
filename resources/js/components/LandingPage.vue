@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <main>
         <!--<nav aria-label="breadcrumb">
             <ol class="breadcrumb">
@@ -60,10 +61,16 @@
             </div>
         </div>
     </main>
+=======
+  <div>
+    <h1>Landing working</h1>
+  </div>
+>>>>>>> pau
 </template>
 
 <script>
 export default {
+<<<<<<< HEAD
     data() {
         return {
             src:
@@ -81,12 +88,22 @@ export default {
             window.location.href = "/project_broggi/public/alertates";
         },
     },
+=======
+  data() {
+    return {};
+  }
+>>>>>>> pau
 };
 </script>
 
 <style lang="scss" scoped>
 section {
+<<<<<<< HEAD
     padding-top: 100px;
     padding-bottom: 100px;
+=======
+  padding-top: 100px;
+  padding-bottom: 100px;
+>>>>>>> pau
 }
 </style>
