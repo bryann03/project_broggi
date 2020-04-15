@@ -2263,6 +2263,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2273,10 +2287,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     openLanding: function openLanding() {
-      window.location.href = '/project_broggi/public/principal';
+      href = "{{ route('login ') }}";
     },
     openRegistro: function openRegistro() {
-      window.location.href = '/project_broggi/public/registro';
+      window.location.href = "/project_broggi/public/registro";
     }
   }
 });
@@ -79329,87 +79343,103 @@ var render = function() {
         _c("div", { staticClass: "col-2 col-lg-4 col-md-3" }),
         _vm._v(" "),
         _c("div", { staticClass: "col-8 col-lg-4 col-md-6 text-center" }, [
-          _c("form", { attrs: { action: "", method: "get" } }, [
-            _c("div", [
-              _c("label", { staticClass: "float-left" }, [_vm._v("User")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.username,
-                    expression: "username"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { required: "", type: "text" },
-                domProps: { value: _vm.username },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+          _c(
+            "form",
+            {
+              attrs: {
+                action: "",
+                method: "post",
+                enctype: "multipart/form-data"
+              }
+            },
+            [
+              _c("div", [
+                _c("label", { staticClass: "float-left" }, [_vm._v("User")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.username,
+                      expression: "username"
                     }
-                    _vm.username = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "mt-3 mb-4" }, [
-              _c("label", { staticClass: "float-left" }, [_vm._v("Password")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.password,
-                    expression: "password"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { required: "", type: "password" },
-                domProps: { value: _vm.password },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+                  ],
+                  staticClass: "form-control",
+                  attrs: { required: "", name: "codi", type: "text" },
+                  domProps: { value: _vm.username },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.username = $event.target.value
                     }
-                    _vm.password = $event.target.value
                   }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary btn-block",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.openLanding()
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "mt-3 mb-4" }, [
+                _c("label", { staticClass: "float-left" }, [
+                  _vm._v("Password")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.password,
+                      expression: "password"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    required: "",
+                    name: "contrasenya",
+                    type: "password"
+                  },
+                  domProps: { value: _vm.password },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.password = $event.target.value
+                    }
                   }
-                }
-              },
-              [_vm._v("Iniciar sesión")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-outline-dark btn-block",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.openRegistro()
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary btn-block",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.openLanding()
+                    }
                   }
-                }
-              },
-              [_vm._v("Registrarse")]
-            )
-          ])
+                },
+                [_vm._v("Iniciar sesión")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-outline-dark btn-block",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.openRegistro()
+                    }
+                  }
+                },
+                [_vm._v("Registrarse")]
+              )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-2 col-lg-4 col-md-3" })

@@ -15,8 +15,15 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/principal', 'LandingController@index');
-Route::get('/registro', 'RegistroController@index');
+
+Route::get('/registro', 'RegistroController@index')->name('registro');
+
 Route::get('/login', 'Auth\LoginController@showLogin')->name('login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+Route::post('/login', 'Auth\LoginController@login');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'LandingController@index')->name('home');
+});
 
 //Route::get('/principal', ['middleware' => 'auth', 'uses' => 'LandingController@index']);
