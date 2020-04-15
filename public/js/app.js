@@ -2117,7 +2117,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", false), _ref;
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _ref;
   },
   created: function created() {
     this.getApi({
@@ -79675,6 +79675,9 @@ var render = function() {
             id: "tablaRecursos",
             "per-page": _vm.perPage,
             hover: "",
+            striped: "",
+            fixed: "",
+            outlined: "",
             items: _vm.arrayRecursos,
             fields: _vm.columnasTablaAsignados
           },
@@ -79694,7 +79697,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Editar")]
+                    [_vm._v("EDITAR")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -79708,7 +79711,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Esborrar")]
+                    [_vm._v("ESBORRAR")]
                   )
                 ]
               }
@@ -79801,7 +79804,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Asignar recurs")]
+          [_vm._v("ASIGNAR RECURS")]
         )
       ],
       1
@@ -79827,6 +79830,9 @@ var render = function() {
             id: "tablaTipoRecursos",
             "per-page": _vm.perPage,
             hover: "",
+            striped: "",
+            fixed: "",
+            outlined: "",
             items: _vm.arrayTipusRecurs,
             fields: _vm.columnasTablaRecursos
           },
@@ -79846,7 +79852,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Esborrar")]
+                    [_vm._v("ESBORRAR")]
                   )
                 ]
               }
@@ -79880,7 +79886,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Afegir recurs")]
+          [_vm._v("AFEGIR RECURS")]
         )
       ],
       1

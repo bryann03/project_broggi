@@ -10,10 +10,10 @@
             </div>
         </div>
         <section v-show="sectionAsignados">
-            <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover :items="arrayRecursos" :fields="columnasTablaAsignados">
+            <b-table ref="table" :current-page="currentPage" id="tablaRecursos" :per-page="perPage" hover striped fixed outlined :items="arrayRecursos" :fields="columnasTablaAsignados">
                 <template v-slot:cell(manage)="data">
-                    <button type="button" class="btn btn-primary mr-3" @click="abrirModal('update', data.item)">Editar</button>
-                    <button type="button" class="btn btn-danger" @click="deleteRecurs(data.item.id)">Esborrar</button>
+                    <button type="button" class="btn btn-primary mr-3" @click="abrirModal('update', data.item)">EDITAR</button>
+                    <button type="button" class="btn btn-danger" @click="deleteRecurs(data.item.id)">ESBORRAR</button>
                 </template>
 
             </b-table>
@@ -34,20 +34,20 @@
 
             <b-pagination v-model="currentPage" :per-page="perPage" :total-rows="rowsAsignados" aria-controls="tablaRecursos"></b-pagination>
 
-            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">Asignar recurs</button>
+            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insert')">ASIGNAR RECURS</button>
 
         </section>
 
         <section v-show="sectionRecursos">
-            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" hover :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
+            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" hover striped fixed outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
                 <template v-slot:cell(manage)="data">
-                    <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">Esborrar</button>
+                    <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">ESBORRAR</button>
                 </template>
             </b-table>
 
             <b-pagination v-model="currentPageRecursos" :per-page="perPage" :total-rows="rowsRecursos" aria-controls="tablaTipoRecursos"></b-pagination>
 
-            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insertTipusRecurs')">Afegir recurs</button>
+            <button type="button" class="btn btn-primary btn-block" @click="abrirModal('insertTipusRecurs')">AFEGIR RECURS</button>
         </section>
 
         <!-- Modal -->
@@ -149,7 +149,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
         currentPage: 1,
         currentPageRecursos: 1,
         sectionAsignados: false,
-        sectionRecursos: false
+        sectionRecursos: true
       }
     },
     created() {
