@@ -22,7 +22,7 @@
         <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" aria-controls="table_alertants"></b-pagination>
 
         <!-- Info modal -->
-        <b-modal :id="editAlertantModal.id" :title="editAlertantModal.title" @ok="saveAlertant()">
+        <b-modal :id="editAlertantModal.id" :title="editAlertantModal.title" @ok="saveAlertant()" :ok-title="aceptar" :cancel-title="cancelar">
             <input type="hidden" name="_method" value="PUT">
             <!--<pre>{{ editAlertantModal.content }}</pre>-->
             <div class="form-group">
@@ -83,7 +83,9 @@
                     }
                 },
                 currentAlertant : [],
-                filter: null
+                filter: null,
+                aceptar : "Aceptar",
+                cancelar : "Cancelar"
             }
         },
         created() {
