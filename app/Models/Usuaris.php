@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 
-class Usuaris extends Model
+class Usuaris extends Authenticatable
 {
     protected $table = 'usuaris';
     protected $primaryKey = 'id';
@@ -25,4 +28,13 @@ class Usuaris extends Model
     {
         return $this->hasMany('App\Models\Recursos', 'id_usuario');
     }
+
+
+    protected $fillable = [
+        'codi', 'contrasenya',
+    ];
+
+    protected $hidden = [
+        'contrasenya', 'remember_token',
+    ];
 }
