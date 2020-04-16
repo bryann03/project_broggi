@@ -2586,6 +2586,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2598,12 +2599,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         hora: null,
         adreca: '',
         complement_adreca: '',
-        descripcion: '',
+        descripcio: '',
         municipis_id: null,
         tipus_incident_id: null,
         estats_incidencia_id: null,
         tipus_alertant_id: null,
-        alertant_id: null
+        alertants_id: null
       },
       datosInidenciaHasRecurso: {
         prioritat: null
@@ -2630,6 +2631,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getApi({
       ruta: 'alertants',
       nombreTabla: 'alertants'
+    });
+    this.getApi({
+      ruta: 'estats_incidencia',
+      nombreTabla: 'estats_incidencia'
     });
     this.getTipusRecursos();
     console.log("created");
@@ -2665,7 +2670,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       alert("Incidencia añadida");
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia']))
 });
 
 /***/ }),
@@ -80835,7 +80840,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Num.Incidencia" },
+                  attrs: { type: "number", placeholder: "Num.Incidencia" },
                   domProps: { value: _vm.datosIncidencia.num_incidencia },
                   on: {
                     input: function($event) {
@@ -80951,7 +80956,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Alertant")]
+                      [_vm._v("Municipis")]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayMunicipis, function(municipi) {
@@ -81086,8 +81091,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model.number",
-                        value: _vm.datosIncidencia.alertant_id,
-                        expression: "datosIncidencia.alertant_id",
+                        value: _vm.datosIncidencia.alertants_id,
+                        expression: "datosIncidencia.alertants_id",
                         modifiers: { number: true }
                       }
                     ],
@@ -81104,7 +81109,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.datosIncidencia,
-                          "alertant_id",
+                          "alertants_id",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -81176,8 +81181,17 @@ var render = function() {
                         domProps: { value: null }
                       },
                       [_vm._v("Estat incidenica")]
-                    )
-                  ]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayEstatsIncidencia, function(estat) {
+                      return _c(
+                        "option",
+                        { key: estat.id, domProps: { value: estat.id } },
+                        [_vm._v(_vm._s(estat.estat))]
+                      )
+                    })
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
@@ -81243,13 +81257,13 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.datosIncidencia.descripcion,
-                      expression: "datosIncidencia.descripcion"
+                      value: _vm.datosIncidencia.descripcio,
+                      expression: "datosIncidencia.descripcio"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { rows: "3", placeholder: "Descripció incidencia" },
-                  domProps: { value: _vm.datosIncidencia.descripcion },
+                  domProps: { value: _vm.datosIncidencia.descripcio },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
@@ -81257,7 +81271,7 @@ var render = function() {
                       }
                       _vm.$set(
                         _vm.datosIncidencia,
-                        "descripcion",
+                        "descripcio",
                         $event.target.value
                       )
                     }
@@ -95201,6 +95215,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     arrayTipusIncidencia: [],
     arrayRecursos: [],
     arrayAlertants: [],
+    arrayEstatsIncidencia: [],
     afegit: false,
     arrayRecursosPoliciales: [],
     arrayRecursosSanitarios: []
@@ -95237,6 +95252,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     alertants: function alertants(state, datosRecibidos) {
       state.arrayAlertants = datosRecibidos;
+    },
+    estats_incidencia: function estats_incidencia(state, datosRecibidos) {
+      state.arrayEstatsIncidencia = datosRecibidos;
     }
   },
   actions: {

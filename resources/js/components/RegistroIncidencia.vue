@@ -7,7 +7,7 @@
             <form action method="post">
                 <div class="row">
                     <div class="col-4">
-                        <input v-model.number="datosIncidencia.num_incidencia" class="form-control" type="text" placeholder="Num.Incidencia">
+                        <input v-model.number="datosIncidencia.num_incidencia" class="form-control" type="number" placeholder="Num.Incidencia">
                     </div>
                     <section class="col-8">
                         <b-form-datepicker :value-as-date="true" :today-button="true" v-model="datosIncidencia.data" class="form-control" placeholder="Data"></b-form-datepicker>
@@ -17,7 +17,7 @@
                     </div>
                     <div class="col-8">
                         <select class="form-control" v-model.number="datosIncidencia.municipis_id">
-                            <option :value="null" disabled hidden>Alertant</option>
+                            <option :value="null" disabled hidden>Municipis</option>
                             <option v-for="municipi in arrayMunicipis" :key="municipi.id" :value="municipi.id" >{{ municipi.nom }}</option>
                         </select>
                         <!-- <b-form-input v-model.number="datosIncidencia.municipis_id" list="list-municipis" id="input-with-list" placeholder="Municipis"></b-form-input>
@@ -38,7 +38,7 @@
                         </select>
                     </div>
                     <div class="col-8">
-                        <select class="form-control" v-model.number="datosIncidencia.alertant_id">
+                        <select class="form-control" v-model.number="datosIncidencia.alertants_id">
                             <option :value="null" disabled hidden>Alertant</option>
                             <option v-for="alertant in arrayAlertants" :key="alertant.id" :value="alertant.id" >{{ alertant.nom }}</option>
                         </select>
@@ -50,6 +50,7 @@
                     <div class="col-4">
                         <select v-model.number="datosIncidencia.estats_incidencia_id" class="form-control">
                             <option :value="null" disabled hidden>Estat incidenica</option>
+                            <option v-for="estat in arrayEstatsIncidencia" :key="estat.id" :value="estat.id" >{{ estat.estat }}</option>
                         </select>
                     </div>
                     <div class="col-8">
@@ -59,7 +60,7 @@
                         </select>
                     </div>
                     <div class="col-12">
-                        <textarea v-model="datosIncidencia.descripcion" class="form-control" rows="3" placeholder="Descripció incidencia"></textarea>
+                        <textarea v-model="datosIncidencia.descripcio" class="form-control" rows="3" placeholder="Descripció incidencia"></textarea>
                     </div>
                 </div>
             </form>
@@ -107,12 +108,12 @@ export default {
                 hora: null,
                 adreca: '',
                 complement_adreca: '',
-                descripcion: '',
+                descripcio: '',
                 municipis_id: null,
                 tipus_incident_id: null,
                 estats_incidencia_id: null,
                 tipus_alertant_id: null,
-                alertant_id: null
+                alertants_id: null
             },
             datosInidenciaHasRecurso:{
                 prioritat: null
@@ -128,6 +129,7 @@ export default {
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
         this.getApi({ruta: 'tipus_incident', nombreTabla: 'tipus_incident'});
         this.getApi({ruta: 'alertants', nombreTabla: 'alertants'});
+        this.getApi({ruta: 'estats_incidencia', nombreTabla: 'estats_incidencia'});
         this.getTipusRecursos();
         console.log("created");
     },
@@ -165,7 +167,7 @@ export default {
     computed: {
         ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia',
                      'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios',
-                     'arrayAlertants'])
+                     'arrayAlertants', 'arrayEstatsIncidencia'])
     },
 }
 </script>

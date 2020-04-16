@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EstatsIncidenciaResource;
 use App\Models\EstatsIncidencia;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class EstatsIncidenciaController extends Controller
      */
     public function index()
     {
-        //
+        $estatsIncidencia = EstatsIncidencia::all();
+        return EstatsIncidenciaResource::collection($estatsIncidencia);
     }
 
     /**
