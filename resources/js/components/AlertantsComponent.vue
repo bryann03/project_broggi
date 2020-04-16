@@ -3,13 +3,13 @@
         <form action="" method="get" class="form-horizontal">
             <div class="form-group row mt-5 align-middle">
                 <div class="col-10">
-                    <input type="text" class="form-control" name="search" value="">
+                    <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Búsqueda ..."></b-form-input>
                 </div>
                 <button type="submit" class="btn btn-secondary btn-sm col-2">BUSCAR</button>
             </div>
         </form>
 
-        <b-table striped hover id="table_alertants" :items="alertants" :fields="fields" class="table mt-5" :per-page="perPage" :current-page="currentPage">
+        <b-table striped hover id="table_alertants" :items="alertants" :fields="fields" class="table mt-5" :per-page="perPage" :current-page="currentPage" :filter="filter">
             <template v-slot:cell(gestionar)="row">
                 <b-button size="sm" class="mr-1" @click="editAlertant(row.item)">
                     Editar
@@ -82,7 +82,8 @@
                         tel: ""
                     }
                 },
-                currentAlertant : []
+                currentAlertant : [],
+                filter: null
             }
         },
         created() {
