@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-});
 
 //redirects
 Route::get('/registro', 'RegistroController@index')->name('registro');
@@ -31,6 +28,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'LandingController@index')->name('home');
     //Alta incidencias
     Route::get('/incidencias', 'IncidenciasController@index')->name('incidencias');
+    //Registro incidencias
+    Route::get('/registroIncidencias', 'RegistroIncidencias@index');
     //Recursos
     Route::get('/recursos', 'RecursosController@index')->name('recursos');
     //Alertantes
