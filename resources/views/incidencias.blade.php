@@ -1,9 +1,9 @@
 @extends('templates.main')
 
 @section('titulo')
-    Gestion Incidencias
+    Incidencias
 @endsection
 
 @section('principal')
-    <registro-incidencia></registro-incidencia>
+    <incidencias></incidencias>
 @endsection

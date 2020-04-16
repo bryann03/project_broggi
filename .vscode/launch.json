@@ -19,6 +19,13 @@
             "webRoot": "${workspaceFolder}"
         },
         {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Ejecutar para David",
+            "url": "http://localhost:80/project_broggi/public/alertants",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",

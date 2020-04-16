@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('index');
 });
@@ -31,11 +30,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'LandingController@index')->name('home');
     //Alta incidencias
     Route::get('/incidencias', 'IncidenciasController@index')->name('incidencias');
-    //Registro incidencia
+    //Registro incidencias
     Route::get('/registroIncidencias', 'RegistroIncidencias@index');
     //Recursos
     Route::get('/recursos', 'RecursosController@index')->name('recursos');
     //Alertantes
-    //Route::get('/alertantes', 'AlertantesController@index')->name('alertantes');
+    Route::get('/alertants', 'AlertantController@index');
 
 });
