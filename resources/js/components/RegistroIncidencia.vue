@@ -10,17 +10,20 @@
                         <input v-model.number="datosIncidencia.num_incidencia" class="form-control" type="text" placeholder="Num.Incidencia">
                     </div>
                     <section class="col-8">
-                        <b-form-datepicker v-model="datosIncidencia.data" class="form-control" placeholder="Data"></b-form-datepicker>
+                        <b-form-datepicker :value-as-date="true" :today-button="true" v-model="datosIncidencia.data" class="form-control" placeholder="Data"></b-form-datepicker>
                     </section>
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.telefon_alertant" class="form-control" type="text" placeholder="Telf. alertant">
                     </div>
                     <div class="col-8">
-                        <b-form-input v-model.number="datosIncidencia.municipis_id" list="list-municipis" id="input-with-list" placeholder="Municipis"></b-form-input>
+                        <select class="form-control" v-model.number="datosIncidencia.municipis_id">
+                            <option :value="null" disabled hidden>Alertant</option>
+                            <option v-for="municipi in arrayMunicipis" :key="municipi.id" :value="municipi.id" >{{ municipi.nom }}</option>
+                        </select>
+                        <!-- <b-form-input v-model.number="datosIncidencia.municipis_id" list="list-municipis" id="input-with-list" placeholder="Municipis"></b-form-input>
                         <datalist id="list-municipis">
                             <option v-for="municipi in arrayMunicipis" :key="municipi.id">{{ municipi.nom }}</option>
-                        </datalist>
-                        <!-- <input class="form-control" type="text" name="" id="" placeholder="Municipi (AutoComplete)"> -->
+                        </datalist> -->
                     </div>
                     <div class="col-12">
                         <input v-model="datosIncidencia.adreca" class="form-control" type="text" placeholder="Adreça">
@@ -37,7 +40,12 @@
                     <div class="col-8">
                         <select class="form-control" v-model.number="datosIncidencia.alertant_id">
                             <option :value="null" disabled hidden>Alertant</option>
+                            <option v-for="alertant in arrayAlertants" :key="alertant.id" :value="alertant.id" >{{ alertant.nom }}</option>
                         </select>
+                        <!-- <b-form-input v-model.number="datosIncidencia.alertant_id" list="list-alertants" id="input-with-list" placeholder="Alertants"></b-form-input>
+                        <datalist id="list-alertants">
+                            <option v-for="alertant in arrayAlertants" :key="alertant.id" >{{ alertant.nom }}</option>
+                        </datalist> -->
                     </div>
                     <div class="col-4">
                         <select v-model.number="datosIncidencia.estats_incidencia_id" class="form-control">
@@ -81,7 +89,7 @@
             </div>
         </div>
       </div>
-      <button type="button" class="btn btn-success btn-lg mb-5">REGISTRAR</button>
+      <button type="button" class="btn btn-success btn-lg mb-5" @click="insertIncidencia()">REGISTRAR</button>
     </div>
   </main>
 </template>
@@ -106,6 +114,9 @@ export default {
                 tipus_alertant_id: null,
                 alertant_id: null
             },
+            datosInidenciaHasRecurso:{
+                prioritat: null
+            },
             recursSanitari: false,
             buttonSanitari: true,
             recursPolicial: false,
@@ -116,11 +127,25 @@ export default {
         this.getApi({ruta: 'municipis', nombreTabla: 'municipis'});
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
         this.getApi({ruta: 'tipus_incident', nombreTabla: 'tipus_incident'});
+        this.getApi({ruta: 'alertants', nombreTabla: 'alertants'});
         this.getTipusRecursos();
         console.log("created");
     },
     methods: {
         ...mapActions(['getApi']),
+        insertIncidencia(){
+            let me = this;
+            axios.post("/incidencies", this.datosIncidencia)
+                .then(function(response){
+                    me.mensajeAdd();
+                })
+                .catch(function(error){
+                    console.log(error);
+                    me.mensajeError = error.response.data;
+                    me.errorRol = true;
+                    me.arrrayMensajesError.push(me.mensajeError.error);
+                })
+        },
         mostrarSanitari(){
             this.buttonSanitari = false;
             this.recursSanitari = true;
@@ -132,10 +157,15 @@ export default {
         },
         getTipusRecursos(){
             this.getApi({ruta: 'tipus_recurs', nombreTabla: 'tipus_recurs'});
+        },
+        mensajeAdd(){
+            alert("Incidencia añadida");
         }
     },
     computed: {
-        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios'])
+        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia',
+                     'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios',
+                     'arrayAlertants'])
     },
 }
 </script>

@@ -13,6 +13,7 @@ export default new Vuex.Store({
         arrayMunicipis: [],
         arrayTipusIncidencia: [],
         arrayRecursos: [],
+        arrayAlertants:[],
         afegit: false,
         arrayRecursosPoliciales: [],
         arrayRecursosSanitarios: []
@@ -46,6 +47,9 @@ export default new Vuex.Store({
         },
         recursos(state, datosRecibidos){
             state.arrayRecursos = datosRecibidos;
+        },
+        alertants(state, datosRecibidos){
+            state.arrayAlertants = datosRecibidos;
         }
     },
     actions: {

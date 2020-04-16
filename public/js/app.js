@@ -2578,6 +2578,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2596,6 +2604,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         estats_incidencia_id: null,
         tipus_alertant_id: null,
         alertant_id: null
+      },
+      datosInidenciaHasRecurso: {
+        prioritat: null
       },
       recursSanitari: false,
       buttonSanitari: true,
@@ -2616,10 +2627,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ruta: 'tipus_incident',
       nombreTabla: 'tipus_incident'
     });
+    this.getApi({
+      ruta: 'alertants',
+      nombreTabla: 'alertants'
+    });
     this.getTipusRecursos();
     console.log("created");
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
+    insertIncidencia: function insertIncidencia() {
+      var me = this;
+      axios.post("/incidencies", this.datosIncidencia).then(function (response) {
+        me.mensajeAdd();
+      })["catch"](function (error) {
+        console.log(error);
+        me.mensajeError = error.response.data;
+        me.errorRol = true;
+        me.arrrayMensajesError.push(me.mensajeError.error);
+      });
+    },
     mostrarSanitari: function mostrarSanitari() {
       this.buttonSanitari = false;
       this.recursSanitari = true;
@@ -2634,9 +2660,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         ruta: 'tipus_recurs',
         nombreTabla: 'tipus_recurs'
       });
+    },
+    mensajeAdd: function mensajeAdd() {
+      alert("Incidencia añadida");
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants']))
 });
 
 /***/ }),
@@ -80832,7 +80861,11 @@ var render = function() {
                 [
                   _c("b-form-datepicker", {
                     staticClass: "form-control",
-                    attrs: { placeholder: "Data" },
+                    attrs: {
+                      "value-as-date": true,
+                      "today-button": true,
+                      placeholder: "Data"
+                    },
                     model: {
                       value: _vm.datosIncidencia.data,
                       callback: function($$v) {
@@ -80877,42 +80910,61 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "col-8" },
-                [
-                  _c("b-form-input", {
-                    attrs: {
-                      list: "list-municipis",
-                      id: "input-with-list",
-                      placeholder: "Municipis"
-                    },
-                    model: {
-                      value: _vm.datosIncidencia.municipis_id,
-                      callback: function($$v) {
+              _c("div", { staticClass: "col-8" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.datosIncidencia.municipis_id,
+                        expression: "datosIncidencia.municipis_id",
+                        modifiers: { number: true }
+                      }
+                    ],
+                    staticClass: "form-control",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return _vm._n(val)
+                          })
                         _vm.$set(
                           _vm.datosIncidencia,
                           "municipis_id",
-                          _vm._n($$v)
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
                         )
-                      },
-                      expression: "datosIncidencia.municipis_id"
+                      }
                     }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "datalist",
-                    { attrs: { id: "list-municipis" } },
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { disabled: "", hidden: "" },
+                        domProps: { value: null }
+                      },
+                      [_vm._v("Alertant")]
+                    ),
+                    _vm._v(" "),
                     _vm._l(_vm.arrayMunicipis, function(municipi) {
-                      return _c("option", { key: municipi.id }, [
-                        _vm._v(_vm._s(municipi.nom))
-                      ])
-                    }),
-                    0
-                  )
-                ],
-                1
-              ),
+                      return _c(
+                        "option",
+                        { key: municipi.id, domProps: { value: municipi.id } },
+                        [_vm._v(_vm._s(municipi.nom))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-12" }, [
                 _c("input", {
@@ -81068,8 +81120,17 @@ var render = function() {
                         domProps: { value: null }
                       },
                       [_vm._v("Alertant")]
-                    )
-                  ]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayAlertants, function(alertant) {
+                      return _c(
+                        "option",
+                        { key: alertant.id, domProps: { value: alertant.id } },
+                        [_vm._v(_vm._s(alertant.nom))]
+                      )
+                    })
+                  ],
+                  2
                 )
               ]),
               _vm._v(" "),
@@ -81344,7 +81405,12 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-success btn-lg mb-5",
-          attrs: { type: "button" }
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.insertIncidencia()
+            }
+          }
         },
         [_vm._v("REGISTRAR")]
       )
@@ -95134,6 +95200,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     arrayMunicipis: [],
     arrayTipusIncidencia: [],
     arrayRecursos: [],
+    arrayAlertants: [],
     afegit: false,
     arrayRecursosPoliciales: [],
     arrayRecursosSanitarios: []
@@ -95167,6 +95234,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     recursos: function recursos(state, datosRecibidos) {
       state.arrayRecursos = datosRecibidos;
+    },
+    alertants: function alertants(state, datosRecibidos) {
+      state.arrayAlertants = datosRecibidos;
     }
   },
   actions: {
