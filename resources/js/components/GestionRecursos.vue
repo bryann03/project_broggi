@@ -205,7 +205,6 @@ import { mapState, mapMutations, mapActions } from "vuex";
                     this.objectRecurso.id_usuario = dataRecurs['id_usuario'];
                     // this.objectRecurso = dataRecurs;
                     break;
-
                 default:
                     break;
             }
