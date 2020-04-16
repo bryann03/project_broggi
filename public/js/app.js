@@ -2206,25 +2206,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      valor: null,
+      objectIncidencia: {
+        id: null,
+        numero_incidencia: "",
+        data: null,
+        hora: null,
+        adreca: "",
+        complement_adreca: "",
+        descripcio: "",
+        municipis_id: null,
+        tipus_indicent_id: null,
+        estats_incidencia_id: null,
+        tipus_alertant_id: null,
+        alertants_id: null
+      },
       arrayIncidencia: [],
       columnasTabla: [{
         key: "num_incidencia",
@@ -2262,13 +2260,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     onRowClicked: function onRowClicked(items) {
-      this.valor = items;
-      this.clearSelected();
+      this.objectIncidencia = items.objectIncidencia; // llamar a la ventana de registro modificada
     },
     onFiltered: function onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
+    },
+    nuevo: function nuevo() {
+      window.location.href = "/project_broggi/public/registroIncidencias";
     }
   },
   computed: {
@@ -80150,7 +80150,7 @@ var render = function() {
         _c(
           "b-form-group",
           {
-            staticClass: "mb-0",
+            staticClass: "mb-3",
             attrs: {
               label: "Filter",
               "label-cols-sm": "3",
@@ -80196,40 +80196,7 @@ var render = function() {
             filter: _vm.filter,
             filterIncludedFields: _vm.filterOn
           },
-          on: { "row-dbclicked": _vm.onRowClicked, filtered: _vm.onFiltered },
-          scopedSlots: _vm._u([
-            {
-              key: "cell(actions)",
-              fn: function(row) {
-                return [
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "mr-1",
-                      attrs: { size: "sm" },
-                      on: {
-                        click: function($event) {
-                          return _vm.info(row.item, row.index, $event.target)
-                        }
-                      }
-                    },
-                    [_vm._v("Info modal")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-button",
-                    { attrs: { size: "sm" }, on: { click: row.toggleDetails } },
-                    [
-                      _vm._v(
-                        _vm._s(row.detailsShowing ? "Hide" : "Show") +
-                          " Details"
-                      )
-                    ]
-                  )
-                ]
-              }
-            }
-          ])
+          on: { "row-dbclicked": _vm.onRowClicked, filtered: _vm.onFiltered }
         }),
         _vm._v(" "),
         _c("b-pagination", {
@@ -80254,7 +80221,7 @@ var render = function() {
             attrs: { type: "button" },
             on: {
               click: function($event) {
-                return _vm.abrirModal("insert")
+                return _vm.nuevo()
               }
             }
           },

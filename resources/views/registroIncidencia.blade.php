@@ -1,9 +1,10 @@
 @extends('templates.main')
 
 @section('titulo')
-    Incidencias
+    Registro Incidencia
 @endsection
 
 @section('principal')
-    <incidencias></incidencias>
+    <registro-incidencia></registro-incidencia
+>
 @endsection

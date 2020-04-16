@@ -15,3 +15,4 @@ Route::get('/incidencias', 'Incidencias@index');
 
 
 Route::get('/registro', 'RegistroController@index');
+Route::get('/registroIncidencias', 'RegistroIncidencias@index');
