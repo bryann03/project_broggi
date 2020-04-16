@@ -7,6 +7,9 @@ use App\Http\Resources\AlertantsResource;
 use App\Models\Alertants;
 use Illuminate\Http\Request;
 
+use App\Utils\Utilidad;
+use Illuminate\Database\QueryException;
+
 class AlertantsController extends Controller
 {
     /**
@@ -60,8 +63,25 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Alertants $alertants)
+    public function destroy($id_alertant)
     {
-        //
+        $alertant = Alertants::find($id_alertant);
+
+        if($alertant != null){
+            try {
+                $alertant->delete();
+                $respuesta = (new AlertantsResource($alertant))
+                ->response()
+                ->setStatusCode(200);
+    
+            } catch (QueryException $e) {
+                $mensaje = Utilidad::errorMessage($e);
+                $respuesta = response()->json(["error"=>$mensaje], 400);
+            }
+        }else{
+            $respuesta = response()->json(["error"=> "Registro no encontrado"], 404);
+        }
+
+        return $respuesta;
     }
 }

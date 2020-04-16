@@ -1924,10 +1924,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      alertants: null,
+      alertants: [],
       alertant: {
         id: null,
         nom: "",
@@ -1947,7 +1961,12 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: 'telefon',
         label: 'Telèfon'
-      }]
+      }, "actions"],
+      editAlertantModal: {
+        id: 'editAlertantModal',
+        title: 'EDITAR ALERTANTE',
+        content: ''
+      }
     };
   },
   created: function created() {
@@ -1961,11 +1980,25 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     showAlertants: function showAlertants() {
       var me = this;
-      axios.get("http://localhost:80/project_broggi/public/api/alertants").then(function (response) {
+      axios.get("/alertants").then(function (response) {
         me.alertants = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
+    },
+    deleteAlertant: function deleteAlertant(item) {
+      var me = this;
+      axios["delete"]("/alertants/" + item.id).then(function (response) {
+        me.showAlertants();
+      })["catch"](function (error) {
+        me.errorRol = true;
+        me.missatge = error.response.data;
+        me.mensajesError.push(me.missatge.error);
+      });
+    },
+    editAlertant: function editAlertant(item) {
+      this.editAlertantModal.content = JSON.stringify(item);
+      this.$bvModal.show('editAlertantModal');
     }
   },
   mounted: function mounted() {
@@ -79881,7 +79914,42 @@ var render = function() {
           fields: _vm.fields,
           "per-page": _vm.perPage,
           "current-page": _vm.currentPage
-        }
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "cell(actions)",
+            fn: function(row) {
+              return [
+                _c(
+                  "b-button",
+                  {
+                    staticClass: "mr-1",
+                    attrs: { size: "sm" },
+                    on: {
+                      click: function($event) {
+                        return _vm.editAlertant(row.item)
+                      }
+                    }
+                  },
+                  [_vm._v("\n                Editar\n            ")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-button",
+                  {
+                    attrs: { size: "sm" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteAlertant(row.item)
+                      }
+                    }
+                  },
+                  [_vm._v("\n                Eliminar\n            ")]
+                )
+              ]
+            }
+          }
+        ])
       }),
       _vm._v(" "),
       _c("b-pagination", {
@@ -79897,7 +79965,18 @@ var render = function() {
           },
           expression: "currentPage"
         }
-      })
+      }),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        {
+          attrs: {
+            id: _vm.editAlertantModal.id,
+            title: _vm.editAlertantModal.title
+          }
+        },
+        [_c("pre", [_vm._v(_vm._s(_vm.editAlertantModal.content))])]
+      )
     ],
     1
   )
