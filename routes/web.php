@@ -35,6 +35,6 @@ Route::group(['middleware' => ['auth']], function () {
     //Recursos
     Route::get('/recursos', 'RecursosController@index')->name('recursos');
     //Alertantes
-    //Route::get('/alertantes', 'AlertantesController@index')->name('alertantes');
+    Route::get('/alertants', 'AlertantController@index');
 
 });

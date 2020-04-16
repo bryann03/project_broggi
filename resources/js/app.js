@@ -33,6 +33,7 @@ Vue.component("registro-incidencia",require("./components/RegistroIncidencia.vue
 Vue.component("gestion-recursos",require("./components/GestionRecursos.vue").default);
 Vue.component("landing", require("./components/LandingPage.vue").default);
 Vue.component("incidencias", require("./components/Incidencias.vue").default);
+Vue.component("alertants", require('./components/AlertantsComponent.vue').default);
 
 Vue.use(BootstrapVue);
 
