@@ -20,7 +20,6 @@ Route::get('/registro', 'RegistroController@index')->name('registro');
 Route::get('/login', 'Auth\LoginController@showLogin')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
-//actions
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::post('/login', 'Auth\LoginController@login');
 
@@ -38,3 +37,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/alertants', 'AlertantController@index');
 
 });
+
+Route::get('/alertants', 'AlertantController@index');
+Route::get('/alertants/create', 'AlertantController@create');

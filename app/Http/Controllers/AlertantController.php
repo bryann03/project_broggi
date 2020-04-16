@@ -25,7 +25,8 @@ class AlertantController extends Controller
      */
     public function create()
     {
-        //
+        $data["title"] = "AFEGIR ALERTANT";
+        return view("alertants.create", $data);
     }
 
     /**
