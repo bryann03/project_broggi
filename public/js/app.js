@@ -2029,6 +2029,59 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2041,15 +2094,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tipus_recurs_id: null,
         id_usuario: null
       },
-      columnasTabla: [{
+      objectTipoRecurso: {
+        id: null,
+        tipus: "",
+        esSanitari: null,
+        esPolicial: null
+      },
+      columnasTablaAsignados: [{
         key: 'codi',
+        sortable: true,
         label: 'Codi'
       }, {
         key: 'tipus_recurs.tipus',
+        sortable: true,
         label: 'Tipus recurs'
       }, {
         key: 'usuaris.nom',
+        sortable: true,
         label: 'Usuari'
+      }, {
+        key: 'manage',
+        label: 'Manage'
+      }],
+      columnasTablaRecursos: [{
+        key: 'tipus',
+        sortable: true,
+        label: 'Nom recurs'
       }, {
         key: 'manage',
         label: 'Manage'
@@ -2059,17 +2129,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _ref;
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _defineProperty(_ref, "headVariant", 'dark'), _defineProperty(_ref, "filter", null), _ref;
   },
   created: function created() {
     this.getApi({
       ruta: 'tipus_alertant',
       nombreTabla: 'tipus_alertant'
     });
-    this.getApi({
-      ruta: 'tipus_recurs',
-      nombreTabla: 'tipus_recurs'
-    });
+    this.getTipusRecursos();
     this.getApi({
       ruta: 'usuaris',
       nombreTabla: 'usuaris'
@@ -2082,6 +2149,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       switch (accionApi) {
         case 'insert':
+          this.modal = 1;
+          this.tituloModal = "Asignar recurs";
+          this.accionApi = accionApi;
+          break;
+
+        case 'insertTipusRecurs':
           this.modal = 1;
           this.tituloModal = "Insertar recurs";
           this.accionApi = accionApi;
@@ -2114,6 +2187,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.objectRecurso.codi = "";
       this.objectRecurso.tipus_recurs_id = null;
       this.objectRecurso.id_usuario = null;
+      this.objectTipoRecurso.id = null;
+      this.objectTipoRecurso.tipus = "";
+      this.objectTipoRecurso.esSanitari = null;
+      this.objectTipoRecurso.esPolicial = null;
     },
     insertRecurs: function insertRecurs() {
       var me = this;
@@ -2130,17 +2207,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         me.arrrayMensajesError.push(me.mensajeError.error);
       });
     },
+    insertTipusRecurs: function insertTipusRecurs() {
+      var me = this;
+      axios.post("/tipus_recurs", this.objectTipoRecurso).then(function (response) {
+        me.cerrarModal();
+        me.getTipusRecursos();
+      })["catch"](function (error) {
+        console.log(error);
+        me.mensajeError = error.response.data;
+        me.errorRol = true;
+        me.arrrayMensajesError.push(me.mensajeError.error);
+      });
+    },
     deleteRecurs: function deleteRecurs(idRecurs) {
       var me = this;
       axios["delete"]("/recursos/" + idRecurs).then(function (response) {
         console.log("BORRADO");
-        var index = me.arrayRecursos.findIndex(function (recurso) {
-          return recurso.id === idRecurs;
-        });
-
-        if (~index) {
-          me.arrayRecursos.splice(index, 1);
-        }
+        me.getRecursos();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2183,11 +2266,38 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         ruta: 'recursos',
         nombreTabla: 'recursos'
       });
+    },
+    getTipusRecursos: function getTipusRecursos() {
+      this.getApi({
+        ruta: 'tipus_recurs',
+        nombreTabla: 'tipus_recurs'
+      });
+    },
+    deleteTipusRecurs: function deleteTipusRecurs(idTipusRecurs) {
+      var me = this;
+      console.log(idTipusRecurs);
+      axios["delete"]("/tipus_recurs/" + idTipusRecurs).then(function (response) {
+        console.log("BORRADO");
+        me.getTipusRecursos();
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    mostrarAsignados: function mostrarAsignados() {
+      this.sectionRecursos = false;
+      this.sectionAsignados = true;
+    },
+    mostrarRecursos: function mostrarRecursos() {
+      this.sectionAsignados = false;
+      this.sectionRecursos = true;
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']), {
-    rows: function rows() {
+    rowsAsignados: function rowsAsignados() {
       return this.arrayRecursos.length;
+    },
+    rowsRecursos: function rowsRecursos() {
+      return this.arrayTipusRecurs.length;
     }
   })
 });
@@ -2577,26 +2687,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2635,6 +2725,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ruta: 'tipus_incident',
       nombreTabla: 'tipus_incident'
     });
+    this.getTipusRecursos();
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
     mostrarSanitari: function mostrarSanitari() {
@@ -2645,9 +2736,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     mostrarPolicial: function mostrarPolicial() {
       this.buttonPolicial = false;
       this.recursPolicial = true;
+    },
+    getTipusRecursos: function getTipusRecursos() {
+      this.getApi({
+        ruta: 'tipus_recurs',
+        nombreTabla: 'tipus_recurs'
+      });
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs']))
 });
 
 /***/ }),
@@ -47039,7 +47136,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "section[data-v-20569590] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n  height: 100vh;\n}\n.modal-content[data-v-20569590] {\n  width: 100% !important;\n  position: absolute !important;\n  top: 200px !important;\n}\n.mostrar[data-v-20569590] {\n  display: list-item !important;\n  opacity: 1 !important;\n  position: absolute !important;\n  background-color: black !important;\n}\nform div[data-v-20569590] {\n  margin-bottom: 2rem;\n}", ""]);
+exports.push([module.i, "section[data-v-20569590] {\n  padding-top: 20px;\n  padding-bottom: 20px;\n}\n.modal-content[data-v-20569590] {\n  width: 100% !important;\n  position: absolute !important;\n  top: 200px !important;\n}\n.mostrar[data-v-20569590] {\n  display: list-item !important;\n  opacity: 1 !important;\n  position: absolute !important;\n  background-color: black !important;\n}\nform div[data-v-20569590] {\n  margin-bottom: 2rem;\n}", ""]);
 
 // exports
 
@@ -79692,22 +79789,137 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
+    _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
+      _vm._v("Gestió de recursos")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-dark btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.mostrarRecursos()
+              }
+            }
+          },
+          [_vm._v("RECURSOS")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-dark btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.mostrarAsignados()
+              }
+            }
+          },
+          [_vm._v("RECURSOS ASIGNATS")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
     _c(
       "section",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.sectionAsignados,
+            expression: "sectionAsignados"
+          }
+        ]
+      },
       [
-        _c("h1", { staticClass: "text-center mb-5" }, [
-          _vm._v("Gestió de recursos")
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c(
+                "b-form-group",
+                {
+                  staticClass: "mb-0",
+                  attrs: {
+                    label: "Filter",
+                    "label-cols-sm": "3",
+                    "label-align-sm": "right",
+                    "label-size": "sm",
+                    "label-for": "filterInput"
+                  }
+                },
+                [
+                  _c(
+                    "b-input-group",
+                    { attrs: { size: "sm" } },
+                    [
+                      _c("b-form-input", {
+                        attrs: {
+                          type: "search",
+                          id: "filterInput",
+                          placeholder: "Type to Search"
+                        },
+                        model: {
+                          value: _vm.filter,
+                          callback: function($$v) {
+                            _vm.filter = $$v
+                          },
+                          expression: "filter"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-input-group-append",
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: { disabled: !_vm.filter },
+                              on: {
+                                click: function($event) {
+                                  _vm.filter = ""
+                                }
+                              }
+                            },
+                            [_vm._v("Clear")]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
         ]),
         _vm._v(" "),
         _c("b-table", {
           ref: "table",
           attrs: {
+            filter: _vm.filter,
             "current-page": _vm.currentPage,
             id: "tablaRecursos",
             "per-page": _vm.perPage,
+            "head-variant": _vm.headVariant,
             hover: "",
+            striped: "",
+            fixed: "",
+            outlined: "",
             items: _vm.arrayRecursos,
-            fields: _vm.columnasTabla
+            fields: _vm.columnasTablaAsignados
           },
           scopedSlots: _vm._u([
             {
@@ -79725,28 +79937,21 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Editar")]
+                    [_vm._v("EDITAR")]
                   ),
                   _vm._v(" "),
                   _c(
                     "button",
                     {
-                      directives: [
-                        {
-                          name: "b-modal",
-                          rawName: "v-b-modal.modal-esborrar",
-                          modifiers: { "modal-esborrar": true }
-                        }
-                      ],
                       staticClass: "btn btn-danger",
                       attrs: { type: "button" },
                       on: {
                         click: function($event) {
-                          return _vm.sendRecurs(data.item)
+                          return _vm.deleteRecurs(data.item.id)
                         }
                       }
                     },
-                    [_vm._v("Esborrar")]
+                    [_vm._v("ESBORRAR")]
                   )
                 ]
               }
@@ -79816,7 +80021,7 @@ var render = function() {
         _c("b-pagination", {
           attrs: {
             "per-page": _vm.perPage,
-            "total-rows": _vm.rows,
+            "total-rows": _vm.rowsAsignados,
             "aria-controls": "tablaRecursos"
           },
           model: {
@@ -79839,7 +80044,89 @@ var render = function() {
               }
             }
           },
-          [_vm._v("Afegir recurs")]
+          [_vm._v("ASIGNAR RECURS")]
+        )
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "section",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.sectionRecursos,
+            expression: "sectionRecursos"
+          }
+        ]
+      },
+      [
+        _c("b-table", {
+          ref: "table2",
+          attrs: {
+            "current-page": _vm.currentPageRecursos,
+            id: "tablaTipoRecursos",
+            "per-page": _vm.perPage,
+            "head-variant": _vm.headVariant,
+            hover: "",
+            striped: "",
+            outlined: "",
+            items: _vm.arrayTipusRecurs,
+            fields: _vm.columnasTablaRecursos
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "cell(manage)",
+              fn: function(data) {
+                return [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteTipusRecurs(data.item.id)
+                        }
+                      }
+                    },
+                    [_vm._v("ESBORRAR")]
+                  )
+                ]
+              }
+            }
+          ])
+        }),
+        _vm._v(" "),
+        _c("b-pagination", {
+          attrs: {
+            "per-page": _vm.perPage,
+            "total-rows": _vm.rowsRecursos,
+            "aria-controls": "tablaTipoRecursos"
+          },
+          model: {
+            value: _vm.currentPageRecursos,
+            callback: function($$v) {
+              _vm.currentPageRecursos = $$v
+            },
+            expression: "currentPageRecursos"
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                return _vm.abrirModal("insertTipusRecurs")
+              }
+            }
+          },
+          [_vm._v("AFEGIR RECURS")]
         )
       ],
       1
@@ -79887,42 +80174,226 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "form",
-                  {
-                    attrs: {
-                      action: "",
-                      method: "post",
-                      enctype: "multipart/form-data"
-                    }
-                  },
-                  [
-                    _c("div", { staticClass: "form-group row" }, [
+                _vm.accionApi === "insert"
+                  ? _c(
+                      "form",
+                      {
+                        attrs: {
+                          action: "",
+                          method: "post",
+                          enctype: "multipart/form-data"
+                        }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c("div", { staticClass: "col-12" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.objectRecurso.codi,
+                                  expression: "objectRecurso.codi"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Codi recurs"
+                              },
+                              domProps: { value: _vm.objectRecurso.codi },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.objectRecurso,
+                                    "codi",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model.number",
+                                    value: _vm.objectRecurso.tipus_recurs_id,
+                                    expression: "objectRecurso.tipus_recurs_id",
+                                    modifiers: { number: true }
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return _vm._n(val)
+                                      })
+                                    _vm.$set(
+                                      _vm.objectRecurso,
+                                      "tipus_recurs_id",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: { disabled: "", hidden: "" },
+                                    domProps: { value: null }
+                                  },
+                                  [_vm._v("Tipus recurs")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.arrayTipusRecurs, function(tipus) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: tipus.id,
+                                      domProps: { value: tipus.id }
+                                    },
+                                    [_vm._v(_vm._s(tipus.tipus))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-12" }, [
+                            _c(
+                              "select",
+                              {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model.number",
+                                    value: _vm.objectRecurso.id_usuario,
+                                    expression: "objectRecurso.id_usuario",
+                                    modifiers: { number: true }
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                on: {
+                                  change: function($event) {
+                                    var $$selectedVal = Array.prototype.filter
+                                      .call($event.target.options, function(o) {
+                                        return o.selected
+                                      })
+                                      .map(function(o) {
+                                        var val =
+                                          "_value" in o ? o._value : o.value
+                                        return _vm._n(val)
+                                      })
+                                    _vm.$set(
+                                      _vm.objectRecurso,
+                                      "id_usuario",
+                                      $event.target.multiple
+                                        ? $$selectedVal
+                                        : $$selectedVal[0]
+                                    )
+                                  }
+                                }
+                              },
+                              [
+                                _c(
+                                  "option",
+                                  {
+                                    attrs: { disabled: "", hidden: "" },
+                                    domProps: { value: null }
+                                  },
+                                  [_vm._v("Usuari")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.arrayUsuaris, function(usuari) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: usuari.id,
+                                      domProps: { value: usuari.id }
+                                    },
+                                    [_vm._v(_vm._s(usuari.nom))]
+                                  )
+                                })
+                              ],
+                              2
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.errorRol,
+                                expression: "errorRol"
+                              }
+                            ],
+                            staticClass: "form-group row"
+                          },
+                          [
+                            _c(
+                              "div",
+                              { staticClass: "offset-3 col-md-9" },
+                              _vm._l(_vm.arrrayMensajesError, function(error) {
+                                return _c(
+                                  "p",
+                                  { key: error, staticClass: "text-danger" },
+                                  [_vm._v(_vm._s(error))]
+                                )
+                              }),
+                              0
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  : _vm.accionApi === "insertTipusRecurs"
+                  ? _c("form", { attrs: { action: "", method: "post" } }, [
                       _c("div", { staticClass: "col-12" }, [
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.objectRecurso.codi,
-                              expression: "objectRecurso.codi"
+                              value: _vm.objectTipoRecurso.tipus,
+                              expression: "objectTipoRecurso.tipus"
                             }
                           ],
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            name: "rol",
-                            placeholder: "Codi recurs"
+                            placeholder: "Nom del recurs"
                           },
-                          domProps: { value: _vm.objectRecurso.codi },
+                          domProps: { value: _vm.objectTipoRecurso.tipus },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
                               _vm.$set(
-                                _vm.objectRecurso,
-                                "codi",
+                                _vm.objectTipoRecurso,
+                                "tipus",
                                 $event.target.value
                               )
                             }
@@ -79930,155 +80401,86 @@ var render = function() {
                         })
                       ]),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-12" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model.number",
-                                value: _vm.objectRecurso.tipus_recurs_id,
-                                expression: "objectRecurso.tipus_recurs_id",
-                                modifiers: { number: true }
-                              }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return _vm._n(val)
-                                  })
-                                _vm.$set(
-                                  _vm.objectRecurso,
-                                  "tipus_recurs_id",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { disabled: "", hidden: "" },
-                                domProps: { value: null }
-                              },
-                              [_vm._v("Tipus recurs")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.arrayTipusRecurs, function(tipus) {
-                              return _c(
-                                "option",
-                                {
-                                  key: tipus.id,
-                                  domProps: { value: tipus.id }
+                      _c(
+                        "div",
+                        { staticClass: "col-6" },
+                        [
+                          _c(
+                            "b-form-checkbox",
+                            {
+                              model: {
+                                value: _vm.objectTipoRecurso.esSanitari,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.objectTipoRecurso,
+                                    "esSanitari",
+                                    $$v
+                                  )
                                 },
-                                [_vm._v(_vm._s(tipus.tipus))]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-12" }, [
-                        _c(
-                          "select",
-                          {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model.number",
-                                value: _vm.objectRecurso.id_usuario,
-                                expression: "objectRecurso.id_usuario",
-                                modifiers: { number: true }
+                                expression: "objectTipoRecurso.esSanitari"
                               }
-                            ],
-                            staticClass: "form-control",
-                            on: {
-                              change: function($event) {
-                                var $$selectedVal = Array.prototype.filter
-                                  .call($event.target.options, function(o) {
-                                    return o.selected
-                                  })
-                                  .map(function(o) {
-                                    var val = "_value" in o ? o._value : o.value
-                                    return _vm._n(val)
-                                  })
-                                _vm.$set(
-                                  _vm.objectRecurso,
-                                  "id_usuario",
-                                  $event.target.multiple
-                                    ? $$selectedVal
-                                    : $$selectedVal[0]
-                                )
-                              }
-                            }
-                          },
-                          [
-                            _c(
-                              "option",
-                              {
-                                attrs: { disabled: "", hidden: "" },
-                                domProps: { value: null }
-                              },
-                              [_vm._v("Usuari")]
-                            ),
-                            _vm._v(" "),
-                            _vm._l(_vm.arrayUsuaris, function(usuari) {
-                              return _c(
-                                "option",
-                                {
-                                  key: usuari.id,
-                                  domProps: { value: usuari.id }
-                                },
-                                [_vm._v(_vm._s(usuari.nom))]
-                              )
-                            })
-                          ],
-                          2
-                        )
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: _vm.errorRol,
-                            expression: "errorRol"
-                          }
+                            },
+                            [_vm._v("Sanitari")]
+                          )
                         ],
-                        staticClass: "form-group row"
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "offset-3 col-md-9" },
-                          _vm._l(_vm.arrrayMensajesError, function(error) {
-                            return _c(
-                              "p",
-                              { key: error, staticClass: "text-danger" },
-                              [_vm._v(_vm._s(error))]
-                            )
-                          }),
-                          0
-                        )
-                      ]
-                    )
-                  ]
-                )
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-6" },
+                        [
+                          _c(
+                            "b-form-checkbox",
+                            {
+                              model: {
+                                value: _vm.objectTipoRecurso.esPolicial,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.objectTipoRecurso,
+                                    "esPolicial",
+                                    $$v
+                                  )
+                                },
+                                expression: "objectTipoRecurso.esPolicial"
+                              }
+                            },
+                            [_vm._v("Policial")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.errorRol,
+                              expression: "errorRol"
+                            }
+                          ],
+                          staticClass: "form-group row"
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "offset-3 col-md-9" },
+                            _vm._l(_vm.arrrayMensajesError, function(error) {
+                              return _c(
+                                "p",
+                                { key: error, staticClass: "text-danger" },
+                                [_vm._v(_vm._s(error))]
+                              )
+                            }),
+                            0
+                          )
+                        ]
+                      )
+                    ])
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-footer" }, [
@@ -80105,6 +80507,20 @@ var render = function() {
                         on: {
                           click: function($event) {
                             return _vm.insertRecurs()
+                          }
+                        }
+                      },
+                      [_vm._v("Asignar")]
+                    )
+                  : _vm.accionApi === "insertTipusRecurs"
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            return _vm.insertTipusRecurs()
                           }
                         }
                       },
@@ -81109,15 +81525,35 @@ var render = function() {
                   }
                 ]
               },
-              [
-                _vm._m(0),
-                _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _vm._m(3)
-              ]
+              _vm._l(_vm.arrayTipusRecurs, function(tipus) {
+                return _c(
+                  "div",
+                  {
+                    key: tipus.id,
+                    staticClass: "custom-control custom-checkbox m-3"
+                  },
+                  [
+                    tipus.esSanitari === 1
+                      ? _c("div", [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: { type: "checkbox", id: tipus.id }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: tipus.id }
+                            },
+                            [_vm._v(_vm._s(tipus.tipus))]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
+              }),
+              0
             )
           ]),
           _vm._v(" "),
@@ -81158,15 +81594,35 @@ var render = function() {
                   }
                 ]
               },
-              [
-                _vm._m(4),
-                _vm._v(" "),
-                _vm._m(5),
-                _vm._v(" "),
-                _vm._m(6),
-                _vm._v(" "),
-                _vm._m(7)
-              ]
+              _vm._l(_vm.arrayTipusRecurs, function(tipus) {
+                return _c(
+                  "div",
+                  {
+                    key: tipus.id,
+                    staticClass: "custom-control custom-checkbox m-3"
+                  },
+                  [
+                    tipus.esPolicial === 1
+                      ? _c("div", [
+                          _c("input", {
+                            staticClass: "custom-control-input",
+                            attrs: { type: "checkbox", id: tipus.id }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "label",
+                            {
+                              staticClass: "custom-control-label",
+                              attrs: { for: tipus.id }
+                            },
+                            [_vm._v(_vm._s(tipus.tipus))]
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
+              }),
+              0
             )
           ])
         ])
@@ -81183,168 +81639,7 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck1" }
-        },
-        [_vm._v("Amb. Medicalitzada-Mike")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck2" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck2" }
-        },
-        [_vm._v("Amb. Sanitaritzada-India")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck1" }
-        },
-        [_vm._v("Amb. Assitencial-Tango")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck1" }
-        },
-        [_vm._v("Helicopter medicalitzat")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck1" }
-        },
-        [_vm._v("Default checkbox")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck2" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck2" }
-        },
-        [_vm._v("Default checkbox")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck1" }
-        },
-        [_vm._v("Default checkbox")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "custom-control custom-checkbox m-3" }, [
-      _c("input", {
-        staticClass: "custom-control-input",
-        attrs: { type: "checkbox", value: "", id: "defaultCheck1" }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        {
-          staticClass: "custom-control-label",
-          attrs: { for: "defaultCheck1" }
-        },
-        [_vm._v("Default checkbox")]
-      )
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
