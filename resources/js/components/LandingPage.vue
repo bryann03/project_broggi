@@ -64,7 +64,6 @@
 
 <script>
 export default {
-<<<<<<< HEAD
     data() {
         return {
             src:
@@ -82,22 +81,13 @@ export default {
             window.location.href = "/project_broggi/public/alertates";
         },
     },
-=======
-  data() {
-    return {};
-  }
->>>>>>> pau
 };
 </script>
 
 <style lang="scss" scoped>
 section {
-<<<<<<< HEAD
     padding-top: 100px;
     padding-bottom: 100px;
-=======
-  padding-top: 100px;
-  padding-bottom: 100px;
->>>>>>> pau
+
 }
 </style>
