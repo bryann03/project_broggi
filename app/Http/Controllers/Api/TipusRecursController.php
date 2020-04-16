@@ -31,7 +31,6 @@ class TipusRecursController extends Controller
         $tipusRecurs = new TipusRecurs();
 
         $tipusRecurs->tipus = $request->input('tipus');
-        $tipusRecurs->esSanitari = $request->input('esSanitari');
         $tipusRecurs->esPolicial = $request->input('esPolicial');
 
         try

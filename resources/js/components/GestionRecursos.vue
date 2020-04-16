@@ -53,15 +53,15 @@
             <div class="row">
                 <div class="col-12">
                     <b-input-group class="mb-3">
-                        <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+                        <b-form-input v-model="filterRecursos" type="search" id="filterInput2" placeholder="Type to Search"></b-form-input>
                         <b-input-group-append>
-                            <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                            <b-button :disabled="!filterRecursos" @click="filterRecursos = ''">Clear</b-button>
                         </b-input-group-append>
                     </b-input-group>
                 </div>
             </div>
 
-            <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" :head-variant="headVariant" hover striped outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
+            <b-table ref="table2" :filter="filterRecursos"  :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" :head-variant="headVariant" hover striped outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">ESBORRAR</button>
                 </template>
@@ -114,7 +114,7 @@
                                 <input class="form-control" type="text" v-model="objectTipoRecurso.tipus" placeholder="Nom del recurs" />
                             </div>
                             <div class="col-6">
-                                <b-form-checkbox v-model="objectTipoRecurso.esSanitari">Sanitari</b-form-checkbox>
+                                <b-form-checkbox>Sanitari</b-form-checkbox>
                             </div>
                             <div class="col-6">
                                 <b-form-checkbox v-model="objectTipoRecurso.esPolicial">Policial</b-form-checkbox>
@@ -154,7 +154,6 @@ import { mapState, mapMutations, mapActions } from "vuex";
         objectTipoRecurso:{
             id: null,
             tipus: "",
-            esSanitari: null,
             esPolicial: null
         },
         columnasTablaAsignados:[{key: 'codi', sortable: true, label: 'Codi'}, {key: 'tipus_recurs.tipus', sortable: true, label: 'Tipus recurs'},
@@ -173,6 +172,7 @@ import { mapState, mapMutations, mapActions } from "vuex";
         sectionRecursos: true,
         headVariant: 'dark',
         filter: null,
+        filterRecursos: null
       }
     },
     created() {
@@ -225,7 +225,6 @@ import { mapState, mapMutations, mapActions } from "vuex";
 
             this.objectTipoRecurso.id = null;
             this.objectTipoRecurso.tipus = "";
-            this.objectTipoRecurso.esSanitari = null;
             this.objectTipoRecurso.esPolicial = null;
         },
         insertRecurs(){

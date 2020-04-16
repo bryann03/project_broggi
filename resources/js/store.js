@@ -13,7 +13,9 @@ export default new Vuex.Store({
         arrayMunicipis: [],
         arrayTipusIncidencia: [],
         arrayRecursos: [],
-        afegit: false
+        afegit: false,
+        arrayRecursosPoliciales: [],
+        arrayRecursosSanitarios: []
     },
     mutations: {
         tipus_alertant(state, datosRecibidos){
@@ -21,6 +23,17 @@ export default new Vuex.Store({
         },
         tipus_recurs(state, datosRecibidos){
             state.arrayTipusRecurs = datosRecibidos;
+            console.log("array ->", state.arrayTipusRecurs);
+            console.log("datos ->", datosRecibidos);
+            let me = state;
+            for (let i = 0; i < datosRecibidos.length; i++) {
+                if(datosRecibidos[i].esPolicial === 1){
+                    me.arrayRecursosPoliciales.push(datosRecibidos[i]);
+                }
+                else{
+                    me.arrayRecursosSanitarios.push(datosRecibidos[i]);
+                }
+            }
         },
         municipis(state, datosRecibidos){
             state.arrayMunicipis = datosRecibidos;

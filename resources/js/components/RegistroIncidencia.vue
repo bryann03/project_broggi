@@ -62,11 +62,9 @@
                 <button v-show="buttonSanitari" type="button" class="btn btn-danger btn-lg p-4"
                      @click="mostrarSanitari()">SANITARI</button>
                 <div v-show="recursSanitari">
-                    <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayTipusRecurs" :key="tipus.id" >
-                        <div v-if="tipus.esSanitari === 1">
-                            <input class="custom-control-input" type="checkbox" :id="tipus.id">
-                            <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
-                        </div>
+                    <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosSanitarios" :key="tipus.id" >
+                        <input class="custom-control-input" type="checkbox" :id="tipus.id">
+                        <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
             </div>
@@ -75,11 +73,9 @@
                 <button v-show="buttonPolicial" type="button" class="btn btn-primary btn-lg p-4"
                      @click="mostrarPolicial()">POLICIAL</button>
                 <div v-show="recursPolicial">
-                    <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayTipusRecurs" :key="tipus.id" >
-                        <div v-if="tipus.esPolicial === 1">
-                            <input class="custom-control-input" type="checkbox" :id="tipus.id">
-                            <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
-                        </div>
+                    <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosPoliciales" :key="tipus.id" >
+                        <input class="custom-control-input" type="checkbox" :id="tipus.id">
+                        <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
             </div>
@@ -121,6 +117,7 @@ export default {
         this.getApi({ruta: 'tipus_alertant', nombreTabla: 'tipus_alertant'});
         this.getApi({ruta: 'tipus_incident', nombreTabla: 'tipus_incident'});
         this.getTipusRecursos();
+        console.log("created");
     },
     methods: {
         ...mapActions(['getApi']),
@@ -138,7 +135,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs'])
+        ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios'])
     },
 }
 </script>
