@@ -41,6 +41,7 @@ Vue.component(
     require("./components/GestionRecursos.vue").default
 );
 Vue.component("incidencias", require("./components/Incidencias.vue").default);
+Vue.component("alertants", require('./components/AlertantsComponent.vue').default);
 
 Vue.use(BootstrapVue);
 

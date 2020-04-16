@@ -16,3 +16,4 @@ Route::get('/incidencias', 'Incidencias@index');
 
 
 Route::get('/registro', 'RegistroController@index');
+Route::get('/alertants', 'AlertantController@index');
