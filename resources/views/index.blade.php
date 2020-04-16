@@ -1,10 +1,15 @@
 @extends('templates.main')
 
 @section('titulo')
-    Incidencias
+Hello there
 @endsection
 
 @section('principal')
-    <login></login>
-    <button type="button" class="btn btn-primary" onclick="window.location='{{ url('/registro') }}'">REGISTRO</button>
+<!--<registro-incidencia></registro-incidencia>
+{{-- <gestion-recursos></gestion-recursos> --}}
+<landing></landing>
+-->
+<h1>HELLO</h1>
+
+<p>aqui explicaremos un poquito de que va el proyecto </p>
 @endsection

@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\AlertantsResource;
 use App\Models\Alertants;
 use Illuminate\Http\Request;
 
-use App\Utils\Utilidad;
-use Illuminate\Database\QueryException;
-
-class AlertantsController extends Controller
+class AlertantController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +14,18 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        $alertants = Alertants::all();
-        return AlertantsResource::collection($alertants);
+        $data["title"] = "ALERTANTS";
+        return view("alertants.index", $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -46,6 +51,17 @@ class AlertantsController extends Controller
     }
 
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Alertants  $alertants
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Alertants $alertants)
+    {
+        //
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -63,25 +79,8 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id_alertant)
+    public function destroy(Alertants $alertants)
     {
-        $alertant = Alertants::find($id_alertant);
-
-        if($alertant != null){
-            try {
-                $alertant->delete();
-                $respuesta = (new AlertantsResource($alertant))
-                ->response()
-                ->setStatusCode(200);
-    
-            } catch (QueryException $e) {
-                $mensaje = Utilidad::errorMessage($e);
-                $respuesta = response()->json(["error"=>$mensaje], 400);
-            }
-        }else{
-            $respuesta = response()->json(["error"=> "Registro no encontrado"], 404);
-        }
-
-        return $respuesta;
+        //
     }
 }

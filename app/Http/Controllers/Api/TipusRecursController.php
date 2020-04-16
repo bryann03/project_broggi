@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TipusRecursResource;
 use App\Models\TipusRecurs;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class TipusRecursController extends Controller
      */
     public function index()
     {
-        //
+        $tipusRecurs = TipusRecurs::all();
+        return TipusRecursResource::collection($tipusRecurs);
     }
 
     /**
@@ -26,7 +28,25 @@ class TipusRecursController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipusRecurs = new TipusRecurs();
+
+        $tipusRecurs->tipus = $request->input('tipus');
+        $tipusRecurs->esPolicial = $request->input('esPolicial');
+
+        try
+        {
+            $tipusRecurs->save();
+            $respuesta = (new TipusRecursResource($tipusRecurs))
+                        ->response()
+                        ->setStatusCode(201);
+        }
+        catch (QueryException $e)
+        {
+            $mensaje = Utilitat::errorMessage($e);
+            $respuesta = response()
+                        ->json(['error' => $mensaje], 400);
+        }
+        return $respuesta;
     }
 
     /**
@@ -58,8 +78,30 @@ class TipusRecursController extends Controller
      * @param  \App\Models\TipusRecurs  $tipusRecurs
      * @return \Illuminate\Http\Response
      */
-    public function destroy(TipusRecurs $tipusRecurs)
+    public function destroy($idTipusRecurs)
     {
-        //
+        $tipusRecurs = TipusRecurs::find($idTipusRecurs);
+        if($tipusRecurs == null)
+        {
+            $respuesta = response()
+                        ->json(['error'=>"¡ELEMENTO NO ENCONTRADO!"], 404);
+        }
+        else
+        {
+            try
+            {
+                $tipusRecurs->delete();
+                $respuesta = (new TipusRecursResource($tipusRecurs))
+                            ->response()
+                            ->setStatusCode(200);
+            }
+            catch(QueryException $e)
+            {
+                $mensaje = Utilitat::errorMessage($e);
+                $respuesta = response()
+                            ->json(['error'=>$mensaje], 400);
+            }
+        }
+        return $respuesta;
     }
 }

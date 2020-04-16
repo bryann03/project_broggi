@@ -22,6 +22,11 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = '/project_broggi/public/api/';
+
+//NOMBRE DE CARPETA LA QUE TENGAN EN LOCAL
+window.axios.defaults.baseURL = '/project_broggi/public/api';
+
 
 //NOMBRE DE CARPETA LA QUE TENGAN EN LOCAL
 window.axios.defaults.baseURL = '/project_broggi/public/api';
