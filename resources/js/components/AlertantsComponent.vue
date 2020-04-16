@@ -27,17 +27,17 @@
             <!--<pre>{{ editAlertantModal.content }}</pre>-->
             <div class="form-group">
                 <label for="exampleFormControlInput1">Nom:</label>
-                <b-form-input name="nom" class="form-control" placeholder="Nom" :value="editAlertantModal.info.name" v-model="editAlertantModal.info.name"></b-form-input>
+                <b-form-input id="nom" name="nom" class="form-control" placeholder="Nom" :value="editAlertantModal.info.name" v-model="editAlertantModal.info.name"></b-form-input>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">Adreça:</label>
-                <b-form-input name="adreca" class="form-control" placeholder="Adreça" :value="editAlertantModal.info.adress" v-model="editAlertantModal.info.adress"></b-form-input>
+                <b-form-input id="adreca" name="adreca" class="form-control" placeholder="Adreça" :value="editAlertantModal.info.adress" v-model="editAlertantModal.info.adress"></b-form-input>
             </div>
 
             <div class="form-group">
                 <label for="exampleFormControlInput1">Telefon:</label>
-                <b-form-input name="telefon" class="form-control" placeholder="Telefon" :value="editAlertantModal.info.tel" v-model="editAlertantModal.info.tel"></b-form-input>
+                <b-form-input  id="telefon" name="telefon" class="form-control" placeholder="Telefon" :value="editAlertantModal.info.tel" v-model="editAlertantModal.info.tel"></b-form-input>
             </div>
         </b-modal>
     </main>
@@ -128,9 +128,8 @@
 
             saveAlertant(){
                 let me = this;
-                console.log(me.currentAlertant.id);
-
-                axios.put("/alertants" , me.currentAlertant.id).then(function (response) {
+                
+                axios.put("/alertants/" + me.currentAlertant.id, me.editAlertantModal.info).then(function (response) {
                     me.showAlertants();
                 })
                 .catch (function (error) {

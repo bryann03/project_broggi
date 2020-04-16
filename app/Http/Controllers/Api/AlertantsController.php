@@ -77,9 +77,9 @@ class AlertantsController extends Controller
     {
         $alertants = Alertants::find($id_alertant);
 
-        $alertants->nom =  $request->input("nom");
-        $alertants->adreca =  $request->input("adreca");
-        $alertants->telefon =  $request->input("telefon");
+        $alertants->nom =  $request->input("name");
+        $alertants->adreca =  $request->input("adress");
+        $alertants->telefon =  $request->input("tel");
 
         try {
             $alertants->save();
