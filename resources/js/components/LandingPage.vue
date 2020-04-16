@@ -78,7 +78,7 @@ export default {
             window.location.href = "/project_broggi/public/recursos";
         },
         openAlertantes() {
-            window.location.href = "/project_broggi/public/alertates";
+            window.location.href = "/project_broggi/public/alertants";
         },
     },
 };
