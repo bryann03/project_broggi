@@ -2191,6 +2191,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2213,7 +2243,9 @@ __webpack_require__.r(__webpack_exports__);
         label: "Tipus Incident"
       }],
       perPage: 5,
-      currentPage: 1
+      currentPage: 1,
+      filter: null,
+      filterOn: []
     };
   },
   mounted: function mounted() {
@@ -2229,9 +2261,14 @@ __webpack_require__.r(__webpack_exports__);
         return console.log(e);
       });
     },
-    onRowSelected: function onRowSelected(items) {
+    onRowClicked: function onRowClicked(items) {
       this.valor = items;
-      clearSelected();
+      this.clearSelected();
+    },
+    onFiltered: function onFiltered(filteredItems) {
+      // Trigger pagination to update the number of buttons/pages due to filtering
+      this.totalRows = filteredItems.length;
+      this.currentPage = 1;
     }
   },
   computed: {
@@ -80110,18 +80147,89 @@ var render = function() {
           _vm._v("Gestió de incidencies")
         ]),
         _vm._v(" "),
+        _c(
+          "b-form-group",
+          {
+            staticClass: "mb-0",
+            attrs: {
+              label: "Filter",
+              "label-cols-sm": "3",
+              "label-align-sm": "right",
+              "label-size": "sm",
+              "label-for": "filterInput"
+            }
+          },
+          [
+            _c(
+              "b-input-group",
+              { attrs: { size: "sm" } },
+              [
+                _c("b-form-input", {
+                  attrs: {
+                    type: "search",
+                    id: "filterInput",
+                    placeholder: "Type to Search"
+                  },
+                  model: {
+                    value: _vm.filter,
+                    callback: function($$v) {
+                      _vm.filter = $$v
+                    },
+                    expression: "filter"
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
         _c("b-table", {
           ref: "table",
           attrs: {
             "current-page": _vm.currentPage,
             id: "tablaIncidencies",
             "per-page": _vm.perPage,
-            hover: "",
-            selectable: "",
             items: _vm.arrayIncidencia,
-            fields: _vm.columnasTabla
+            fields: _vm.columnasTabla,
+            filter: _vm.filter,
+            filterIncludedFields: _vm.filterOn
           },
-          on: { "row-clicked": _vm.onRowSelected }
+          on: { "row-dbclicked": _vm.onRowClicked, filtered: _vm.onFiltered },
+          scopedSlots: _vm._u([
+            {
+              key: "cell(actions)",
+              fn: function(row) {
+                return [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "mr-1",
+                      attrs: { size: "sm" },
+                      on: {
+                        click: function($event) {
+                          return _vm.info(row.item, row.index, $event.target)
+                        }
+                      }
+                    },
+                    [_vm._v("Info modal")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-button",
+                    { attrs: { size: "sm" }, on: { click: row.toggleDetails } },
+                    [
+                      _vm._v(
+                        _vm._s(row.detailsShowing ? "Hide" : "Show") +
+                          " Details"
+                      )
+                    ]
+                  )
+                ]
+              }
+            }
+          ])
         }),
         _vm._v(" "),
         _c("b-pagination", {
