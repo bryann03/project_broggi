@@ -31,7 +31,28 @@ class AlertantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alertant = new Alertants();
+
+        $alertant->nom = $request->input("nom");
+        $alertant->cognoms = "";
+        $alertant->adreca = $request->input("adreca");
+        $alertant->municipis_id = "851";
+        $alertant->telefon = $request->input("tel");
+        $alertant->tipus_alertant_id = "1";
+
+        try {
+            $alertant->save();
+            
+            $respuesta = (new AlertantsResource($alertant))
+                            ->response()
+                            ->setStatusCode(201);
+        } catch (QueryException $e) {
+            $mensaje = Utilidad::errorMessage($e);
+
+            $respuesta = response()->json(["error"=>$mensaje], 400);
+        }
+
+        return $respuesta;
     }
 
     /**
@@ -52,9 +73,27 @@ class AlertantsController extends Controller
      * @param  \App\Models\Alertants  $alertants
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Alertants $alertants)
+    public function update(Request $request, $id_alertant)
     {
-        //
+        $alertants = Alertants::find($id_alertant);
+
+        $alertants->nom =  $request->input("nom");
+        $alertants->adreca =  $request->input("adreca");
+        $alertants->telefon =  $request->input("telefon");
+
+        try {
+            $alertants->save();
+            
+            $respuesta = (new AlertantsResource($alertants))
+                            ->response()
+                            ->setStatusCode(200);
+
+        } catch (QueryException $e) {
+            $mensaje = Utilidad::errorMessage($e);
+            $respuesta = response()->json(["error"=>$mensaje], 400);
+        }
+
+        return $respuesta;
     }
 
     /**

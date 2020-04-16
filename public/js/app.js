@@ -1899,6 +1899,91 @@ module.exports = {
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      alertant: {
+        "nom": "",
+        "adreca": "",
+        "tel": ""
+      }
+    };
+  },
+  methods: {
+    insertAlertant: function insertAlertant() {
+      var me = this;
+      axios.post("/alertants", me.alertant).then(function (response) {
+        me.alertant = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js& ***!
@@ -1908,6 +1993,21 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1961,12 +2061,17 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: 'telefon',
         label: 'Telèfon'
-      }, "actions"],
+      }, "gestionar"],
       editAlertantModal: {
         id: 'editAlertantModal',
         title: 'EDITAR ALERTANTE',
-        content: ''
-      }
+        info: {
+          name: "",
+          adress: "",
+          tel: ""
+        }
+      },
+      currentAlertant: []
     };
   },
   created: function created() {
@@ -1991,14 +2096,27 @@ __webpack_require__.r(__webpack_exports__);
       axios["delete"]("/alertants/" + item.id).then(function (response) {
         me.showAlertants();
       })["catch"](function (error) {
-        me.errorRol = true;
         me.missatge = error.response.data;
         me.mensajesError.push(me.missatge.error);
       });
     },
     editAlertant: function editAlertant(item) {
-      this.editAlertantModal.content = JSON.stringify(item);
+      var me = this;
+      me.currentAlertant = item;
+      this.editAlertantModal.info.name = item.nom;
+      this.editAlertantModal.info.adress = item.adreca;
+      this.editAlertantModal.info.tel = item.telefon;
       this.$bvModal.show('editAlertantModal');
+    },
+    saveAlertant: function saveAlertant() {
+      var me = this;
+      console.log(me.currentAlertant.id);
+      axios.put("/alertants", me.currentAlertant.id).then(function (response) {
+        me.showAlertants();
+      })["catch"](function (error) {
+        me.missatge = error.response.data;
+        me.mensajesError.push(me.missatge.error);
+      });
     }
   },
   mounted: function mounted() {
@@ -79884,6 +80002,185 @@ var e=function(){return(e=Object.assign||function(e){for(var t,r=1,s=arguments.l
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("div", { staticClass: "card mt-5" }, [
+      _c("div", { staticClass: "card-header" }, [_vm._v("NOU ALERTANT")]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "card-body" },
+        [
+          _c("b-form", { attrs: { method: "post" } }, [
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "name" }
+                },
+                [_vm._v("Nom")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.alertant.nom,
+                      expression: "alertant.nom"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "nom",
+                    id: "nom",
+                    placeholder: "Nom de l'alertant"
+                  },
+                  domProps: { value: _vm.alertant.nom },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.alertant, "nom", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "tel" }
+                },
+                [_vm._v("Adreça")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.alertant.adreca,
+                      expression: "alertant.adreca"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "adreca",
+                    id: "adreca",
+                    placeholder: "Adreça de l'alertant"
+                  },
+                  domProps: { value: _vm.alertant.adreca },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.alertant, "adreca", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "tel" }
+                },
+                [_vm._v("Telèfon")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.alertant.tel,
+                      expression: "alertant.tel"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    name: "tel",
+                    id: "tel",
+                    placeholder: "Telèfon de l'alertant"
+                  },
+                  domProps: { value: _vm.alertant.tel },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.alertant, "tel", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "div",
+                { staticClass: "col-sm-11 offset-1" },
+                [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      on: {
+                        click: function($event) {
+                          return _vm.insertAlertant()
+                        }
+                      }
+                    },
+                    [_vm._v("AFEGIR")]
+                  )
+                ],
+                1
+              )
+            ])
+          ])
+        ],
+        1
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640&":
 /*!*********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640& ***!
@@ -79917,7 +80214,7 @@ var render = function() {
         },
         scopedSlots: _vm._u([
           {
-            key: "cell(actions)",
+            key: "cell(gestionar)",
             fn: function(row) {
               return [
                 _c(
@@ -79973,9 +80270,99 @@ var render = function() {
           attrs: {
             id: _vm.editAlertantModal.id,
             title: _vm.editAlertantModal.title
+          },
+          on: {
+            ok: function($event) {
+              return _vm.saveAlertant()
+            }
           }
         },
-        [_c("pre", [_vm._v(_vm._s(_vm.editAlertantModal.content))])]
+        [
+          _c("input", {
+            attrs: { type: "hidden", name: "_method", value: "PUT" }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
+                _vm._v("Nom:")
+              ]),
+              _vm._v(" "),
+              _c("b-form-input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "nom",
+                  placeholder: "Nom",
+                  value: _vm.editAlertantModal.info.name
+                },
+                model: {
+                  value: _vm.editAlertantModal.info.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.editAlertantModal.info, "name", $$v)
+                  },
+                  expression: "editAlertantModal.info.name"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
+                _vm._v("Adreça:")
+              ]),
+              _vm._v(" "),
+              _c("b-form-input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "adreca",
+                  placeholder: "Adreça",
+                  value: _vm.editAlertantModal.info.adress
+                },
+                model: {
+                  value: _vm.editAlertantModal.info.adress,
+                  callback: function($$v) {
+                    _vm.$set(_vm.editAlertantModal.info, "adress", $$v)
+                  },
+                  expression: "editAlertantModal.info.adress"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group" },
+            [
+              _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
+                _vm._v("Telefon:")
+              ]),
+              _vm._v(" "),
+              _c("b-form-input", {
+                staticClass: "form-control",
+                attrs: {
+                  name: "telefon",
+                  placeholder: "Telefon",
+                  value: _vm.editAlertantModal.info.tel
+                },
+                model: {
+                  value: _vm.editAlertantModal.info.tel,
+                  callback: function($$v) {
+                    _vm.$set(_vm.editAlertantModal.info, "tel", $$v)
+                  },
+                  expression: "editAlertantModal.info.tel"
+                }
+              })
+            ],
+            1
+          )
+        ]
       )
     ],
     1
@@ -95037,6 +95424,7 @@ Vue.component("registro-incidencia", __webpack_require__(/*! ./components/Regist
 Vue.component("gestion-recursos", __webpack_require__(/*! ./components/GestionRecursos.vue */ "./resources/js/components/GestionRecursos.vue")["default"]);
 Vue.component("incidencias", __webpack_require__(/*! ./components/Incidencias.vue */ "./resources/js/components/Incidencias.vue")["default"]);
 Vue.component("alertants", __webpack_require__(/*! ./components/AlertantsComponent.vue */ "./resources/js/components/AlertantsComponent.vue")["default"]);
+Vue.component("addalertant", __webpack_require__(/*! ./components/AlertantsAddComponent.vue */ "./resources/js/components/AlertantsAddComponent.vue")["default"]);
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["BootstrapVue"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -95094,6 +95482,75 @@ window.axios.defaults.baseURL = '/project_broggi/public/api/';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AlertantsAddComponent.vue":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/AlertantsAddComponent.vue ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& */ "./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&");
+/* harmony import */ var _AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlertantsAddComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/AlertantsAddComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertantsAddComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& ***!
+  \******************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
 
 /***/ }),
 
