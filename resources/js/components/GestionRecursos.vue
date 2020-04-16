@@ -12,15 +12,12 @@
         <section v-show="sectionAsignados">
             <div class="row">
                 <div class="col-12">
-                <b-form-group label="Filter" label-cols-sm="3" label-align-sm="right" label-size="sm" label-for="filterInput" class="mb-0">
-
-                <b-input-group size="sm">
-                    <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
-                    <b-input-group-append>
-                        <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
-                    </b-input-group-append>
+                    <b-input-group class="mb-3">
+                        <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+                        <b-input-group-append>
+                            <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                        </b-input-group-append>
                     </b-input-group>
-                </b-form-group>
                 </div>
             </div>
 
@@ -53,6 +50,17 @@
         </section>
 
         <section v-show="sectionRecursos">
+            <div class="row">
+                <div class="col-12">
+                    <b-input-group class="mb-3">
+                        <b-form-input v-model="filter" type="search" id="filterInput" placeholder="Type to Search"></b-form-input>
+                        <b-input-group-append>
+                            <b-button :disabled="!filter" @click="filter = ''">Clear</b-button>
+                        </b-input-group-append>
+                    </b-input-group>
+                </div>
+            </div>
+
             <b-table ref="table2" :current-page="currentPageRecursos" id="tablaTipoRecursos" :per-page="perPage" :head-variant="headVariant" hover striped outlined :items="arrayTipusRecurs" :fields="columnasTablaRecursos">
                 <template v-slot:cell(manage)="data">
                     <button type="button" class="btn btn-danger" @click="deleteTipusRecurs(data.item.id)">ESBORRAR</button>
