@@ -1899,235 +1899,6 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      alertant: {
-        "nom": "",
-        "adreca": "",
-        "tel": ""
-      }
-    };
-  },
-  methods: {
-    insertAlertant: function insertAlertant() {
-      var me = this;
-      axios.post("/alertants", me.alertant).then(function (response) {
-        me.alertant = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      alertants: [],
-      alertant: {
-        id: null,
-        nom: "",
-        cognoms: "",
-        adreca: "",
-        municipis_id: null,
-        telefon: "",
-        tipus_alertant_id: ''
-      },
-      perPage: 5,
-      currentPage: 1,
-      fields: [{
-        key: 'nom'
-      }, {
-        key: 'adreca',
-        label: 'Adreça'
-      }, {
-        key: 'telefon',
-        label: 'Telèfon'
-      }, "gestionar"],
-      editAlertantModal: {
-        id: 'editAlertantModal',
-        title: 'EDITAR ALERTANTE',
-        info: {
-          name: "",
-          adress: "",
-          tel: ""
-        }
-      },
-      currentAlertant: [],
-      filter: null,
-      aceptar: "Aceptar",
-      cancelar: "Cancelar"
-    };
-  },
-  created: function created() {
-    this.showAlertants();
-  },
-  computed: {
-    rows: function rows() {
-      return this.alertants.length;
-    }
-  },
-  methods: {
-    showAlertants: function showAlertants() {
-      var me = this;
-      axios.get("/alertants").then(function (response) {
-        me.alertants = response.data;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    deleteAlertant: function deleteAlertant(item) {
-      var me = this;
-      axios["delete"]("/alertants/" + item.id).then(function (response) {
-        me.showAlertants();
-      })["catch"](function (error) {
-        me.missatge = error.response.data;
-        me.mensajesError.push(me.missatge.error);
-      });
-    },
-    editAlertant: function editAlertant(item) {
-      var me = this;
-      me.currentAlertant = item;
-      this.editAlertantModal.info.name = item.nom;
-      this.editAlertantModal.info.adress = item.adreca;
-      this.editAlertantModal.info.tel = item.telefon;
-      this.$bvModal.show('editAlertantModal');
-    },
-    saveAlertant: function saveAlertant() {
-      var me = this;
-      axios.put("/alertants/" + me.currentAlertant.id, me.editAlertantModal.info).then(function (response) {
-        me.showAlertants();
-      })["catch"](function (error) {
-        me.missatge = error.response.data;
-        me.mensajesError.push(me.missatge.error);
-      });
-    }
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js& ***!
@@ -2311,14 +2082,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2334,6 +2097,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       objectTipoRecurso: {
         id: null,
         tipus: "",
+        esSanitari: null,
         esPolicial: null
       },
       columnasTablaAsignados: [{
@@ -2365,7 +2129,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _defineProperty(_ref, "headVariant", 'dark'), _defineProperty(_ref, "filter", null), _defineProperty(_ref, "filterRecursos", null), _ref;
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _defineProperty(_ref, "headVariant", 'dark'), _defineProperty(_ref, "filter", null), _ref;
   },
   created: function created() {
     this.getApi({
@@ -2425,6 +2189,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.objectRecurso.id_usuario = null;
       this.objectTipoRecurso.id = null;
       this.objectTipoRecurso.tipus = "";
+      this.objectTipoRecurso.esSanitari = null;
       this.objectTipoRecurso.esPolicial = null;
     },
     insertRecurs: function insertRecurs() {
@@ -2595,9 +2360,185 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      arrayMunicipis: [],
+      arrayTipusAlertant: [],
+      arrayTipusIncidencia: [],
+      arrayEstatIncidencia: [],
+      arrayTipusRecurs: [],
+      arrayAlertants: [],
       objectIncidencia: {
         id: null,
         numero_incidencia: "",
@@ -2628,7 +2569,7 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: "tipus_incident.tipus",
         label: "Tipus Incident"
-      }],
+      }, "gestionar"],
       perPage: 5,
       currentPage: 1,
       filter: null,
@@ -2637,6 +2578,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.obtenerIncidencias();
+    this.obtenerTipusRecursos();
+    this.obtenerMunicipis();
+    this.obtenerTipusAlertant();
+    this.obtenerTipusIncidencia();
+    this.obtenerAlertants();
+    this.obtenerEstatIncidencies();
   },
   methods: {
     obtenerIncidencias: function obtenerIncidencias() {
@@ -2644,6 +2591,58 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("http://localhost:8080/project_broggi/public/api/incidencies").then(function (response) {
         _this.arrayIncidencia = response.data;
+      });
+    },
+    obtenerTipusRecursos: function obtenerTipusRecursos() {
+      var _this2 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_recurs").then(function (response) {
+        _this2.arrayTipusRecurs = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerMunicipis: function obtenerMunicipis() {
+      var _this3 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/municipis").then(function (response) {
+        _this3.arrayMunicipis = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerTipusAlertant: function obtenerTipusAlertant() {
+      var _this4 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_alertant").then(function (response) {
+        _this4.arrayTipusAlertant = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerTipusIncidencia: function obtenerTipusIncidencia() {
+      var _this5 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_incident").then(function (response) {
+        _this5.arrayTipusIncidencia = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerAlertants: function obtenerAlertants() {
+      var _this6 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/alertants").then(function (response) {
+        _this6.arrayAlertants = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerEstatIncidencies: function obtenerEstatIncidencies() {
+      var _this7 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/estat_incident").then(function (response) {
+        _this7.arrayEstatIncidencia = response.data;
       })["catch"](function (e) {
         return console.log(e);
       });
@@ -2658,6 +2657,26 @@ __webpack_require__.r(__webpack_exports__);
     },
     nuevo: function nuevo() {
       window.location.href = "/project_broggi/public/registroIncidencias";
+    },
+    editIncidencia: function editIncidencia(item) {
+      var me = this;
+      me.objectIncidencia = item;
+      this.$bvModal.show("editIncidenciaModal");
+    },
+    saveIncident: function saveIncident(idObjecte) {
+      var me = this;
+      axios.put("/incidencies/" + idObjecte, this.objectIncidencia).then(function (response) {
+        me.objectIncidencias();
+      })["catch"](function (error) {
+        me.missatge = error.response.data;
+        me.mensajesError.push(me.missatge.error);
+      });
+    },
+    cerrarModal: function cerrarModal() {
+      this.modal = 0;
+      this.tituloModal = "";
+      this.errorRol = false;
+      this.accionApi = "";
     }
   },
   computed: {
@@ -2742,32 +2761,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      src: 'https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80'
+      src: "https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80"
     };
   },
   methods: {
     openIncidencia: function openIncidencia() {
-      window.location.href = '/project_broggi/public/incidencias';
+      window.location.href = "/project_broggi/public/incidencias";
     },
     openRecursos: function openRecursos() {
-      window.location.href = '/project_broggi/public/recursos';
+      window.location.href = "/project_broggi/public/recursos";
     },
     openAlertantes: function openAlertantes() {
-      window.location.href = '/project_broggi/public/alertants';
+      window.location.href = "/project_broggi/public/alertates";
     }
   }
 });
@@ -2964,13 +2972,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -3068,7 +3069,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3078,80 +3117,98 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         telefon_alertant: null,
         data: null,
         hora: null,
-        adreca: '',
-        complement_adreca: '',
-        descripcio: '',
+        adreca: "",
+        complement_adreca: "",
+        descripcion: "",
         municipis_id: null,
         tipus_incident_id: null,
         estats_incidencia_id: null,
         tipus_alertant_id: null,
-        alertants_id: null
+        alertant_id: null
       },
-      datosInidenciaHasRecurso: {
-        prioritat: null
-      },
+      arrayMunicipis: [],
+      arrayTipusAlertant: [],
+      arrayTipusIncidencia: [],
+      arrayEstatIncidencia: [],
+      arrayTipusRecurs: [],
+      arrayAlertants: [],
       recursSanitari: false,
       buttonSanitari: true,
       recursPolicial: false,
       buttonPolicial: true
     };
   },
-  created: function created() {
-    this.getApi({
-      ruta: 'municipis',
-      nombreTabla: 'municipis'
-    });
-    this.getApi({
-      ruta: 'tipus_alertant',
-      nombreTabla: 'tipus_alertant'
-    });
-    this.getApi({
-      ruta: 'tipus_incident',
-      nombreTabla: 'tipus_incident'
-    });
-    this.getApi({
-      ruta: 'alertants',
-      nombreTabla: 'alertants'
-    });
-    this.getApi({
-      ruta: 'estats_incidencia',
-      nombreTabla: 'estats_incidencia'
-    });
-    this.getTipusRecursos();
-    console.log("created");
+  mounted: function mounted() {
+    this.obtenerTipusRecursos();
+    this.obtenerMunicipis();
+    this.obtenerTipusAlertant();
+    this.obtenerTipusIncidencia();
+    this.obtenerAlertants();
+    this.obtenerEstatIncidencies();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
-    insertIncidencia: function insertIncidencia() {
-      var me = this;
-      axios.post("/incidencies", this.datosIncidencia).then(function (response) {
-        me.mensajeAdd();
-      })["catch"](function (error) {
-        console.log(error);
-        me.mensajeError = error.response.data;
-        me.errorRol = true;
-        me.arrrayMensajesError.push(me.mensajeError.error);
+  methods: {
+    obtenerTipusRecursos: function obtenerTipusRecursos() {
+      var _this = this;
+
+      console.log("Estem dins del getTipusRecurs");
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_recurs").then(function (response) {
+        _this.arrayTipusRecurs = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
       });
     },
-    mostrarSanitari: function mostrarSanitari() {
-      this.buttonSanitari = false;
-      this.recursSanitari = true;
-      console.log(this.arrayTipusAlertant);
-    },
-    mostrarPolicial: function mostrarPolicial() {
-      this.buttonPolicial = false;
-      this.recursPolicial = true;
-    },
-    getTipusRecursos: function getTipusRecursos() {
-      this.getApi({
-        ruta: 'tipus_recurs',
-        nombreTabla: 'tipus_recurs'
+    obtenerMunicipis: function obtenerMunicipis() {
+      var _this2 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/municipis").then(function (response) {
+        _this2.arrayMunicipis = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
       });
     },
-    mensajeAdd: function mensajeAdd() {
-      alert("Incidencia añadida");
+    obtenerTipusAlertant: function obtenerTipusAlertant() {
+      var _this3 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_alertant").then(function (response) {
+        _this3.arrayTipusAlertant = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerTipusIncidencia: function obtenerTipusIncidencia() {
+      var _this4 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_incident").then(function (response) {
+        _this4.arrayTipusIncidencia = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerAlertants: function obtenerAlertants() {
+      var _this5 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/alertants").then(function (response) {
+        _this5.arrayAlertants = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    obtenerEstatIncidencies: function obtenerEstatIncidencies() {
+      var _this6 = this;
+
+      axios.get("http://localhost:8080/project_broggi/public/api/estat_incident").then(function (response) {
+        _this6.arrayEstatIncidencia = response.data;
+      })["catch"](function (e) {
+        return console.log(e);
+      });
+    },
+    volver: function volver() {
+      window.location.href = "/project_broggi/public/Incidencias";
+    },
+    guardar: function guardar() {
+      window.location.href = "/project_broggi/public/Incidencias";
     }
-  }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia']))
+  }
 });
 
 /***/ }),
@@ -80182,425 +80239,6 @@ var e=function(){return(e=Object.assign||function(e){for(var t,r=1,s=arguments.l
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&":
-/*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& ***!
-  \************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("main", [
-    _c("div", { staticClass: "card mt-5" }, [
-      _c("div", { staticClass: "card-header" }, [_vm._v("NOU ALERTANT")]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card-body" },
-        [
-          _c("b-form", { attrs: { method: "post" } }, [
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-1 col-form-label",
-                  attrs: { for: "name" }
-                },
-                [_vm._v("Nom")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-11" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.alertant.nom,
-                      expression: "alertant.nom"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "nom",
-                    id: "nom",
-                    placeholder: "Nom de l'alertant"
-                  },
-                  domProps: { value: _vm.alertant.nom },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.alertant, "nom", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-1 col-form-label",
-                  attrs: { for: "tel" }
-                },
-                [_vm._v("Adreça")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-11" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.alertant.adreca,
-                      expression: "alertant.adreca"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "adreca",
-                    id: "adreca",
-                    placeholder: "Adreça de l'alertant"
-                  },
-                  domProps: { value: _vm.alertant.adreca },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.alertant, "adreca", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-1 col-form-label",
-                  attrs: { for: "tel" }
-                },
-                [_vm._v("Telèfon")]
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-sm-11" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.alertant.tel,
-                      expression: "alertant.tel"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    name: "tel",
-                    id: "tel",
-                    placeholder: "Telèfon de l'alertant"
-                  },
-                  domProps: { value: _vm.alertant.tel },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.alertant, "tel", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "div",
-                { staticClass: "col-sm-11 offset-1" },
-                [
-                  _c(
-                    "b-button",
-                    {
-                      staticClass: "btn btn-secondary",
-                      on: {
-                        click: function($event) {
-                          return _vm.insertAlertant()
-                        }
-                      }
-                    },
-                    [_vm._v("AFEGIR")]
-                  )
-                ],
-                1
-              )
-            ])
-          ])
-        ],
-        1
-      )
-    ])
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640& ***!
-  \*********************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "main",
-    [
-      _c(
-        "form",
-        {
-          staticClass: "form-horizontal",
-          attrs: { action: "", method: "get" }
-        },
-        [
-          _c("div", { staticClass: "form-group row mt-5 align-middle" }, [
-            _c(
-              "div",
-              { staticClass: "col-10" },
-              [
-                _c("b-form-input", {
-                  attrs: {
-                    type: "search",
-                    id: "filterInput",
-                    placeholder: "Búsqueda ..."
-                  },
-                  model: {
-                    value: _vm.filter,
-                    callback: function($$v) {
-                      _vm.filter = $$v
-                    },
-                    expression: "filter"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-secondary btn-sm col-2",
-                attrs: { type: "submit" }
-              },
-              [_vm._v("BUSCAR")]
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("b-table", {
-        staticClass: "table mt-5",
-        attrs: {
-          striped: "",
-          hover: "",
-          id: "table_alertants",
-          items: _vm.alertants,
-          fields: _vm.fields,
-          "per-page": _vm.perPage,
-          "current-page": _vm.currentPage,
-          filter: _vm.filter
-        },
-        scopedSlots: _vm._u([
-          {
-            key: "cell(gestionar)",
-            fn: function(row) {
-              return [
-                _c(
-                  "b-button",
-                  {
-                    staticClass: "mr-1",
-                    attrs: { size: "sm" },
-                    on: {
-                      click: function($event) {
-                        return _vm.editAlertant(row.item)
-                      }
-                    }
-                  },
-                  [_vm._v("\n                Editar\n            ")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "b-button",
-                  {
-                    attrs: { size: "sm" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteAlertant(row.item)
-                      }
-                    }
-                  },
-                  [_vm._v("\n                Eliminar\n            ")]
-                )
-              ]
-            }
-          }
-        ])
-      }),
-      _vm._v(" "),
-      _c("b-pagination", {
-        attrs: {
-          "total-rows": _vm.rows,
-          "per-page": _vm.perPage,
-          "aria-controls": "table_alertants"
-        },
-        model: {
-          value: _vm.currentPage,
-          callback: function($$v) {
-            _vm.currentPage = $$v
-          },
-          expression: "currentPage"
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "b-modal",
-        {
-          attrs: {
-            id: _vm.editAlertantModal.id,
-            title: _vm.editAlertantModal.title,
-            "ok-title": _vm.aceptar,
-            "cancel-title": _vm.cancelar
-          },
-          on: {
-            ok: function($event) {
-              return _vm.saveAlertant()
-            }
-          }
-        },
-        [
-          _c("input", {
-            attrs: { type: "hidden", name: "_method", value: "PUT" }
-          }),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
-                _vm._v("Nom:")
-              ]),
-              _vm._v(" "),
-              _c("b-form-input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "nom",
-                  name: "nom",
-                  placeholder: "Nom",
-                  value: _vm.editAlertantModal.info.name
-                },
-                model: {
-                  value: _vm.editAlertantModal.info.name,
-                  callback: function($$v) {
-                    _vm.$set(_vm.editAlertantModal.info, "name", $$v)
-                  },
-                  expression: "editAlertantModal.info.name"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
-                _vm._v("Adreça:")
-              ]),
-              _vm._v(" "),
-              _c("b-form-input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "adreca",
-                  name: "adreca",
-                  placeholder: "Adreça",
-                  value: _vm.editAlertantModal.info.adress
-                },
-                model: {
-                  value: _vm.editAlertantModal.info.adress,
-                  callback: function($$v) {
-                    _vm.$set(_vm.editAlertantModal.info, "adress", $$v)
-                  },
-                  expression: "editAlertantModal.info.adress"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
-                _vm._v("Telefon:")
-              ]),
-              _vm._v(" "),
-              _c("b-form-input", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "telefon",
-                  name: "telefon",
-                  placeholder: "Telefon",
-                  value: _vm.editAlertantModal.info.tel
-                },
-                model: {
-                  value: _vm.editAlertantModal.info.tel,
-                  callback: function($$v) {
-                    _vm.$set(_vm.editAlertantModal.info, "tel", $$v)
-                  },
-                  expression: "editAlertantModal.info.tel"
-                }
-              })
-            ],
-            1
-          )
-        ]
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-
-
-
-/***/ }),
-
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e&":
 /*!*******************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ExampleComponent.vue?vue&type=template&id=299e239e& ***!
@@ -80721,38 +80359,54 @@ var render = function() {
             { staticClass: "col-12" },
             [
               _c(
-                "b-input-group",
-                { staticClass: "mb-3" },
+                "b-form-group",
+                {
+                  staticClass: "mb-0",
+                  attrs: {
+                    label: "Filter",
+                    "label-cols-sm": "3",
+                    "label-align-sm": "right",
+                    "label-size": "sm",
+                    "label-for": "filterInput"
+                  }
+                },
                 [
-                  _c("b-form-input", {
-                    attrs: {
-                      type: "search",
-                      id: "filterInput",
-                      placeholder: "Type to Search"
-                    },
-                    model: {
-                      value: _vm.filter,
-                      callback: function($$v) {
-                        _vm.filter = $$v
-                      },
-                      expression: "filter"
-                    }
-                  }),
-                  _vm._v(" "),
                   _c(
-                    "b-input-group-append",
+                    "b-input-group",
+                    { attrs: { size: "sm" } },
                     [
-                      _c(
-                        "b-button",
-                        {
-                          attrs: { disabled: !_vm.filter },
-                          on: {
-                            click: function($event) {
-                              _vm.filter = ""
-                            }
-                          }
+                      _c("b-form-input", {
+                        attrs: {
+                          type: "search",
+                          id: "filterInput",
+                          placeholder: "Type to Search"
                         },
-                        [_vm._v("Clear")]
+                        model: {
+                          value: _vm.filter,
+                          callback: function($$v) {
+                            _vm.filter = $$v
+                          },
+                          expression: "filter"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "b-input-group-append",
+                        [
+                          _c(
+                            "b-button",
+                            {
+                              attrs: { disabled: !_vm.filter },
+                              on: {
+                                click: function($event) {
+                                  _vm.filter = ""
+                                }
+                              }
+                            },
+                            [_vm._v("Clear")]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
@@ -80922,60 +80576,9 @@ var render = function() {
         ]
       },
       [
-        _c("div", { staticClass: "row" }, [
-          _c(
-            "div",
-            { staticClass: "col-12" },
-            [
-              _c(
-                "b-input-group",
-                { staticClass: "mb-3" },
-                [
-                  _c("b-form-input", {
-                    attrs: {
-                      type: "search",
-                      id: "filterInput2",
-                      placeholder: "Type to Search"
-                    },
-                    model: {
-                      value: _vm.filterRecursos,
-                      callback: function($$v) {
-                        _vm.filterRecursos = $$v
-                      },
-                      expression: "filterRecursos"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c(
-                    "b-input-group-append",
-                    [
-                      _c(
-                        "b-button",
-                        {
-                          attrs: { disabled: !_vm.filterRecursos },
-                          on: {
-                            click: function($event) {
-                              _vm.filterRecursos = ""
-                            }
-                          }
-                        },
-                        [_vm._v("Clear")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ]),
-        _vm._v(" "),
         _c("b-table", {
           ref: "table2",
           attrs: {
-            filter: _vm.filterRecursos,
             "current-page": _vm.currentPageRecursos,
             id: "tablaTipoRecursos",
             "per-page": _vm.perPage,
@@ -81314,7 +80917,25 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "col-6" },
-                        [_c("b-form-checkbox", [_vm._v("Sanitari")])],
+                        [
+                          _c(
+                            "b-form-checkbox",
+                            {
+                              model: {
+                                value: _vm.objectTipoRecurso.esSanitari,
+                                callback: function($$v) {
+                                  _vm.$set(
+                                    _vm.objectTipoRecurso,
+                                    "esSanitari",
+                                    $$v
+                                  )
+                                },
+                                expression: "objectTipoRecurso.esSanitari"
+                              }
+                            },
+                            [_vm._v("Sanitari")]
+                          )
+                        ],
                         1
                       ),
                       _vm._v(" "),
@@ -81534,7 +81155,29 @@ var render = function() {
             filter: _vm.filter,
             filterIncludedFields: _vm.filterOn
           },
-          on: { "row-dbclicked": _vm.onRowClicked, filtered: _vm.onFiltered }
+          on: { "row-dbclicked": _vm.onRowClicked, filtered: _vm.onFiltered },
+          scopedSlots: _vm._u([
+            {
+              key: "cell(gestionar)",
+              fn: function(row) {
+                return [
+                  _c(
+                    "b-button",
+                    {
+                      staticClass: "mr-1",
+                      attrs: { size: "sm" },
+                      on: {
+                        click: function($event) {
+                          return _vm.editIncidencia(row.item)
+                        }
+                      }
+                    },
+                    [_vm._v("Editar")]
+                  )
+                ]
+              }
+            }
+          ])
         }),
         _vm._v(" "),
         _c("b-pagination", {
@@ -81564,6 +81207,570 @@ var render = function() {
             }
           },
           [_vm._v("Afegir Incidencia")]
+        ),
+        _vm._v(" "),
+        _c(
+          "b-modal",
+          {
+            attrs: { id: "editIncidenciaModal", title: "Editar Incidencia" },
+            on: {
+              ok: function($event) {
+                return _vm.saveIncident(_vm.objectIncidencia.id)
+              }
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "modal-footer",
+                fn: function(ref) {
+                  var cancel = ref.cancel
+                  return [
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { size: "sm", variant: "outline-primary" },
+                        on: {
+                          click: function($event) {
+                            return cancel()
+                          }
+                        }
+                      },
+                      [_vm._v("Cancelar")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-button",
+                      {
+                        attrs: { size: "sm", variant: "primary" },
+                        on: {
+                          click: function($event) {
+                            return _vm.saveIncident(_vm.objectIncidencia.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Guardar")]
+                    )
+                  ]
+                }
+              }
+            ])
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-7" }, [
+                _c("h3", { staticClass: "text-center mb-5" }, [
+                  _vm._v("Nueva incidencia")
+                ]),
+                _vm._v(" "),
+                _c("form", { attrs: { action: "", method: "put" } }, [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-4" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.objectIncidencia.num_incidencia,
+                            expression: "objectIncidencia.num_incidencia",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          name: "num_incidencia",
+                          type: "text",
+                          placeholder: "Num.Incidencia"
+                        },
+                        domProps: {
+                          value: _vm.objectIncidencia.num_incidencia
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.objectIncidencia,
+                              "num_incidencia",
+                              _vm._n($event.target.value)
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "section",
+                      { staticClass: "col-3" },
+                      [
+                        _c("b-form-timepicker", {
+                          staticClass: "form-control",
+                          attrs: { name: "hora", placeholder: "Hora" },
+                          model: {
+                            value: _vm.objectIncidencia.hora,
+                            callback: function($$v) {
+                              _vm.$set(_vm.objectIncidencia, "hora", $$v)
+                            },
+                            expression: "objectIncidencia.hora"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "section",
+                      { staticClass: "col-5" },
+                      [
+                        _c("b-form-datepicker", {
+                          staticClass: "form-control",
+                          attrs: { name: "data", placeholder: "Data" },
+                          model: {
+                            value: _vm.objectIncidencia.data,
+                            callback: function($$v) {
+                              _vm.$set(_vm.objectIncidencia, "data", $$v)
+                            },
+                            expression: "objectIncidencia.data"
+                          }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-5" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model.number",
+                            value: _vm.objectIncidencia.telefon_alertant,
+                            expression: "objectIncidencia.telefon_alertant",
+                            modifiers: { number: true }
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "telefon_alertant",
+                          placeholder: "Telf. alertant"
+                        },
+                        domProps: {
+                          value: _vm.objectIncidencia.telefon_alertant
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.objectIncidencia,
+                              "telefon_alertant",
+                              _vm._n($event.target.value)
+                            )
+                          },
+                          blur: function($event) {
+                            return _vm.$forceUpdate()
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-7" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: _vm.objectIncidencia.municipis_id,
+                              expression: "objectIncidencia.municipis_id",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "municipis_id" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return _vm._n(val)
+                                })
+                              _vm.$set(
+                                _vm.objectIncidencia,
+                                "municipis_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { disabled: "", hidden: "" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("Municipis")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayMunicipis, function(municipi) {
+                            return _c(
+                              "option",
+                              {
+                                key: municipi.id,
+                                domProps: { value: municipi.id }
+                              },
+                              [_vm._v(_vm._s(municipi.nom))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.objectIncidencia.adreca,
+                            expression: "objectIncidencia.adreca"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "adreca",
+                          placeholder: "Adreça"
+                        },
+                        domProps: { value: _vm.objectIncidencia.adreca },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.objectIncidencia,
+                              "adreca",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.objectIncidencia.complement_adreca,
+                            expression: "objectIncidencia.complement_adreca"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "complement_adreca",
+                          placeholder: "Complemet adreça"
+                        },
+                        domProps: {
+                          value: _vm.objectIncidencia.complement_adreca
+                        },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.objectIncidencia,
+                              "complement_adreca",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-4" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: _vm.objectIncidencia.tipus_alertant_id,
+                              expression: "objectIncidencia.tipus_alertant_id",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "tipus_alertant_id" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return _vm._n(val)
+                                })
+                              _vm.$set(
+                                _vm.objectIncidencia,
+                                "tipus_alertant_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { disabled: "", hidden: "" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("Tipus alertant")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayTipusAlertant, function(tipus) {
+                            return _c(
+                              "option",
+                              { key: tipus.id, domProps: { value: tipus.id } },
+                              [_vm._v(_vm._s(tipus.tipus))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: _vm.objectIncidencia.alertants_id,
+                              expression: "objectIncidencia.alertants_id",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "alertants_id" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return _vm._n(val)
+                                })
+                              _vm.$set(
+                                _vm.objectIncidencia,
+                                "alertants_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { disabled: "", hidden: "" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("Alertant")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayAlertants, function(alertant) {
+                            return _c(
+                              "option",
+                              {
+                                key: alertant.id,
+                                domProps: { value: alertant.id }
+                              },
+                              [_vm._v(_vm._s(alertant.nom))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-4" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: _vm.objectIncidencia.estats_incidencia_id,
+                              expression:
+                                "objectIncidencia.estats_incidencia_id",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "estats_incidencia_id" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return _vm._n(val)
+                                })
+                              _vm.$set(
+                                _vm.objectIncidencia,
+                                "estats_incidencia_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { disabled: "", hidden: "" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("Estat incidenica")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayEstatIncidencia, function(estat) {
+                            return _c(
+                              "option",
+                              { key: estat.id, domProps: { value: estat.id } },
+                              [_vm._v(_vm._s(estat.estat))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-8" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model.number",
+                              value: _vm.objectIncidencia.tipus_incident_id,
+                              expression: "objectIncidencia.tipus_incident_id",
+                              modifiers: { number: true }
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { name: "tipus_incident_id" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return _vm._n(val)
+                                })
+                              _vm.$set(
+                                _vm.objectIncidencia,
+                                "tipus_incident_id",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            {
+                              attrs: { disabled: "", hidden: "" },
+                              domProps: { value: null }
+                            },
+                            [_vm._v("Tipus incidenica")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayTipusIncidencia, function(tipus) {
+                            return _c(
+                              "option",
+                              { key: tipus.id, domProps: { value: tipus.id } },
+                              [_vm._v(_vm._s(tipus.tipus))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("textarea", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.objectIncidencia.descripcio,
+                            expression: "objectIncidencia.descripcio"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          rows: "3",
+                          name: "descripcion",
+                          placeholder: "Descripció incidencia"
+                        },
+                        domProps: { value: _vm.objectIncidencia.descripcio },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.objectIncidencia,
+                              "descripcio",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ])
+                ])
+              ])
+            ])
+          ]
         )
       ],
       1
@@ -81593,139 +81800,99 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("main", [
-    _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
-      _vm._v("Escoge una opcin a Gestionar")
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row", attrs: { id: "app" } }, [
-      _c(
-        "div",
-        [
+    _c("div", { staticClass: "row m-10", attrs: { id: "app" } }, [
+      _c("div", { staticClass: "card col-sm-3" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.src, alt: "Card image" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("Alta Incidencia")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing\n                    elit.\n                "
+            )
+          ]),
+          _vm._v(" "),
           _c(
-            "b-card",
+            "button",
             {
-              staticClass: "p-3 m-3 ",
-              staticStyle: { "max-width": "20rem" },
-              attrs: {
-                title: "Incidencias",
-                "img-src":
-                  "https://www.abc.net.au/health/features/img/bloodtrans_m2238305.jpg",
-                "img-alt": "Image",
-                "img-top": "",
-                tag: "article"
+              staticClass: "btn btn-outline-dark btn-block",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.openIncidencia()
+                }
               }
             },
-            [
-              _c("b-card-text", [
-                _vm._v(
-                  "\n          En este apartado puedes revisar tanto las incidencias abiertas como\n          las que tienes asiganadas, como asi poder dar de alta a nuevas\n          incidencias.\n        "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                {
-                  attrs: { href: "#", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.openIncidencia()
-                    }
-                  }
-                },
-                [_vm._v("Gestionar")]
-              )
-            ],
-            1
+            [_vm._v("\n                    GO\n                ")]
           )
-        ],
-        1
-      ),
+        ])
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        [
+      _c("div", { staticClass: "card col-sm-3" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.src, alt: "Card image" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("Recursos")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing\n                    elit.\n                "
+            )
+          ]),
+          _vm._v(" "),
           _c(
-            "b-card",
+            "button",
             {
-              staticClass: "p-3 m-3 ",
-              staticStyle: { "max-width": "20rem" },
-              attrs: {
-                title: "Recursos",
-                "img-src":
-                  "https://www.comparaonline.com.co/blog-statics/co/uploads/2019/12/Consejos-para-actuar-ante-el-sonido-de-una-ambulancia.jpg",
-                "img-alt": "Image",
-                "img-top": "",
-                tag: "article"
+              staticClass: "btn btn-outline-dark btn-block",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.openRecursos()
+                }
               }
             },
-            [
-              _c("b-card-text", [
-                _vm._v(
-                  "\n          En este apartado podras saber que recursos estan disponibles y\n          gestionarlos para que nunca falten y siempre sobren.\n        "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                {
-                  attrs: { href: "#", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.openRecursos()
-                    }
-                  }
-                },
-                [_vm._v("Gestionar")]
-              )
-            ],
-            1
+            [_vm._v("\n                    GO\n                ")]
           )
-        ],
-        1
-      ),
+        ])
+      ]),
       _vm._v(" "),
-      _c(
-        "div",
-        [
+      _c("div", { staticClass: "card col-sm-3" }, [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: { src: _vm.src, alt: "Card image" }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h4", { staticClass: "card-title" }, [_vm._v("Alertantes")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n                    Lorem ipsum dolor sit amet, consectetur adipisicing\n                    elit.\n                "
+            )
+          ]),
+          _vm._v(" "),
           _c(
-            "b-card",
+            "button",
             {
-              staticClass: "p-3 m-3",
-              staticStyle: { "max-width": "20rem" },
-              attrs: {
-                title: "Alertantes",
-                "img-src":
-                  "https://magentaig.com/wp-content/uploads/2017/01/Encuestas-Online.jpg",
-                "img-alt": "Image",
-                "img-top": "",
-                tag: "article"
+              staticClass: "btn btn-outline-dark btn-block",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.openAlertantes()
+                }
               }
             },
-            [
-              _c("b-card-text", [
-                _vm._v(
-                  "\n          Base de datos de alertantes que se han dado de alta con nosotros,\n          tambien los que no paran de llamar estan aqui.\n        "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                {
-                  attrs: { href: "#", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.openAlertantes()
-                    }
-                  }
-                },
-                [_vm._v("Gestionar")]
-              )
-            ],
-            1
+            [_vm._v("\n                    GO\n                ")]
           )
-        ],
-        1
-      )
+        ])
+      ])
     ])
   ])
 }
@@ -82133,7 +82300,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "number", placeholder: "Num.Incidencia" },
+                  attrs: { type: "text", placeholder: "Num.Incidencia" },
                   domProps: { value: _vm.datosIncidencia.num_incidencia },
                   on: {
                     input: function($event) {
@@ -82155,15 +82322,30 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "section",
-                { staticClass: "col-8" },
+                { staticClass: "col-3" },
+                [
+                  _c("b-form-timepicker", {
+                    staticClass: "form-control",
+                    attrs: { placeholder: "Hora" },
+                    model: {
+                      value: _vm.datosIncidencia.hora,
+                      callback: function($$v) {
+                        _vm.$set(_vm.datosIncidencia, "hora", $$v)
+                      },
+                      expression: "datosIncidencia.hora"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "section",
+                { staticClass: "col-5" },
                 [
                   _c("b-form-datepicker", {
                     staticClass: "form-control",
-                    attrs: {
-                      "value-as-date": true,
-                      "today-button": true,
-                      placeholder: "Data"
-                    },
+                    attrs: { placeholder: "Data" },
                     model: {
                       value: _vm.datosIncidencia.data,
                       callback: function($$v) {
@@ -82176,7 +82358,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-4" }, [
+              _c("div", { staticClass: "col-5" }, [
                 _c("input", {
                   directives: [
                     {
@@ -82208,7 +82390,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-8" }, [
+              _c("div", { staticClass: "col-7" }, [
                 _c(
                   "select",
                   {
@@ -82384,8 +82566,8 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model.number",
-                        value: _vm.datosIncidencia.alertants_id,
-                        expression: "datosIncidencia.alertants_id",
+                        value: _vm.datosIncidencia.alertant_id,
+                        expression: "datosIncidencia.alertant_id",
                         modifiers: { number: true }
                       }
                     ],
@@ -82402,7 +82584,7 @@ var render = function() {
                           })
                         _vm.$set(
                           _vm.datosIncidencia,
-                          "alertants_id",
+                          "alertant_id",
                           $event.target.multiple
                             ? $$selectedVal
                             : $$selectedVal[0]
@@ -82476,7 +82658,7 @@ var render = function() {
                       [_vm._v("Estat incidenica")]
                     ),
                     _vm._v(" "),
-                    _vm._l(_vm.arrayEstatsIncidencia, function(estat) {
+                    _vm._l(_vm.arrayEstatIncidencia, function(estat) {
                       return _c(
                         "option",
                         { key: estat.id, domProps: { value: estat.id } },
@@ -82550,13 +82732,13 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.datosIncidencia.descripcio,
-                      expression: "datosIncidencia.descripcio"
+                      value: _vm.datosIncidencia.descripcion,
+                      expression: "datosIncidencia.descripcion"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: { rows: "3", placeholder: "Descripció incidencia" },
-                  domProps: { value: _vm.datosIncidencia.descripcio },
+                  domProps: { value: _vm.datosIncidencia.descripcion },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
@@ -82564,7 +82746,7 @@ var render = function() {
                       }
                       _vm.$set(
                         _vm.datosIncidencia,
-                        "descripcio",
+                        "descripcion",
                         $event.target.value
                       )
                     }
@@ -82572,138 +82754,6 @@ var render = function() {
                 })
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-lg-5 text-center" }, [
-          _c("h3", [_vm._v("Recursos")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "divRecurs text-left" }, [
-            _c(
-              "button",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.buttonSanitari,
-                    expression: "buttonSanitari"
-                  }
-                ],
-                staticClass: "btn btn-danger btn-lg p-4",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.mostrarSanitari()
-                  }
-                }
-              },
-              [_vm._v("SANITARI")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.recursSanitari,
-                    expression: "recursSanitari"
-                  }
-                ]
-              },
-              _vm._l(_vm.arrayRecursosSanitarios, function(tipus) {
-                return _c(
-                  "div",
-                  {
-                    key: tipus.id,
-                    staticClass: "custom-control custom-checkbox m-3"
-                  },
-                  [
-                    _c("input", {
-                      staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: tipus.id }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-control-label",
-                        attrs: { for: tipus.id }
-                      },
-                      [_vm._v(_vm._s(tipus.tipus))]
-                    )
-                  ]
-                )
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _c("hr"),
-          _vm._v(" "),
-          _c("div", { staticClass: "divRecurs text-left" }, [
-            _c(
-              "button",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.buttonPolicial,
-                    expression: "buttonPolicial"
-                  }
-                ],
-                staticClass: "btn btn-primary btn-lg p-4",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    return _vm.mostrarPolicial()
-                  }
-                }
-              },
-              [_vm._v("POLICIAL")]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.recursPolicial,
-                    expression: "recursPolicial"
-                  }
-                ]
-              },
-              _vm._l(_vm.arrayRecursosPoliciales, function(tipus) {
-                return _c(
-                  "div",
-                  {
-                    key: tipus.id,
-                    staticClass: "custom-control custom-checkbox m-3"
-                  },
-                  [
-                    _c("input", {
-                      staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: tipus.id }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "custom-control-label",
-                        attrs: { for: tipus.id }
-                      },
-                      [_vm._v(_vm._s(tipus.tipus))]
-                    )
-                  ]
-                )
-              }),
-              0
-            )
           ])
         ])
       ]),
@@ -82715,11 +82765,25 @@ var render = function() {
           attrs: { type: "button" },
           on: {
             click: function($event) {
-              return _vm.insertIncidencia()
+              return _vm.guardar()
             }
           }
         },
-        [_vm._v("REGISTRAR")]
+        [_vm._v("Guardar")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-secondary btn-lg mb-5",
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.volver()
+            }
+          }
+        },
+        [_vm._v("Cancelar")]
       )
     ])
   ])
@@ -96004,9 +96068,6 @@ Vue.component("incidencias", __webpack_require__(/*! ./components/Incidencias.vu
 Vue.component("registro-incidencia", __webpack_require__(/*! ./components/RegistroIncidencia.vue */ "./resources/js/components/RegistroIncidencia.vue")["default"]);
 Vue.component("gestion-recursos", __webpack_require__(/*! ./components/GestionRecursos.vue */ "./resources/js/components/GestionRecursos.vue")["default"]);
 Vue.component("landing", __webpack_require__(/*! ./components/LandingPage.vue */ "./resources/js/components/LandingPage.vue")["default"]);
-Vue.component("incidencias", __webpack_require__(/*! ./components/Incidencias.vue */ "./resources/js/components/Incidencias.vue")["default"]);
-Vue.component("alertants", __webpack_require__(/*! ./components/AlertantsComponent.vue */ "./resources/js/components/AlertantsComponent.vue")["default"]);
-Vue.component("addalertant", __webpack_require__(/*! ./components/AlertantsAddComponent.vue */ "./resources/js/components/AlertantsAddComponent.vue")["default"]);
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["BootstrapVue"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -96049,10 +96110,7 @@ try {
 
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.baseURL = '/project_broggi/public/api/'; //NOMBRE DE CARPETA LA QUE TENGAN EN LOCAL
-
-window.axios.defaults.baseURL = '/project_broggi/public/api'; //NOMBRE DE CARPETA LA QUE TENGAN EN LOCAL
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; //NOMBRE DE CARPETA LA QUE TENGAN EN LOCAL
 
 window.axios.defaults.baseURL = '/project_broggi/public/api';
 /**
@@ -96068,144 +96126,6 @@ window.axios.defaults.baseURL = '/project_broggi/public/api';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/components/AlertantsAddComponent.vue":
-/*!***********************************************************!*\
-  !*** ./resources/js/components/AlertantsAddComponent.vue ***!
-  \***********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& */ "./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&");
-/* harmony import */ var _AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlertantsAddComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/AlertantsAddComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertantsAddComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&":
-/*!******************************************************************************************!*\
-  !*** ./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& ***!
-  \******************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertantsAddComponent.vue?vue&type=template&id=ec92e62e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsAddComponent.vue?vue&type=template&id=ec92e62e&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsAddComponent_vue_vue_type_template_id_ec92e62e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/AlertantsComponent.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/AlertantsComponent.vue ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AlertantsComponent.vue?vue&type=template&id=23907640& */ "./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640&");
-/* harmony import */ var _AlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlertantsComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/AlertantsComponent.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertantsComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640& ***!
-  \***************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./AlertantsComponent.vue?vue&type=template&id=23907640& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/AlertantsComponent.vue?vue&type=template&id=23907640&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 
@@ -96818,86 +96738,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"], axios__WEBPACK_IMPORTED_MODULE_2___default.a);
-/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {
-    arrayRols: [],
-    arrayUsuaris: [],
-    arrayTipusAlertant: [],
-    arrayTipusRecurs: [],
-    arrayMunicipis: [],
-    arrayTipusIncidencia: [],
-    arrayRecursos: [],
-    arrayAlertants: [],
-    arrayEstatsIncidencia: [],
-    afegit: false,
-    arrayRecursosPoliciales: [],
-    arrayRecursosSanitarios: []
-  },
-  mutations: {
-    tipus_alertant: function tipus_alertant(state, datosRecibidos) {
-      state.arrayTipusAlertant = datosRecibidos;
-    },
-    tipus_recurs: function tipus_recurs(state, datosRecibidos) {
-      state.arrayTipusRecurs = datosRecibidos;
-      console.log("array ->", state.arrayTipusRecurs);
-      console.log("datos ->", datosRecibidos);
-      var me = state;
-
-      for (var i = 0; i < datosRecibidos.length; i++) {
-        if (datosRecibidos[i].esPolicial === 1) {
-          me.arrayRecursosPoliciales.push(datosRecibidos[i]);
-        } else {
-          me.arrayRecursosSanitarios.push(datosRecibidos[i]);
-        }
-      }
-    },
-    municipis: function municipis(state, datosRecibidos) {
-      state.arrayMunicipis = datosRecibidos;
-    },
-    tipus_incident: function tipus_incident(state, datosRecibidos) {
-      state.arrayTipusIncidencia = datosRecibidos;
-    },
-    usuaris: function usuaris(state, datosRecibidos) {
-      state.arrayUsuaris = datosRecibidos;
-    },
-    recursos: function recursos(state, datosRecibidos) {
-      state.arrayRecursos = datosRecibidos;
-    },
-    alertants: function alertants(state, datosRecibidos) {
-      state.arrayAlertants = datosRecibidos;
-    },
-    estats_incidencia: function estats_incidencia(state, datosRecibidos) {
-      state.arrayEstatsIncidencia = datosRecibidos;
-    }
-  },
-  actions: {
-    //LE PASA EL NOMBRE DE LA TABLA Y SU RUTA
-    getApi: function getApi(_ref, _ref2) {
-      var commit = _ref.commit;
-      var ruta = _ref2.ruta,
-          nombreTabla = _ref2.nombreTabla;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/" + ruta).then(function (response) {
-        var datos = response.data;
-        console.log(nombreTabla);
-        commit(nombreTabla, datos);
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    //SIN USO, EN PRUEBAS...
-    postApi: function postApi(_ref3) {
-      var ruta = _ref3.ruta,
-          objeto = _ref3.objeto;
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("/" + ruta, objeto).then(function (response) {
-        console.log("RECURSO AÑADIDO");
-        var añadido = true;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  modules: {}
-}));
+/* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({}));
 
 /***/ }),
 
@@ -96919,8 +96760,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/project_broggi/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/project_broggi/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/project_broggi/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/project_broggi/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
