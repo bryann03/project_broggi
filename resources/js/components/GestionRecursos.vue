@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <form v-if="accionApi === 'insert'" action method="post" enctype="multipart/form-data">
+                        <form v-if="accionApi === 'insert'  || accionApi === 'update'" action method="post" enctype="multipart/form-data">
                             <div class="form-group row">
                                 <div class="col-12">
                                     <input class="form-control" type="text" v-model="objectRecurso.codi" placeholder="Codi recurs" />
