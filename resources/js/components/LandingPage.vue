@@ -5,7 +5,7 @@
                 <li class="breadcrumb-item"><a href="#">Landing</a></li>
             </ol>
         </nav>-->
-    <h1 class="text-center mb-5 mt-5">Escoge una opcin a Gestionar</h1>
+    <h1 class="text-center mb-5 mt-5">Gestiones Broggi</h1>
 
     <div id="app" class="row">
       <div>
