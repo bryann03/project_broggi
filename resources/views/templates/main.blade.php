@@ -31,16 +31,20 @@
             </ul>
             <ul class="navbar-nav text-right">
                 @if (Auth::check())
-                
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{Auth::user()->nom}}
-  </button>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <a class="dropdown-item" href="{{route('logout')}}">Leave</a>
-    </div>
+                <li class="nav-item dropdown btn btn-outline-danger">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{Auth::user()->nom}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="{{route('logout')}}">Leave</a>
+
+                    </div>
+                </li>
+
+
                 @else
 
-                <!--<a href="{{route('login')}}"><button class="btn btn-outline-success my-2 my-sm-0">LOGIN</button></a>-->
+                <!--<a href="{{--route('login')--}}"><button class="btn btn-outline-success my-2 my-sm-0">LOGIN</button></a>-->
 
                 @endif
             </ul>
