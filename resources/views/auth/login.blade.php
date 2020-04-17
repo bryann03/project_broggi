@@ -5,26 +5,27 @@ Log in
 @endsection
 
 @section('principal')
-<div class="row">
-    <div class="col-2 col-lg-4 col-md-3"></div>
-    <div class="col-8 col-lg-4 col-md-6 text-center">
-        <form action="{{action('Auth\LoginController@login')}}" method="POST">
-            @csrf
-            <div>
-                <label class="float-left">User</label>
-                <input required class="form-control" name="codi" type="text" value="{{old('codi')}}" />
-            </div>
+<section>
+<div class="m-5 text-center">
+    <form action="{{action('Auth\LoginController@login')}}" method="POST">
+    @csrf
+      <img class="mb-4" src="{{asset('storage/img/logoBroggi.png')}}" alt="" width="120" height="auto">
+      <h1 class="h3 mb-3 font-weight-normal">Logeate, Broggi!</h1>
+      <input type="text" name="Nom" class="form-control" placeholder="Nº Credencial" required autofocus>
 
-            <div class="mt-3 mb-4">
-                <label class="float-left">Password</label>
-                <input required class="form-control" name="password" type="password" value="{{old('password')}}" />
-            </div>
+      <input type="password" name="Codi" class="form-control" placeholder="Contraseña" required>
+      <div class="checkbox my-2">
+        <label>
+          <input type="checkbox" value="remember-me" disabled> Recuerdame en un futuro
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Iniciar Sesión</button>
+      </form>
+           <a href="{{route('registro')}}"><button class="btn btn-outline-dark my-2 my-sm-0">Registrarse</button></a>
 
-            <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
-        </form>
-        <a href="{{route('registro')}}"><button class="btn btn-outline-dark my-2 my-sm-0">Registrarse</button></a>
-    </div>
-    <div class="col-2 col-lg-4 col-md-3"></div>
-</div>
 
+      <p class="mt-5 mb-3 text-muted">&copy; 2020-Covid</p>
+    
+  </div>
+    </section>
 @endsection
