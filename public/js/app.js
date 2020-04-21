@@ -3068,6 +3068,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3153,6 +3169,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     inputRecursoId: function inputRecursoId(id) {
       this.datosIncidencia.recurso_id = id;
+    },
+    setNow: function setNow() {
+      var now = new Date(); // Grab the HH:mm:ss part of the time string
+
+      this.datosIncidencia.hora = now.toTimeString().slice(0, 8);
+    },
+    clearTime: function clearTime() {
+      this.datosIncidencia.hora = '';
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia']))
@@ -82157,28 +82181,61 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c(
-                "section",
-                { staticClass: "col-8" },
-                [
-                  _c("b-form-datepicker", {
+              _c("div", { staticClass: "col-8" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.datosIncidencia.alertants_id,
+                        expression: "datosIncidencia.alertants_id",
+                        modifiers: { number: true }
+                      }
+                    ],
                     staticClass: "form-control",
-                    attrs: {
-                      "value-as-date": true,
-                      "today-button": true,
-                      placeholder: "Data"
-                    },
-                    model: {
-                      value: _vm.datosIncidencia.data,
-                      callback: function($$v) {
-                        _vm.$set(_vm.datosIncidencia, "data", $$v)
-                      },
-                      expression: "datosIncidencia.data"
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return _vm._n(val)
+                          })
+                        _vm.$set(
+                          _vm.datosIncidencia,
+                          "alertants_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  })
-                ],
-                1
-              ),
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { disabled: "", hidden: "" },
+                        domProps: { value: null }
+                      },
+                      [_vm._v("Alertant")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayAlertants, function(alertant) {
+                      return _c(
+                        "option",
+                        { key: alertant.id, domProps: { value: alertant.id } },
+                        [_vm._v(_vm._s(alertant.nom))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-4" }, [
                 _c("input", {
@@ -82574,7 +82631,83 @@ var render = function() {
                     }
                   }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "section",
+                { staticClass: "col-8" },
+                [
+                  _c("b-form-datepicker", {
+                    staticClass: "form-control",
+                    attrs: {
+                      "value-as-date": true,
+                      "today-button": true,
+                      placeholder: "Data"
+                    },
+                    model: {
+                      value: _vm.datosIncidencia.data,
+                      callback: function($$v) {
+                        _vm.$set(_vm.datosIncidencia, "data", $$v)
+                      },
+                      expression: "datosIncidencia.data"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "section",
+                { staticClass: "col-4" },
+                [
+                  _c(
+                    "b-time",
+                    {
+                      attrs: { type: "time" },
+                      model: {
+                        value: _vm.datosIncidencia.hora,
+                        callback: function($$v) {
+                          _vm.$set(_vm.datosIncidencia, "hora", $$v)
+                        },
+                        expression: "datosIncidencia.hora"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex", attrs: { dir: "ltr" } },
+                        [
+                          _vm.datosIncidencia.hora
+                            ? _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    size: "sm",
+                                    variant: "outline-danger"
+                                  },
+                                  on: { click: _vm.clearTime }
+                                },
+                                [_vm._v("Clear time")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "ml-auto",
+                              attrs: { size: "sm", variant: "outline-primary" },
+                              on: { click: _vm.setNow }
+                            },
+                            [_vm._v("Set Now")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           ])
         ]),

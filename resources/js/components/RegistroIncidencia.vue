@@ -9,9 +9,14 @@
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.num_incidencia" class="form-control" type="number" placeholder="Num.Incidencia">
                     </div>
-                    <section class="col-8">
-                        <b-form-datepicker :value-as-date="true" :today-button="true" v-model="datosIncidencia.data" class="form-control" placeholder="Data"></b-form-datepicker>
-                    </section>
+                    <div class="col-8">
+                        <select class="form-control" v-model.number="datosIncidencia.alertants_id">
+                            <option :value="null" disabled hidden>Alertant</option>
+                            <option v-for="alertant in arrayAlertants" :key="alertant.id" :value="alertant.id" >{{ alertant.nom }}</option>
+                        </select>
+                    </div>
+
+
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.telefon_alertant" class="form-control" type="text" placeholder="Telf. alertant">
                     </div>
@@ -62,6 +67,17 @@
                     <div class="col-12">
                         <textarea v-model="datosIncidencia.descripcio" class="form-control" rows="3" placeholder="Descripció incidencia"></textarea>
                     </div>
+                    <section class="col-8">
+                        <b-form-datepicker :value-as-date="true" :today-button="true" v-model="datosIncidencia.data" class="form-control" placeholder="Data"></b-form-datepicker>
+                    </section>
+                    <section class="col-4">
+                        <b-time type="time" v-model="datosIncidencia.hora">
+                            <div class="d-flex" dir="ltr">
+                                <b-button size="sm" variant="outline-danger" v-if="datosIncidencia.hora" @click="clearTime">Clear time</b-button>
+                                <b-button size="sm" variant="outline-primary" class="ml-auto" @click="setNow">Set Now</b-button>
+                            </div>
+                        </b-time>
+                    </section>
                 </div>
             </form>
         </div>
@@ -166,6 +182,14 @@ export default {
         },
         inputRecursoId(id){
             this.datosIncidencia.recurso_id = id;
+        },
+        setNow() {
+            const now = new Date()
+            // Grab the HH:mm:ss part of the time string
+            this.datosIncidencia.hora = now.toTimeString().slice(0, 8)
+        },
+        clearTime() {
+            this.datosIncidencia.hora = ''
         }
     },
     computed: {
