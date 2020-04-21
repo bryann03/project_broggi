@@ -3068,6 +3068,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3085,7 +3101,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tipus_incident_id: null,
         estats_incidencia_id: null,
         tipus_alertant_id: null,
-        alertants_id: null
+        alertants_id: null,
+        recurso_id: null
       },
       datosInidenciaHasRecurso: {
         prioritat: null
@@ -3149,6 +3166,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     mensajeAdd: function mensajeAdd() {
       alert("Incidencia añadida");
+    },
+    inputRecursoId: function inputRecursoId(id) {
+      this.datosIncidencia.recurso_id = id;
+    },
+    setNow: function setNow() {
+      var now = new Date(); // Grab the HH:mm:ss part of the time string
+
+      this.datosIncidencia.hora = now.toTimeString().slice(0, 8);
+    },
+    clearTime: function clearTime() {
+      this.datosIncidencia.hora = '';
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia']))
@@ -81084,7 +81112,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _vm.accionApi === "insert"
+                _vm.accionApi === "insert" || _vm.accionApi === "update"
                   ? _c(
                       "form",
                       {
@@ -81594,7 +81622,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", [
     _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
-      _vm._v("Escoge una opcin a Gestionar")
+      _vm._v("Gestiones Broggi")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row", attrs: { id: "app" } }, [
@@ -82153,28 +82181,61 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c(
-                "section",
-                { staticClass: "col-8" },
-                [
-                  _c("b-form-datepicker", {
+              _c("div", { staticClass: "col-8" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model.number",
+                        value: _vm.datosIncidencia.alertants_id,
+                        expression: "datosIncidencia.alertants_id",
+                        modifiers: { number: true }
+                      }
+                    ],
                     staticClass: "form-control",
-                    attrs: {
-                      "value-as-date": true,
-                      "today-button": true,
-                      placeholder: "Data"
-                    },
-                    model: {
-                      value: _vm.datosIncidencia.data,
-                      callback: function($$v) {
-                        _vm.$set(_vm.datosIncidencia, "data", $$v)
-                      },
-                      expression: "datosIncidencia.data"
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return _vm._n(val)
+                          })
+                        _vm.$set(
+                          _vm.datosIncidencia,
+                          "alertants_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
-                  })
-                ],
-                1
-              ),
+                  },
+                  [
+                    _c(
+                      "option",
+                      {
+                        attrs: { disabled: "", hidden: "" },
+                        domProps: { value: null }
+                      },
+                      [_vm._v("Alertant")]
+                    ),
+                    _vm._v(" "),
+                    _vm._l(_vm.arrayAlertants, function(alertant) {
+                      return _c(
+                        "option",
+                        { key: alertant.id, domProps: { value: alertant.id } },
+                        [_vm._v(_vm._s(alertant.nom))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-4" }, [
                 _c("input", {
@@ -82570,7 +82631,83 @@ var render = function() {
                     }
                   }
                 })
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "section",
+                { staticClass: "col-8" },
+                [
+                  _c("b-form-datepicker", {
+                    staticClass: "form-control",
+                    attrs: {
+                      "value-as-date": true,
+                      "today-button": true,
+                      placeholder: "Data"
+                    },
+                    model: {
+                      value: _vm.datosIncidencia.data,
+                      callback: function($$v) {
+                        _vm.$set(_vm.datosIncidencia, "data", $$v)
+                      },
+                      expression: "datosIncidencia.data"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "section",
+                { staticClass: "col-4" },
+                [
+                  _c(
+                    "b-time",
+                    {
+                      attrs: { type: "time" },
+                      model: {
+                        value: _vm.datosIncidencia.hora,
+                        callback: function($$v) {
+                          _vm.$set(_vm.datosIncidencia, "hora", $$v)
+                        },
+                        expression: "datosIncidencia.hora"
+                      }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "d-flex", attrs: { dir: "ltr" } },
+                        [
+                          _vm.datosIncidencia.hora
+                            ? _c(
+                                "b-button",
+                                {
+                                  attrs: {
+                                    size: "sm",
+                                    variant: "outline-danger"
+                                  },
+                                  on: { click: _vm.clearTime }
+                                },
+                                [_vm._v("Clear time")]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "b-button",
+                            {
+                              staticClass: "ml-auto",
+                              attrs: { size: "sm", variant: "outline-primary" },
+                              on: { click: _vm.setNow }
+                            },
+                            [_vm._v("Set Now")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
             ])
           ])
         ]),
@@ -82687,8 +82824,49 @@ var render = function() {
                   },
                   [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.datosIncidencia.recurso_id,
+                          expression: "datosIncidencia.recurso_id"
+                        }
+                      ],
                       staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: tipus.id }
+                      attrs: { type: "checkbox", id: tipus.id },
+                      domProps: {
+                        checked: Array.isArray(_vm.datosIncidencia.recurso_id)
+                          ? _vm._i(_vm.datosIncidencia.recurso_id, null) > -1
+                          : _vm.datosIncidencia.recurso_id
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.datosIncidencia.recurso_id,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.datosIncidencia,
+                                  "recurso_id",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.datosIncidencia,
+                                  "recurso_id",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.datosIncidencia, "recurso_id", $$c)
+                          }
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c(
@@ -96919,8 +97097,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/project_broggi/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/project_broggi/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\project_broggi\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\project_broggi\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
