@@ -1,3 +1,9 @@
+Skip to content Pull requests Issues Marketplace Explore @danielgalvan11
+bryann03 / project_broggi Private 1 0 0 Code Issues 0 Pull requests 0 Actions
+Projects 0 Security 0 Insights
+project_broggi/resources/js/components/Incidencias.vue @Amrow96 Amrow96
+Solventat problema del merge e4eed5d 12 minutes ago @Amrow96 @danielgalvan11 392
+lines (387 sloc) 11.8 KB
 <template>
   <main>
     <section>
@@ -33,7 +39,9 @@
         @filtered="onFiltered"
       >
         <template v-slot:cell(gestionar)="row">
-          <b-button size="sm" class="mr-1" @click="editIncidencia(row.item)">Editar</b-button>
+          <b-button size="sm" class="mr-1" @click="editIncidencia(row.item)"
+            >Editar</b-button
+          >
         </template>
       </b-table>
       <!-- La Paginación -->
@@ -43,7 +51,9 @@
         :total-rows="rows"
         aria-controls="tablaIncidencies"
       ></b-pagination>
-      <button type="button" @click="nuevo()" class="btn btn-primary btn-block">Afegir Incidencia</button>
+      <button type="button" @click="nuevo()" class="btn btn-primary btn-block">
+        Afegir Incidencia
+      </button>
       <!-- Modal Info  -->
       <b-modal
         id="editIncidenciaModal"
@@ -108,7 +118,8 @@
                   v-for="municipi in arrayMunicipis"
                   :key="municipi.id"
                   :value="municipi.id"
-                >{{ municipi.nom }}</option>
+                  >{{ municipi.nom }}</option
+                >
               </select>
 
               <!-- <input class="form-control" type="text" name="" id="" placeholder="Municipi (AutoComplete)"> -->
@@ -148,7 +159,8 @@
                   v-for="tipus in arrayTipusAlertant"
                   :key="tipus.id"
                   :value="tipus.id"
-                >{{ tipus.tipus }}</option>
+                  >{{ tipus.tipus }}</option
+                >
               </select>
             </div>
             <!-- Alertante TODO: Faltaria que es mostresin en funcio del tipus d'alertant seleccionat-->
@@ -164,7 +176,8 @@
                   v-for="alertant in arrayAlertants"
                   :key="alertant.id"
                   :value="alertant.id"
-                >{{ alertant.nom }}</option>
+                  >{{ alertant.nom }}</option
+                >
               </select>
             </div>
             <!-- Estado Incidencia  -->
@@ -180,7 +193,8 @@
                   v-for="estat in arrayEstatIncidencia"
                   :key="estat.id"
                   :value="estat.id"
-                >{{ estat.estat }}</option>
+                  >{{ estat.estat }}</option
+                >
               </select>
             </div>
             <!-- Tipo Incidencia -->
@@ -196,7 +210,8 @@
                   v-for="tipus in arrayTipusIncidencia"
                   :key="tipus.id"
                   :value="tipus.id"
-                >{{ tipus.tipus }}</option>
+                  >{{ tipus.tipus }}</option
+                >
               </select>
             </div>
             <!-- Descripcion -->
@@ -213,9 +228,16 @@
           </div>
         </form>
         <template v-slot:modal-footer>
-          <b-button size="sm" variant="outline-primary" @click="cancelar()">Cancelar</b-button>
+          <b-button size="sm" variant="outline-primary" @click="cancelar()"
+            >Cancelar</b-button
+          >
           <!-- Button with custom close trigger value -->
-          <b-button size="sm" variant="primary" @click="saveIncident(objectIncidencia.id)">Guardar</b-button>
+          <b-button
+            size="sm"
+            variant="primary"
+            @click="saveIncident(objectIncidencia.id)"
+            >Guardar</b-button
+          >
         </template>
       </b-modal>
     </section>
@@ -234,31 +256,31 @@ export default {
       arrayAlertants: [],
       objectIncidencia: {
         id: null,
-        numero_incidencia: "",
+        numero_incidencia: '',
         data: null,
         hora: null,
-        adreca: "",
-        complement_adreca: "",
-        descripcio: "",
+        adreca: '',
+        complement_adreca: '',
+        descripcio: '',
         municipis_id: null,
         tipus_incident_id: null,
         estats_incidencia_id: null,
         tipus_alertant_id: null,
-        alertants_id: null
+        alertants_id: null,
       },
       arrayIncidencia: [],
       columnasTabla: [
-        { key: "num_incidencia", label: "Numero Incidencia" },
-        { key: "hora", label: "Hora" },
-        { key: "descripcio", label: "Descripció" },
-        { key: "municipis.nom", label: "Municipi" },
-        { key: "tipus_incident.tipus", label: "Tipus Incident" },
-        "gestionar"
+        { key: 'num_incidencia', label: 'Numero Incidencia' },
+        { key: 'hora', label: 'Hora' },
+        { key: 'descripcio', label: 'Descripció' },
+        { key: 'municipis.nom', label: 'Municipi' },
+        { key: 'tipus_incident.tipus', label: 'Tipus Incident' },
+        'gestionar',
       ],
       perPage: 5,
       currentPage: 1,
       filter: null,
-      filterOn: []
+      filterOn: [],
     };
   },
   mounted() {
@@ -273,60 +295,60 @@ export default {
   methods: {
     obtenerIncidencias() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/incidencies")
-        .then(response => {
+        .get('http://localhost:8080/project_broggi/public/api/incidencies')
+        .then((response) => {
           this.arrayIncidencia = response.data;
         });
     },
     obtenerTipusRecursos() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/tipus_recurs")
-        .then(response => {
+        .get('http://localhost:8080/project_broggi/public/api/tipus_recurs')
+        .then((response) => {
           this.arrayTipusRecurs = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     obtenerMunicipis() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/municipis")
-        .then(response => {
+        .get('http://localhost:8080/project_broggi/public/api/municipis')
+        .then((response) => {
           this.arrayMunicipis = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     obtenerTipusAlertant() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/tipus_alertant")
-        .then(response => {
+        .get('http://localhost:8080/project_broggi/public/api/tipus_alertant')
+        .then((response) => {
           this.arrayTipusAlertant = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     obtenerTipusIncidencia() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/tipus_incident")
-        .then(response => {
+        .get('http://localhost:8080/project_broggi/public/api/tipus_incident')
+        .then((response) => {
           this.arrayTipusIncidencia = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     obtenerAlertants() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/alertants")
-        .then(response => {
+        .get('http://localhost:8080/project_broggi/public/api/alertants')
+        .then((response) => {
           this.arrayAlertants = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     obtenerEstatIncidencies() {
       axios
         .get(
-          "http://localhost:8080/project_broggi/public/api/estats_incidencia"
+          'http://localhost:8080/project_broggi/public/api/estats_incidencia'
         )
-        .then(response => {
+        .then((response) => {
           this.arrayEstatIncidencia = response.data;
         })
-        .catch(e => console.log(e));
+        .catch((e) => console.log(e));
     },
     onFiltered(filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
@@ -334,22 +356,20 @@ export default {
       this.currentPage = 1;
     },
     nuevo() {
-      window.location.href = "/project_broggi/public/registroIncidencias";
+      window.location.href = '/project_broggi/public/registroIncidencias';
     },
     editIncidencia(item) {
       let me = this;
       me.objectIncidencia = item;
-
-      this.$bvModal.show("editIncidenciaModal");
+      this.$bvModal.show('editIncidenciaModal');
     },
     saveIncident(idObjecte) {
       let me = this;
-
       axios
-        .put("/incidencies/" + idObjecte, this.objectIncidencia)
+        .put('/incidencies/' + idObjecte, this.objectIncidencia)
         .then(function(response) {
           me.obtenerIncidencias();
-          me.$bvModal.hide("editIncidenciaModal");
+          me.$bvModal.hide('editIncidenciaModal');
         })
         .catch(function(error) {
           me.missatge = error.response.data;
@@ -358,14 +378,14 @@ export default {
     },
     cancelar() {
       this.obtenerIncidencias();
-      this.$bvModal.hide("editIncidenciaModal");
-    }
+      this.$bvModal.hide('editIncidenciaModal');
+    },
   },
   computed: {
     rows() {
       return this.arrayIncidencia.length;
-    }
-  }
+    },
+  },
 };
 </script>
 
