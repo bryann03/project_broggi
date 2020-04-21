@@ -83,7 +83,7 @@
                      @click="mostrarPolicial()">POLICIAL</button>
                 <div v-show="recursPolicial">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosPoliciales" :key="tipus.id" >
-                        <input class="custom-control-input" type="checkbox" :id="tipus.id">
+                        <input v-model="datosIncidencia.recurso_id" class="custom-control-input" type="checkbox" :id="tipus.id">
                         <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
@@ -113,7 +113,8 @@ export default {
                 tipus_incident_id: null,
                 estats_incidencia_id: null,
                 tipus_alertant_id: null,
-                alertants_id: null
+                alertants_id: null,
+                recurso_id: null
             },
             datosInidenciaHasRecurso:{
                 prioritat: null
@@ -162,12 +163,16 @@ export default {
         },
         mensajeAdd(){
             alert("Incidencia añadida");
+        },
+        inputRecursoId(id){
+            this.datosIncidencia.recurso_id = id;
         }
     },
     computed: {
         ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia',
                      'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios',
-                     'arrayAlertants', 'arrayEstatsIncidencia'])
+                     'arrayAlertants', 'arrayEstatsIncidencia']),
+
     },
 }
 </script>

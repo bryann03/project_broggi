@@ -3085,7 +3085,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tipus_incident_id: null,
         estats_incidencia_id: null,
         tipus_alertant_id: null,
-        alertants_id: null
+        alertants_id: null,
+        recurso_id: null
       },
       datosInidenciaHasRecurso: {
         prioritat: null
@@ -3149,6 +3150,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     mensajeAdd: function mensajeAdd() {
       alert("Incidencia añadida");
+    },
+    inputRecursoId: function inputRecursoId(id) {
+      this.datosIncidencia.recurso_id = id;
     }
   }),
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia']))
@@ -81084,7 +81088,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
-                _vm.accionApi === "insert"
+                _vm.accionApi === "insert" || _vm.accionApi === "update"
                   ? _c(
                       "form",
                       {
@@ -81594,7 +81598,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", [
     _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
-      _vm._v("Escoge una opcin a Gestionar")
+      _vm._v("Gestiones Broggi")
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row", attrs: { id: "app" } }, [
@@ -82687,8 +82691,49 @@ var render = function() {
                   },
                   [
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.datosIncidencia.recurso_id,
+                          expression: "datosIncidencia.recurso_id"
+                        }
+                      ],
                       staticClass: "custom-control-input",
-                      attrs: { type: "checkbox", id: tipus.id }
+                      attrs: { type: "checkbox", id: tipus.id },
+                      domProps: {
+                        checked: Array.isArray(_vm.datosIncidencia.recurso_id)
+                          ? _vm._i(_vm.datosIncidencia.recurso_id, null) > -1
+                          : _vm.datosIncidencia.recurso_id
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.datosIncidencia.recurso_id,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = null,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.datosIncidencia,
+                                  "recurso_id",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.datosIncidencia,
+                                  "recurso_id",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.datosIncidencia, "recurso_id", $$c)
+                          }
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _c(
@@ -96919,8 +96964,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/project_broggi/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Applications/XAMPP/xamppfiles/htdocs/project_broggi/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\project_broggi\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\project_broggi\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
