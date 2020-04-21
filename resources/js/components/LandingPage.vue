@@ -94,14 +94,10 @@ export default {
   },
 };
 </script>
-<<<<<<< HEAD
 
 <style lang="scss" scoped>
 section {
-    padding-top: 100px;
-    padding-bottom: 100px;
-
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 </style>
-=======
->>>>>>> daniel
