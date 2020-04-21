@@ -100,7 +100,7 @@ export default {
         aceptar: ["Acceptar", "Aceptar", "Accept"],
         cancelar: ["Cancelar", "Cancelar", "Cancel"],
         buscar: ["Buscar", "Buscar", "Search"],
-        editarAlertant: ["Editar Alertant", "Editar Alertante", "Edit Alerting"]
+        editarAlertant: ["Editar Alertant", "Editar Alertante", "Edit Alerter"]
       },
       alertants: [],
       alertant: {
