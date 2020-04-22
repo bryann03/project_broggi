@@ -16,7 +16,6 @@
                         </select>
                     </div>
 
-
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.telefon_alertant" class="form-control" type="text" placeholder="Telf. alertant">
                     </div>
@@ -88,7 +87,7 @@
                      @click="mostrarSanitari()">SANITARI</button>
                 <div v-show="recursSanitari">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosSanitarios" :key="tipus.id" >
-                        <input class="custom-control-input" type="checkbox" :id="tipus.id">
+                        <input class="custom-control-input" v-model="datosIncidencia.recurso_id" type="checkbox" :id="tipus.id" :value="tipus.id">
                         <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
@@ -99,10 +98,18 @@
                      @click="mostrarPolicial()">POLICIAL</button>
                 <div v-show="recursPolicial">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosPoliciales" :key="tipus.id" >
-                        <input v-model="datosIncidencia.recurso_id" class="custom-control-input" type="checkbox" :id="tipus.id">
+                        <input type="checkbox" v-model="datosIncidencia.recurso_id" class="custom-control-input" :value="tipus.id" :id="tipus.id">
                         <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
+            </div>
+            <h3>PRIORITAT</h3>
+            <div class="list-group list-group-horizontal mt-3 mb-5" id="list-tab" role="tablist">
+                <a @click="selectPrioritat(1)" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">1</a>
+                <a @click="selectPrioritat(2)" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">2</a>
+                <a @click="selectPrioritat(3)" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">3</a>
+                <a @click="selectPrioritat(4)" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">4</a>
+                <a @click="selectPrioritat(5)" class="list-group-item list-group-item-action" data-toggle="list" href="#" role="tab">5</a>
             </div>
         </div>
       </div>
@@ -130,7 +137,8 @@ export default {
                 estats_incidencia_id: null,
                 tipus_alertant_id: null,
                 alertants_id: null,
-                recurso_id: null
+                recurso_id: [],
+                prioritat: null
             },
             datosInidenciaHasRecurso:{
                 prioritat: null
@@ -138,7 +146,8 @@ export default {
             recursSanitari: false,
             buttonSanitari: true,
             recursPolicial: false,
-            buttonPolicial: true
+            buttonPolicial: true,
+            recursos:[]
         }
     },
     created() {
@@ -190,13 +199,16 @@ export default {
         },
         clearTime() {
             this.datosIncidencia.hora = ''
+        },
+        selectPrioritat(item){
+            console.log(item);
+            this.datosIncidencia.prioritat = item;
         }
     },
     computed: {
         ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia',
                      'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios',
                      'arrayAlertants', 'arrayEstatsIncidencia']),
-
     },
 }
 </script>
@@ -215,5 +227,15 @@ form div{
     display:flex;
     justify-content:center;
     align-items:center;
+}
+.list-group a{
+    height: 5rem;
+    font-size: 3rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.list-group-item.active{
+    background-color: darkorange;
 }
 </style>
