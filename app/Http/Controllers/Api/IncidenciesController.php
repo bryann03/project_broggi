@@ -28,6 +28,7 @@ class IncidenciesController extends Controller
      */
     public function store(Request $request)
     {
+        $fechaRecurso = new Date();
         $incidencies = new Incidencies();
 
         $incidencies->adreca = $request->input('adreca');
@@ -43,7 +44,21 @@ class IncidenciesController extends Controller
         $incidencies->tipus_alertant_id = $request->input('tipus_alertant_id');
         $incidencies->alertants_id = $request->input('alertants_id');
 
+        $recursos_id = $request->input('recursos_id');
+        $prioritat = $request->input('prioritat');
+
         try {
+            $incidencies->save();
+            $incidencies->recursos()->attach($recursos_id, [
+                'prioritat' => $prioritat,
+                'hora_activacio' => $fechaRecurso,
+                'hora_mobilitzacio' => $fechaRecurso,
+                'hora_assistencia' => $fechaRecurso,
+                'hora_transport' => $fechaRecurso,
+                'hora_arribada_hospital' => $fechaRecurso,
+                'hora_transferencia' => $fechaRecurso,
+                'hora_finalitzacio' => $fechaRecurso,
+            ]);
             $incidencies->save();
             $respuesta = (new IncidenciesResource($incidencies))
                 ->response()

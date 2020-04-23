@@ -15,7 +15,6 @@
                             <option v-for="alertant in arrayAlertants" :key="alertant.id" :value="alertant.id" >{{ alertant.nom }}</option>
                         </select>
                     </div>
-
                     <div class="col-4">
                         <input v-model.number="datosIncidencia.telefon_alertant" class="form-control" type="text" placeholder="Telf. alertant">
                     </div>
@@ -87,7 +86,7 @@
                      @click="mostrarSanitari()">SANITARI</button>
                 <div v-show="recursSanitari">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosSanitarios" :key="tipus.id" >
-                        <input class="custom-control-input" v-model="datosIncidencia.recurso_id" type="checkbox" :id="tipus.id" :value="tipus.id">
+                        <input class="custom-control-input" v-model="datosIncidencia.recursos_id" type="checkbox" :id="tipus.id" :value="tipus.id">
                         <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
@@ -98,7 +97,7 @@
                      @click="mostrarPolicial()">POLICIAL</button>
                 <div v-show="recursPolicial">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosPoliciales" :key="tipus.id" >
-                        <input type="checkbox" v-model="datosIncidencia.recurso_id" class="custom-control-input" :value="tipus.id" :id="tipus.id">
+                        <input type="checkbox" v-model="datosIncidencia.recursos_id" class="custom-control-input" :value="tipus.id" :id="tipus.id">
                         <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
                     </div>
                 </div>
@@ -137,7 +136,7 @@ export default {
                 estats_incidencia_id: null,
                 tipus_alertant_id: null,
                 alertants_id: null,
-                recurso_id: [],
+                recursos_id: [],
                 prioritat: null
             },
             datosInidenciaHasRecurso:{
@@ -146,8 +145,7 @@ export default {
             recursSanitari: false,
             buttonSanitari: true,
             recursPolicial: false,
-            buttonPolicial: true,
-            recursos:[]
+            buttonPolicial: true
         }
     },
     created() {
@@ -157,7 +155,6 @@ export default {
         this.getApi({ruta: 'alertants', nombreTabla: 'alertants'});
         this.getApi({ruta: 'estats_incidencia', nombreTabla: 'estats_incidencia'});
         this.getTipusRecursos();
-        console.log("created");
     },
     methods: {
         ...mapActions(['getApi']),
@@ -169,9 +166,6 @@ export default {
                 })
                 .catch(function(error){
                     console.log(error);
-                    me.mensajeError = error.response.data;
-                    me.errorRol = true;
-                    me.arrrayMensajesError.push(me.mensajeError.error);
                 })
         },
         mostrarSanitari(){
