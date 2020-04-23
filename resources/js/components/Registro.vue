@@ -2,29 +2,61 @@
   <main>
     <section>
       <div class="text-center mb-3">
-        <h1>{{ titulo }}</h1>
+        <h1>{{ textos.registrarUsuario[idioma] }}</h1>
       </div>
       <div class="row">
         <div class="col-2 col-lg-4"></div>
         <div class="col-8 col-lg-4 text-center formRegistro">
           <form action method="post" enctype="multipart/form-data">
-            <input required class="form-control" name="nom" type="text" placeholder="Nom" v-model="objectUsuario.nom" />
-            <input required class="form-control" name="codi" type="text" placeholder="Codi" v-model="objectUsuario.codi" />
+            <input
+              required
+              class="form-control"
+              name="nom"
+              type="text"
+              :placeholder="textos.nom[idioma]"
+              v-model="objectUsuario.nom"
+            />
+            <input
+              required
+              class="form-control"
+              name="codi"
+              type="text"
+              :placeholder="textos.codi[idioma]"
+              v-model="objectUsuario.codi"
+            />
             <div class="row m-0">
+              <input
+                required
+                class="form-control col-10 pwd"
+                name="contrasenya"
+                type="password"
+                :placeholder="textos.password[idioma]"
+                v-model="objectUsuario.contrasenya"
+              />
 
-              <input required class="form-control col-10 pwd" name="contrasenya" type="password"
-                    placeholder="Contrasenya" v-model="objectUsuario.contrasenya" />
-
-              <button class="btn btn-primary reveal col-2 form-control" @click="mostrarContraseña()" type="button">
+              <button
+                class="btn btn-primary reveal col-2 form-control"
+                @click="mostrarContraseña()"
+                type="button"
+              >
                 <i class="fas fa-eye"></i>
               </button>
             </div>
-            <select required class="form-control" name="rols_id" v-model.number="objectUsuario.rols_id">
-              <option :value="null" disabled hidden>Selecciona el teu rol</option>
-              <option v-for="rol in arrayRoles" :key="rol.id" :value="rol.id" >{{ rol.nom }}</option>
+            <select
+              required
+              class="form-control"
+              name="rols_id"
+              v-model.number="objectUsuario.rols_id"
+            >
+              <option :value="null" disabled hidden>{{ textos.selRol[idioma] }}</option>
+              <option v-for="rol in arrayRoles" :key="rol.id" :value="rol.id">{{ rol.nom }}</option>
             </select>
             <p class="text-danger">{{ aviso }}</p>
-            <button type="button" class="btn btn-primary btn-block mt-3" @click="insertUsuari()">Registrarse</button>
+            <button
+              type="button"
+              class="btn btn-primary btn-block mt-3"
+              @click="insertUsuari()"
+            >{{ textos.registrarse[idioma] }}</button>
           </form>
         </div>
         <div class="col-2 col-lg-4"></div>
@@ -37,16 +69,37 @@
 export default {
   data() {
     return {
-      titulo: "Registro work's",
+      idioma: 0,
+      textos: {
+        registrarse: ["Registrarse", "Registrarse", "Sign In"],
+        registrarUsuario: [
+          "Registrar Usuari",
+          "Registrar Usuario",
+          "User Register"
+        ],
+        codi: ["Codi", "Codigo", "Code"],
+        password: ["Contrasenya", "Contraseña", "Password"],
+        nom: ["Nom", "Nombre", "Name"],
+        selRol: [
+          "Selecciona el teu Rol",
+          "Selecciona tu Rol",
+          "Choose your Role"
+        ],
+        msgAvis: [
+          "Siusplau, omple tots els camps!",
+          "¡Por favor, rellena todos los campos!",
+          "Please fill in all fields!"
+        ]
+      },
       objectUsuario: {
         id: null,
-        codi: '',
-        nom: '',
-        contrasenya: '',
+        codi: "",
+        nom: "",
+        contrasenya: "",
         rols_id: null
       },
       arrayRoles: null,
-      aviso:"",
+      aviso: "",
       registrado: false
     };
   },
@@ -62,38 +115,43 @@ export default {
         $pwd.attr("type", "password");
       }
     },
-    getRoles(){
+    getRoles() {
       let me = this;
-      axios.get("/rols")
-          .then(function(response){
-            me.arrayRoles = response.data;
-          })
-          .catch(function(error){
-            console.log(error);
-          })
+      axios
+        .get("/rols")
+        .then(function(response) {
+          me.arrayRoles = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
-    insertUsuari(){
+    insertUsuari() {
       let me = this;
 
-      if(me.objectUsuario.nom != "" && me.objectUsuario.codi != "" &&
-         me.objectUsuario.contrasenya != "" && me.objectUsuario.rols_id != null){
-           axios.post("/usuaris", this.objectUsuario)
-                .then(function(response){
-                  console.log("AÑADIDO");
-                  me.registrado = true;
-                  me.goToLogin();
-                })
-                .catch(function(error){
-                  console.log(error);
-                })
-      }
-      else{
-        console.log("FALTAN CAMPOS")
-        this.aviso = "¡Por favor, rellena todos los campos!"
+      if (
+        me.objectUsuario.nom != "" &&
+        me.objectUsuario.codi != "" &&
+        me.objectUsuario.contrasenya != "" &&
+        me.objectUsuario.rols_id != null
+      ) {
+        axios
+          .post("/usuaris", this.objectUsuario)
+          .then(function(response) {
+            console.log("AÑADIDO");
+            me.registrado = true;
+            me.goToLogin();
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      } else {
+        console.log("FALTAN CAMPOS");
+        this.aviso = this.textos.registrarse[this.idioma];
       }
     },
-    goToLogin(){
-      window.location.href = '/project_broggi/public';
+    goToLogin() {
+      window.location.href = "/project_broggi/public";
     }
   },
   mounted() {
@@ -107,7 +165,9 @@ section {
   padding-top: 100px;
   padding-bottom: 100px;
 }
-input, select, .pwd {
+input,
+select,
+.pwd {
   margin-bottom: 1.5rem;
 }
 </style>
