@@ -2,19 +2,19 @@
   <main>
     <section>
       <div class="text-center mb-3">
-        <h1>{{ titulo }}</h1>
+        <h1>{{textos.iniciarSession[idioma]}}</h1>
       </div>
       <div class="row">
         <div class="col-2 col-lg-4 col-md-3"></div>
         <div class="col-8 col-lg-4 col-md-6 text-center">
           <form action method="post" enctype="multipart/form-data">
             <div>
-              <label class="float-left">User</label>
+              <label class="float-left">{{textos.usuari[idioma]}}</label>
               <input required class="form-control" name="codi" type="text" v-model="username" />
             </div>
 
             <div class="mt-3 mb-4">
-              <label class="float-left">Password</label>
+              <label class="float-left">{{textos.password[idioma]}}</label>
               <input
                 required
                 class="form-control"
@@ -28,12 +28,12 @@
               type="button"
               @click="openLanding()"
               class="btn btn-primary btn-block"
-            >Iniciar sesión</button>
+            >{{textos.iniciarSession[idioma]}}</button>
             <button
               type="button"
               @click="openRegistro()"
               class="btn btn-outline-dark btn-block"
-            >Registrarse</button>
+            >{{textos.registrarse[idioma]}}</button>
           </form>
         </div>
         <div class="col-2 col-lg-4 col-md-3"></div>
@@ -46,7 +46,14 @@
 export default {
   data() {
     return {
-      titulo: "Iniciar sesión",
+      idioma: 0,
+      textos: {
+        usuari: ["Usuari", "Usuario", "User"],
+        password: ["Contrasenya", "Contraseña", "Password"],
+        registrarse: ["Registrarse", "Registrarse", "Sign In"],
+        iniciarSession: ["Iniciar Sessió", "Iniciar Sesión", "Login"]
+      },
+
       username: "",
       password: ""
     };
