@@ -52,10 +52,10 @@ export default new Vuex.Store({
             let me = state;
             for (let i = 0; i < datosRecibidos.length; i++) {
                 if(datosRecibidos[i].tipus_recurs.esPolicial === 1){
-                    me.arrayRecursosPoliciales.push(datosRecibidos[i].tipus_recurs);
+                    me.arrayRecursosPoliciales.push(datosRecibidos[i]);
                 }
                 else{
-                    me.arrayRecursosSanitarios.push(datosRecibidos[i].tipus_recurs);
+                    me.arrayRecursosSanitarios.push(datosRecibidos[i]);
                 }
             }
         },

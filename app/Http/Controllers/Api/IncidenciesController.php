@@ -47,7 +47,6 @@ class IncidenciesController extends Controller
         $incidencies->alertants_id = $request->input('alertants_id');
 
         $prioritat = $request->input('prioritat');
-
         try {
             $incidencies->save();
             if($request->input('recursos_id') != null){

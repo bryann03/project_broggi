@@ -87,7 +87,7 @@
                 <div v-show="recursSanitari">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosSanitarios" :key="tipus.id" >
                         <input class="custom-control-input" v-model="datosIncidencia.recursos_id" type="checkbox" :id="tipus.id" :value="tipus.id">
-                        <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
+                        <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus_recurs.tipus }}</label>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@
                 <div v-show="recursPolicial">
                     <div class="custom-control custom-checkbox m-3" v-for="tipus in arrayRecursosPoliciales" :key="tipus.id" >
                         <input type="checkbox" v-model="datosIncidencia.recursos_id" class="custom-control-input" :value="tipus.id" :id="tipus.id">
-                        <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus }}</label>
+                        <label class="custom-control-label" :for="tipus.id">{{ tipus.tipus_recurs.tipus }}</label>
                     </div>
                 </div>
             </div>
@@ -166,6 +166,7 @@ export default {
             axios.post("/incidencies", this.datosIncidencia)
                 .then(function(response){
                     me.mensajeAdd();
+                    window.location.href = '/project_broggi/public/incidencias';
                 })
                 .catch(function(error){
                     console.log(error);

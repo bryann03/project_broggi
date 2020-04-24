@@ -3432,6 +3432,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var me = this;
       axios.post("/incidencies", this.datosIncidencia).then(function (response) {
         me.mensajeAdd();
+        window.location.href = '/project_broggi/public/incidencias';
       })["catch"](function (error) {
         console.log(error);
       });
@@ -83689,7 +83690,7 @@ var render = function() {
                         staticClass: "custom-control-label",
                         attrs: { for: tipus.id }
                       },
-                      [_vm._v(_vm._s(tipus.tipus))]
+                      [_vm._v(_vm._s(tipus.tipus_recurs.tipus))]
                     )
                   ]
                 )
@@ -83797,7 +83798,7 @@ var render = function() {
                         staticClass: "custom-control-label",
                         attrs: { for: tipus.id }
                       },
-                      [_vm._v(_vm._s(tipus.tipus))]
+                      [_vm._v(_vm._s(tipus.tipus_recurs.tipus))]
                     )
                   ]
                 )
@@ -98047,9 +98048,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       for (var i = 0; i < datosRecibidos.length; i++) {
         if (datosRecibidos[i].tipus_recurs.esPolicial === 1) {
-          me.arrayRecursosPoliciales.push(datosRecibidos[i].tipus_recurs);
+          me.arrayRecursosPoliciales.push(datosRecibidos[i]);
         } else {
-          me.arrayRecursosSanitarios.push(datosRecibidos[i].tipus_recurs);
+          me.arrayRecursosSanitarios.push(datosRecibidos[i]);
         }
       }
     },
