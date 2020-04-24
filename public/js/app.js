@@ -3369,7 +3369,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3388,7 +3387,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         estats_incidencia_id: null,
         tipus_alertant_id: null,
         alertants_id: null,
-        recurso_id: [],
+        recursos_id: [],
         prioritat: null
       },
       datosInidenciaHasRecurso: {
@@ -3397,8 +3396,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       recursSanitari: false,
       buttonSanitari: true,
       recursPolicial: false,
-      buttonPolicial: true,
-      recursos: []
+      buttonPolicial: true
     };
   },
   created: function created() {
@@ -3422,8 +3420,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ruta: 'estats_incidencia',
       nombreTabla: 'estats_incidencia'
     });
+    this.getApi({
+      ruta: 'recursos',
+      nombreTabla: 'recursos'
+    });
+    console.log(this.arrayRecursosSanitarios);
     this.getTipusRecursos();
-    console.log("created");
   },
   methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
     insertIncidencia: function insertIncidencia() {
@@ -3432,9 +3434,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         me.mensajeAdd();
       })["catch"](function (error) {
         console.log(error);
-        me.mensajeError = error.response.data;
-        me.errorRol = true;
-        me.arrrayMensajesError.push(me.mensajeError.error);
       });
     },
     mostrarSanitari: function mostrarSanitari() {
@@ -3471,7 +3470,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.datosIncidencia.prioritat = item;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia', 'arrayRecursos']))
 });
 
 /***/ }),
@@ -83641,22 +83640,22 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.datosIncidencia.recurso_id,
-                          expression: "datosIncidencia.recurso_id"
+                          value: _vm.datosIncidencia.recursos_id,
+                          expression: "datosIncidencia.recursos_id"
                         }
                       ],
                       staticClass: "custom-control-input",
                       attrs: { type: "checkbox", id: tipus.id },
                       domProps: {
                         value: tipus.id,
-                        checked: Array.isArray(_vm.datosIncidencia.recurso_id)
-                          ? _vm._i(_vm.datosIncidencia.recurso_id, tipus.id) >
+                        checked: Array.isArray(_vm.datosIncidencia.recursos_id)
+                          ? _vm._i(_vm.datosIncidencia.recursos_id, tipus.id) >
                             -1
-                          : _vm.datosIncidencia.recurso_id
+                          : _vm.datosIncidencia.recursos_id
                       },
                       on: {
                         change: function($event) {
-                          var $$a = _vm.datosIncidencia.recurso_id,
+                          var $$a = _vm.datosIncidencia.recursos_id,
                             $$el = $event.target,
                             $$c = $$el.checked ? true : false
                           if (Array.isArray($$a)) {
@@ -83666,19 +83665,19 @@ var render = function() {
                               $$i < 0 &&
                                 _vm.$set(
                                   _vm.datosIncidencia,
-                                  "recurso_id",
+                                  "recursos_id",
                                   $$a.concat([$$v])
                                 )
                             } else {
                               $$i > -1 &&
                                 _vm.$set(
                                   _vm.datosIncidencia,
-                                  "recurso_id",
+                                  "recursos_id",
                                   $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                 )
                             }
                           } else {
-                            _vm.$set(_vm.datosIncidencia, "recurso_id", $$c)
+                            _vm.$set(_vm.datosIncidencia, "recursos_id", $$c)
                           }
                         }
                       }
@@ -83749,22 +83748,22 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.datosIncidencia.recurso_id,
-                          expression: "datosIncidencia.recurso_id"
+                          value: _vm.datosIncidencia.recursos_id,
+                          expression: "datosIncidencia.recursos_id"
                         }
                       ],
                       staticClass: "custom-control-input",
                       attrs: { type: "checkbox", id: tipus.id },
                       domProps: {
                         value: tipus.id,
-                        checked: Array.isArray(_vm.datosIncidencia.recurso_id)
-                          ? _vm._i(_vm.datosIncidencia.recurso_id, tipus.id) >
+                        checked: Array.isArray(_vm.datosIncidencia.recursos_id)
+                          ? _vm._i(_vm.datosIncidencia.recursos_id, tipus.id) >
                             -1
-                          : _vm.datosIncidencia.recurso_id
+                          : _vm.datosIncidencia.recursos_id
                       },
                       on: {
                         change: function($event) {
-                          var $$a = _vm.datosIncidencia.recurso_id,
+                          var $$a = _vm.datosIncidencia.recursos_id,
                             $$el = $event.target,
                             $$c = $$el.checked ? true : false
                           if (Array.isArray($$a)) {
@@ -83774,19 +83773,19 @@ var render = function() {
                               $$i < 0 &&
                                 _vm.$set(
                                   _vm.datosIncidencia,
-                                  "recurso_id",
+                                  "recursos_id",
                                   $$a.concat([$$v])
                                 )
                             } else {
                               $$i > -1 &&
                                 _vm.$set(
                                   _vm.datosIncidencia,
-                                  "recurso_id",
+                                  "recursos_id",
                                   $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                 )
                             }
                           } else {
-                            _vm.$set(_vm.datosIncidencia, "recurso_id", $$c)
+                            _vm.$set(_vm.datosIncidencia, "recursos_id", $$c)
                           }
                         }
                       }
@@ -98022,16 +98021,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     tipus_recurs: function tipus_recurs(state, datosRecibidos) {
       state.arrayTipusRecurs = datosRecibidos;
       console.log("array ->", state.arrayTipusRecurs);
-      console.log("datos ->", datosRecibidos);
-      var me = state;
-
-      for (var i = 0; i < datosRecibidos.length; i++) {
-        if (datosRecibidos[i].esPolicial === 1) {
-          me.arrayRecursosPoliciales.push(datosRecibidos[i]);
-        } else {
-          me.arrayRecursosSanitarios.push(datosRecibidos[i]);
-        }
-      }
+      console.log("datos ->", datosRecibidos); // let me = state;
+      // for (let i = 0; i < datosRecibidos.length; i++) {
+      //     if(datosRecibidos[i].esPolicial === 1){
+      //         me.arrayRecursosPoliciales.push(datosRecibidos[i]);
+      //     }
+      //     else{
+      //         me.arrayRecursosSanitarios.push(datosRecibidos[i]);
+      //     }
+      // }
     },
     municipis: function municipis(state, datosRecibidos) {
       state.arrayMunicipis = datosRecibidos;
@@ -98044,6 +98042,16 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     recursos: function recursos(state, datosRecibidos) {
       state.arrayRecursos = datosRecibidos;
+      console.log("datos ->", datosRecibidos);
+      var me = state;
+
+      for (var i = 0; i < datosRecibidos.length; i++) {
+        if (datosRecibidos[i].tipus_recurs.esPolicial === 1) {
+          me.arrayRecursosPoliciales.push(datosRecibidos[i].tipus_recurs);
+        } else {
+          me.arrayRecursosSanitarios.push(datosRecibidos[i].tipus_recurs);
+        }
+      }
     },
     alertants: function alertants(state, datosRecibidos) {
       state.arrayAlertants = datosRecibidos;

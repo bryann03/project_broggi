@@ -27,15 +27,15 @@ export default new Vuex.Store({
             state.arrayTipusRecurs = datosRecibidos;
             console.log("array ->", state.arrayTipusRecurs);
             console.log("datos ->", datosRecibidos);
-            let me = state;
-            for (let i = 0; i < datosRecibidos.length; i++) {
-                if(datosRecibidos[i].esPolicial === 1){
-                    me.arrayRecursosPoliciales.push(datosRecibidos[i]);
-                }
-                else{
-                    me.arrayRecursosSanitarios.push(datosRecibidos[i]);
-                }
-            }
+            // let me = state;
+            // for (let i = 0; i < datosRecibidos.length; i++) {
+            //     if(datosRecibidos[i].esPolicial === 1){
+            //         me.arrayRecursosPoliciales.push(datosRecibidos[i]);
+            //     }
+            //     else{
+            //         me.arrayRecursosSanitarios.push(datosRecibidos[i]);
+            //     }
+            // }
         },
         municipis(state, datosRecibidos){
             state.arrayMunicipis = datosRecibidos;
@@ -48,6 +48,16 @@ export default new Vuex.Store({
         },
         recursos(state, datosRecibidos){
             state.arrayRecursos = datosRecibidos;
+            console.log("datos ->", datosRecibidos);
+            let me = state;
+            for (let i = 0; i < datosRecibidos.length; i++) {
+                if(datosRecibidos[i].tipus_recurs.esPolicial === 1){
+                    me.arrayRecursosPoliciales.push(datosRecibidos[i].tipus_recurs);
+                }
+                else{
+                    me.arrayRecursosSanitarios.push(datosRecibidos[i].tipus_recurs);
+                }
+            }
         },
         alertants(state, datosRecibidos){
             state.arrayAlertants = datosRecibidos;

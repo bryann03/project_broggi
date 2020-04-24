@@ -154,6 +154,9 @@ export default {
         this.getApi({ruta: 'tipus_incident', nombreTabla: 'tipus_incident'});
         this.getApi({ruta: 'alertants', nombreTabla: 'alertants'});
         this.getApi({ruta: 'estats_incidencia', nombreTabla: 'estats_incidencia'});
+        this.getApi({ruta: 'recursos', nombreTabla: 'recursos'});
+        console.log(this.arrayRecursosSanitarios);
+
         this.getTipusRecursos();
     },
     methods: {
@@ -202,7 +205,7 @@ export default {
     computed: {
         ...mapState(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia',
                      'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios',
-                     'arrayAlertants', 'arrayEstatsIncidencia']),
+                     'arrayAlertants', 'arrayEstatsIncidencia', 'arrayRecursos']),
     },
 }
 </script>
