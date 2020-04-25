@@ -36,6 +36,8 @@ Vue.component("landing", require("./components/LandingPage.vue").default);
 Vue.component("incidencias", require("./components/Incidencias.vue").default);
 Vue.component("alertants", require('./components/AlertantsComponent.vue').default);
 Vue.component("addalertant", require('./components/AlertantsAddComponent.vue').default);
+Vue.component("incidencies-tablet", require('./components/IncidenciesTablet.vue').default);
+Vue.component("card-incidencia", require('./components/CardIncidencia.vue').default);
 
 Vue.use(BootstrapVue);
 

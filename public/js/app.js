@@ -1957,13 +1957,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      idioma: 0,
+      textos: {
+        nom: ["Nom", "Nombre", "Name"],
+        adreca: ["Adreça", "Dirección", "Address"],
+        telefon: ["Telèfon", "Telefono", "Phone"],
+        afegir: ["Afegir", "Añadir", "Add"]
+      },
       alertant: {
-        "nom": "",
-        "adreca": "",
-        "tel": ""
+        nom: "",
+        adreca: "",
+        tel: ""
       }
     };
   },
@@ -1978,7 +2003,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
   }
 });
 
@@ -2038,9 +2063,64 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      idioma: 0,
+      textos: {
+        nom: ["Nom:", "Nombre:", "Name:"],
+        adreca: ["Adreça:", "Dirección:", "Address:"],
+        telefon: ["Telèfon:", "Telefono:", "Phone:"],
+        editar: ["Editar", "Editar", "Edit"],
+        eliminar: ["Eliminar", "Eliminar", "Remove"],
+        aceptar: ["Acceptar", "Aceptar", "Accept"],
+        cancelar: ["Cancelar", "Cancelar", "Cancel"],
+        buscar: ["Buscar", "Buscar", "Search"],
+        editarAlertant: ["Editar Alertant", "Editar Alertante", "Edit Alerter"]
+      },
       alertants: [],
       alertant: {
         id: null,
@@ -2049,22 +2129,27 @@ __webpack_require__.r(__webpack_exports__);
         adreca: "",
         municipis_id: null,
         telefon: "",
-        tipus_alertant_id: ''
+        tipus_alertant_id: ""
       },
       perPage: 5,
       currentPage: 1,
       fields: [{
-        key: 'nom'
+        key: "nom",
+        //   {{textos.nom[idioma]}}
+        lavel: "Nom"
       }, {
-        key: 'adreca',
-        label: 'Adreça'
+        key: "adreca",
+        //   {{textos.adreca[idioma]}}
+        label: "Adreça"
       }, {
-        key: 'telefon',
-        label: 'Telèfon'
+        key: "telefon",
+        //   {{textos.telefon[idioma]}}
+        label: "Telèfon"
       }, "gestionar"],
       editAlertantModal: {
-        id: 'editAlertantModal',
-        title: 'EDITAR ALERTANTE',
+        id: "editAlertantModal",
+        // {{textos.editAlertant[idioma]}}
+        title: "EDITAR ALERTANTE",
         info: {
           name: "",
           adress: "",
@@ -2072,9 +2157,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       currentAlertant: [],
-      filter: null,
-      aceptar: "Aceptar",
-      cancelar: "Cancelar"
+      filter: null
     };
   },
   created: function created() {
@@ -2109,7 +2192,7 @@ __webpack_require__.r(__webpack_exports__);
       this.editAlertantModal.info.name = item.nom;
       this.editAlertantModal.info.adress = item.adreca;
       this.editAlertantModal.info.tel = item.telefon;
-      this.$bvModal.show('editAlertantModal');
+      this.$bvModal.show("editAlertantModal");
     },
     saveAlertant: function saveAlertant() {
       var me = this;
@@ -2122,8 +2205,73 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    console.log('Component mounted.');
+    console.log("Component mounted.");
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardIncidencia.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CardIncidencia.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      datosIncidencia: {
+        id: null,
+        num_incidencia: null,
+        telefon_alertant: null,
+        data: null,
+        hora: null,
+        adreca: "",
+        complement_adreca: "",
+        descripcio: "",
+        municipis_id: null,
+        tipus_incident_id: null,
+        estats_incidencia_id: null,
+        tipus_alertant_id: null,
+        alertants_id: null,
+        recursos_id: [],
+        prioritat: null
+      }
+    };
+  },
+  created: function created() {
+    console.log(this.objectIncidencia);
+  },
+  props: ['objectIncidencia']
 });
 
 /***/ }),
@@ -2319,12 +2467,187 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     var _ref;
 
     return _ref = {
+      idioma: 0,
+      textos: {
+        gestioRecursos: ["Gestió de Recursos", "Gestión de Recursos", "Resource's Management"],
+        recursos: ["Recursos", "Recursos", "Resources"],
+        recursosAsignados: ["Recursos Asignats", "Recursos Asignados", "Allocated Resources"],
+        buscar: ["Buscar", "Buscar", "Search"],
+        limpiar: ["Neteja", "Limpia", "Clear"],
+        editar: ["Editar", "Editar", "Edit"],
+        borrar: ["Esborrar", "Borrar", "Delete"],
+        borrarRecurso: ["Esborrar Recurs", "Borrar Recurso", "Delete Resoursce"],
+        confirmarBorrarRecurso: ["Vols esborrar el recurs amb el codi", "Quieres borrar el recurso con el codigo", "Would you like to delete the resource with the code"],
+        cancelar: ["Cancelar", "Cancelar", "Cancel"],
+        asignarRecurso: ["Asignar Recurs", "Asignar Recurso", "Asign Resoursce"],
+        anyadirRecurso: ["Afegir Recurs", "Añadir Recurso", "Add Resoursce"],
+        editarRecurso: ["Editar Recurs", "Editar Recurso", "Edit Resoursce"],
+        actualitzat: ["Actualitzat", "Actualizado", "Updated"],
+        msgActualitzat: ["Les dades han sigut actualitzades correctament", "Los datos han sido actualizados correctamente", "The data has been updated correctly"],
+        codigoRecurso: ["Codi Recurs", "Codigo Recurso", "Resoursce's Code"],
+        tipoRecurso: ["Tipus Recurs", "Tipo Recurso", "Resoursce's Type"],
+        usuari: ["Usuari", "Usuario", "User"],
+        guardar: ["Guardar", "Guardar", "Save"],
+        asignar: ["Asignar", "Asignar", "Asign"],
+        actualizar: ["Actualitzar", "Actualizar", "Update"],
+        cerrar: ["Tanca", "Cerrar", "Close"],
+        policial: ["Policial", "Policial", "Police"],
+        sanitario: ["Sanitari", "Sanitario", "Sanitary"],
+        nombreRecurso: ["Nom del Recurs", "Nombre del Recurso", "Resoursce's name"]
+      },
       objectRecurso: {
         id: null,
         codi: "",
@@ -2337,73 +2660,73 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         esPolicial: null
       },
       columnasTablaAsignados: [{
-        key: 'codi',
+        key: "codi",
         sortable: true,
-        label: 'Codi'
+        label: "Codi"
       }, {
-        key: 'tipus_recurs.tipus',
+        key: "tipus_recurs.tipus",
         sortable: true,
-        label: 'Tipus recurs'
+        label: "Tipus recurs"
       }, {
-        key: 'usuaris.nom',
+        key: "usuaris.nom",
         sortable: true,
-        label: 'Usuari'
+        label: "Usuari"
       }, {
-        key: 'manage',
-        label: 'Manage'
+        key: "manage",
+        label: "Manage"
       }],
       columnasTablaRecursos: [{
-        key: 'tipus',
+        key: "tipus",
         sortable: true,
-        label: 'Nom recurs'
+        label: "Nom recurs"
       }, {
-        key: 'manage',
-        label: 'Manage'
+        key: "manage",
+        label: "Manage"
       }],
       tituloModal: "",
       modal: 0,
       errorRol: false,
       accionApi: "",
       arrrayMensajesError: []
-    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _defineProperty(_ref, "headVariant", 'dark'), _defineProperty(_ref, "filter", null), _defineProperty(_ref, "filterRecursos", null), _ref;
+    }, _defineProperty(_ref, "tituloModal", ""), _defineProperty(_ref, "perPage", 5), _defineProperty(_ref, "currentPage", 1), _defineProperty(_ref, "currentPageRecursos", 1), _defineProperty(_ref, "sectionAsignados", false), _defineProperty(_ref, "sectionRecursos", true), _defineProperty(_ref, "headVariant", "dark"), _defineProperty(_ref, "filter", null), _defineProperty(_ref, "filterRecursos", null), _ref;
   },
   created: function created() {
     this.getApi({
-      ruta: 'tipus_alertant',
-      nombreTabla: 'tipus_alertant'
+      ruta: "tipus_alertant",
+      nombreTabla: "tipus_alertant"
     });
     this.getTipusRecursos();
     this.getApi({
-      ruta: 'usuaris',
-      nombreTabla: 'usuaris'
+      ruta: "usuaris",
+      nombreTabla: "usuaris"
     });
     this.getRecursos();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi', 'postApi']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi", "postApi"]), {
     abrirModal: function abrirModal(accionApi) {
       var dataRecurs = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
 
       switch (accionApi) {
-        case 'insert':
+        case "insert":
           this.modal = 1;
-          this.tituloModal = "Asignar recurs";
+          this.tituloModal = this.textos.asignarRecurso[this.idioma];
           this.accionApi = accionApi;
           break;
 
-        case 'insertTipusRecurs':
+        case "insertTipusRecurs":
           this.modal = 1;
-          this.tituloModal = "Insertar recurs";
+          this.tituloModal = this.textos.anyadirRecurso[this.idioma];
           this.accionApi = accionApi;
           break;
 
-        case 'update':
+        case "update":
           this.modal = 1;
-          this.tituloModal = 'Editar recurs';
+          this.tituloModal = this.textos.editarRecurso[this.idioma];
           this.accionApi = accionApi;
-          this.objectRecurso.id = dataRecurs['id'];
-          this.objectRecurso.codi = dataRecurs['codi'];
-          this.objectRecurso.tipus_recurs_id = dataRecurs['tipus_recurs_id'];
-          this.objectRecurso.id_usuario = dataRecurs['id_usuario']; // this.objectRecurso = dataRecurs;
+          this.objectRecurso.id = dataRecurs["id"];
+          this.objectRecurso.codi = dataRecurs["codi"];
+          this.objectRecurso.tipus_recurs_id = dataRecurs["tipus_recurs_id"];
+          this.objectRecurso.id_usuario = dataRecurs["id_usuario"]; // this.objectRecurso = dataRecurs;
 
           break;
 
@@ -2483,13 +2806,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     showModal: function showModal() {
       var _this = this;
 
-      this.$bvModal.msgBoxOk('Les dades han sigut actualitzades correctament', {
-        title: 'Actualitzat',
-        size: 'sm',
-        buttonSize: 'sm',
-        okVariant: 'success',
-        headerClass: 'p-2 border-bottom-0',
-        footerClass: 'p-2 border-top-0',
+      this.$bvModal.msgBoxOk(this.textos.msgActualitzat[this.idioma], {
+        title: this.textos.actualitzat[this.idioma],
+        size: "sm",
+        buttonSize: "sm",
+        okVariant: "success",
+        headerClass: "p-2 border-bottom-0",
+        footerClass: "p-2 border-top-0",
         centered: true
       }).then(function (value) {
         _this.boxTwo = value;
@@ -2498,14 +2821,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getRecursos: function getRecursos() {
       this.getApi({
-        ruta: 'recursos',
-        nombreTabla: 'recursos'
+        ruta: "recursos",
+        nombreTabla: "recursos"
       });
     },
     getTipusRecursos: function getTipusRecursos() {
       this.getApi({
-        ruta: 'tipus_recurs',
-        nombreTabla: 'tipus_recurs'
+        ruta: "tipus_recurs",
+        nombreTabla: "tipus_recurs"
       });
     },
     deleteTipusRecurs: function deleteTipusRecurs(idTipusRecurs) {
@@ -2527,7 +2850,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.sectionRecursos = true;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayTipusAlertant', 'arrayTipusRecurs', 'arrayUsuaris', 'arrayRecursos']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["arrayTipusAlertant", "arrayTipusRecurs", "arrayUsuaris", "arrayRecursos"]), {
     rowsAsignados: function rowsAsignados() {
       return this.arrayRecursos.length;
     },
@@ -2788,15 +3111,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      idioma: 0,
+      textos: {
+        gestioIncidencies: ["Gestió d'Incidencies", "Gestión de Incidencias", "Incidents Management"],
+        buscar: ["Buscar", "Buscar", "Search"],
+        buscador: ["Buscador", "Buscador", "Browser"],
+        editar: ["Editar", "Editar", "Edit"],
+        afegirIncidencia: ["Afegir Incidencia", "Añadir Incidencia", "Add Incidence"],
+        editarIncidencia: ["Editar Incidencia", "Editar Incidencia", "Edit Incidence"],
+        numeroIncidencia: ["Numero d'Incidencia", " Numero de Incidencia", "Incidence Number"],
+        hora: ["Hora", "Hora", "Hour"],
+        fecha: ["Data", "Fecha", "Date"],
+        cancelar: ["Cancelar", "Cancelar", "Cancel"],
+        guardar: ["Guardar", "Guardar", "Save"],
+        telefon: ["Telèfon de l'Alertant", "Telefono del Alertante", "Alerting Phone"],
+        municipi: ["Municipi", "Municipio", "Town"],
+        adreca: ["Adreça", "Dirección", "Address"],
+        compAdreca: ["Complement d'Adreça", "Complemento de Dirección", "Add-on Address"],
+        tipusAlertant: ["Tipus d'Alertant", "Tipo de Alertant:", "Alerter's Type"],
+        alertant: ["Alertant", "Alertante", "Alerter"],
+        estatIncidencia: ["Estat de l'Incidencia", "Estado de la incidencia", "Incidence Status"],
+        tipusIncidencia: ["Tipus d'Incidencia", "Tipo de incidencia", "Incidence Type"],
+        descripcio: ["Descripció", "Descripción", "Description"]
+      },
       arrayMunicipis: [],
       arrayTipusAlertant: [],
       arrayTipusIncidencia: [],
@@ -2805,12 +3145,12 @@ __webpack_require__.r(__webpack_exports__);
       arrayAlertants: [],
       objectIncidencia: {
         id: null,
-        numero_incidencia: '',
+        numero_incidencia: "",
         data: null,
         hora: null,
-        adreca: '',
-        complement_adreca: '',
-        descripcio: '',
+        adreca: "",
+        complement_adreca: "",
+        descripcio: "",
         municipis_id: null,
         tipus_incident_id: null,
         estats_incidencia_id: null,
@@ -2819,21 +3159,21 @@ __webpack_require__.r(__webpack_exports__);
       },
       arrayIncidencia: [],
       columnasTabla: [{
-        key: 'num_incidencia',
-        label: 'Numero Incidencia'
+        key: "num_incidencia",
+        label: "Numero Incidencia"
       }, {
-        key: 'hora',
-        label: 'Hora'
+        key: "hora",
+        label: "Hora"
       }, {
-        key: 'descripcio',
-        label: 'Descripció'
+        key: "descripcio",
+        label: "textos.descripcio[idioma]"
       }, {
-        key: 'municipis.nom',
-        label: 'Municipi'
+        key: "municipis.nom",
+        label: "Municipi"
       }, {
-        key: 'tipus_incident.tipus',
-        label: 'Tipus Incident'
-      }, 'gestionar'],
+        key: "tipus_incident.tipus",
+        label: "Tipus Incident"
+      }, "gestionar"],
       perPage: 5,
       currentPage: 1,
       filter: null,
@@ -2853,14 +3193,14 @@ __webpack_require__.r(__webpack_exports__);
     obtenerIncidencias: function obtenerIncidencias() {
       var _this = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/incidencies').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/incidencies").then(function (response) {
         _this.arrayIncidencia = response.data;
       });
     },
     obtenerTipusRecursos: function obtenerTipusRecursos() {
       var _this2 = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/tipus_recurs').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_recurs").then(function (response) {
         _this2.arrayTipusRecurs = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2869,7 +3209,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerMunicipis: function obtenerMunicipis() {
       var _this3 = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/municipis').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/municipis").then(function (response) {
         _this3.arrayMunicipis = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2878,7 +3218,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerTipusAlertant: function obtenerTipusAlertant() {
       var _this4 = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/tipus_alertant').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_alertant").then(function (response) {
         _this4.arrayTipusAlertant = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2887,7 +3227,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerTipusIncidencia: function obtenerTipusIncidencia() {
       var _this5 = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/tipus_incident').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/tipus_incident").then(function (response) {
         _this5.arrayTipusIncidencia = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2896,7 +3236,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerAlertants: function obtenerAlertants() {
       var _this6 = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/alertants').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/alertants").then(function (response) {
         _this6.arrayAlertants = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2905,7 +3245,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerEstatIncidencies: function obtenerEstatIncidencies() {
       var _this7 = this;
 
-      axios.get('http://localhost:8080/project_broggi/public/api/estats_incidencia').then(function (response) {
+      axios.get("http://localhost:8080/project_broggi/public/api/estats_incidencia").then(function (response) {
         _this7.arrayEstatIncidencia = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -2917,18 +3257,18 @@ __webpack_require__.r(__webpack_exports__);
       this.currentPage = 1;
     },
     nuevo: function nuevo() {
-      window.location.href = '/project_broggi/public/registroIncidencias';
+      window.location.href = "/project_broggi/public/registroIncidencias";
     },
     editIncidencia: function editIncidencia(item) {
       var me = this;
       me.objectIncidencia = item;
-      this.$bvModal.show('editIncidenciaModal');
+      this.$bvModal.show("editIncidenciaModal");
     },
     saveIncident: function saveIncident(idObjecte) {
       var me = this;
-      axios.put('/incidencies/' + idObjecte, this.objectIncidencia).then(function (response) {
+      axios.put("/incidencies/" + idObjecte, this.objectIncidencia).then(function (response) {
         me.obtenerIncidencias();
-        me.$bvModal.hide('editIncidenciaModal');
+        me.$bvModal.hide("editIncidenciaModal");
       })["catch"](function (error) {
         me.missatge = error.response.data;
         me.mensajesError.push(me.missatge.error);
@@ -2936,7 +3276,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     cancelar: function cancelar() {
       this.obtenerIncidencias();
-      this.$bvModal.hide('editIncidenciaModal');
+      this.$bvModal.hide("editIncidenciaModal");
     }
   },
   computed: {
@@ -2944,6 +3284,66 @@ __webpack_require__.r(__webpack_exports__);
       return this.arrayIncidencia.length;
     }
   }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/IncidenciesTablet.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/IncidenciesTablet.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      ads: 'v-for="incidencia in arrayIncidencies" :key="incidencia.id"'
+    };
+  },
+  created: function created() {
+    this.getIncidencies();
+  },
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi"]), {
+    getIncidencies: function getIncidencies() {
+      this.getApi({
+        ruta: "incidencies",
+        nombreTabla: "incidencies"
+      });
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["arrayIncidencies"]))
 });
 
 /***/ }),
@@ -3028,25 +3428,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      src: 'https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80'
+      idioma: 0,
+      textos: {
+        gesionesBroggi: ["Gestions Broggi", "Gestiones Broggi", "Broggi's Managements"],
+        descIncidencias: ["En aquest apartat pots revisar tant les incidencies obertes com\n les que tens assignades, com poder donar d'alta noves incidencies", "En este apartado puedes revisar tanto las incidencias abiertas como \nlas que tienes asiganadas, como asi poder dar de alta a nuevas \nincidencias.", "In this section you can review both open incidents and the ones you have assigned,\nso that you can register new incidents."],
+        descRecursos: ["En aquest apartat podràs saber quins recursos estan disponibles i\n gestionarlos per a que mai faltin i dempre sobrin.", "En este apartado podras saber que recursos estan disponibles y\n gestionarlos para que nunca falten y siempre sobren.", "In this section you will be able to know what resources are available and \n manage them so that they are never lacking and always superfluous."],
+        descAlertants: ["Base de dades d'alertants que s'han donat d'alta amb nosaltres,\n també els que no paren de trucar són aqui", "Base de datos de alertantes que se han dado de alta con nosotros,\n tambien los que no paran de llamar estan aqui.", "Database of alerters who have registered with us, also those who do not stop calling are here."],
+        gestionar: ["Gestionar", "Gestionar", "Manage"],
+        incidencias: ["Incidencies", "Incidencias", "Incidents"],
+        recursos: ["Recursos", "Recursos", "Resources"],
+        alertants: ["Alertants", "Alertantes", "Alerters"]
+      },
+      src: "https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80"
     };
   },
   methods: {
     openIncidencia: function openIncidencia() {
-      window.location.href = '/project_broggi/public/incidencias';
+      window.location.href = "/project_broggi/public/incidencias";
     },
     openRecursos: function openRecursos() {
-      window.location.href = '/project_broggi/public/recursos';
+      window.location.href = "/project_broggi/public/recursos";
     },
     openAlertantes: function openAlertantes() {
-      window.location.href = '/project_broggi/public/alertants';
+      window.location.href = "/project_broggi/public/alertants";
     }
   }
 });
@@ -3109,7 +3516,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      titulo: "Iniciar sesión",
+      idioma: 0,
+      textos: {
+        usuari: ["Usuari", "Usuario", "User"],
+        password: ["Contrasenya", "Contraseña", "Password"],
+        registrarse: ["Registrarse", "Registrarse", "Sign In"],
+        iniciarSession: ["Iniciar Sessió", "Iniciar Sesión", "Login"]
+      },
       username: "",
       password: ""
     };
@@ -3170,15 +3583,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      titulo: "Registro work's",
+      idioma: 0,
+      textos: {
+        registrarse: ["Registrarse", "Registrarse", "Sign In"],
+        registrarUsuario: ["Registrar Usuari", "Registrar Usuario", "User Register"],
+        codi: ["Codi", "Codigo", "Code"],
+        password: ["Contrasenya", "Contraseña", "Password"],
+        nom: ["Nom", "Nombre", "Name"],
+        selRol: ["Selecciona el teu Rol", "Selecciona tu Rol", "Choose your Role"],
+        msgAvis: ["Siusplau, omple tots els camps!", "¡Por favor, rellena todos los campos!", "Please fill in all fields!"]
+      },
       objectUsuario: {
         id: null,
-        codi: '',
-        nom: '',
-        contrasenya: '',
+        codi: "",
+        nom: "",
+        contrasenya: "",
         rols_id: null
       },
       arrayRoles: null,
@@ -3220,11 +3674,11 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         console.log("FALTAN CAMPOS");
-        this.aviso = "¡Por favor, rellena todos los campos!";
+        this.aviso = this.textos.registrarse[this.idioma];
       }
     },
     goToLogin: function goToLogin() {
-      window.location.href = '/project_broggi/public';
+      window.location.href = "/project_broggi/public";
     }
   },
   mounted: function mounted() {
@@ -3369,19 +3823,119 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      idioma: 0,
+      textos: {
+        registrar: ["Registrar", "Registrar", "Register"],
+        policial: ["Policial", "Policial", "Police"],
+        sanitario: ["Sanitari", "Sanitario", "Sanitary"],
+        prioritat: ["Pioritat", "Prioridad", "Priority"],
+        recursos: ["Recursos", "Recursos", "Resources"],
+        limpiarTiempo: ["Netejar Temps", "Limpiar Tiempo", "Clear time"],
+        setNow: ["Estableix Ara", "Establecer Ahora", "Set Now"],
+        fecha: ["Data", "Fecha", "Date"],
+        descIncidencies: ["Descripció d'Incidencies", "Descripción de Incidencias", "Incidents Description"],
+        tipusIncidencia: ["Tipus d'Incidencia", "Tipo de incidencia", "Incidence Type"],
+        estatIncidencia: ["Estat de l'Incidencia", "Estado de la incidencia", "Incidence Status"],
+        alertant: ["Alertant", "Alertante", "Alerter"],
+        tipusAlertant: ["Tipus d'Alertant", "Tipo de Alertante", "Alerter's Type"],
+        municipi: ["Municipi", "Municipio", "Town"],
+        adreca: ["Adreça", "Dirección", "Address"],
+        compAdreca: ["Complement d'Adreça", "Complemento de Dirección", "Add-on Address"],
+        telefonoAlertante: ["Telefon d'Alertant", "Telefono de Alertante", "Alerter's Phone"],
+        numeroIncidencia: ["Numero d'Incidencia", " Numero de Incidencia", "Incidence Number"],
+        novaIncidencia: ["Nova Incidencia", "Nueva Incidencia", "New Incidence"]
+      },
       datosIncidencia: {
         id: null,
         num_incidencia: null,
         telefon_alertant: null,
         data: null,
         hora: null,
-        adreca: '',
-        complement_adreca: '',
-        descripcio: '',
+        adreca: "",
+        complement_adreca: "",
+        descripcio: "",
         municipis_id: null,
         tipus_incident_id: null,
         estats_incidencia_id: null,
@@ -3401,33 +3955,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   created: function created() {
     this.getApi({
-      ruta: 'municipis',
-      nombreTabla: 'municipis'
+      ruta: "municipis",
+      nombreTabla: "municipis"
     });
     this.getApi({
-      ruta: 'tipus_alertant',
-      nombreTabla: 'tipus_alertant'
+      ruta: "tipus_alertant",
+      nombreTabla: "tipus_alertant"
     });
     this.getApi({
-      ruta: 'tipus_incident',
-      nombreTabla: 'tipus_incident'
+      ruta: "tipus_incident",
+      nombreTabla: "tipus_incident"
     });
     this.getApi({
-      ruta: 'alertants',
-      nombreTabla: 'alertants'
+      ruta: "alertants",
+      nombreTabla: "alertants"
     });
     this.getApi({
-      ruta: 'estats_incidencia',
-      nombreTabla: 'estats_incidencia'
+      ruta: "estats_incidencia",
+      nombreTabla: "estats_incidencia"
     });
     this.getApi({
       ruta: 'recursos',
       nombreTabla: 'recursos'
     });
-    console.log(this.arrayRecursosSanitarios);
     this.getTipusRecursos();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(['getApi']), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi"]), {
     insertIncidencia: function insertIncidencia() {
       var me = this;
       axios.post("/incidencies", this.datosIncidencia).then(function (response) {
@@ -3448,8 +4001,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getTipusRecursos: function getTipusRecursos() {
       this.getApi({
-        ruta: 'tipus_recurs',
-        nombreTabla: 'tipus_recurs'
+        ruta: "tipus_recurs",
+        nombreTabla: "tipus_recurs"
       });
     },
     mensajeAdd: function mensajeAdd() {
@@ -3464,14 +4017,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.datosIncidencia.hora = now.toTimeString().slice(0, 8);
     },
     clearTime: function clearTime() {
-      this.datosIncidencia.hora = '';
+      this.datosIncidencia.hora = "";
     },
     selectPrioritat: function selectPrioritat(item) {
-      console.log(item);
       this.datosIncidencia.prioritat = item;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['arrayMunicipis', 'arrayTipusAlertant', 'arrayTipusIncidencia', 'arrayTipusRecurs', 'arrayRecursosPoliciales', 'arrayRecursosSanitarios', 'arrayAlertants', 'arrayEstatsIncidencia', 'arrayRecursos']))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["arrayMunicipis", "arrayTipusAlertant", "arrayTipusIncidencia", "arrayTipusRecurs", "arrayRecursosPoliciales", "arrayRecursosSanitarios", "arrayAlertants", "arrayEstatsIncidencia", 'arrayRecursos']))
 });
 
 /***/ }),
@@ -47939,7 +48491,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "section[data-v-6b2c17c4] {\n  padding-top: 100px;\n  padding-bottom: 100px;\n}\ninput[data-v-6b2c17c4], select[data-v-6b2c17c4], .pwd[data-v-6b2c17c4] {\n  margin-bottom: 1.5rem;\n}", ""]);
+exports.push([module.i, "section[data-v-6b2c17c4] {\n  padding-top: 100px;\n  padding-bottom: 100px;\n}\ninput[data-v-6b2c17c4],\nselect[data-v-6b2c17c4],\n.pwd[data-v-6b2c17c4] {\n  margin-bottom: 1.5rem;\n}", ""]);
 
 // exports
 
@@ -80533,7 +81085,7 @@ var render = function() {
                   staticClass: "col-sm-1 col-form-label",
                   attrs: { for: "name" }
                 },
-                [_vm._v("Nom")]
+                [_vm._v(_vm._s(_vm.textos.nom[_vm.idioma]))]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-11" }, [
@@ -80573,7 +81125,7 @@ var render = function() {
                   staticClass: "col-sm-1 col-form-label",
                   attrs: { for: "tel" }
                 },
-                [_vm._v("Adreça")]
+                [_vm._v(_vm._s(_vm.textos.adreca[_vm.idioma]))]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-11" }, [
@@ -80613,7 +81165,7 @@ var render = function() {
                   staticClass: "col-sm-1 col-form-label",
                   attrs: { for: "tel" }
                 },
-                [_vm._v("Telèfon")]
+                [_vm._v(_vm._s(_vm.textos.telefon[_vm.idioma]))]
               ),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm-11" }, [
@@ -80661,7 +81213,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("AFEGIR")]
+                    [_vm._v(_vm._s(_vm.textos.afegir[_vm.idioma]))]
                   )
                 ],
                 1
@@ -80715,7 +81267,7 @@ var render = function() {
                   attrs: {
                     type: "search",
                     id: "filterInput",
-                    placeholder: "Búsqueda ..."
+                    placeholder: _vm.textos.buscar[_vm.idioma] + " ..."
                   },
                   model: {
                     value: _vm.filter,
@@ -80735,7 +81287,7 @@ var render = function() {
                 staticClass: "btn btn-secondary btn-sm col-2",
                 attrs: { type: "submit" }
               },
-              [_vm._v("BUSCAR")]
+              [_vm._v(_vm._s(_vm.textos.buscar[_vm.idioma]))]
             )
           ])
         ]
@@ -80769,7 +81321,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Editar\n            ")]
+                  [_vm._v(_vm._s(_vm.textos.editar[_vm.idioma]))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -80782,7 +81334,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("\n                Eliminar\n            ")]
+                  [_vm._v(_vm._s(_vm.textos.eliminar[_vm.idioma]))]
                 )
               ]
             }
@@ -80811,8 +81363,8 @@ var render = function() {
           attrs: {
             id: _vm.editAlertantModal.id,
             title: _vm.editAlertantModal.title,
-            "ok-title": _vm.aceptar,
-            "cancel-title": _vm.cancelar
+            "ok-title": _vm.textos.aceptar[_vm.idioma],
+            "cancel-title": _vm.textos.cancelar[_vm.idioma]
           },
           on: {
             ok: function($event) {
@@ -80830,7 +81382,7 @@ var render = function() {
             { staticClass: "form-group" },
             [
               _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
-                _vm._v("Nom:")
+                _vm._v(_vm._s(_vm.textos.nom[_vm.idioma]))
               ]),
               _vm._v(" "),
               _c("b-form-input", {
@@ -80838,7 +81390,7 @@ var render = function() {
                 attrs: {
                   id: "nom",
                   name: "nom",
-                  placeholder: "Nom",
+                  placeholder: _vm.textos.nom[_vm.idioma],
                   value: _vm.editAlertantModal.info.name
                 },
                 model: {
@@ -80858,7 +81410,7 @@ var render = function() {
             { staticClass: "form-group" },
             [
               _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
-                _vm._v("Adreça:")
+                _vm._v(_vm._s(_vm.textos.adreca[_vm.idioma]))
               ]),
               _vm._v(" "),
               _c("b-form-input", {
@@ -80866,7 +81418,7 @@ var render = function() {
                 attrs: {
                   id: "adreca",
                   name: "adreca",
-                  placeholder: "Adreça",
+                  placeholder: _vm.textos.adreca[_vm.idioma],
                   value: _vm.editAlertantModal.info.adress
                 },
                 model: {
@@ -80886,7 +81438,7 @@ var render = function() {
             { staticClass: "form-group" },
             [
               _c("label", { attrs: { for: "exampleFormControlInput1" } }, [
-                _vm._v("Telefon:")
+                _vm._v(_vm._s(_vm.textos.telefon[_vm.idioma]))
               ]),
               _vm._v(" "),
               _c("b-form-input", {
@@ -80894,7 +81446,7 @@ var render = function() {
                 attrs: {
                   id: "telefon",
                   name: "telefon",
-                  placeholder: "Telefon",
+                  placeholder: _vm.textos.telefon[_vm.idioma],
                   value: _vm.editAlertantModal.info.tel
                 },
                 model: {
@@ -80909,6 +81461,99 @@ var render = function() {
             1
           )
         ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardIncidencia.vue?vue&type=template&id=17787118&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CardIncidencia.vue?vue&type=template&id=17787118& ***!
+  \*****************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "main",
+    [
+      _c(
+        "b-card",
+        {
+          attrs: {
+            "header-tag": "header",
+            "footer-tag": "footer",
+            title: _vm.objectIncidencia.tipus_incident.tipus
+          },
+          scopedSlots: _vm._u([
+            {
+              key: "header",
+              fn: function() {
+                return [
+                  _c("h6", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "Num Incidencia: " +
+                        _vm._s(_vm.objectIncidencia.num_incidencia)
+                    )
+                  ])
+                ]
+              },
+              proxy: true
+            },
+            {
+              key: "footer",
+              fn: function() {
+                return [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-6" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-block",
+                          attrs: { type: "button" }
+                        },
+                        [_vm._v("Editar")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-6" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary btn-block",
+                          attrs: { type: "button" }
+                        },
+                        [_vm._v("Ver detalle")]
+                      )
+                    ])
+                  ])
+                ]
+              },
+              proxy: true
+            }
+          ])
+        },
+        [
+          _vm._v(" "),
+          _c("b-card-text", [_vm._v(_vm._s(_vm.objectIncidencia.hora))]),
+          _vm._v(" "),
+          _c("b-card-text", [_vm._v(_vm._s(_vm.objectIncidencia.adreca))])
+        ],
+        1
       )
     ],
     1
@@ -80985,7 +81630,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", [
     _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
-      _vm._v("Gestió de recursos")
+      _vm._v(_vm._s(_vm.textos.gestioRecursos[_vm.idioma]))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row" }, [
@@ -81001,7 +81646,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("RECURSOS")]
+          [_vm._v(_vm._s(_vm.textos.recursos[_vm.idioma]))]
         )
       ]),
       _vm._v(" "),
@@ -81017,7 +81662,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("RECURSOS ASIGNATS")]
+          [_vm._v(_vm._s(_vm.textos.recursosAsignados[_vm.idioma]))]
         )
       ])
     ]),
@@ -81048,7 +81693,7 @@ var render = function() {
                     attrs: {
                       type: "search",
                       id: "filterInput",
-                      placeholder: "Type to Search"
+                      placeholder: _vm.textos.buscar[_vm.idioma]
                     },
                     model: {
                       value: _vm.filter,
@@ -81072,7 +81717,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Clear")]
+                        [_vm._v(_vm._s(_vm.textos.limpiar[_vm.idioma]))]
                       )
                     ],
                     1
@@ -81116,7 +81761,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("EDITAR")]
+                    [_vm._v(_vm._s(_vm.textos.editar[_vm.idioma]))]
                   ),
                   _vm._v(" "),
                   _c(
@@ -81130,7 +81775,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("ESBORRAR")]
+                    [_vm._v(_vm._s(_vm.textos.borrar[_vm.idioma]))]
                   )
                 ]
               }
@@ -81144,7 +81789,7 @@ var render = function() {
             attrs: {
               id: "modal-esborrar",
               centered: "",
-              title: "Esborrar recurs"
+              title: _vm.textos.borrarRecurso[_vm.idioma]
             },
             scopedSlots: _vm._u([
               {
@@ -81162,7 +81807,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("\n                    Cancel\n                ")]
+                      [_vm._v(_vm._s(_vm.textos.cancelar[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _c(
@@ -81175,11 +81820,7 @@ var render = function() {
                           }
                         }
                       },
-                      [
-                        _vm._v(
-                          "\n                    Esborrar\n                "
-                        )
-                      ]
+                      [_vm._v(_vm._s(_vm.textos.borrar[_vm.idioma]))]
                     )
                   ]
                 }
@@ -81188,11 +81829,15 @@ var render = function() {
           },
           [
             _c("p", { staticClass: "my-4" }, [
-              _vm._v("Vols esborrar el recurs amb el codi --> "),
+              _vm._v(
+                "\n        " +
+                  _vm._s(_vm.textos.confirmarBorrarRecurso[_vm.idioma]) +
+                  " -->\n        "
+              ),
               _c("span", { staticStyle: { "font-weight": "bold" } }, [
                 _vm._v(_vm._s(_vm.objectRecurso.codi))
               ]),
-              _vm._v(" ?")
+              _vm._v(" ?\n      ")
             ])
           ]
         ),
@@ -81223,7 +81868,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("ASIGNAR RECURS")]
+          [_vm._v(_vm._s(_vm.textos.asignarRecurso[_vm.idioma]))]
         )
       ],
       1
@@ -81255,7 +81900,7 @@ var render = function() {
                     attrs: {
                       type: "search",
                       id: "filterInput2",
-                      placeholder: "Type to Search"
+                      placeholder: _vm.textos.buscar[_vm.idioma]
                     },
                     model: {
                       value: _vm.filterRecursos,
@@ -81279,7 +81924,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("Clear")]
+                        [_vm._v(_vm._s(_vm.textos.limpiar[_vm.idioma]))]
                       )
                     ],
                     1
@@ -81322,7 +81967,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("ESBORRAR")]
+                    [_vm._v(_vm._s(_vm.textos.borrar[_vm.idioma]))]
                   )
                 ]
               }
@@ -81356,7 +82001,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("AFEGIR RECURS")]
+          [_vm._v(_vm._s(_vm.textos.anyadirRecurso[_vm.idioma]))]
         )
       ],
       1
@@ -81429,7 +82074,8 @@ var render = function() {
                               staticClass: "form-control",
                               attrs: {
                                 type: "text",
-                                placeholder: "Codi recurs"
+                                placeholder:
+                                  _vm.textos.codigoRecurso[_vm.idioma]
                               },
                               domProps: { value: _vm.objectRecurso.codi },
                               on: {
@@ -81489,7 +82135,11 @@ var render = function() {
                                     attrs: { disabled: "", hidden: "" },
                                     domProps: { value: null }
                                   },
-                                  [_vm._v("Tipus recurs")]
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.textos.tipoRecurso[_vm.idioma])
+                                    )
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _vm._l(_vm.arrayTipusRecurs, function(tipus) {
@@ -81549,7 +82199,11 @@ var render = function() {
                                     attrs: { disabled: "", hidden: "" },
                                     domProps: { value: null }
                                   },
-                                  [_vm._v("Usuari")]
+                                  [
+                                    _vm._v(
+                                      _vm._s(_vm.textos.usuari[_vm.idioma])
+                                    )
+                                  ]
                                 ),
                                 _vm._v(" "),
                                 _vm._l(_vm.arrayUsuaris, function(usuari) {
@@ -81613,7 +82267,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nom del recurs"
+                            placeholder: _vm.textos.nombreRecurso[_vm.idioma]
                           },
                           domProps: { value: _vm.objectTipoRecurso.tipus },
                           on: {
@@ -81634,7 +82288,11 @@ var render = function() {
                       _c(
                         "div",
                         { staticClass: "col-6" },
-                        [_c("b-form-checkbox", [_vm._v("Sanitari")])],
+                        [
+                          _c("b-form-checkbox", [
+                            _vm._v(_vm._s(_vm.textos.sanitario[_vm.idioma]))
+                          ])
+                        ],
                         1
                       ),
                       _vm._v(" "),
@@ -81657,7 +82315,7 @@ var render = function() {
                                 expression: "objectTipoRecurso.esPolicial"
                               }
                             },
-                            [_vm._v("Policial")]
+                            [_vm._v(_vm._s(_vm.textos.policial[_vm.idioma]))]
                           )
                         ],
                         1
@@ -81707,7 +82365,7 @@ var render = function() {
                       }
                     }
                   },
-                  [_vm._v("Close")]
+                  [_vm._v(_vm._s(_vm.textos.cerrar[_vm.idioma]))]
                 ),
                 _vm._v(" "),
                 _vm.accionApi === "insert"
@@ -81722,7 +82380,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Asignar")]
+                      [_vm._v(_vm._s(_vm.textos.asignar[_vm.idioma]))]
                     )
                   : _vm.accionApi === "insertTipusRecurs"
                   ? _c(
@@ -81736,7 +82394,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Guardar")]
+                      [_vm._v(_vm._s(_vm.textos.guardar[_vm.idioma]))]
                     )
                   : _vm.accionApi === "delete"
                   ? _c(
@@ -81750,7 +82408,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Borrar")]
+                      [_vm._v(_vm._s(_vm.textos.borrar[_vm.idioma]))]
                     )
                   : _vm.accionApi === "update"
                   ? _c(
@@ -81764,7 +82422,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Actualitzar")]
+                      [_vm._v(_vm._s(_vm.textos.actualizar[_vm.idioma]))]
                     )
                   : _vm._e()
               ])
@@ -81802,7 +82460,7 @@ var render = function() {
       "section",
       [
         _c("h1", { staticClass: "text-center mb-5" }, [
-          _vm._v("Gestió de incidencies")
+          _vm._v(_vm._s(_vm.textos.gestioIncidencies[_vm.idioma]))
         ]),
         _vm._v(" "),
         _c(
@@ -81810,7 +82468,7 @@ var render = function() {
           {
             staticClass: "mb-3",
             attrs: {
-              label: "Filter",
+              label: _vm.textos.buscador[_vm.idioma],
               "label-cols-sm": "3",
               "label-align-sm": "right",
               "label-size": "sm",
@@ -81826,7 +82484,7 @@ var render = function() {
                   attrs: {
                     type: "search",
                     id: "filterInput",
-                    placeholder: "Type to Search"
+                    placeholder: _vm.textos.buscar[_vm.idioma] + "..."
                   },
                   model: {
                     value: _vm.filter,
@@ -81871,7 +82529,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Editar")]
+                    [_vm._v(_vm._s(_vm.textos.editar[_vm.idioma]))]
                   )
                 ]
               }
@@ -81905,13 +82563,16 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n      Afegir Incidencia\n    ")]
+          [_vm._v(_vm._s(_vm.textos.afegirIncidencia[_vm.idioma]))]
         ),
         _vm._v(" "),
         _c(
           "b-modal",
           {
-            attrs: { id: "editIncidenciaModal", title: "Editar Incidencia" },
+            attrs: {
+              id: "editIncidenciaModal",
+              title: _vm.textos.editarIncidencia[_vm.idioma]
+            },
             on: {
               ok: function($event) {
                 return _vm.saveIncident(_vm.objectIncidencia.id)
@@ -81935,7 +82596,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Cancelar")]
+                      [_vm._v(_vm._s(_vm.textos.cancelar[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _c(
@@ -81948,7 +82609,7 @@ var render = function() {
                           }
                         }
                       },
-                      [_vm._v("Guardar")]
+                      [_vm._v(_vm._s(_vm.textos.guardar[_vm.idioma]))]
                     )
                   ]
                 },
@@ -81960,7 +82621,11 @@ var render = function() {
             _c("form", { attrs: { action: "", method: "put" } }, [
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-12" }, [
-                  _vm._v("\n            Numero Incidencia:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.numeroIncidencia[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c("input", {
                     directives: [
                       {
@@ -81975,7 +82640,7 @@ var render = function() {
                     attrs: {
                       name: "num_incidencia",
                       type: "text",
-                      placeholder: "Num.Incidencia"
+                      placeholder: _vm.textos.numeroIncidencia[_vm.idioma]
                     },
                     domProps: { value: _vm.objectIncidencia.num_incidencia },
                     on: {
@@ -82000,10 +82665,17 @@ var render = function() {
                   "div",
                   { staticClass: "col-5" },
                   [
-                    _vm._v("\n            Hora:\n            "),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.textos.hora[_vm.idioma]) +
+                        ":\n            "
+                    ),
                     _c("b-form-timepicker", {
                       staticClass: "form-control",
-                      attrs: { name: "hora", placeholder: "Hora" },
+                      attrs: {
+                        name: "hora",
+                        placeholder: _vm.textos.hora[_vm.idioma]
+                      },
                       model: {
                         value: _vm.objectIncidencia.hora,
                         callback: function($$v) {
@@ -82020,10 +82692,17 @@ var render = function() {
                   "div",
                   { staticClass: "col-7" },
                   [
-                    _vm._v("\n            Data:\n            "),
+                    _vm._v(
+                      "\n            " +
+                        _vm._s(_vm.textos.fecha[_vm.idioma]) +
+                        ":\n            "
+                    ),
                     _c("b-form-datepicker", {
                       staticClass: "form-control",
-                      attrs: { name: "data", placeholder: "Data" },
+                      attrs: {
+                        name: "data",
+                        placeholder: _vm.textos.fecha[_vm.idioma]
+                      },
                       model: {
                         value: _vm.objectIncidencia.data,
                         callback: function($$v) {
@@ -82037,7 +82716,11 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-5" }, [
-                  _vm._v("\n            Telefon Alertant:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.telefon[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c("input", {
                     directives: [
                       {
@@ -82052,7 +82735,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "telefon_alertant",
-                      placeholder: "Telf. alertant"
+                      placeholder: _vm.textos.telefon[_vm.idioma]
                     },
                     domProps: { value: _vm.objectIncidencia.telefon_alertant },
                     on: {
@@ -82074,7 +82757,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-7" }, [
-                  _vm._v("\n            Municipi:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.municipi[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c(
                     "select",
                     {
@@ -82116,7 +82803,7 @@ var render = function() {
                           attrs: { disabled: "", hidden: "" },
                           domProps: { value: null }
                         },
-                        [_vm._v("Municipis")]
+                        [_vm._v(_vm._s(_vm.textos.municipi[_vm.idioma]))]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.arrayMunicipis, function(municipi) {
@@ -82135,7 +82822,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12" }, [
-                  _vm._v("\n            Adreça:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.adreca[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c("input", {
                     directives: [
                       {
@@ -82149,7 +82840,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "adreca",
-                      placeholder: "Adreça"
+                      placeholder: _vm.textos.adreca[_vm.idioma]
                     },
                     domProps: { value: _vm.objectIncidencia.adreca },
                     on: {
@@ -82168,7 +82859,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12" }, [
-                  _vm._v("\n            Complement d'Adreça:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.compAdreca[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c("input", {
                     directives: [
                       {
@@ -82182,7 +82877,7 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "complement_adreca",
-                      placeholder: "Complemet adreça"
+                      placeholder: _vm.textos.compAdreca[_vm.idioma]
                     },
                     domProps: { value: _vm.objectIncidencia.complement_adreca },
                     on: {
@@ -82201,7 +82896,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-4" }, [
-                  _vm._v("\n            Tipus d'Alertant:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.tipusAlertant[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c(
                     "select",
                     {
@@ -82243,7 +82942,7 @@ var render = function() {
                           attrs: { disabled: "", hidden: "" },
                           domProps: { value: null }
                         },
-                        [_vm._v("Tipus alertant")]
+                        [_vm._v(_vm._s(_vm.textos.tipusAlertant[_vm.idioma]))]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.arrayTipusAlertant, function(tipus) {
@@ -82259,7 +82958,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-8" }, [
-                  _vm._v("\n            Alertant:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.alertant[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c(
                     "select",
                     {
@@ -82301,7 +83004,7 @@ var render = function() {
                           attrs: { disabled: "", hidden: "" },
                           domProps: { value: null }
                         },
-                        [_vm._v("Alertant")]
+                        [_vm._v(_vm._s(_vm.textos.alertant[_vm.idioma]))]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.arrayAlertants, function(alertant) {
@@ -82320,7 +83023,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-4" }, [
-                  _vm._v("\n            Estat de l'Incidencia\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.estatIncidencia[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c(
                     "select",
                     {
@@ -82362,7 +83069,7 @@ var render = function() {
                           attrs: { disabled: "", hidden: "" },
                           domProps: { value: null }
                         },
-                        [_vm._v("Estat incidenica")]
+                        [_vm._v(_vm._s(_vm.textos.estatIncidencia[_vm.idioma]))]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.arrayEstatIncidencia, function(estat) {
@@ -82378,7 +83085,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-8" }, [
-                  _vm._v("\n            Tipus d'Incidencia:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.tipusIncidencia[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c(
                     "select",
                     {
@@ -82420,7 +83131,7 @@ var render = function() {
                           attrs: { disabled: "", hidden: "" },
                           domProps: { value: null }
                         },
-                        [_vm._v("Tipus incidenica")]
+                        [_vm._v(_vm._s(_vm.textos.tipusIncidencia[_vm.idioma]))]
                       ),
                       _vm._v(" "),
                       _vm._l(_vm.arrayTipusIncidencia, function(tipus) {
@@ -82436,7 +83147,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-12" }, [
-                  _vm._v("\n            Descripció:\n            "),
+                  _vm._v(
+                    "\n            " +
+                      _vm._s(_vm.textos.descripcio[_vm.idioma]) +
+                      ":\n            "
+                  ),
                   _c("textarea", {
                     directives: [
                       {
@@ -82450,7 +83165,7 @@ var render = function() {
                     attrs: {
                       rows: "3",
                       name: "descripcion",
-                      placeholder: "Descripció incidencia"
+                      placeholder: _vm.textos.descripcio[_vm.idioma]
                     },
                     domProps: { value: _vm.objectIncidencia.descripcio },
                     on: {
@@ -82483,6 +83198,81 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/IncidenciesTablet.vue?vue&type=template&id=1248b7a1&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/IncidenciesTablet.vue?vue&type=template&id=1248b7a1& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("main", [
+    _c("section", [
+      _c("h3", { staticClass: "text-center m-3" }, [_vm._v("Incidencies")]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.arrayIncidencies, function(incidencia) {
+          return _c(
+            "div",
+            { key: incidencia.id, staticClass: "col-6 mb-5" },
+            [
+              _c("card-incidencia", { attrs: { objectIncidencia: incidencia } })
+            ],
+            1
+          )
+        }),
+        0
+      )
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-5 mt-5" }, [
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-info btn-block",
+            attrs: { type: "button" }
+          },
+          [_vm._v("Ver todas")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-6" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-outline-info btn-block",
+            attrs: { type: "button" }
+          },
+          [_vm._v("Ver asignadas")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/LandingPage.vue?vue&type=template&id=643fd5aa&scoped=true&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/LandingPage.vue?vue&type=template&id=643fd5aa&scoped=true& ***!
@@ -82500,7 +83290,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", [
     _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
-      _vm._v("Gestiones Broggi")
+      _vm._v(_vm._s(_vm.textos.gesionesBroggi[_vm.idioma]))
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "row", attrs: { id: "app" } }, [
@@ -82510,10 +83300,10 @@ var render = function() {
           _c(
             "b-card",
             {
-              staticClass: "p-3 m-3 ",
+              staticClass: "p-3 m-3",
               staticStyle: { "max-width": "20rem" },
               attrs: {
-                title: "Incidencias",
+                title: _vm.textos.incidencias[_vm.idioma],
                 "img-src":
                   "https://www.abc.net.au/health/features/img/bloodtrans_m2238305.jpg",
                 "img-alt": "Image",
@@ -82523,9 +83313,7 @@ var render = function() {
             },
             [
               _c("b-card-text", [
-                _vm._v(
-                  "\n          En este apartado puedes revisar tanto las incidencias abiertas como\n          las que tienes asiganadas, como asi poder dar de alta a nuevas\n          incidencias.\n        "
-                )
+                _vm._v(_vm._s(_vm.textos.descIncidencias[_vm.idioma]))
               ]),
               _vm._v(" "),
               _c(
@@ -82538,50 +83326,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Gestionar")]
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        [
-          _c(
-            "b-card",
-            {
-              staticClass: "p-3 m-3 ",
-              staticStyle: { "max-width": "20rem" },
-              attrs: {
-                title: "Recursos",
-                "img-src":
-                  "https://www.comparaonline.com.co/blog-statics/co/uploads/2019/12/Consejos-para-actuar-ante-el-sonido-de-una-ambulancia.jpg",
-                "img-alt": "Image",
-                "img-top": "",
-                tag: "article"
-              }
-            },
-            [
-              _c("b-card-text", [
-                _vm._v(
-                  "\n          En este apartado podras saber que recursos estan disponibles y\n          gestionarlos para que nunca falten y siempre sobren.\n        "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "b-button",
-                {
-                  attrs: { href: "#", variant: "primary" },
-                  on: {
-                    click: function($event) {
-                      return _vm.openRecursos()
-                    }
-                  }
-                },
-                [_vm._v("Gestionar")]
+                [_vm._v(_vm._s(_vm.textos.gestionar[_vm.idioma]))]
               )
             ],
             1
@@ -82599,7 +83344,48 @@ var render = function() {
               staticClass: "p-3 m-3",
               staticStyle: { "max-width": "20rem" },
               attrs: {
-                title: "Alertantes",
+                title: _vm.textos.recursos[_vm.idioma],
+                "img-src":
+                  "https://www.comparaonline.com.co/blog-statics/co/uploads/2019/12/Consejos-para-actuar-ante-el-sonido-de-una-ambulancia.jpg",
+                "img-alt": "Image",
+                "img-top": "",
+                tag: "article"
+              }
+            },
+            [
+              _c("b-card-text", [
+                _vm._v(_vm._s(_vm.textos.descRecursos[_vm.idioma]))
+              ]),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  attrs: { href: "#", variant: "primary" },
+                  on: {
+                    click: function($event) {
+                      return _vm.openRecursos()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.textos.gestionar[_vm.idioma]))]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _c(
+            "b-card",
+            {
+              staticClass: "p-3 m-3",
+              staticStyle: { "max-width": "20rem" },
+              attrs: {
+                title: _vm.textos.alertants[_vm.idioma],
                 "img-src":
                   "https://magentaig.com/wp-content/uploads/2017/01/Encuestas-Online.jpg",
                 "img-alt": "Image",
@@ -82609,9 +83395,7 @@ var render = function() {
             },
             [
               _c("b-card-text", [
-                _vm._v(
-                  "\n          Base de datos de alertantes que se han dado de alta con nosotros,\n          tambien los que no paran de llamar estan aqui.\n        "
-                )
+                _vm._v(_vm._s(_vm.textos.descAlertants[_vm.idioma]))
               ]),
               _vm._v(" "),
               _c(
@@ -82624,7 +83408,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Gestionar")]
+                [_vm._v(_vm._s(_vm.textos.gestionar[_vm.idioma]))]
               )
             ],
             1
@@ -82660,7 +83444,7 @@ var render = function() {
   return _c("main", [
     _c("section", [
       _c("div", { staticClass: "text-center mb-3" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.titulo))])
+        _c("h1", [_vm._v(_vm._s(_vm.textos.iniciarSession[_vm.idioma]))])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -82678,7 +83462,9 @@ var render = function() {
             },
             [
               _c("div", [
-                _c("label", { staticClass: "float-left" }, [_vm._v("User")]),
+                _c("label", { staticClass: "float-left" }, [
+                  _vm._v(_vm._s(_vm.textos.usuari[_vm.idioma]))
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -82705,7 +83491,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "mt-3 mb-4" }, [
                 _c("label", { staticClass: "float-left" }, [
-                  _vm._v("Password")
+                  _vm._v(_vm._s(_vm.textos.password[_vm.idioma]))
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -82746,7 +83532,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Iniciar sesión")]
+                [_vm._v(_vm._s(_vm.textos.iniciarSession[_vm.idioma]))]
               ),
               _vm._v(" "),
               _c(
@@ -82760,7 +83546,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Registrarse")]
+                [_vm._v(_vm._s(_vm.textos.registrarse[_vm.idioma]))]
               )
             ]
           )
@@ -82796,7 +83582,7 @@ var render = function() {
   return _c("main", [
     _c("section", [
       _c("div", { staticClass: "text-center mb-3" }, [
-        _c("h1", [_vm._v(_vm._s(_vm.titulo))])
+        _c("h1", [_vm._v(_vm._s(_vm.textos.registrarUsuario[_vm.idioma]))])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -82827,7 +83613,7 @@ var render = function() {
                   required: "",
                   name: "nom",
                   type: "text",
-                  placeholder: "Nom"
+                  placeholder: _vm.textos.nom[_vm.idioma]
                 },
                 domProps: { value: _vm.objectUsuario.nom },
                 on: {
@@ -82854,7 +83640,7 @@ var render = function() {
                   required: "",
                   name: "codi",
                   type: "text",
-                  placeholder: "Codi"
+                  placeholder: _vm.textos.codi[_vm.idioma]
                 },
                 domProps: { value: _vm.objectUsuario.codi },
                 on: {
@@ -82882,7 +83668,7 @@ var render = function() {
                     required: "",
                     name: "contrasenya",
                     type: "password",
-                    placeholder: "Contrasenya"
+                    placeholder: _vm.textos.password[_vm.idioma]
                   },
                   domProps: { value: _vm.objectUsuario.contrasenya },
                   on: {
@@ -82955,7 +83741,7 @@ var render = function() {
                       attrs: { disabled: "", hidden: "" },
                       domProps: { value: null }
                     },
-                    [_vm._v("Selecciona el teu rol")]
+                    [_vm._v(_vm._s(_vm.textos.selRol[_vm.idioma]))]
                   ),
                   _vm._v(" "),
                   _vm._l(_vm.arrayRoles, function(rol) {
@@ -82984,7 +83770,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Registrarse")]
+                [_vm._v(_vm._s(_vm.textos.registrarse[_vm.idioma]))]
               )
             ]
           )
@@ -83022,7 +83808,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-lg-7" }, [
           _c("h3", { staticClass: "text-center mb-5" }, [
-            _vm._v("Nueva incidencia")
+            _vm._v(_vm._s(_vm.textos.novaIncidencia[_vm.idioma]))
           ]),
           _vm._v(" "),
           _c("form", { attrs: { action: "", method: "post" } }, [
@@ -83039,7 +83825,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "number", placeholder: "Num.Incidencia" },
+                  attrs: {
+                    type: "number",
+                    placeholder: _vm.textos.numeroIncidencia[_vm.idioma]
+                  },
                   domProps: { value: _vm.datosIncidencia.num_incidencia },
                   on: {
                     input: function($event) {
@@ -83100,7 +83889,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Alertant")]
+                      [_vm._v(_vm._s(_vm.textos.alertant[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayAlertants, function(alertant) {
@@ -83127,7 +83916,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Telf. alertant" },
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.textos.telefonoAlertante[_vm.idioma]
+                  },
                   domProps: { value: _vm.datosIncidencia.telefon_alertant },
                   on: {
                     input: function($event) {
@@ -83188,7 +83980,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Municipis")]
+                      [_vm._v(_vm._s(_vm.textos.municipi[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayMunicipis, function(municipi) {
@@ -83214,7 +84006,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Adreça" },
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.textos.adreca[_vm.idioma]
+                  },
                   domProps: { value: _vm.datosIncidencia.adreca },
                   on: {
                     input: function($event) {
@@ -83242,7 +84037,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", placeholder: "Complemet adreça" },
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.textos.compAdreca[_vm.idioma]
+                  },
                   domProps: { value: _vm.datosIncidencia.complement_adreca },
                   on: {
                     input: function($event) {
@@ -83300,7 +84098,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Tipus alertant")]
+                      [_vm._v(_vm._s(_vm.textos.tipusAlertant[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayTipusAlertant, function(tipus) {
@@ -83356,7 +84154,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Alertant")]
+                      [_vm._v(_vm._s(_vm.textos.alertant[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayAlertants, function(alertant) {
@@ -83412,7 +84210,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Estat incidenica")]
+                      [_vm._v(_vm._s(_vm.textos.estatIncidencia[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayEstatsIncidencia, function(estat) {
@@ -83468,7 +84266,7 @@ var render = function() {
                         attrs: { disabled: "", hidden: "" },
                         domProps: { value: null }
                       },
-                      [_vm._v("Tipus incidenica")]
+                      [_vm._v(_vm._s(_vm.textos.tipusIncidencia[_vm.idioma]))]
                     ),
                     _vm._v(" "),
                     _vm._l(_vm.arrayTipusIncidencia, function(tipus) {
@@ -83494,7 +84292,10 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { rows: "3", placeholder: "Descripció incidencia" },
+                  attrs: {
+                    rows: "3",
+                    placeholder: _vm.textos.descIncidencies[_vm.idioma]
+                  },
                   domProps: { value: _vm.datosIncidencia.descripcio },
                   on: {
                     input: function($event) {
@@ -83520,7 +84321,7 @@ var render = function() {
                     attrs: {
                       "value-as-date": true,
                       "today-button": true,
-                      placeholder: "Data"
+                      placeholder: _vm.textos.fecha[_vm.idioma]
                     },
                     model: {
                       value: _vm.datosIncidencia.data,
@@ -83565,7 +84366,11 @@ var render = function() {
                                   },
                                   on: { click: _vm.clearTime }
                                 },
-                                [_vm._v("Clear time")]
+                                [
+                                  _vm._v(
+                                    _vm._s(_vm.textos.limpiarTiempo[_vm.idioma])
+                                  )
+                                ]
                               )
                             : _vm._e(),
                           _vm._v(" "),
@@ -83576,7 +84381,7 @@ var render = function() {
                               attrs: { size: "sm", variant: "outline-primary" },
                               on: { click: _vm.setNow }
                             },
-                            [_vm._v("Set Now")]
+                            [_vm._v(_vm._s(_vm.textos.setNow[_vm.idioma]))]
                           )
                         ],
                         1
@@ -83591,7 +84396,7 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-lg-5 text-center" }, [
-          _c("h3", [_vm._v("Recursos")]),
+          _c("h3", [_vm._v(_vm._s(_vm.textos.recursos[_vm.idioma]))]),
           _vm._v(" "),
           _c("div", { staticClass: "divRecurs text-left" }, [
             _c(
@@ -83613,7 +84418,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("SANITARI")]
+              [_vm._v(_vm._s(_vm.textos.sanitario[_vm.idioma]))]
             ),
             _vm._v(" "),
             _c(
@@ -83721,7 +84526,7 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("POLICIAL")]
+              [_vm._v(_vm._s(_vm.textos.policial[_vm.idioma]))]
             ),
             _vm._v(" "),
             _c(
@@ -83749,22 +84554,22 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.datosIncidencia.recursos_id,
-                          expression: "datosIncidencia.recursos_id"
+                          value: _vm.datosIncidencia.recurso_id,
+                          expression: "datosIncidencia.recurso_id"
                         }
                       ],
                       staticClass: "custom-control-input",
                       attrs: { type: "checkbox", id: tipus.id },
                       domProps: {
                         value: tipus.id,
-                        checked: Array.isArray(_vm.datosIncidencia.recursos_id)
-                          ? _vm._i(_vm.datosIncidencia.recursos_id, tipus.id) >
+                        checked: Array.isArray(_vm.datosIncidencia.recurso_id)
+                          ? _vm._i(_vm.datosIncidencia.recurso_id, tipus.id) >
                             -1
-                          : _vm.datosIncidencia.recursos_id
+                          : _vm.datosIncidencia.recurso_id
                       },
                       on: {
                         change: function($event) {
-                          var $$a = _vm.datosIncidencia.recursos_id,
+                          var $$a = _vm.datosIncidencia.recurso_id,
                             $$el = $event.target,
                             $$c = $$el.checked ? true : false
                           if (Array.isArray($$a)) {
@@ -83774,19 +84579,19 @@ var render = function() {
                               $$i < 0 &&
                                 _vm.$set(
                                   _vm.datosIncidencia,
-                                  "recursos_id",
+                                  "recurso_id",
                                   $$a.concat([$$v])
                                 )
                             } else {
                               $$i > -1 &&
                                 _vm.$set(
                                   _vm.datosIncidencia,
-                                  "recursos_id",
+                                  "recurso_id",
                                   $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                                 )
                             }
                           } else {
-                            _vm.$set(_vm.datosIncidencia, "recursos_id", $$c)
+                            _vm.$set(_vm.datosIncidencia, "recurso_id", $$c)
                           }
                         }
                       }
@@ -83807,7 +84612,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("h3", [_vm._v("PRIORITAT")]),
+          _c("h3", [_vm._v(_vm._s(_vm.textos.prioritat[_vm.idioma]))]),
           _vm._v(" "),
           _c(
             "div",
@@ -83901,7 +84706,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v("REGISTRAR")]
+        [_vm._v(_vm._s(_vm.textos.registrar[_vm.idioma]))]
       )
     ])
   ])
@@ -97189,6 +97994,8 @@ Vue.component("landing", __webpack_require__(/*! ./components/LandingPage.vue */
 Vue.component("incidencias", __webpack_require__(/*! ./components/Incidencias.vue */ "./resources/js/components/Incidencias.vue")["default"]);
 Vue.component("alertants", __webpack_require__(/*! ./components/AlertantsComponent.vue */ "./resources/js/components/AlertantsComponent.vue")["default"]);
 Vue.component("addalertant", __webpack_require__(/*! ./components/AlertantsAddComponent.vue */ "./resources/js/components/AlertantsAddComponent.vue")["default"]);
+Vue.component("incidencies-tablet", __webpack_require__(/*! ./components/IncidenciesTablet.vue */ "./resources/js/components/IncidenciesTablet.vue")["default"]);
+Vue.component("card-incidencia", __webpack_require__(/*! ./components/CardIncidencia.vue */ "./resources/js/components/CardIncidencia.vue")["default"]);
 Vue.use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__["BootstrapVue"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -97386,6 +98193,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AlertantsComponent_vue_vue_type_template_id_23907640___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CardIncidencia.vue":
+/*!****************************************************!*\
+  !*** ./resources/js/components/CardIncidencia.vue ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CardIncidencia_vue_vue_type_template_id_17787118___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardIncidencia.vue?vue&type=template&id=17787118& */ "./resources/js/components/CardIncidencia.vue?vue&type=template&id=17787118&");
+/* harmony import */ var _CardIncidencia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardIncidencia.vue?vue&type=script&lang=js& */ "./resources/js/components/CardIncidencia.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CardIncidencia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CardIncidencia_vue_vue_type_template_id_17787118___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CardIncidencia_vue_vue_type_template_id_17787118___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CardIncidencia.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CardIncidencia.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/CardIncidencia.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardIncidencia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CardIncidencia.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardIncidencia.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardIncidencia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CardIncidencia.vue?vue&type=template&id=17787118&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/CardIncidencia.vue?vue&type=template&id=17787118& ***!
+  \***********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardIncidencia_vue_vue_type_template_id_17787118___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CardIncidencia.vue?vue&type=template&id=17787118& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CardIncidencia.vue?vue&type=template&id=17787118&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardIncidencia_vue_vue_type_template_id_17787118___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardIncidencia_vue_vue_type_template_id_17787118___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -97629,6 +98505,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Incidencias_vue_vue_type_template_id_01aafbdf_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Incidencias_vue_vue_type_template_id_01aafbdf_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/IncidenciesTablet.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/IncidenciesTablet.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IncidenciesTablet_vue_vue_type_template_id_1248b7a1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IncidenciesTablet.vue?vue&type=template&id=1248b7a1& */ "./resources/js/components/IncidenciesTablet.vue?vue&type=template&id=1248b7a1&");
+/* harmony import */ var _IncidenciesTablet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./IncidenciesTablet.vue?vue&type=script&lang=js& */ "./resources/js/components/IncidenciesTablet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _IncidenciesTablet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _IncidenciesTablet_vue_vue_type_template_id_1248b7a1___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _IncidenciesTablet_vue_vue_type_template_id_1248b7a1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/IncidenciesTablet.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/IncidenciesTablet.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/IncidenciesTablet.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IncidenciesTablet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./IncidenciesTablet.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/IncidenciesTablet.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_IncidenciesTablet_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/IncidenciesTablet.vue?vue&type=template&id=1248b7a1&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/IncidenciesTablet.vue?vue&type=template&id=1248b7a1& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IncidenciesTablet_vue_vue_type_template_id_1248b7a1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./IncidenciesTablet.vue?vue&type=template&id=1248b7a1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/IncidenciesTablet.vue?vue&type=template&id=1248b7a1&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IncidenciesTablet_vue_vue_type_template_id_1248b7a1___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_IncidenciesTablet_vue_vue_type_template_id_1248b7a1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -98011,6 +98956,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     arrayRecursos: [],
     arrayAlertants: [],
     arrayEstatsIncidencia: [],
+    arrayIncidencies: [],
     afegit: false,
     arrayRecursosPoliciales: [],
     arrayRecursosSanitarios: []
@@ -98021,16 +98967,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     tipus_recurs: function tipus_recurs(state, datosRecibidos) {
       state.arrayTipusRecurs = datosRecibidos;
-      console.log("array ->", state.arrayTipusRecurs);
-      console.log("datos ->", datosRecibidos); // let me = state;
-      // for (let i = 0; i < datosRecibidos.length; i++) {
-      //     if(datosRecibidos[i].esPolicial === 1){
-      //         me.arrayRecursosPoliciales.push(datosRecibidos[i]);
-      //     }
-      //     else{
-      //         me.arrayRecursosSanitarios.push(datosRecibidos[i]);
-      //     }
-      // }
     },
     municipis: function municipis(state, datosRecibidos) {
       state.arrayMunicipis = datosRecibidos;
@@ -98059,6 +98995,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     estats_incidencia: function estats_incidencia(state, datosRecibidos) {
       state.arrayEstatsIncidencia = datosRecibidos;
+    },
+    incidencies: function incidencies(state, datosRecibidos) {
+      state.arrayIncidencies = datosRecibidos;
     }
   },
   actions: {

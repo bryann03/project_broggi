@@ -5,5 +5,6 @@
 @endsection
 
 @section('principal')
-    <landing></landing>
+    {{-- <landing></landing> --}}
+    <incidencies-tablet></incidencies-tablet>
 @endsection

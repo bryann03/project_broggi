@@ -15,6 +15,7 @@ export default new Vuex.Store({
         arrayRecursos: [],
         arrayAlertants:[],
         arrayEstatsIncidencia: [],
+        arrayIncidencies: [],
         afegit: false,
         arrayRecursosPoliciales: [],
         arrayRecursosSanitarios: []
@@ -53,6 +54,9 @@ export default new Vuex.Store({
         },
         estats_incidencia(state, datosRecibidos){
             state.arrayEstatsIncidencia = datosRecibidos;
+        },
+        incidencies(state, datosRecibidos){
+            state.arrayIncidencies = datosRecibidos;
         }
     },
     actions: {
