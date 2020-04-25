@@ -347,15 +347,13 @@ export default {
   },
   methods: {
     obtenerIncidencias() {
-      axios
-        .get("http://localhost:8080/project_broggi/public/api/incidencies")
-        .then(response => {
-          this.arrayIncidencia = response.data;
-        });
+      axios.get("/incidencies").then(response => {
+        this.arrayIncidencia = response.data;
+      });
     },
     obtenerTipusRecursos() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/tipus_recurs")
+        .get("/tipus_recurs")
         .then(response => {
           this.arrayTipusRecurs = response.data;
         })
@@ -363,7 +361,7 @@ export default {
     },
     obtenerMunicipis() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/municipis")
+        .get("/municipis")
         .then(response => {
           this.arrayMunicipis = response.data;
         })
@@ -371,7 +369,7 @@ export default {
     },
     obtenerTipusAlertant() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/tipus_alertant")
+        .get("/tipus_alertant")
         .then(response => {
           this.arrayTipusAlertant = response.data;
         })
@@ -379,7 +377,7 @@ export default {
     },
     obtenerTipusIncidencia() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/tipus_incident")
+        .get("/tipus_incident")
         .then(response => {
           this.arrayTipusIncidencia = response.data;
         })
@@ -387,7 +385,7 @@ export default {
     },
     obtenerAlertants() {
       axios
-        .get("http://localhost:8080/project_broggi/public/api/alertants")
+        .get("/alertants")
         .then(response => {
           this.arrayAlertants = response.data;
         })
@@ -395,9 +393,7 @@ export default {
     },
     obtenerEstatIncidencies() {
       axios
-        .get(
-          "http://localhost:8080/project_broggi/public/api/estats_incidencia"
-        )
+        .get("/estats_incidencia")
         .then(response => {
           this.arrayEstatIncidencia = response.data;
         })
