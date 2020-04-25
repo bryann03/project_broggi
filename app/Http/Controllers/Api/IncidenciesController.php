@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\IncidenciesResource;
 use App\Models\Incidencies;
+use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 
 class IncidenciesController extends Controller
 {
@@ -28,12 +30,13 @@ class IncidenciesController extends Controller
      */
     public function store(Request $request)
     {
+        $fechaRecurso = new DateTime();
         $incidencies = new Incidencies();
 
         $incidencies->adreca = $request->input('adreca');
         $incidencies->num_incidencia = $request->input('num_incidencia');
         $incidencies->telefon_alertant = $request->input('telefon_alertant');
-        $incidencies->data = $request->input('data');
+        $incidencies->data = $fechaRecurso;
         $incidencies->hora = $request->input('hora');
         $incidencies->complement_adreca = $request->input('complement_adreca');
         $incidencies->descripcio = $request->input('descripcio');
@@ -43,11 +46,29 @@ class IncidenciesController extends Controller
         $incidencies->tipus_alertant_id = $request->input('tipus_alertant_id');
         $incidencies->alertants_id = $request->input('alertants_id');
 
+        $prioritat = $request->input('prioritat');
         try {
+            $incidencies->save();
+            if($request->input('recursos_id') != null){
+                $recursos_id = $request->input('recursos_id');
+                foreach($recursos_id as $id){
+                    $incidencies->recursos()->attach($id, [
+                        'prioritat' => $prioritat,
+                        'hora_activacio' => $fechaRecurso,
+                        'hora_mobilitzacio' => $fechaRecurso,
+                        'hora_assistencia' => $fechaRecurso,
+                        'hora_transport' => $fechaRecurso,
+                        'hora_arribada_hospital' => $fechaRecurso,
+                        'hora_transferencia' => $fechaRecurso,
+                        'hora_finalitzacio' => $fechaRecurso,
+                    ]);
+                }
+            }
             $incidencies->save();
             $respuesta = (new IncidenciesResource($incidencies))
                 ->response()
                 ->setStatusCode(201);
+
         } catch (QueryException $e) {
             $mensaje = Utilitat::errorMessage($e);
             $respuesta = response()

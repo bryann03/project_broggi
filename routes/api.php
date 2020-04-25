@@ -27,3 +27,4 @@ Route::apiResource('tipus_recurs', 'Api\TipusRecursController');
 Route::apiResource('recursos', 'Api\RecursosController');
 Route::apiResource('incidencies', 'Api\IncidenciesController');
 Route::apiResource('estats_incidencia', 'Api\EstatsIncidenciaController');
+Route::apiResource('incidencies_has_recursos', 'Api\IncidenciesHasRecursosController');
