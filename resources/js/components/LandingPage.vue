@@ -6,7 +6,11 @@
             </ol>
     </nav>-->
     <h1 class="text-center mb-5 mt-5">{{ textos.gesionesBroggi[idioma] }}</h1>
-
+    <select id="idiomas" v-model="idioma" @change="selectIdioma()">
+      <option value="0" selected>Català</option>
+      <option value="1">Castellano</option>
+      <option value="2">English</option>
+    </select>
     <div id="app" class="row">
       <div>
         <b-card
@@ -70,6 +74,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -114,8 +119,15 @@ export default {
     },
     openAlertantes() {
       window.location.href = "/project_broggi/public/alertants";
+    },
+    ...mapMutations(["seleccionarIdioma"]),
+
+    selectIdioma() {
+      console.log(this.idioma);
+      this.seleccionarIdioma(this.idioma);
     }
-  }
+  },
+  computed: { ...mapState(["idiomaGlobal"]) }
 };
 </script>
 

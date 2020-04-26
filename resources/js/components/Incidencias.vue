@@ -239,6 +239,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -336,7 +337,13 @@ export default {
       filterOn: []
     };
   },
-  mounted() {
+  computed: {
+    rows() {
+      return this.arrayIncidencia.length;
+    },
+    ...mapState(["idiomaGlobal"])
+  },
+  created() {
     this.obtenerIncidencias();
     this.obtenerTipusRecursos();
     this.obtenerMunicipis();
@@ -344,6 +351,7 @@ export default {
     this.obtenerTipusIncidencia();
     this.obtenerAlertants();
     this.obtenerEstatIncidencies();
+    console.log(this.idiomaGlobal);
   },
   methods: {
     obtenerIncidencias() {
@@ -428,11 +436,6 @@ export default {
     cancelar() {
       this.obtenerIncidencias();
       this.$bvModal.hide("editIncidenciaModal");
-    }
-  },
-  computed: {
-    rows() {
-      return this.arrayIncidencia.length;
     }
   }
 };
