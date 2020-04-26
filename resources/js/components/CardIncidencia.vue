@@ -1,17 +1,27 @@
 <template>
     <main>
-        <b-card header-tag="header" footer-tag="footer" :title="objectIncidencia.tipus_incident.tipus">
+        <b-card :border-variant="colorCard" header-tag="header" footer-tag="footer"
+                :header-bg-variant="colorCard" :header-text-variant="colorTextCard"
+                :header-border-variant="colorCard" :title="objectIncidencia.incidencies.tipus_incident.tipus">
             <template v-slot:header>
-                <h6 class="mb-0">Num Incidencia: {{ objectIncidencia.num_incidencia }}</h6>
+                <h6 class="mb-0"> <strong>Num Incidencia:</strong>
+                    {{ objectIncidencia.incidencies.num_incidencia }}</h6>
             </template>
 
-            <b-card-text>{{ objectIncidencia.hora }}</b-card-text>
-            <b-card-text>{{ objectIncidencia.adreca }}</b-card-text>
+            <b-card-text> <strong>Hora:</strong>
+                {{ objectIncidencia.incidencies.hora }}</b-card-text>
+
+            <b-card-text> <strong>Adreça:</strong>
+                {{ objectIncidencia.incidencies.adreca }}</b-card-text>
+
+            <b-card-text> <strong>Prioritat:</strong>
+                {{ objectIncidencia.prioritat }}</b-card-text>
 
             <template v-slot:footer>
                 <div class="row">
                     <div class="col-6">
-                        <button type="button" class="btn btn-primary btn-block">Editar</button>
+                        <button type="button" class="btn btn-primary btn-block"
+                                :disabled="objectIncidencia.recursos.codi != codigoRecurso">Editar</button>
                     </div>
                     <div class="col-6">
                         <button type="button" class="btn btn-primary btn-block">Ver detalle</button>
@@ -27,27 +37,33 @@ import { mapState, mapMutations, mapActions } from "vuex";
 export default {
     data() {
         return {
-            datosIncidencia: {
-                id: null,
-                num_incidencia: null,
-                telefon_alertant: null,
-                data: null,
-                hora: null,
-                adreca: "",
-                complement_adreca: "",
-                descripcio: "",
-                municipis_id: null,
-                tipus_incident_id: null,
-                estats_incidencia_id: null,
-                tipus_alertant_id: null,
-                alertants_id: null,
-                recursos_id: [],
-                prioritat: null
-            },
+            buttonEditar: false
         }
     },
     created(){
-        console.log(this.objectIncidencia);
+        
+    },
+    computed: {
+        ...mapState(['codigoRecurso']),
+        colorCard(){
+            let color;
+            let priotitat = this.objectIncidencia.prioritat;
+            if(priotitat >= 4){
+                color = 'danger';
+            }
+            if(priotitat == 2 || priotitat == 3){
+                color = 'warning';
+            }
+            return color;
+        },
+        colorTextCard(){
+            let color;
+            let priotitat = this.objectIncidencia.prioritat;
+            if(priotitat >= 4){
+                color = 'white';
+            }
+            return color
+        }
     },
     props: ['objectIncidencia']
 }
