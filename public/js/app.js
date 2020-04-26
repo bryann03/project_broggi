@@ -2249,29 +2249,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      datosIncidencia: {
-        id: null,
-        num_incidencia: null,
-        telefon_alertant: null,
-        data: null,
-        hora: null,
-        adreca: "",
-        complement_adreca: "",
-        descripcio: "",
-        municipis_id: null,
-        tipus_incident_id: null,
-        estats_incidencia_id: null,
-        tipus_alertant_id: null,
-        alertants_id: null,
-        recursos_id: [],
-        prioritat: null
-      }
+      buttonEditar: false
     };
   },
   created: function created() {
     console.log(this.objectIncidencia);
   },
-  props: ['objectIncidencia']
+  props: ['objectIncidencia', 'objectIncidenciaAsignada']
 });
 
 /***/ }),
@@ -3193,14 +3177,14 @@ __webpack_require__.r(__webpack_exports__);
     obtenerIncidencias: function obtenerIncidencias() {
       var _this = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/incidencies").then(function (response) {
+      axios.get("/incidencies").then(function (response) {
         _this.arrayIncidencia = response.data;
       });
     },
     obtenerTipusRecursos: function obtenerTipusRecursos() {
       var _this2 = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/tipus_recurs").then(function (response) {
+      axios.get("/tipus_recurs").then(function (response) {
         _this2.arrayTipusRecurs = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -3209,7 +3193,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerMunicipis: function obtenerMunicipis() {
       var _this3 = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/municipis").then(function (response) {
+      axios.get("/municipis").then(function (response) {
         _this3.arrayMunicipis = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -3218,7 +3202,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerTipusAlertant: function obtenerTipusAlertant() {
       var _this4 = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/tipus_alertant").then(function (response) {
+      axios.get("/tipus_alertant").then(function (response) {
         _this4.arrayTipusAlertant = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -3227,7 +3211,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerTipusIncidencia: function obtenerTipusIncidencia() {
       var _this5 = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/tipus_incident").then(function (response) {
+      axios.get("/tipus_incident").then(function (response) {
         _this5.arrayTipusIncidencia = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -3236,7 +3220,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerAlertants: function obtenerAlertants() {
       var _this6 = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/alertants").then(function (response) {
+      axios.get("/alertants").then(function (response) {
         _this6.arrayAlertants = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -3245,7 +3229,7 @@ __webpack_require__.r(__webpack_exports__);
     obtenerEstatIncidencies: function obtenerEstatIncidencies() {
       var _this7 = this;
 
-      axios.get("http://localhost:8080/project_broggi/public/api/estats_incidencia").then(function (response) {
+      axios.get("/estats_incidencia").then(function (response) {
         _this7.arrayEstatIncidencia = response.data;
       })["catch"](function (e) {
         return console.log(e);
@@ -3325,25 +3309,63 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      ads: 'v-for="incidencia in arrayIncidencies" :key="incidencia.id"'
+      titulo: 'Incidencies asignadas',
+      incidenciesActivadas: false,
+      incidenciesAsignadas: true
     };
   },
   created: function created() {
+    this.setCodigoRecurso("AAAA");
     this.getIncidencies();
+    this.getIncidenciesHasRecursos();
   },
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi"]), {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(['setCodigoRecurso']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])(["getApi"]), {
     getIncidencies: function getIncidencies() {
       this.getApi({
         ruta: "incidencies",
         nombreTabla: "incidencies"
       });
+    },
+    getIncidenciesHasRecursos: function getIncidenciesHasRecursos() {
+      this.getApi({
+        ruta: "incidencies_has_recursos",
+        nombreTabla: "incidencies_has_recursos"
+      });
+    },
+    showAllIncidencies: function showAllIncidencies() {
+      this.titulo = 'Incidencies activadas';
+      this.incidenciesAsignadas = false;
+      this.incidenciesActivadas = true;
+    },
+    showIncidenciesAsignadas: function showIncidenciesAsignadas() {
+      this.titulo = 'Incidencies asignadas';
+      this.incidenciesActivadas = false;
+      this.incidenciesAsignadas = true;
     }
   }),
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["arrayIncidencies"]))
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["arrayIncidencies", "arrayIncidenciesActivadas", "arrayIncidenciesHasRecursos", "codigoRecurso", "arrayIncidenciesAsignadas"]))
 });
 
 /***/ }),
@@ -81497,7 +81519,7 @@ var render = function() {
           attrs: {
             "header-tag": "header",
             "footer-tag": "footer",
-            title: _vm.objectIncidencia.tipus_incident.tipus
+            title: _vm.objectIncidencia.incidencies.tipus_incident.tipus
           },
           scopedSlots: _vm._u([
             {
@@ -81507,7 +81529,7 @@ var render = function() {
                   _c("h6", { staticClass: "mb-0" }, [
                     _vm._v(
                       "Num Incidencia: " +
-                        _vm._s(_vm.objectIncidencia.num_incidencia)
+                        _vm._s(_vm.objectIncidencia.incidencies.num_incidencia)
                     )
                   ])
                 ]
@@ -81549,9 +81571,13 @@ var render = function() {
         },
         [
           _vm._v(" "),
-          _c("b-card-text", [_vm._v(_vm._s(_vm.objectIncidencia.hora))]),
+          _c("b-card-text", [
+            _vm._v(_vm._s(_vm.objectIncidencia.incidencies.hora))
+          ]),
           _vm._v(" "),
-          _c("b-card-text", [_vm._v(_vm._s(_vm.objectIncidencia.adreca))])
+          _c("b-card-text", [
+            _vm._v(_vm._s(_vm.objectIncidencia.incidencies.adreca))
+          ])
         ],
         1
       )
@@ -83215,58 +83241,119 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("main", [
     _c("section", [
-      _c("h3", { staticClass: "text-center m-3" }, [_vm._v("Incidencies")]),
+      _c("h3", { staticClass: "text-center m-3" }, [
+        _vm._v(_vm._s(_vm.titulo))
+      ]),
       _vm._v(" "),
-      _vm._m(0),
+      _c("div", { staticClass: "row mb-5 mt-5" }, [
+        _c("div", { staticClass: "col-6" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-info btn-block",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.showAllIncidencies()
+                }
+              }
+            },
+            [_vm._v("Ver todas")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-outline-info btn-block",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.showIncidenciesAsignadas()
+                }
+              }
+            },
+            [_vm._v("Ver asignadas")]
+          )
+        ])
+      ]),
       _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.arrayIncidencies, function(incidencia) {
-          return _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.incidenciesActivadas,
+              expression: "incidenciesActivadas"
+            }
+          ]
+        },
+        [
+          _c(
             "div",
-            { key: incidencia.id, staticClass: "col-6 mb-5" },
-            [
-              _c("card-incidencia", { attrs: { objectIncidencia: incidencia } })
-            ],
-            1
+            { staticClass: "row" },
+            _vm._l(_vm.arrayIncidenciesActivadas, function(incidencia) {
+              return _c(
+                "div",
+                { key: incidencia.id, staticClass: "col-6 mb-5" },
+                [
+                  _c("card-incidencia", {
+                    attrs: { objectIncidencia: incidencia }
+                  })
+                ],
+                1
+              )
+            }),
+            0
           )
-        }),
-        0
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "section",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.incidenciesAsignadas,
+              expression: "incidenciesAsignadas"
+            }
+          ]
+        },
+        [
+          _vm.arrayIncidenciesAsignadas.length > 0
+            ? _c(
+                "div",
+                { staticClass: "row" },
+                _vm._l(_vm.arrayIncidenciesAsignadas, function(incidencia) {
+                  return _c(
+                    "div",
+                    { key: incidencia.id, staticClass: "col-6 mb-5" },
+                    [
+                      _c("card-incidencia", {
+                        attrs: { objectIncidencia: incidencia }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                0
+              )
+            : _c("div", [
+                _c("h4", { staticClass: "text-center" }, [
+                  _vm._v("SIN INCIDENCIAS ASIGNADAS")
+                ])
+              ])
+        ]
       )
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-5 mt-5" }, [
-      _c("div", { staticClass: "col-6" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-info btn-block",
-            attrs: { type: "button" }
-          },
-          [_vm._v("Ver todas")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-outline-info btn-block",
-            attrs: { type: "button" }
-          },
-          [_vm._v("Ver asignadas")]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -98957,9 +99044,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     arrayAlertants: [],
     arrayEstatsIncidencia: [],
     arrayIncidencies: [],
+    arrayIncidenciesHasRecursos: [],
     afegit: false,
     arrayRecursosPoliciales: [],
-    arrayRecursosSanitarios: []
+    arrayRecursosSanitarios: [],
+    arrayIncidenciesActivadas: [],
+    arrayIncidenciesAsignadas: [],
+    codigoRecurso: null
   },
   mutations: {
     tipus_alertant: function tipus_alertant(state, datosRecibidos) {
@@ -98998,6 +99089,22 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     incidencies: function incidencies(state, datosRecibidos) {
       state.arrayIncidencies = datosRecibidos;
+    },
+    incidencies_has_recursos: function incidencies_has_recursos(state, datosRecibidos) {
+      state.arrayIncidenciesHasRecursos = datosRecibidos;
+      var me = state;
+      datosRecibidos.forEach(function (dato) {
+        if (dato.recursos.codi === me.codigoRecurso) {
+          me.arrayIncidenciesAsignadas.push(dato);
+        }
+
+        if (dato.incidencies.estats_incidencia_id === 1) {
+          me.arrayIncidenciesActivadas.push(dato);
+        }
+      });
+    },
+    setCodigoRecurso: function setCodigoRecurso(state, codigo) {
+      state.codigoRecurso = codigo;
     }
   },
   actions: {
@@ -99008,7 +99115,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           nombreTabla = _ref2.nombreTabla;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get("/" + ruta).then(function (response) {
         var datos = response.data;
-        console.log(nombreTabla);
         commit(nombreTabla, datos);
       })["catch"](function (error) {
         console.log(error);

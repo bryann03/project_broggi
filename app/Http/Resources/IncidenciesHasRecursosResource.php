@@ -15,5 +15,9 @@ class IncidenciesHasRecursosResource extends JsonResource
     public function toArray($request)
     {
         return parent::toArray($request);
+        // return[
+        //     "prioritat" =>$this->prioritat,
+        //     "incidencies_id" =>$this->incidencies_id
+        // ];
     }
 }

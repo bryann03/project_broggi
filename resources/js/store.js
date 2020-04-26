@@ -16,9 +16,13 @@ export default new Vuex.Store({
         arrayAlertants:[],
         arrayEstatsIncidencia: [],
         arrayIncidencies: [],
+        arrayIncidenciesHasRecursos: [],
         afegit: false,
         arrayRecursosPoliciales: [],
-        arrayRecursosSanitarios: []
+        arrayRecursosSanitarios: [],
+        arrayIncidenciesActivadas: [],
+        arrayIncidenciesAsignadas: [],
+        codigoRecurso: null
     },
     mutations: {
         tipus_alertant(state, datosRecibidos){
@@ -57,6 +61,21 @@ export default new Vuex.Store({
         },
         incidencies(state, datosRecibidos){
             state.arrayIncidencies = datosRecibidos;
+        },
+        incidencies_has_recursos(state, datosRecibidos){
+            state.arrayIncidenciesHasRecursos = datosRecibidos;
+            let me = state;
+            datosRecibidos.forEach(dato => {
+                if(dato.recursos.codi === me.codigoRecurso){
+                    me.arrayIncidenciesAsignadas.push(dato);
+                }
+                if(dato.incidencies.estats_incidencia_id === 1){
+                    me.arrayIncidenciesActivadas.push(dato);
+                }
+            });
+        },
+        setCodigoRecurso(state, codigo){
+            state.codigoRecurso = codigo;
         }
     },
     actions: {
@@ -65,7 +84,6 @@ export default new Vuex.Store({
             axios.get("/" + ruta)
                 .then(function (response) {
                     const datos = response.data;
-                    console.log(nombreTabla);
                     commit(nombreTabla, datos);
                 })
                 .catch(function (error) {
