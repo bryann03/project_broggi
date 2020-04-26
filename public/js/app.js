@@ -2221,6 +2221,22 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2252,10 +2268,34 @@ __webpack_require__.r(__webpack_exports__);
       buttonEditar: false
     };
   },
-  created: function created() {
-    console.log(this.objectIncidencia);
-  },
-  props: ['objectIncidencia', 'objectIncidenciaAsignada']
+  created: function created() {},
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['codigoRecurso']), {
+    colorCard: function colorCard() {
+      var color;
+      var priotitat = this.objectIncidencia.prioritat;
+
+      if (priotitat >= 4) {
+        color = 'danger';
+      }
+
+      if (priotitat == 2 || priotitat == 3) {
+        color = 'warning';
+      }
+
+      return color;
+    },
+    colorTextCard: function colorTextCard() {
+      var color;
+      var priotitat = this.objectIncidencia.prioritat;
+
+      if (priotitat >= 4) {
+        color = 'white';
+      }
+
+      return color;
+    }
+  }),
+  props: ['objectIncidencia']
 });
 
 /***/ }),
@@ -81517,8 +81557,12 @@ var render = function() {
         "b-card",
         {
           attrs: {
+            "border-variant": _vm.colorCard,
             "header-tag": "header",
             "footer-tag": "footer",
+            "header-bg-variant": _vm.colorCard,
+            "header-text-variant": _vm.colorTextCard,
+            "header-border-variant": _vm.colorCard,
             title: _vm.objectIncidencia.incidencies.tipus_incident.tipus
           },
           scopedSlots: _vm._u([
@@ -81527,8 +81571,9 @@ var render = function() {
               fn: function() {
                 return [
                   _c("h6", { staticClass: "mb-0" }, [
+                    _c("strong", [_vm._v("Num Incidencia:")]),
                     _vm._v(
-                      "Num Incidencia: " +
+                      "\n                " +
                         _vm._s(_vm.objectIncidencia.incidencies.num_incidencia)
                     )
                   ])
@@ -81546,7 +81591,12 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary btn-block",
-                          attrs: { type: "button" }
+                          attrs: {
+                            type: "button",
+                            disabled:
+                              _vm.objectIncidencia.recursos.codi !=
+                              _vm.codigoRecurso
+                          }
                         },
                         [_vm._v("Editar")]
                       )
@@ -81572,11 +81622,22 @@ var render = function() {
         [
           _vm._v(" "),
           _c("b-card-text", [
-            _vm._v(_vm._s(_vm.objectIncidencia.incidencies.hora))
+            _c("strong", [_vm._v("Hora:")]),
+            _vm._v(
+              "\n            " + _vm._s(_vm.objectIncidencia.incidencies.hora)
+            )
           ]),
           _vm._v(" "),
           _c("b-card-text", [
-            _vm._v(_vm._s(_vm.objectIncidencia.incidencies.adreca))
+            _c("strong", [_vm._v("Adreça:")]),
+            _vm._v(
+              "\n            " + _vm._s(_vm.objectIncidencia.incidencies.adreca)
+            )
+          ]),
+          _vm._v(" "),
+          _c("b-card-text", [
+            _c("strong", [_vm._v("Prioritat:")]),
+            _vm._v("\n            " + _vm._s(_vm.objectIncidencia.prioritat))
           ])
         ],
         1
