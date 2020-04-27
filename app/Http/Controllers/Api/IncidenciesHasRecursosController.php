@@ -16,7 +16,8 @@ class IncidenciesHasRecursosController extends Controller
      */
     public function index()
     {
-        $inciden = IncidenciesHasRecursos::with('incidencies.tipus_incident')->with('incidencies.estats_incidencia')->with('recursos')->get();
+        $inciden = IncidenciesHasRecursos::with('incidencies.tipus_incident')->with('incidencies.estats_incidencia')
+                    ->with('incidencies.tipus_alertant')->with('incidencies.municipis')->with('recursos')->get();
         return new IncidenciesHasRecursosResource($inciden);
     }
 

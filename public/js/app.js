@@ -2261,35 +2261,136 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      buttonEditar: false
+      buttonEditar: false,
+      modalName: "",
+      detalleIncidencia: {
+        id: null,
+        num_incidencia: "",
+        data: null,
+        hora: null,
+        adreca: "",
+        complement_adreca: "",
+        descripcio: "",
+        municipis: [],
+        municipis_id: null,
+        tipus_incident: [],
+        tipus_incident_id: null,
+        estats_incidencia: [],
+        estats_incidencia_id: null,
+        tipus_alertant: [],
+        tipus_alertant_id: null,
+        alertants_id: null
+      }
     };
   },
-  created: function created() {},
+  created: function created() {
+    var id = this.objectIncidencia.incidencies_id.toString() + this.objectIncidencia.recursos_id.toString();
+    this.modalName = id;
+  },
+  methods: {
+    openModalDetalle: function openModalDetalle(incidencia) {
+      this.detalleIncidencia = incidencia;
+      console.log(this.detalleIncidencia);
+      this.$bvModal.show(this.modalName);
+    },
+    cancelar: function cancelar() {
+      this.$bvModal.hide(this.modalName);
+    }
+  },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(['codigoRecurso']), {
     colorCard: function colorCard() {
       var color;
       var priotitat = this.objectIncidencia.prioritat;
 
-      if (priotitat >= 4) {
+      if (priotitat > 4) {
         color = 'danger';
-      }
-
-      if (priotitat == 2 || priotitat == 3) {
-        color = 'warning';
-      }
-
-      return color;
-    },
-    colorTextCard: function colorTextCard() {
-      var color;
-      var priotitat = this.objectIncidencia.prioritat;
-
-      if (priotitat >= 4) {
-        color = 'white';
+      } else {
+        color = 'primary';
       }
 
       return color;
@@ -2895,6 +2996,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3135,6 +3243,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3204,7 +3313,12 @@ __webpack_require__.r(__webpack_exports__);
       filterOn: []
     };
   },
-  mounted: function mounted() {
+  computed: _objectSpread({
+    rows: function rows() {
+      return this.arrayIncidencia.length;
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["idiomaGlobal"])),
+  created: function created() {
     this.obtenerIncidencias();
     this.obtenerTipusRecursos();
     this.obtenerMunicipis();
@@ -3212,6 +3326,7 @@ __webpack_require__.r(__webpack_exports__);
     this.obtenerTipusIncidencia();
     this.obtenerAlertants();
     this.obtenerEstatIncidencies();
+    console.log(this.idiomaGlobal);
   },
   methods: {
     obtenerIncidencias: function obtenerIncidencias() {
@@ -3301,11 +3416,6 @@ __webpack_require__.r(__webpack_exports__);
     cancelar: function cancelar() {
       this.obtenerIncidencias();
       this.$bvModal.hide("editIncidenciaModal");
-    }
-  },
-  computed: {
-    rows: function rows() {
-      return this.arrayIncidencia.length;
     }
   }
 });
@@ -3419,6 +3529,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3490,6 +3607,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3507,7 +3629,7 @@ __webpack_require__.r(__webpack_exports__);
       src: "https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80"
     };
   },
-  methods: {
+  methods: _objectSpread({
     openIncidencia: function openIncidencia() {
       window.location.href = "/project_broggi/public/incidencias";
     },
@@ -3517,7 +3639,13 @@ __webpack_require__.r(__webpack_exports__);
     openAlertantes: function openAlertantes() {
       window.location.href = "/project_broggi/public/alertants";
     }
-  }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["seleccionarIdioma"]), {
+    selectIdioma: function selectIdioma() {
+      console.log(this.idioma);
+      this.seleccionarIdioma(this.idioma);
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["idiomaGlobal"]))
 });
 
 /***/ }),
@@ -81560,8 +81688,6 @@ var render = function() {
             "border-variant": _vm.colorCard,
             "header-tag": "header",
             "footer-tag": "footer",
-            "header-bg-variant": _vm.colorCard,
-            "header-text-variant": _vm.colorTextCard,
             "header-border-variant": _vm.colorCard,
             title: _vm.objectIncidencia.incidencies.tipus_incident.tipus
           },
@@ -81607,7 +81733,14 @@ var render = function() {
                         "button",
                         {
                           staticClass: "btn btn-primary btn-block",
-                          attrs: { type: "button" }
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.openModalDetalle(
+                                _vm.objectIncidencia.incidencies
+                              )
+                            }
+                          }
                         },
                         [_vm._v("Ver detalle")]
                       )
@@ -81622,13 +81755,6 @@ var render = function() {
         [
           _vm._v(" "),
           _c("b-card-text", [
-            _c("strong", [_vm._v("Hora:")]),
-            _vm._v(
-              "\n            " + _vm._s(_vm.objectIncidencia.incidencies.hora)
-            )
-          ]),
-          _vm._v(" "),
-          _c("b-card-text", [
             _c("strong", [_vm._v("Adreça:")]),
             _vm._v(
               "\n            " + _vm._s(_vm.objectIncidencia.incidencies.adreca)
@@ -81636,9 +81762,256 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("b-card-text", [
-            _c("strong", [_vm._v("Prioritat:")]),
-            _vm._v("\n            " + _vm._s(_vm.objectIncidencia.prioritat))
-          ])
+            _c("strong", [_vm._v("Municipi:")]),
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.objectIncidencia.incidencies.municipis.nom)
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mb-3" }, [
+            _c(
+              "div",
+              { staticClass: "col-6" },
+              [
+                _c("b-card-text", [
+                  _c("strong", [_vm._v("Hora:")]),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.objectIncidencia.incidencies.hora)
+                  )
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-6" },
+              [
+                _c("b-card-text", [
+                  _c("strong", [_vm._v("Prioritat:")]),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.objectIncidencia.prioritat)
+                  )
+                ])
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("b-card-text", [
+            _c("strong", [_vm._v("Descripció:")]),
+            _vm._v(
+              "\n            " +
+                _vm._s(_vm.objectIncidencia.incidencies.descripcio)
+            )
+          ]),
+          _vm._v(" "),
+          _vm._v(" "),
+          _c(
+            "b-modal",
+            {
+              attrs: {
+                id: _vm.modalName,
+                "header-bg-variant": "primary",
+                "header-text-variant": "white",
+                title: "Detalls"
+              },
+              on: {
+                hidden: function($event) {
+                  return _vm.cancelar()
+                }
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "modal-footer",
+                  fn: function() {
+                    return [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" },
+                          on: {
+                            click: function($event) {
+                              return _vm.cancelar()
+                            }
+                          }
+                        },
+                        [_vm._v("Tancar")]
+                      )
+                    ]
+                  },
+                  proxy: true
+                }
+              ])
+            },
+            [
+              _c("form", [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Num incidencia")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.num_incidencia
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [_vm._v("Adreça")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.adreca
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Complement adreça")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.complement_adreca
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [_vm._v("Municipi")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.municipis.nom
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Tipus incident")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.tipus_incident.tipus
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Estat incidencia")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder:
+                          _vm.detalleIncidencia.estats_incidencia.estat
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Tipus alertant")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.tipus_alertant.tipus
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Telefon alertant")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.telefon_alertant
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [
+                      _vm._v("Descripció")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.descripcio
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [_vm._v("Data")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.data
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row col-12 mb-3" }, [
+                    _c("label", { staticClass: "col-4" }, [_vm._v("Hora")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "col-6",
+                      attrs: {
+                        disabled: "",
+                        type: "text",
+                        placeholder: _vm.detalleIncidencia.hora
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]
+          )
         ],
         1
       )
@@ -83440,6 +83813,50 @@ var render = function() {
     _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
       _vm._v(_vm._s(_vm.textos.gesionesBroggi[_vm.idioma]))
     ]),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.idioma,
+            expression: "idioma"
+          }
+        ],
+        attrs: { id: "idiomas" },
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.idioma = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            function($event) {
+              return _vm.selectIdioma()
+            }
+          ]
+        }
+      },
+      [
+        _c("option", { attrs: { value: "0", selected: "" } }, [
+          _vm._v("Català")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1" } }, [_vm._v("Castellano")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("English")])
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "row", attrs: { id: "app" } }, [
       _c(
@@ -99111,7 +99528,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     arrayRecursosSanitarios: [],
     arrayIncidenciesActivadas: [],
     arrayIncidenciesAsignadas: [],
-    codigoRecurso: null
+    codigoRecurso: null,
+    idiomaGlobal: null
   },
   mutations: {
     tipus_alertant: function tipus_alertant(state, datosRecibidos) {
@@ -99166,6 +99584,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setCodigoRecurso: function setCodigoRecurso(state, codigo) {
       state.codigoRecurso = codigo;
+    },
+    seleccionarIdioma: function seleccionarIdioma(state, codigo) {
+      state.idiomaGlobal = codigo;
     }
   },
   actions: {
