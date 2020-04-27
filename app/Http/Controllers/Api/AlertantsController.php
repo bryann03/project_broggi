@@ -80,6 +80,8 @@ class AlertantsController extends Controller
         $alertants->nom =  $request->input("name");
         $alertants->adreca =  $request->input("adress");
         $alertants->telefon =  $request->input("tel");
+        $alertants->municipis_id =  $request->input("municipi_id");
+        $alertants->tipus_alertant_id =  $request->input("tipus_alertant_id");
 
         try {
             $alertants->save();

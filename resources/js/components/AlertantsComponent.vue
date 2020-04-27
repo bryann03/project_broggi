@@ -87,7 +87,7 @@
       <div class="form-group row">
         <label for="tel" class="col-sm-4 col-form-label">Municipi</label>
         <div class="col-sm-8">
-          <select class="custom-select" id="cars" v-model="alertant.municipis_id">
+          <select class="custom-select" id="cars" v-model="editAlertantModal.info.municipi_id">
               <option
                 v-for="municipi in municipis"
                 :key="municipi.id"
@@ -101,7 +101,7 @@
       <div class="form-group row">
         <label for="tel" class="col-sm-4 col-form-label">Tipus alertant</label>
         <div class="col-sm-8">
-          <select class="custom-select" v-model="alertant.tipus_alertant_id">
+          <select class="custom-select" v-model="editAlertantModal.info.tipus_alertant_id">
               <option
                 v-for="tipus_alertant in tipus_alertants"
                 :key="tipus_alertant.id"
@@ -186,7 +186,9 @@ export default {
         info: {
           name: "",
           adress: "",
-          tel: ""
+          tel: "",
+          municipi_id: "",
+          tipus_alertant_id: ""
         }
       },
       currentAlertant: [],
@@ -237,6 +239,8 @@ export default {
       this.editAlertantModal.info.name = item.nom;
       this.editAlertantModal.info.adress = item.adreca;
       this.editAlertantModal.info.tel = item.telefon;
+      this.editAlertantModal.info.municipi_id = item.municipis.nom;
+      this.editAlertantModal.info.tipus_alertant_id = item.tipus_alertant.tipus;
       this.$bvModal.show("editAlertantModal");
     },
 

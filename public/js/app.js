@@ -2256,7 +2256,9 @@ __webpack_require__.r(__webpack_exports__);
         info: {
           name: "",
           adress: "",
-          tel: ""
+          tel: "",
+          municipi_id: "",
+          tipus_alertant_id: ""
         }
       },
       currentAlertant: [],
@@ -2297,6 +2299,8 @@ __webpack_require__.r(__webpack_exports__);
       this.editAlertantModal.info.name = item.nom;
       this.editAlertantModal.info.adress = item.adreca;
       this.editAlertantModal.info.tel = item.telefon;
+      this.editAlertantModal.info.municipi_id = item.municipis.nom;
+      this.editAlertantModal.info.tipus_alertant_id = item.tipus_alertant.tipus;
       this.$bvModal.show("editAlertantModal");
     },
     saveAlertant: function saveAlertant() {
@@ -81800,8 +81804,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.alertant.municipis_id,
-                      expression: "alertant.municipis_id"
+                      value: _vm.editAlertantModal.info.municipi_id,
+                      expression: "editAlertantModal.info.municipi_id"
                     }
                   ],
                   staticClass: "custom-select",
@@ -81817,8 +81821,8 @@ var render = function() {
                           return val
                         })
                       _vm.$set(
-                        _vm.alertant,
-                        "municipis_id",
+                        _vm.editAlertantModal.info,
+                        "municipi_id",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -81853,8 +81857,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.alertant.tipus_alertant_id,
-                      expression: "alertant.tipus_alertant_id"
+                      value: _vm.editAlertantModal.info.tipus_alertant_id,
+                      expression: "editAlertantModal.info.tipus_alertant_id"
                     }
                   ],
                   staticClass: "custom-select",
@@ -81869,7 +81873,7 @@ var render = function() {
                           return val
                         })
                       _vm.$set(
-                        _vm.alertant,
+                        _vm.editAlertantModal.info,
                         "tipus_alertant_id",
                         $event.target.multiple
                           ? $$selectedVal
