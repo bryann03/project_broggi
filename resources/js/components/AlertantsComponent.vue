@@ -130,6 +130,16 @@ export default {
           //   {{textos.telefon[idioma]}}
           label: "Telèfon"
         },
+        {
+          key: "municipis_id",
+          //   {{textos.telefon[idioma]}}
+          label: "Municipi"
+        },
+        {
+          key: "tipus_alertant_id",
+          //   {{textos.telefon[idioma]}}
+          label: "Tipus alertant"
+        },
         "gestionar"
       ],
       editAlertantModal: {

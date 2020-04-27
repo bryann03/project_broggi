@@ -1975,6 +1975,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1988,15 +2016,45 @@ __webpack_require__.r(__webpack_exports__);
       alertant: {
         nom: "",
         adreca: "",
-        tel: ""
+        tel: "",
+        municipis_id: "",
+        tipus_alertant_id: ""
+      },
+      tipus_alertants: {
+        id: "",
+        tipus: ""
+      },
+      municipis: {
+        id: "",
+        nom: ""
       }
     };
+  },
+  created: function created() {
+    this.getTipusAlertant();
+    this.getMunicipis();
   },
   methods: {
     insertAlertant: function insertAlertant() {
       var me = this;
       axios.post("/alertants", me.alertant).then(function (response) {
         me.alertant = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant() {
+      var me = this;
+      axios.get("/tipus_alertant").then(function (response) {
+        me.tipus_alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMunicipis: function getMunicipis() {
+      var me = this;
+      axios.get("/municipis").then(function (response) {
+        me.municipis = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2145,6 +2203,14 @@ __webpack_require__.r(__webpack_exports__);
         key: "telefon",
         //   {{textos.telefon[idioma]}}
         label: "Telèfon"
+      }, {
+        key: "municipis_id",
+        //   {{textos.telefon[idioma]}}
+        label: "Municipi"
+      }, {
+        key: "tipus_alertant_id",
+        //   {{textos.telefon[idioma]}}
+        label: "Tipus alertant"
       }, "gestionar"],
       editAlertantModal: {
         id: "editAlertantModal",
@@ -2895,6 +2961,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3135,6 +3208,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3204,7 +3278,12 @@ __webpack_require__.r(__webpack_exports__);
       filterOn: []
     };
   },
-  mounted: function mounted() {
+  computed: _objectSpread({
+    rows: function rows() {
+      return this.arrayIncidencia.length;
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["idiomaGlobal"])),
+  created: function created() {
     this.obtenerIncidencias();
     this.obtenerTipusRecursos();
     this.obtenerMunicipis();
@@ -3212,6 +3291,7 @@ __webpack_require__.r(__webpack_exports__);
     this.obtenerTipusIncidencia();
     this.obtenerAlertants();
     this.obtenerEstatIncidencies();
+    console.log(this.idiomaGlobal);
   },
   methods: {
     obtenerIncidencias: function obtenerIncidencias() {
@@ -3301,11 +3381,6 @@ __webpack_require__.r(__webpack_exports__);
     cancelar: function cancelar() {
       this.obtenerIncidencias();
       this.$bvModal.hide("editIncidenciaModal");
-    }
-  },
-  computed: {
-    rows: function rows() {
-      return this.arrayIncidencia.length;
     }
   }
 });
@@ -3419,6 +3494,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3490,6 +3572,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -3507,7 +3594,7 @@ __webpack_require__.r(__webpack_exports__);
       src: "https://images.unsplash.com/photo-1520006709240-e2a6f6323d8e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=dfe8a318c622dee80cb04c81155485e6&auto=format&fit=crop&w=1050&q=80"
     };
   },
-  methods: {
+  methods: _objectSpread({
     openIncidencia: function openIncidencia() {
       window.location.href = "/project_broggi/public/incidencias";
     },
@@ -3517,7 +3604,13 @@ __webpack_require__.r(__webpack_exports__);
     openAlertantes: function openAlertantes() {
       window.location.href = "/project_broggi/public/alertants";
     }
-  }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["seleccionarIdioma"]), {
+    selectIdioma: function selectIdioma() {
+      console.log(this.idioma);
+      this.seleccionarIdioma(this.idioma);
+    }
+  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])(["idiomaGlobal"]))
 });
 
 /***/ }),
@@ -81262,6 +81355,120 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
               _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "tel" }
+                },
+                [_vm._v("Municipi")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.alertant.municipis_id,
+                        expression: "alertant.municipis_id"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "cars" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.alertant,
+                          "municipis_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.municipis, function(municipi) {
+                    return _c(
+                      "option",
+                      { key: municipi.id, domProps: { value: municipi.id } },
+                      [_vm._v(_vm._s(municipi.nom))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "tel" }
+                },
+                [_vm._v("Tipus alertant")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.alertant.tipus_alertant_id,
+                        expression: "alertant.tipus_alertant_id"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.alertant,
+                          "tipus_alertant_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.tipus_alertants, function(tipus_alertant) {
+                    return _c(
+                      "option",
+                      {
+                        key: tipus_alertant.id,
+                        domProps: { value: tipus_alertant.id }
+                      },
+                      [_vm._v(_vm._s(tipus_alertant.tipus))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
                 "div",
                 { staticClass: "col-sm-11 offset-1" },
                 [
@@ -83440,6 +83647,50 @@ var render = function() {
     _c("h1", { staticClass: "text-center mb-5 mt-5" }, [
       _vm._v(_vm._s(_vm.textos.gesionesBroggi[_vm.idioma]))
     ]),
+    _vm._v(" "),
+    _c(
+      "select",
+      {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.idioma,
+            expression: "idioma"
+          }
+        ],
+        attrs: { id: "idiomas" },
+        on: {
+          change: [
+            function($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function(o) {
+                  return o.selected
+                })
+                .map(function(o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.idioma = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+            function($event) {
+              return _vm.selectIdioma()
+            }
+          ]
+        }
+      },
+      [
+        _c("option", { attrs: { value: "0", selected: "" } }, [
+          _vm._v("Català")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1" } }, [_vm._v("Castellano")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("English")])
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "row", attrs: { id: "app" } }, [
       _c(
@@ -99111,7 +99362,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     arrayRecursosSanitarios: [],
     arrayIncidenciesActivadas: [],
     arrayIncidenciesAsignadas: [],
-    codigoRecurso: null
+    codigoRecurso: null,
+    idiomaGlobal: null
   },
   mutations: {
     tipus_alertant: function tipus_alertant(state, datosRecibidos) {
@@ -99166,6 +99418,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setCodigoRecurso: function setCodigoRecurso(state, codigo) {
       state.codigoRecurso = codigo;
+    },
+    seleccionarIdioma: function seleccionarIdioma(state, codigo) {
+      state.idiomaGlobal = codigo;
     }
   },
   actions: {
