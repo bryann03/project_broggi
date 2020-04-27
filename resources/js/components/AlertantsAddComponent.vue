@@ -163,7 +163,7 @@ export default {
         .catch(function(error) {
           console.log(error);
       });
-    },
+    }
   },
   mounted() {
     console.log("Component mounted.");

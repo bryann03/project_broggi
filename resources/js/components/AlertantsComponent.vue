@@ -82,6 +82,35 @@
           v-model="editAlertantModal.info.tel"
         ></b-form-input>
       </div>
+
+      <!-- Municipi -->
+      <div class="form-group row">
+        <label for="tel" class="col-sm-4 col-form-label">Municipi</label>
+        <div class="col-sm-8">
+          <select class="custom-select" id="cars" v-model="alertant.municipis_id">
+              <option
+                v-for="municipi in municipis"
+                :key="municipi.id"
+                :value="municipi.id"
+              >{{ municipi.nom }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tipus Alertant -->
+      <div class="form-group row">
+        <label for="tel" class="col-sm-4 col-form-label">Tipus alertant</label>
+        <div class="col-sm-8">
+          <select class="custom-select" v-model="alertant.tipus_alertant_id">
+              <option
+                v-for="tipus_alertant in tipus_alertants"
+                :key="tipus_alertant.id"
+                :value="tipus_alertant.id"
+              >{{ tipus_alertant.tipus }}</option>
+          </select>
+        </div>
+      </div>
+
     </b-modal>
   </main>
 </template>
@@ -112,6 +141,14 @@ export default {
         telefon: "",
         tipus_alertant_id: ""
       },
+      tipus_alertants: {
+        id: "",
+        tipus: ""
+      },
+      municipis: {
+        id: "",
+        nom: ""
+      },
       perPage: 5,
       currentPage: 1,
       fields: [
@@ -131,12 +168,12 @@ export default {
           label: "Telèfon"
         },
         {
-          key: "municipis_id",
+          key: "municipis.nom",
           //   {{textos.telefon[idioma]}}
           label: "Municipi"
         },
         {
-          key: "tipus_alertant_id",
+          key: "tipus_alertant.tipus",
           //   {{textos.telefon[idioma]}}
           label: "Tipus alertant"
         },
@@ -158,6 +195,8 @@ export default {
   },
   created() {
     this.showAlertants();
+    this.getTipusAlertant();
+    this.getMunicipis();
   },
   computed: {
     rows() {
@@ -213,6 +252,32 @@ export default {
           me.missatge = error.response.data;
           me.mensajesError.push(me.missatge.error);
         });
+    },
+
+    getTipusAlertant(){
+      let me = this;
+
+      axios
+        .get("/tipus_alertant")
+        .then(function(response) {
+          me.tipus_alertants = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+      });
+    },
+
+    getMunicipis(){
+      let me = this;
+
+      axios
+        .get("/municipis")
+        .then(function(response) {
+          me.municipis = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+      });
     }
   },
   mounted() {
