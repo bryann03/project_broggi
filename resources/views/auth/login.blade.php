@@ -7,25 +7,30 @@ Log in
 @section('principal')
 <section>
   <div class="m-5 text-center">
-    <form action="{{action('Auth\LoginController@login')}}" method="POST">
-      @csrf
-      <img class="mb-4" src="{{asset('storage/img/logoBroggi.png')}}" alt="" width="120" height="auto">
-      <h1 class="h3 mb-3 font-weight-normal">Logeate, Broggi!</h1>
-      <input required class="form-control col-12" name="codi" type="text" placeholder="Nom" />
 
-      <input required class="form-control" name="password" type="text" placeholder="Codi" />
+    <div class="row">
+        <div class="col-2 col-lg-4 col-md-3"></div>
+        <div class="col-8 col-lg-4 col-md-6 text-center">
+            <form action="{{action('Auth\LoginController@login')}}" method="POST">
+              @csrf
+              <img class="mb-4" src="{{asset('storage/img/logoBroggi.png')}}" alt="" width="120" height="auto">
+              <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
 
-      <div class="checkbox my-2">
-        <label>
-          <input type="checkbox" value="remember-me" disabled> Recuerdame en un futuro
-        </label>
+              <input required class="form-control mb-3" name="codi" type="text" placeholder="Nom" />
+
+              <input required class="form-control mb-3" name="password" type="password" placeholder="Codi" />
+
+              <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Iniciar Sesión</button>
+            </form>
+        </div>
+        <div class="col-2 col-lg-4 col-md-3"></div>
+
       </div>
-      <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Iniciar Sesión</button>
-    </form>
+
     <a href="{{route('registro')}}"><button class="btn btn-outline-dark my-2 my-sm-0">Registrarse</button></a>
 
 
-    <p class="mt-5 mb-3 text-muted">&copy; 2020-Covid</p>
+    <p class="mt-3 mb-3 text-muted">&copy;2020</p>
 
   </div>
 </section>
