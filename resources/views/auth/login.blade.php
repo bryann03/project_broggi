@@ -16,9 +16,9 @@ Log in
               <img class="mb-4" src="{{asset('storage/img/logoBroggi.png')}}" alt="" width="120" height="auto">
               <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
 
-              <input required class="form-control mb-3" name="codi" type="text" placeholder="Nom" />
+              <input required class="form-control mb-3" name="codi" type="text" placeholder="Codi" />
 
-              <input required class="form-control mb-3" name="password" type="password" placeholder="Codi" />
+              <input required class="form-control mb-3" name="password" type="password" placeholder="Contrasenya" />
 
               <button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Iniciar Sesión</button>
             </form>
