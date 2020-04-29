@@ -1975,6 +1975,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1988,15 +2016,45 @@ __webpack_require__.r(__webpack_exports__);
       alertant: {
         nom: "",
         adreca: "",
-        tel: ""
+        tel: "",
+        municipis_id: "",
+        tipus_alertant_id: ""
+      },
+      tipus_alertants: {
+        id: "",
+        tipus: ""
+      },
+      municipis: {
+        id: "",
+        nom: ""
       }
     };
+  },
+  created: function created() {
+    this.getTipusAlertant();
+    this.getMunicipis();
   },
   methods: {
     insertAlertant: function insertAlertant() {
       var me = this;
       axios.post("/alertants", me.alertant).then(function (response) {
         me.alertant = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant() {
+      var me = this;
+      axios.get("/tipus_alertant").then(function (response) {
+        me.tipus_alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMunicipis: function getMunicipis() {
+      var me = this;
+      axios.get("/municipis").then(function (response) {
+        me.municipis = response.data;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2018,6 +2076,35 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2131,6 +2218,14 @@ __webpack_require__.r(__webpack_exports__);
         telefon: "",
         tipus_alertant_id: ""
       },
+      tipus_alertants: {
+        id: "",
+        tipus: ""
+      },
+      municipis: {
+        id: "",
+        nom: ""
+      },
       perPage: 5,
       currentPage: 1,
       fields: [{
@@ -2145,6 +2240,14 @@ __webpack_require__.r(__webpack_exports__);
         key: "telefon",
         //   {{textos.telefon[idioma]}}
         label: "Telèfon"
+      }, {
+        key: "municipis.nom",
+        //   {{textos.telefon[idioma]}}
+        label: "Municipi"
+      }, {
+        key: "tipus_alertant.tipus",
+        //   {{textos.telefon[idioma]}}
+        label: "Tipus alertant"
       }, "gestionar"],
       editAlertantModal: {
         id: "editAlertantModal",
@@ -2153,7 +2256,9 @@ __webpack_require__.r(__webpack_exports__);
         info: {
           name: "",
           adress: "",
-          tel: ""
+          tel: "",
+          municipi_id: "",
+          tipus_alertant_id: ""
         }
       },
       currentAlertant: [],
@@ -2162,6 +2267,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.showAlertants();
+    this.getTipusAlertant();
+    this.getMunicipis();
   },
   computed: {
     rows: function rows() {
@@ -2192,6 +2299,8 @@ __webpack_require__.r(__webpack_exports__);
       this.editAlertantModal.info.name = item.nom;
       this.editAlertantModal.info.adress = item.adreca;
       this.editAlertantModal.info.tel = item.telefon;
+      this.editAlertantModal.info.municipi_id = item.municipis.nom;
+      this.editAlertantModal.info.tipus_alertant_id = item.tipus_alertant.tipus;
       this.$bvModal.show("editAlertantModal");
     },
     saveAlertant: function saveAlertant() {
@@ -2201,6 +2310,22 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         me.missatge = error.response.data;
         me.mensajesError.push(me.missatge.error);
+      });
+    },
+    getTipusAlertant: function getTipusAlertant() {
+      var me = this;
+      axios.get("/tipus_alertant").then(function (response) {
+        me.tipus_alertants = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    getMunicipis: function getMunicipis() {
+      var me = this;
+      axios.get("/municipis").then(function (response) {
+        me.municipis = response.data;
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   },
@@ -81390,6 +81515,120 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
               _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "tel" }
+                },
+                [_vm._v("Municipi")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.alertant.municipis_id,
+                        expression: "alertant.municipis_id"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    attrs: { id: "cars" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.alertant,
+                          "municipis_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.municipis, function(municipi) {
+                    return _c(
+                      "option",
+                      { key: municipi.id, domProps: { value: municipi.id } },
+                      [_vm._v(_vm._s(municipi.nom))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "col-sm-1 col-form-label",
+                  attrs: { for: "tel" }
+                },
+                [_vm._v("Tipus alertant")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-11" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.alertant.tipus_alertant_id,
+                        expression: "alertant.tipus_alertant_id"
+                      }
+                    ],
+                    staticClass: "custom-select",
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.alertant,
+                          "tipus_alertant_id",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  _vm._l(_vm.tipus_alertants, function(tipus_alertant) {
+                    return _c(
+                      "option",
+                      {
+                        key: tipus_alertant.id,
+                        domProps: { value: tipus_alertant.id }
+                      },
+                      [_vm._v(_vm._s(tipus_alertant.tipus))]
+                    )
+                  }),
+                  0
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
                 "div",
                 { staticClass: "col-sm-11 offset-1" },
                 [
@@ -81649,7 +81888,115 @@ var render = function() {
               })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-4 col-form-label", attrs: { for: "tel" } },
+              [_vm._v("Municipi")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editAlertantModal.info.municipi_id,
+                      expression: "editAlertantModal.info.municipi_id"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  attrs: { id: "cars" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.editAlertantModal.info,
+                        "municipi_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.municipis, function(municipi) {
+                  return _c(
+                    "option",
+                    { key: municipi.id, domProps: { value: municipi.id } },
+                    [_vm._v(_vm._s(municipi.nom))]
+                  )
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c(
+              "label",
+              { staticClass: "col-sm-4 col-form-label", attrs: { for: "tel" } },
+              [_vm._v("Tipus alertant")]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.editAlertantModal.info.tipus_alertant_id,
+                      expression: "editAlertantModal.info.tipus_alertant_id"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.editAlertantModal.info,
+                        "tipus_alertant_id",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    }
+                  }
+                },
+                _vm._l(_vm.tipus_alertants, function(tipus_alertant) {
+                  return _c(
+                    "option",
+                    {
+                      key: tipus_alertant.id,
+                      domProps: { value: tipus_alertant.id }
+                    },
+                    [_vm._v(_vm._s(tipus_alertant.tipus))]
+                  )
+                }),
+                0
+              )
+            ])
+          ])
         ]
       )
     ],

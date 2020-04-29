@@ -19,7 +19,7 @@ class AlertantsController extends Controller
      */
     public function index()
     {
-        $alertants = Alertants::all();
+        $alertants = Alertants::with('municipis')->with('tipus_alertant')->get();
         return AlertantsResource::collection($alertants);
     }
 
@@ -36,9 +36,9 @@ class AlertantsController extends Controller
         $alertant->nom = $request->input("nom");
         $alertant->cognoms = "";
         $alertant->adreca = $request->input("adreca");
-        $alertant->municipis_id = "851";
+        $alertant->municipis_id = $request->input("municipis_id");
         $alertant->telefon = $request->input("tel");
-        $alertant->tipus_alertant_id = "1";
+        $alertant->tipus_alertant_id = $request->input("tipus_alertant_id");
 
         try {
             $alertant->save();
@@ -80,6 +80,8 @@ class AlertantsController extends Controller
         $alertants->nom =  $request->input("name");
         $alertants->adreca =  $request->input("adress");
         $alertants->telefon =  $request->input("tel");
+        $alertants->municipis_id =  $request->input("municipi_id");
+        $alertants->tipus_alertant_id =  $request->input("tipus_alertant_id");
 
         try {
             $alertants->save();
