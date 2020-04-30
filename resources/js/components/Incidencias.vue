@@ -326,7 +326,7 @@ export default {
       columnasTabla: [
         { key: "num_incidencia", label: "Numero Incidencia" },
         { key: "hora", label: "Hora" },
-        { key: "descripcio", label: "textos.descripcio[idioma]" },
+        { key: "descripcio", label: "Descripció" },
         { key: "municipis.nom", label: "Municipi" },
         { key: "tipus_incident.tipus", label: "Tipus Incident" },
         "gestionar"
